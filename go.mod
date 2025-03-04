@@ -1,4 +1,4 @@
-module github.com/AyuuSaxena/protos-go
+module github.com/AyuuSaxena/my-protos-go
 
 go 1.23.5
 
