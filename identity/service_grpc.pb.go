@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v3.21.12
-// source: auth/service.proto
+// source: identity/service.proto
 
-package auth
+package identity
 
 import (
 	context "context"
@@ -19,14 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_Auth_FullMethodName = "/auth.AuthService/Auth"
+	AuthService_IdentityLogin_FullMethodName = "/auth.AuthService/IdentityLogin"
 )
 
 // AuthServiceClient is the client API for AuthService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AuthServiceClient interface {
-	Auth(ctx context.Context, in *AuthenticationRequest, opts ...grpc.CallOption) (*AuthenticationResponse, error)
+	IdentityLogin(ctx context.Context, in *IdentityAuthRequest, opts ...grpc.CallOption) (*IdentityAuthResponse, error)
 }
 
 type authServiceClient struct {
@@ -37,10 +37,10 @@ func NewAuthServiceClient(cc grpc.ClientConnInterface) AuthServiceClient {
 	return &authServiceClient{cc}
 }
 
-func (c *authServiceClient) Auth(ctx context.Context, in *AuthenticationRequest, opts ...grpc.CallOption) (*AuthenticationResponse, error) {
+func (c *authServiceClient) IdentityLogin(ctx context.Context, in *IdentityAuthRequest, opts ...grpc.CallOption) (*IdentityAuthResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AuthenticationResponse)
-	err := c.cc.Invoke(ctx, AuthService_Auth_FullMethodName, in, out, cOpts...)
+	out := new(IdentityAuthResponse)
+	err := c.cc.Invoke(ctx, AuthService_IdentityLogin_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (c *authServiceClient) Auth(ctx context.Context, in *AuthenticationRequest,
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility.
 type AuthServiceServer interface {
-	Auth(context.Context, *AuthenticationRequest) (*AuthenticationResponse, error)
+	IdentityLogin(context.Context, *IdentityAuthRequest) (*IdentityAuthResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
 
@@ -62,8 +62,8 @@ type AuthServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAuthServiceServer struct{}
 
-func (UnimplementedAuthServiceServer) Auth(context.Context, *AuthenticationRequest) (*AuthenticationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Auth not implemented")
+func (UnimplementedAuthServiceServer) IdentityLogin(context.Context, *IdentityAuthRequest) (*IdentityAuthResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IdentityLogin not implemented")
 }
 func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
 func (UnimplementedAuthServiceServer) testEmbeddedByValue()                     {}
@@ -86,20 +86,20 @@ func RegisterAuthServiceServer(s grpc.ServiceRegistrar, srv AuthServiceServer) {
 	s.RegisterService(&AuthService_ServiceDesc, srv)
 }
 
-func _AuthService_Auth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AuthenticationRequest)
+func _AuthService_IdentityLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdentityAuthRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServiceServer).Auth(ctx, in)
+		return srv.(AuthServiceServer).IdentityLogin(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthService_Auth_FullMethodName,
+		FullMethod: AuthService_IdentityLogin_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).Auth(ctx, req.(*AuthenticationRequest))
+		return srv.(AuthServiceServer).IdentityLogin(ctx, req.(*IdentityAuthRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -112,10 +112,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*AuthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Auth",
-			Handler:    _AuthService_Auth_Handler,
+			MethodName: "IdentityLogin",
+			Handler:    _AuthService_IdentityLogin_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "auth/service.proto",
+	Metadata: "identity/service.proto",
 }
