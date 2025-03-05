@@ -32,9 +32,9 @@ type Identity struct {
 	Email    string `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`
 	Password string `protobuf:"bytes,6,opt,name=password,proto3" json:"password,omitempty"`
 	// @gotags: `json:"isVerfied,omitempty" bson:"isVerfied,omitempty"`
-	IsVerfied string `protobuf:"bytes,7,opt,name=is_verfied,json=isVerfied,proto3" json:"is_verfied,omitempty"`
+	IsVerfied string `protobuf:"bytes,7,opt,name=is_verfied,json=isVerfied,proto3" json:"isVerfied,omitempty" bson:"isVerfied,omitempty"`
 	// @gotags: `json:"isActive,omitempty" bson:"isActive,omitempty"`
-	IsActive string `protobuf:"bytes,8,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	IsActive string `protobuf:"bytes,8,opt,name=is_active,json=isActive,proto3" json:"isActive,omitempty" bson:"isActive,omitempty"`
 }
 
 func (x *Identity) Reset() {
