@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "content/v1/romService.proto",
+    "title": "content/v1/rom/romService.proto",
     "version": "version not set"
   },
   "tags": [
@@ -23,7 +23,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ListConsolesResponse"
+              "$ref": "#/definitions/romListConsolesResponse"
             }
           },
           "default": {
@@ -54,7 +54,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1RomListResponse"
+              "$ref": "#/definitions/romRomListResponse"
             }
           },
           "default": {
@@ -70,7 +70,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1RomListRequest"
+              "$ref": "#/definitions/romRomListRequest"
             }
           }
         ],
@@ -86,7 +86,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1RomUploadResponse"
+              "$ref": "#/definitions/romRomUploadResponse"
             }
           },
           "default": {
@@ -103,7 +103,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1RomUploadRequest"
+              "$ref": "#/definitions/romRomUploadRequest"
             }
           }
         ],
@@ -119,7 +119,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1RomMetadata"
+              "$ref": "#/definitions/romRomMetadata"
             }
           },
           "default": {
@@ -169,7 +169,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1RomDeleteResponse"
+              "$ref": "#/definitions/romRomDeleteResponse"
             }
           },
           "default": {
@@ -212,7 +212,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1RomMetadata"
+              "$ref": "#/definitions/romRomMetadata"
             }
           },
           "default": {
@@ -254,13 +254,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/v1FileChunk"
+                  "$ref": "#/definitions/romFileChunk"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of v1FileChunk"
+              "title": "Stream result of romFileChunk"
             }
           },
           "default": {
@@ -312,7 +312,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1RomShareResponse"
+              "$ref": "#/definitions/romRomShareResponse"
             }
           },
           "default": {
@@ -435,26 +435,7 @@
       },
       "additionalProperties": {}
     },
-    "rpcStatus": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/protobufAny"
-          }
-        }
-      }
-    },
-    "v1ConsoleInfo": {
+    "romConsoleInfo": {
       "type": "object",
       "properties": {
         "mongoId": {
@@ -517,7 +498,7 @@
       },
       "description": "ConsoleInfo represents a gaming console system stored in the database taxonomy."
     },
-    "v1FileChunk": {
+    "romFileChunk": {
       "type": "object",
       "properties": {
         "data": {
@@ -527,7 +508,7 @@
         }
       }
     },
-    "v1FileInfo": {
+    "romFileInfo": {
       "type": "object",
       "properties": {
         "name": {
@@ -614,7 +595,7 @@
         }
       }
     },
-    "v1FileMetadata": {
+    "romFileMetadata": {
       "type": "object",
       "properties": {
         "mongoId": {
@@ -669,20 +650,20 @@
       },
       "description": "FileMetadata describes a storage file record returned from the S3-Free database."
     },
-    "v1ListConsolesResponse": {
+    "romListConsolesResponse": {
       "type": "object",
       "properties": {
         "consoles": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1ConsoleInfo"
+            "$ref": "#/definitions/romConsoleInfo"
           },
           "title": "List of supported console systems"
         }
       }
     },
-    "v1RomDeleteResponse": {
+    "romRomDeleteResponse": {
       "type": "object",
       "properties": {
         "success": {
@@ -695,7 +676,7 @@
         }
       }
     },
-    "v1RomListRequest": {
+    "romRomListRequest": {
       "type": "object",
       "properties": {
         "limit": {
@@ -721,7 +702,7 @@
           "title": "Sort direction order (asc or desc, default desc)"
         },
         "query": {
-          "$ref": "#/definitions/v1RomQuery",
+          "$ref": "#/definitions/romRomQuery",
           "title": "Nested query filters for ROM properties"
         },
         "site": {
@@ -730,14 +711,14 @@
         }
       }
     },
-    "v1RomListResponse": {
+    "romRomListResponse": {
       "type": "object",
       "properties": {
         "roms": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1RomMetadata"
+            "$ref": "#/definitions/romRomMetadata"
           },
           "title": "List of ROM metadata items for the current page"
         },
@@ -763,7 +744,7 @@
         }
       }
     },
-    "v1RomMetadata": {
+    "romRomMetadata": {
       "type": "object",
       "properties": {
         "mongoId": {
@@ -847,17 +828,17 @@
           "type": "string"
         },
         "consoleMetadata": {
-          "$ref": "#/definitions/v1ConsoleInfo",
+          "$ref": "#/definitions/romConsoleInfo",
           "title": "Enriched Relations (populated on read, not persisted in DB)\nFull console details resolved from consoleId"
         },
         "fileMetadata": {
-          "$ref": "#/definitions/v1FileMetadata",
+          "$ref": "#/definitions/romFileMetadata",
           "title": "Full file details resolved from fileId"
         }
       },
       "description": "RomMetadata represents the core normalized ROM entity with relational IDs."
     },
-    "v1RomQuery": {
+    "romRomQuery": {
       "type": "object",
       "properties": {
         "name": {
@@ -902,7 +883,7 @@
         }
       }
     },
-    "v1RomShareResponse": {
+    "romRomShareResponse": {
       "type": "object",
       "properties": {
         "id": {
@@ -919,11 +900,11 @@
         }
       }
     },
-    "v1RomUploadRequest": {
+    "romRomUploadRequest": {
       "type": "object",
       "properties": {
         "fileInfo": {
-          "$ref": "#/definitions/v1FileInfo",
+          "$ref": "#/definitions/romFileInfo",
           "title": "ROM metadata for initial chunk"
         },
         "chunkData": {
@@ -933,12 +914,31 @@
         }
       }
     },
-    "v1RomUploadResponse": {
+    "romRomUploadResponse": {
       "type": "object",
       "properties": {
         "rom": {
-          "$ref": "#/definitions/v1RomMetadata",
+          "$ref": "#/definitions/romRomMetadata",
           "title": "Uploaded ROM metadata"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
         }
       }
     }

@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.2
 // - protoc             v7.36.0
-// source: content/v1/romService.proto
+// source: content/v1/rom/romService.proto
 
-package content
+package rom
 
 import (
 	context "context"
@@ -19,14 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	RomService_ListConsoles_FullMethodName = "/content.v1.RomService/ListConsoles"
-	RomService_RomList_FullMethodName      = "/content.v1.RomService/RomList"
-	RomService_RomUpload_FullMethodName    = "/content.v1.RomService/RomUpload"
-	RomService_RomGet_FullMethodName       = "/content.v1.RomService/RomGet"
-	RomService_RomUpdate_FullMethodName    = "/content.v1.RomService/RomUpdate"
-	RomService_RomDelete_FullMethodName    = "/content.v1.RomService/RomDelete"
-	RomService_RomDownload_FullMethodName  = "/content.v1.RomService/RomDownload"
-	RomService_RomShare_FullMethodName     = "/content.v1.RomService/RomShare"
+	RomService_ListConsoles_FullMethodName = "/content.v1.rom.RomService/ListConsoles"
+	RomService_RomList_FullMethodName      = "/content.v1.rom.RomService/RomList"
+	RomService_RomUpload_FullMethodName    = "/content.v1.rom.RomService/RomUpload"
+	RomService_RomGet_FullMethodName       = "/content.v1.rom.RomService/RomGet"
+	RomService_RomUpdate_FullMethodName    = "/content.v1.rom.RomService/RomUpdate"
+	RomService_RomDelete_FullMethodName    = "/content.v1.rom.RomService/RomDelete"
+	RomService_RomDownload_FullMethodName  = "/content.v1.rom.RomService/RomDownload"
+	RomService_RomShare_FullMethodName     = "/content.v1.rom.RomService/RomShare"
 )
 
 // RomServiceClient is the client API for RomService service.
@@ -340,7 +340,7 @@ func _RomService_RomShare_Handler(srv interface{}, ctx context.Context, dec func
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var RomService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "content.v1.RomService",
+	ServiceName: "content.v1.rom.RomService",
 	HandlerType: (*RomServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -380,5 +380,5 @@ var RomService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "content/v1/romService.proto",
+	Metadata: "content/v1/rom/romService.proto",
 }
