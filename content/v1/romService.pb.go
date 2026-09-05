@@ -26,52 +26,52 @@ var File_content_v1_romService_proto protoreflect.FileDescriptor
 const file_content_v1_romService_proto_rawDesc = "" +
 	"\n" +
 	"\x1bcontent/v1/romService.proto\x12\n" +
-	"content.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x14content/v1/rom.proto2\xca\a\n" +
+	"content.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x14content/v1/rom.proto2\xbe\x06\n" +
 	"\n" +
-	"RomService\x12\x9f\x01\n" +
-	"\x06RomGet\x12\x19.content.v1.RomGetRequest\x1a\x17.content.v1.RomMetadata\"a\x82\xd3\xe4\x93\x02[Z\":\x01*\"\x1d/content.v1.RomService/RomGetZ\":\x01*\"\x1d/storage.v1.RomService/RomGet\x12\x11/api/v1/roms/{id}\x12j\n" +
-	"\vRomDownload\x12\x1e.content.v1.RomDownloadRequest\x1a\x15.content.v1.FileChunk\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/v1/roms/{id}/download0\x01\x12\xa2\x01\n" +
-	"\aRomList\x12\x1a.content.v1.RomListRequest\x1a\x1b.content.v1.RomListResponse\"^\x82\xd3\xe4\x93\x02XZ#:\x01*\"\x1e/content.v1.RomService/RomListZ#:\x01*\"\x1e/storage.v1.RomService/RomList\x12\f/api/v1/roms\x12j\n" +
-	"\tRomUpload\x12\x1c.content.v1.RomUploadRequest\x1a\x1d.content.v1.RomUploadResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/v1/roms/upload(\x01\x12`\n" +
+	"RomService\x12k\n" +
+	"\fListConsoles\x12\x1f.content.v1.ListConsolesRequest\x1a .content.v1.ListConsolesResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/consoles\x12`\n" +
+	"\aRomList\x12\x1a.content.v1.RomListRequest\x1a\x1b.content.v1.RomListResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/api/v1/roms/list\x12j\n" +
+	"\tRomUpload\x12\x1c.content.v1.RomUploadRequest\x1a\x1d.content.v1.RomUploadResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/v1/roms/upload(\x01\x12W\n" +
+	"\x06RomGet\x12\x19.content.v1.RomGetRequest\x1a\x17.content.v1.RomMetadata\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/api/v1/roms/{id}\x12`\n" +
 	"\tRomUpdate\x12\x1c.content.v1.RomUpdateRequest\x1a\x17.content.v1.RomMetadata\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\x1a\x11/api/v1/roms/{id}\x12c\n" +
-	"\tRomDelete\x12\x1c.content.v1.RomDeleteRequest\x1a\x1d.content.v1.RomDeleteResponse\"\x19\x82\xd3\xe4\x93\x02\x13*\x11/api/v1/roms/{id}\x12i\n" +
-	"\bRomShare\x12\x1b.content.v1.RomShareRequest\x1a\x1c.content.v1.RomShareResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/v1/roms/{id}/share\x12k\n" +
-	"\fListConsoles\x12\x1f.content.v1.ListConsolesRequest\x1a .content.v1.ListConsolesResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/consolesB7Z5github.com/AyuuSaxena/my-protos-go/content/v1;contentb\x06proto3"
+	"\tRomDelete\x12\x1c.content.v1.RomDeleteRequest\x1a\x1d.content.v1.RomDeleteResponse\"\x19\x82\xd3\xe4\x93\x02\x13*\x11/api/v1/roms/{id}\x12j\n" +
+	"\vRomDownload\x12\x1e.content.v1.RomDownloadRequest\x1a\x15.content.v1.FileChunk\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/v1/roms/{id}/download0\x01\x12i\n" +
+	"\bRomShare\x12\x1b.content.v1.RomShareRequest\x1a\x1c.content.v1.RomShareResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/v1/roms/{id}/shareB7Z5github.com/AyuuSaxena/my-protos-go/content/v1;contentb\x06proto3"
 
 var file_content_v1_romService_proto_goTypes = []any{
-	(*RomGetRequest)(nil),        // 0: content.v1.RomGetRequest
-	(*RomDownloadRequest)(nil),   // 1: content.v1.RomDownloadRequest
-	(*RomListRequest)(nil),       // 2: content.v1.RomListRequest
-	(*RomUploadRequest)(nil),     // 3: content.v1.RomUploadRequest
+	(*ListConsolesRequest)(nil),  // 0: content.v1.ListConsolesRequest
+	(*RomListRequest)(nil),       // 1: content.v1.RomListRequest
+	(*RomUploadRequest)(nil),     // 2: content.v1.RomUploadRequest
+	(*RomGetRequest)(nil),        // 3: content.v1.RomGetRequest
 	(*RomUpdateRequest)(nil),     // 4: content.v1.RomUpdateRequest
 	(*RomDeleteRequest)(nil),     // 5: content.v1.RomDeleteRequest
-	(*RomShareRequest)(nil),      // 6: content.v1.RomShareRequest
-	(*ListConsolesRequest)(nil),  // 7: content.v1.ListConsolesRequest
-	(*RomMetadata)(nil),          // 8: content.v1.RomMetadata
-	(*FileChunk)(nil),            // 9: content.v1.FileChunk
-	(*RomListResponse)(nil),      // 10: content.v1.RomListResponse
-	(*RomUploadResponse)(nil),    // 11: content.v1.RomUploadResponse
+	(*RomDownloadRequest)(nil),   // 6: content.v1.RomDownloadRequest
+	(*RomShareRequest)(nil),      // 7: content.v1.RomShareRequest
+	(*ListConsolesResponse)(nil), // 8: content.v1.ListConsolesResponse
+	(*RomListResponse)(nil),      // 9: content.v1.RomListResponse
+	(*RomUploadResponse)(nil),    // 10: content.v1.RomUploadResponse
+	(*RomMetadata)(nil),          // 11: content.v1.RomMetadata
 	(*RomDeleteResponse)(nil),    // 12: content.v1.RomDeleteResponse
-	(*RomShareResponse)(nil),     // 13: content.v1.RomShareResponse
-	(*ListConsolesResponse)(nil), // 14: content.v1.ListConsolesResponse
+	(*FileChunk)(nil),            // 13: content.v1.FileChunk
+	(*RomShareResponse)(nil),     // 14: content.v1.RomShareResponse
 }
 var file_content_v1_romService_proto_depIdxs = []int32{
-	0,  // 0: content.v1.RomService.RomGet:input_type -> content.v1.RomGetRequest
-	1,  // 1: content.v1.RomService.RomDownload:input_type -> content.v1.RomDownloadRequest
-	2,  // 2: content.v1.RomService.RomList:input_type -> content.v1.RomListRequest
-	3,  // 3: content.v1.RomService.RomUpload:input_type -> content.v1.RomUploadRequest
+	0,  // 0: content.v1.RomService.ListConsoles:input_type -> content.v1.ListConsolesRequest
+	1,  // 1: content.v1.RomService.RomList:input_type -> content.v1.RomListRequest
+	2,  // 2: content.v1.RomService.RomUpload:input_type -> content.v1.RomUploadRequest
+	3,  // 3: content.v1.RomService.RomGet:input_type -> content.v1.RomGetRequest
 	4,  // 4: content.v1.RomService.RomUpdate:input_type -> content.v1.RomUpdateRequest
 	5,  // 5: content.v1.RomService.RomDelete:input_type -> content.v1.RomDeleteRequest
-	6,  // 6: content.v1.RomService.RomShare:input_type -> content.v1.RomShareRequest
-	7,  // 7: content.v1.RomService.ListConsoles:input_type -> content.v1.ListConsolesRequest
-	8,  // 8: content.v1.RomService.RomGet:output_type -> content.v1.RomMetadata
-	9,  // 9: content.v1.RomService.RomDownload:output_type -> content.v1.FileChunk
-	10, // 10: content.v1.RomService.RomList:output_type -> content.v1.RomListResponse
-	11, // 11: content.v1.RomService.RomUpload:output_type -> content.v1.RomUploadResponse
-	8,  // 12: content.v1.RomService.RomUpdate:output_type -> content.v1.RomMetadata
+	6,  // 6: content.v1.RomService.RomDownload:input_type -> content.v1.RomDownloadRequest
+	7,  // 7: content.v1.RomService.RomShare:input_type -> content.v1.RomShareRequest
+	8,  // 8: content.v1.RomService.ListConsoles:output_type -> content.v1.ListConsolesResponse
+	9,  // 9: content.v1.RomService.RomList:output_type -> content.v1.RomListResponse
+	10, // 10: content.v1.RomService.RomUpload:output_type -> content.v1.RomUploadResponse
+	11, // 11: content.v1.RomService.RomGet:output_type -> content.v1.RomMetadata
+	11, // 12: content.v1.RomService.RomUpdate:output_type -> content.v1.RomMetadata
 	12, // 13: content.v1.RomService.RomDelete:output_type -> content.v1.RomDeleteResponse
-	13, // 14: content.v1.RomService.RomShare:output_type -> content.v1.RomShareResponse
-	14, // 15: content.v1.RomService.ListConsoles:output_type -> content.v1.ListConsolesResponse
+	13, // 14: content.v1.RomService.RomDownload:output_type -> content.v1.FileChunk
+	14, // 15: content.v1.RomService.RomShare:output_type -> content.v1.RomShareResponse
 	8,  // [8:16] is the sub-list for method output_type
 	0,  // [0:8] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
