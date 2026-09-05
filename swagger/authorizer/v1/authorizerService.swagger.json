@@ -1,0 +1,864 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "authorizer/v1/authorizerService.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "AuthorizerService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/access": {
+      "get": {
+        "summary": "ListUserAccess lists access records with pagination.",
+        "operationId": "AuthorizerService_ListUserAccess",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListUserAccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "site",
+            "description": "@gotags: `json:\"site,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "@gotags: `json:\"limit,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "@gotags: `json:\"offset,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/access/check": {
+      "get": {
+        "summary": "CheckAccess verifies user permissions prior to login or action.",
+        "operationId": "AuthorizerService_CheckAccess6",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CheckAccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "@gotags: `json:\"userId,omitempty\" form:\"userId\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "description": "@gotags: `json:\"email,omitempty\" form:\"email\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "description": "@gotags: `json:\"username,omitempty\" form:\"username\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "description": "@gotags: `json:\"service,omitempty\" form:\"service\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "site",
+            "description": "@gotags: `json:\"site,omitempty\" form:\"site\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "action",
+            "description": "@gotags: `json:\"action,omitempty\" form:\"action\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "description": "@gotags: `json:\"id,omitempty\" form:\"id\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "authId",
+            "description": "@gotags: `json:\"authId,omitempty\" form:\"authId\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      },
+      "post": {
+        "summary": "CheckAccess verifies user permissions prior to login or action.",
+        "operationId": "AuthorizerService_CheckAccess5",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CheckAccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "CheckAccessRequest represents incoming parameters to check user service access before login or action.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CheckAccessRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/access/grant": {
+      "post": {
+        "summary": "GrantAccess grants or updates permissions for a user on a service.",
+        "operationId": "AuthorizerService_GrantAccess",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GrantAccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "GrantAccessRequest is used by administrative endpoints to grant access to a user.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GrantAccessRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/access/revoke": {
+      "post": {
+        "summary": "RevokeAccess revokes access to a service for a user.",
+        "operationId": "AuthorizerService_RevokeAccess",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RevokeAccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "RevokeAccessRequest is used to revoke or disable access for a user.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RevokeAccessRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/access/{userId}": {
+      "get": {
+        "summary": "GetUserAccess retrieves a user's full access profile.",
+        "operationId": "AuthorizerService_GetUserAccess",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UserAccess"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "@gotags: `json:\"userId\"`",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "site",
+            "description": "@gotags: `json:\"site,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/auth/check-access": {
+      "get": {
+        "summary": "CheckAccess verifies user permissions prior to login or action.",
+        "operationId": "AuthorizerService_CheckAccess2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CheckAccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "@gotags: `json:\"userId,omitempty\" form:\"userId\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "description": "@gotags: `json:\"email,omitempty\" form:\"email\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "description": "@gotags: `json:\"username,omitempty\" form:\"username\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "description": "@gotags: `json:\"service,omitempty\" form:\"service\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "site",
+            "description": "@gotags: `json:\"site,omitempty\" form:\"site\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "action",
+            "description": "@gotags: `json:\"action,omitempty\" form:\"action\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "description": "@gotags: `json:\"id,omitempty\" form:\"id\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "authId",
+            "description": "@gotags: `json:\"authId,omitempty\" form:\"authId\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      },
+      "post": {
+        "summary": "CheckAccess verifies user permissions prior to login or action.",
+        "operationId": "AuthorizerService_CheckAccess",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CheckAccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "CheckAccessRequest represents incoming parameters to check user service access before login or action.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CheckAccessRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/auth/pre-login": {
+      "get": {
+        "summary": "CheckAccess verifies user permissions prior to login or action.",
+        "operationId": "AuthorizerService_CheckAccess4",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CheckAccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "@gotags: `json:\"userId,omitempty\" form:\"userId\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "description": "@gotags: `json:\"email,omitempty\" form:\"email\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "description": "@gotags: `json:\"username,omitempty\" form:\"username\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "description": "@gotags: `json:\"service,omitempty\" form:\"service\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "site",
+            "description": "@gotags: `json:\"site,omitempty\" form:\"site\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "action",
+            "description": "@gotags: `json:\"action,omitempty\" form:\"action\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "description": "@gotags: `json:\"id,omitempty\" form:\"id\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "authId",
+            "description": "@gotags: `json:\"authId,omitempty\" form:\"authId\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      },
+      "post": {
+        "summary": "CheckAccess verifies user permissions prior to login or action.",
+        "operationId": "AuthorizerService_CheckAccess3",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CheckAccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "CheckAccessRequest represents incoming parameters to check user service access before login or action.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CheckAccessRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CheckAccessRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "title": "@gotags: `json:\"userId,omitempty\" form:\"userId\"`"
+        },
+        "email": {
+          "type": "string",
+          "title": "@gotags: `json:\"email,omitempty\" form:\"email\"`"
+        },
+        "username": {
+          "type": "string",
+          "title": "@gotags: `json:\"username,omitempty\" form:\"username\"`"
+        },
+        "service": {
+          "type": "string",
+          "title": "@gotags: `json:\"service,omitempty\" form:\"service\"`"
+        },
+        "site": {
+          "type": "string",
+          "title": "@gotags: `json:\"site,omitempty\" form:\"site\"`"
+        },
+        "action": {
+          "type": "string",
+          "title": "@gotags: `json:\"action,omitempty\" form:\"action\"`"
+        },
+        "id": {
+          "type": "string",
+          "title": "@gotags: `json:\"id,omitempty\" form:\"id\"`"
+        },
+        "authId": {
+          "type": "string",
+          "title": "@gotags: `json:\"authId,omitempty\" form:\"authId\"`"
+        }
+      },
+      "description": "CheckAccessRequest represents incoming parameters to check user service access before login or action."
+    },
+    "v1CheckAccessResponse": {
+      "type": "object",
+      "properties": {
+        "allowed": {
+          "type": "boolean",
+          "title": "@gotags: `json:\"allowed\"`"
+        },
+        "canLogin": {
+          "type": "boolean",
+          "title": "@gotags: `json:\"canLogin\"`"
+        },
+        "service": {
+          "type": "string",
+          "title": "@gotags: `json:\"service,omitempty\"`"
+        },
+        "userId": {
+          "type": "string",
+          "title": "@gotags: `json:\"userId,omitempty\"`"
+        },
+        "username": {
+          "type": "string",
+          "title": "@gotags: `json:\"username,omitempty\"`"
+        },
+        "email": {
+          "type": "string",
+          "title": "@gotags: `json:\"email,omitempty\"`"
+        },
+        "status": {
+          "type": "string",
+          "title": "@gotags: `json:\"status,omitempty\"`"
+        },
+        "site": {
+          "type": "string",
+          "title": "@gotags: `json:\"site,omitempty\"`"
+        },
+        "message": {
+          "type": "string",
+          "title": "@gotags: `json:\"message,omitempty\"`"
+        },
+        "error": {
+          "type": "string",
+          "title": "@gotags: `json:\"error,omitempty\"`"
+        }
+      },
+      "description": "CheckAccessResponse represents the result of the access check."
+    },
+    "v1GrantAccessRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "title": "@gotags: `json:\"userId\" binding:\"required\"`"
+        },
+        "email": {
+          "type": "string",
+          "title": "@gotags: `json:\"email,omitempty\"`"
+        },
+        "username": {
+          "type": "string",
+          "title": "@gotags: `json:\"username,omitempty\"`"
+        },
+        "service": {
+          "type": "string",
+          "title": "@gotags: `json:\"service,omitempty\"`"
+        },
+        "level": {
+          "type": "string",
+          "title": "@gotags: `json:\"level,omitempty\"`"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "@gotags: `json:\"permissions,omitempty\"`"
+        },
+        "site": {
+          "type": "string",
+          "title": "@gotags: `json:\"site,omitempty\"`"
+        },
+        "quotaBytes": {
+          "type": "string",
+          "format": "int64",
+          "title": "@gotags: `json:\"quotaBytes,omitempty\"`"
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "@gotags: `json:\"attributes,omitempty\"`"
+        }
+      },
+      "description": "GrantAccessRequest is used by administrative endpoints to grant access to a user."
+    },
+    "v1GrantAccessResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "@gotags: `json:\"message\"`"
+        },
+        "access": {
+          "$ref": "#/definitions/v1UserAccess",
+          "title": "@gotags: `json:\"access\"`"
+        }
+      },
+      "description": "GrantAccessResponse is the response returned when granting service access."
+    },
+    "v1ListUserAccessResponse": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1UserAccess"
+          },
+          "title": "@gotags: `json:\"records\"`"
+        },
+        "count": {
+          "type": "string",
+          "format": "int64",
+          "title": "@gotags: `json:\"count\"`"
+        },
+        "offset": {
+          "type": "string",
+          "format": "int64",
+          "title": "@gotags: `json:\"offset\"`"
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64",
+          "title": "@gotags: `json:\"limit\"`"
+        }
+      },
+      "description": "ListUserAccessResponse is the paginated response containing access profiles."
+    },
+    "v1RevokeAccessRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "title": "@gotags: `json:\"userId\" binding:\"required\"`"
+        },
+        "service": {
+          "type": "string",
+          "title": "@gotags: `json:\"service,omitempty\"`"
+        },
+        "site": {
+          "type": "string",
+          "title": "@gotags: `json:\"site,omitempty\"`"
+        }
+      },
+      "description": "RevokeAccessRequest is used to revoke or disable access for a user."
+    },
+    "v1RevokeAccessResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "@gotags: `json:\"message\"`"
+        },
+        "access": {
+          "$ref": "#/definitions/v1UserAccess",
+          "title": "@gotags: `json:\"access\"`"
+        }
+      },
+      "description": "RevokeAccessResponse is the response returned when revoking service access."
+    },
+    "v1ServiceAccess": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "@gotags: `json:\"enabled\" bson:\"enabled\"`"
+        },
+        "level": {
+          "type": "string",
+          "title": "@gotags: `json:\"level,omitempty\" bson:\"level,omitempty\"`"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "@gotags: `json:\"permissions,omitempty\" bson:\"permissions,omitempty\"`"
+        },
+        "quotaBytes": {
+          "type": "string",
+          "format": "int64",
+          "title": "@gotags: `json:\"quotaBytes,omitempty\" bson:\"quotaBytes,omitempty\"`"
+        },
+        "grantedAt": {
+          "type": "string",
+          "title": "@gotags: `json:\"grantedAt,omitempty\" bson:\"grantedAt,omitempty\"`"
+        },
+        "expiresAt": {
+          "type": "string",
+          "title": "@gotags: `json:\"expiresAt,omitempty\" bson:\"expiresAt,omitempty\"`"
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "@gotags: `json:\"attributes,omitempty\" bson:\"attributes,omitempty\"`"
+        }
+      },
+      "description": "ServiceAccess represents permissions and metadata for a specific service."
+    },
+    "v1UserAccess": {
+      "type": "object",
+      "properties": {
+        "mongoId": {
+          "type": "string",
+          "title": "MongoDB internal record identifier (_id)\n@gotags: `json:\"mongoId,omitempty\" bson:\"_id,omitempty\"`"
+        },
+        "id": {
+          "type": "string",
+          "title": "Unique UUID identifier\n@gotags: `json:\"id,omitempty\" bson:\"id,omitempty\"`"
+        },
+        "userId": {
+          "type": "string",
+          "title": "User identifier (external ID, email, or username)\n@gotags: `json:\"userId,omitempty\" bson:\"userId,omitempty\"`"
+        },
+        "authId": {
+          "type": "string",
+          "title": "Auth ID\n@gotags: `json:\"authId,omitempty\" bson:\"authId,omitempty\"`"
+        },
+        "username": {
+          "type": "string",
+          "title": "@gotags: `json:\"username,omitempty\" bson:\"username,omitempty\"`"
+        },
+        "email": {
+          "type": "string",
+          "title": "@gotags: `json:\"email,omitempty\" bson:\"email,omitempty\"`"
+        },
+        "site": {
+          "type": "string",
+          "title": "Multi-tenant site identifier\n@gotags: `json:\"site,omitempty\" bson:\"site,omitempty\"`"
+        },
+        "status": {
+          "type": "string",
+          "title": "User access status (active, suspended, revoked)\n@gotags: `json:\"status,omitempty\" bson:\"status,omitempty\"`"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "@gotags: `json:\"isActive\" bson:\"isActive\"`"
+        },
+        "services": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v1ServiceAccess"
+          },
+          "title": "Dynamic service access map\n@gotags: `json:\"services,omitempty\" bson:\"services,omitempty\"`"
+        },
+        "allowedServices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "List of allowed service names\n@gotags: `json:\"allowedServices,omitempty\" bson:\"allowedServices,omitempty\"`"
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Custom attributes key-value map\n@gotags: `json:\"attributes,omitempty\" bson:\"attributes,omitempty\"`"
+        },
+        "createdAt": {
+          "type": "string",
+          "title": "Timestamp when record was created\n@gotags: `json:\"createdAt,omitempty\" bson:\"createdAt,omitempty\"`"
+        },
+        "updatedAt": {
+          "type": "string",
+          "title": "Timestamp when record was last updated\n@gotags: `json:\"updatedAt,omitempty\" bson:\"updatedAt,omitempty\"`"
+        }
+      },
+      "description": "UserAccess represents a user's service authorization profile."
+    }
+  }
+}

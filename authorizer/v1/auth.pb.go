@@ -160,6 +160,1000 @@ func (x *UserTokenPayload) GetDeviceLimitExceeded() bool {
 	return false
 }
 
+// ServiceAccess represents permissions and metadata for a specific service.
+type ServiceAccess struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: `json:"enabled" bson:"enabled"`
+	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled" bson:"enabled"`
+	// @gotags: `json:"level,omitempty" bson:"level,omitempty"`
+	Level *string `protobuf:"bytes,2,opt,name=level,proto3,oneof" json:"level,omitempty" bson:"level,omitempty"`
+	// @gotags: `json:"permissions,omitempty" bson:"permissions,omitempty"`
+	Permissions []string `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty" bson:"permissions,omitempty"`
+	// @gotags: `json:"quotaBytes,omitempty" bson:"quotaBytes,omitempty"`
+	QuotaBytes *int64 `protobuf:"varint,4,opt,name=quota_bytes,json=quotaBytes,proto3,oneof" json:"quotaBytes,omitempty" bson:"quotaBytes,omitempty"`
+	// @gotags: `json:"grantedAt,omitempty" bson:"grantedAt,omitempty"`
+	GrantedAt *string `protobuf:"bytes,5,opt,name=granted_at,json=grantedAt,proto3,oneof" json:"grantedAt,omitempty" bson:"grantedAt,omitempty"`
+	// @gotags: `json:"expiresAt,omitempty" bson:"expiresAt,omitempty"`
+	ExpiresAt *string `protobuf:"bytes,6,opt,name=expires_at,json=expiresAt,proto3,oneof" json:"expiresAt,omitempty" bson:"expiresAt,omitempty"`
+	// @gotags: `json:"attributes,omitempty" bson:"attributes,omitempty"`
+	Attributes    map[string]string `protobuf:"bytes,7,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value" bson:"attributes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ServiceAccess) Reset() {
+	*x = ServiceAccess{}
+	mi := &file_authorizer_v1_auth_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ServiceAccess) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ServiceAccess) ProtoMessage() {}
+
+func (x *ServiceAccess) ProtoReflect() protoreflect.Message {
+	mi := &file_authorizer_v1_auth_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ServiceAccess.ProtoReflect.Descriptor instead.
+func (*ServiceAccess) Descriptor() ([]byte, []int) {
+	return file_authorizer_v1_auth_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ServiceAccess) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *ServiceAccess) GetLevel() string {
+	if x != nil && x.Level != nil {
+		return *x.Level
+	}
+	return ""
+}
+
+func (x *ServiceAccess) GetPermissions() []string {
+	if x != nil {
+		return x.Permissions
+	}
+	return nil
+}
+
+func (x *ServiceAccess) GetQuotaBytes() int64 {
+	if x != nil && x.QuotaBytes != nil {
+		return *x.QuotaBytes
+	}
+	return 0
+}
+
+func (x *ServiceAccess) GetGrantedAt() string {
+	if x != nil && x.GrantedAt != nil {
+		return *x.GrantedAt
+	}
+	return ""
+}
+
+func (x *ServiceAccess) GetExpiresAt() string {
+	if x != nil && x.ExpiresAt != nil {
+		return *x.ExpiresAt
+	}
+	return ""
+}
+
+func (x *ServiceAccess) GetAttributes() map[string]string {
+	if x != nil {
+		return x.Attributes
+	}
+	return nil
+}
+
+// UserAccess represents a user's service authorization profile.
+type UserAccess struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// MongoDB internal record identifier (_id)
+	// @gotags: `json:"mongoId,omitempty" bson:"_id,omitempty"`
+	MongoId string `protobuf:"bytes,1,opt,name=mongo_id,json=mongoId,proto3" json:"mongoId,omitempty" bson:"_id,omitempty"`
+	// Unique UUID identifier
+	// @gotags: `json:"id,omitempty" bson:"id,omitempty"`
+	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty" bson:"id,omitempty"`
+	// User identifier (external ID, email, or username)
+	// @gotags: `json:"userId,omitempty" bson:"userId,omitempty"`
+	UserId string `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"userId,omitempty" bson:"userId,omitempty"`
+	// Auth ID
+	// @gotags: `json:"authId,omitempty" bson:"authId,omitempty"`
+	AuthId *string `protobuf:"bytes,4,opt,name=auth_id,json=authId,proto3,oneof" json:"authId,omitempty" bson:"authId,omitempty"`
+	// @gotags: `json:"username,omitempty" bson:"username,omitempty"`
+	Username *string `protobuf:"bytes,5,opt,name=username,proto3,oneof" json:"username,omitempty" bson:"username,omitempty"`
+	// @gotags: `json:"email,omitempty" bson:"email,omitempty"`
+	Email *string `protobuf:"bytes,6,opt,name=email,proto3,oneof" json:"email,omitempty" bson:"email,omitempty"`
+	// Multi-tenant site identifier
+	// @gotags: `json:"site,omitempty" bson:"site,omitempty"`
+	Site string `protobuf:"bytes,7,opt,name=site,proto3" json:"site,omitempty" bson:"site,omitempty"`
+	// User access status (active, suspended, revoked)
+	// @gotags: `json:"status,omitempty" bson:"status,omitempty"`
+	Status string `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty" bson:"status,omitempty"`
+	// @gotags: `json:"isActive" bson:"isActive"`
+	IsActive bool `protobuf:"varint,9,opt,name=is_active,json=isActive,proto3" json:"isActive" bson:"isActive"`
+	// Dynamic service access map
+	// @gotags: `json:"services,omitempty" bson:"services,omitempty"`
+	Services map[string]*ServiceAccess `protobuf:"bytes,10,rep,name=services,proto3" json:"services,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value" bson:"services,omitempty"`
+	// List of allowed service names
+	// @gotags: `json:"allowedServices,omitempty" bson:"allowedServices,omitempty"`
+	AllowedServices []string `protobuf:"bytes,11,rep,name=allowed_services,json=allowedServices,proto3" json:"allowedServices,omitempty" bson:"allowedServices,omitempty"`
+	// Custom attributes key-value map
+	// @gotags: `json:"attributes,omitempty" bson:"attributes,omitempty"`
+	Attributes map[string]string `protobuf:"bytes,12,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value" bson:"attributes,omitempty"`
+	// Timestamp when record was created
+	// @gotags: `json:"createdAt,omitempty" bson:"createdAt,omitempty"`
+	CreatedAt string `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"createdAt,omitempty" bson:"createdAt,omitempty"`
+	// Timestamp when record was last updated
+	// @gotags: `json:"updatedAt,omitempty" bson:"updatedAt,omitempty"`
+	UpdatedAt     string `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updatedAt,omitempty" bson:"updatedAt,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserAccess) Reset() {
+	*x = UserAccess{}
+	mi := &file_authorizer_v1_auth_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserAccess) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserAccess) ProtoMessage() {}
+
+func (x *UserAccess) ProtoReflect() protoreflect.Message {
+	mi := &file_authorizer_v1_auth_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserAccess.ProtoReflect.Descriptor instead.
+func (*UserAccess) Descriptor() ([]byte, []int) {
+	return file_authorizer_v1_auth_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UserAccess) GetMongoId() string {
+	if x != nil {
+		return x.MongoId
+	}
+	return ""
+}
+
+func (x *UserAccess) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *UserAccess) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *UserAccess) GetAuthId() string {
+	if x != nil && x.AuthId != nil {
+		return *x.AuthId
+	}
+	return ""
+}
+
+func (x *UserAccess) GetUsername() string {
+	if x != nil && x.Username != nil {
+		return *x.Username
+	}
+	return ""
+}
+
+func (x *UserAccess) GetEmail() string {
+	if x != nil && x.Email != nil {
+		return *x.Email
+	}
+	return ""
+}
+
+func (x *UserAccess) GetSite() string {
+	if x != nil {
+		return x.Site
+	}
+	return ""
+}
+
+func (x *UserAccess) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *UserAccess) GetIsActive() bool {
+	if x != nil {
+		return x.IsActive
+	}
+	return false
+}
+
+func (x *UserAccess) GetServices() map[string]*ServiceAccess {
+	if x != nil {
+		return x.Services
+	}
+	return nil
+}
+
+func (x *UserAccess) GetAllowedServices() []string {
+	if x != nil {
+		return x.AllowedServices
+	}
+	return nil
+}
+
+func (x *UserAccess) GetAttributes() map[string]string {
+	if x != nil {
+		return x.Attributes
+	}
+	return nil
+}
+
+func (x *UserAccess) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *UserAccess) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
+}
+
+// CheckAccessRequest represents incoming parameters to check user service access before login or action.
+type CheckAccessRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: `json:"userId,omitempty" form:"userId"`
+	UserId string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"userId,omitempty" form:"userId"`
+	// @gotags: `json:"email,omitempty" form:"email"`
+	Email *string `protobuf:"bytes,2,opt,name=email,proto3,oneof" json:"email,omitempty" form:"email"`
+	// @gotags: `json:"username,omitempty" form:"username"`
+	Username *string `protobuf:"bytes,3,opt,name=username,proto3,oneof" json:"username,omitempty" form:"username"`
+	// @gotags: `json:"service,omitempty" form:"service"`
+	Service string `protobuf:"bytes,4,opt,name=service,proto3" json:"service,omitempty" form:"service"`
+	// @gotags: `json:"site,omitempty" form:"site"`
+	Site string `protobuf:"bytes,5,opt,name=site,proto3" json:"site,omitempty" form:"site"`
+	// @gotags: `json:"action,omitempty" form:"action"`
+	Action *string `protobuf:"bytes,6,opt,name=action,proto3,oneof" json:"action,omitempty" form:"action"`
+	// @gotags: `json:"id,omitempty" form:"id"`
+	Id *string `protobuf:"bytes,7,opt,name=id,proto3,oneof" json:"id,omitempty" form:"id"`
+	// @gotags: `json:"authId,omitempty" form:"authId"`
+	AuthId        *string `protobuf:"bytes,8,opt,name=auth_id,json=authId,proto3,oneof" json:"authId,omitempty" form:"authId"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckAccessRequest) Reset() {
+	*x = CheckAccessRequest{}
+	mi := &file_authorizer_v1_auth_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckAccessRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckAccessRequest) ProtoMessage() {}
+
+func (x *CheckAccessRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_authorizer_v1_auth_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckAccessRequest.ProtoReflect.Descriptor instead.
+func (*CheckAccessRequest) Descriptor() ([]byte, []int) {
+	return file_authorizer_v1_auth_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CheckAccessRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *CheckAccessRequest) GetEmail() string {
+	if x != nil && x.Email != nil {
+		return *x.Email
+	}
+	return ""
+}
+
+func (x *CheckAccessRequest) GetUsername() string {
+	if x != nil && x.Username != nil {
+		return *x.Username
+	}
+	return ""
+}
+
+func (x *CheckAccessRequest) GetService() string {
+	if x != nil {
+		return x.Service
+	}
+	return ""
+}
+
+func (x *CheckAccessRequest) GetSite() string {
+	if x != nil {
+		return x.Site
+	}
+	return ""
+}
+
+func (x *CheckAccessRequest) GetAction() string {
+	if x != nil && x.Action != nil {
+		return *x.Action
+	}
+	return ""
+}
+
+func (x *CheckAccessRequest) GetId() string {
+	if x != nil && x.Id != nil {
+		return *x.Id
+	}
+	return ""
+}
+
+func (x *CheckAccessRequest) GetAuthId() string {
+	if x != nil && x.AuthId != nil {
+		return *x.AuthId
+	}
+	return ""
+}
+
+// CheckAccessResponse represents the result of the access check.
+type CheckAccessResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: `json:"allowed"`
+	Allowed bool `protobuf:"varint,1,opt,name=allowed,proto3" json:"allowed"`
+	// @gotags: `json:"canLogin"`
+	CanLogin bool `protobuf:"varint,2,opt,name=can_login,json=canLogin,proto3" json:"canLogin"`
+	// @gotags: `json:"service,omitempty"`
+	Service string `protobuf:"bytes,3,opt,name=service,proto3" json:"service,omitempty"`
+	// @gotags: `json:"userId,omitempty"`
+	UserId *string `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3,oneof" json:"userId,omitempty"`
+	// @gotags: `json:"username,omitempty"`
+	Username *string `protobuf:"bytes,5,opt,name=username,proto3,oneof" json:"username,omitempty"`
+	// @gotags: `json:"email,omitempty"`
+	Email *string `protobuf:"bytes,6,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	// @gotags: `json:"status,omitempty"`
+	Status *string `protobuf:"bytes,7,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	// @gotags: `json:"site,omitempty"`
+	Site *string `protobuf:"bytes,8,opt,name=site,proto3,oneof" json:"site,omitempty"`
+	// @gotags: `json:"message,omitempty"`
+	Message *string `protobuf:"bytes,9,opt,name=message,proto3,oneof" json:"message,omitempty"`
+	// @gotags: `json:"error,omitempty"`
+	Error         *string `protobuf:"bytes,10,opt,name=error,proto3,oneof" json:"error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckAccessResponse) Reset() {
+	*x = CheckAccessResponse{}
+	mi := &file_authorizer_v1_auth_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckAccessResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckAccessResponse) ProtoMessage() {}
+
+func (x *CheckAccessResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_authorizer_v1_auth_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckAccessResponse.ProtoReflect.Descriptor instead.
+func (*CheckAccessResponse) Descriptor() ([]byte, []int) {
+	return file_authorizer_v1_auth_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CheckAccessResponse) GetAllowed() bool {
+	if x != nil {
+		return x.Allowed
+	}
+	return false
+}
+
+func (x *CheckAccessResponse) GetCanLogin() bool {
+	if x != nil {
+		return x.CanLogin
+	}
+	return false
+}
+
+func (x *CheckAccessResponse) GetService() string {
+	if x != nil {
+		return x.Service
+	}
+	return ""
+}
+
+func (x *CheckAccessResponse) GetUserId() string {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return ""
+}
+
+func (x *CheckAccessResponse) GetUsername() string {
+	if x != nil && x.Username != nil {
+		return *x.Username
+	}
+	return ""
+}
+
+func (x *CheckAccessResponse) GetEmail() string {
+	if x != nil && x.Email != nil {
+		return *x.Email
+	}
+	return ""
+}
+
+func (x *CheckAccessResponse) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
+}
+
+func (x *CheckAccessResponse) GetSite() string {
+	if x != nil && x.Site != nil {
+		return *x.Site
+	}
+	return ""
+}
+
+func (x *CheckAccessResponse) GetMessage() string {
+	if x != nil && x.Message != nil {
+		return *x.Message
+	}
+	return ""
+}
+
+func (x *CheckAccessResponse) GetError() string {
+	if x != nil && x.Error != nil {
+		return *x.Error
+	}
+	return ""
+}
+
+// GrantAccessRequest is used by administrative endpoints to grant access to a user.
+type GrantAccessRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: `json:"userId" binding:"required"`
+	UserId string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"userId" binding:"required"`
+	// @gotags: `json:"email,omitempty"`
+	Email *string `protobuf:"bytes,2,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	// @gotags: `json:"username,omitempty"`
+	Username *string `protobuf:"bytes,3,opt,name=username,proto3,oneof" json:"username,omitempty"`
+	// @gotags: `json:"service,omitempty"`
+	Service string `protobuf:"bytes,4,opt,name=service,proto3" json:"service,omitempty"`
+	// @gotags: `json:"level,omitempty"`
+	Level string `protobuf:"bytes,5,opt,name=level,proto3" json:"level,omitempty"`
+	// @gotags: `json:"permissions,omitempty"`
+	Permissions []string `protobuf:"bytes,6,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	// @gotags: `json:"site,omitempty"`
+	Site string `protobuf:"bytes,7,opt,name=site,proto3" json:"site,omitempty"`
+	// @gotags: `json:"quotaBytes,omitempty"`
+	QuotaBytes *int64 `protobuf:"varint,8,opt,name=quota_bytes,json=quotaBytes,proto3,oneof" json:"quotaBytes,omitempty"`
+	// @gotags: `json:"attributes,omitempty"`
+	Attributes    map[string]string `protobuf:"bytes,9,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GrantAccessRequest) Reset() {
+	*x = GrantAccessRequest{}
+	mi := &file_authorizer_v1_auth_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GrantAccessRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GrantAccessRequest) ProtoMessage() {}
+
+func (x *GrantAccessRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_authorizer_v1_auth_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GrantAccessRequest.ProtoReflect.Descriptor instead.
+func (*GrantAccessRequest) Descriptor() ([]byte, []int) {
+	return file_authorizer_v1_auth_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GrantAccessRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *GrantAccessRequest) GetEmail() string {
+	if x != nil && x.Email != nil {
+		return *x.Email
+	}
+	return ""
+}
+
+func (x *GrantAccessRequest) GetUsername() string {
+	if x != nil && x.Username != nil {
+		return *x.Username
+	}
+	return ""
+}
+
+func (x *GrantAccessRequest) GetService() string {
+	if x != nil {
+		return x.Service
+	}
+	return ""
+}
+
+func (x *GrantAccessRequest) GetLevel() string {
+	if x != nil {
+		return x.Level
+	}
+	return ""
+}
+
+func (x *GrantAccessRequest) GetPermissions() []string {
+	if x != nil {
+		return x.Permissions
+	}
+	return nil
+}
+
+func (x *GrantAccessRequest) GetSite() string {
+	if x != nil {
+		return x.Site
+	}
+	return ""
+}
+
+func (x *GrantAccessRequest) GetQuotaBytes() int64 {
+	if x != nil && x.QuotaBytes != nil {
+		return *x.QuotaBytes
+	}
+	return 0
+}
+
+func (x *GrantAccessRequest) GetAttributes() map[string]string {
+	if x != nil {
+		return x.Attributes
+	}
+	return nil
+}
+
+// RevokeAccessRequest is used to revoke or disable access for a user.
+type RevokeAccessRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: `json:"userId" binding:"required"`
+	UserId string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"userId" binding:"required"`
+	// @gotags: `json:"service,omitempty"`
+	Service string `protobuf:"bytes,2,opt,name=service,proto3" json:"service,omitempty"`
+	// @gotags: `json:"site,omitempty"`
+	Site          string `protobuf:"bytes,3,opt,name=site,proto3" json:"site,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RevokeAccessRequest) Reset() {
+	*x = RevokeAccessRequest{}
+	mi := &file_authorizer_v1_auth_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RevokeAccessRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RevokeAccessRequest) ProtoMessage() {}
+
+func (x *RevokeAccessRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_authorizer_v1_auth_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RevokeAccessRequest.ProtoReflect.Descriptor instead.
+func (*RevokeAccessRequest) Descriptor() ([]byte, []int) {
+	return file_authorizer_v1_auth_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *RevokeAccessRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *RevokeAccessRequest) GetService() string {
+	if x != nil {
+		return x.Service
+	}
+	return ""
+}
+
+func (x *RevokeAccessRequest) GetSite() string {
+	if x != nil {
+		return x.Site
+	}
+	return ""
+}
+
+// GrantAccessResponse is the response returned when granting service access.
+type GrantAccessResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: `json:"message"`
+	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
+	// @gotags: `json:"access"`
+	Access        *UserAccess `protobuf:"bytes,2,opt,name=access,proto3" json:"access"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GrantAccessResponse) Reset() {
+	*x = GrantAccessResponse{}
+	mi := &file_authorizer_v1_auth_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GrantAccessResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GrantAccessResponse) ProtoMessage() {}
+
+func (x *GrantAccessResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_authorizer_v1_auth_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GrantAccessResponse.ProtoReflect.Descriptor instead.
+func (*GrantAccessResponse) Descriptor() ([]byte, []int) {
+	return file_authorizer_v1_auth_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GrantAccessResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *GrantAccessResponse) GetAccess() *UserAccess {
+	if x != nil {
+		return x.Access
+	}
+	return nil
+}
+
+// RevokeAccessResponse is the response returned when revoking service access.
+type RevokeAccessResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: `json:"message"`
+	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message"`
+	// @gotags: `json:"access"`
+	Access        *UserAccess `protobuf:"bytes,2,opt,name=access,proto3" json:"access"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RevokeAccessResponse) Reset() {
+	*x = RevokeAccessResponse{}
+	mi := &file_authorizer_v1_auth_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RevokeAccessResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RevokeAccessResponse) ProtoMessage() {}
+
+func (x *RevokeAccessResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_authorizer_v1_auth_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RevokeAccessResponse.ProtoReflect.Descriptor instead.
+func (*RevokeAccessResponse) Descriptor() ([]byte, []int) {
+	return file_authorizer_v1_auth_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *RevokeAccessResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *RevokeAccessResponse) GetAccess() *UserAccess {
+	if x != nil {
+		return x.Access
+	}
+	return nil
+}
+
+// GetUserAccessRequest is used to retrieve a user's full access profile.
+type GetUserAccessRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: `json:"userId"`
+	UserId string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"userId"`
+	// @gotags: `json:"site,omitempty"`
+	Site          *string `protobuf:"bytes,2,opt,name=site,proto3,oneof" json:"site,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserAccessRequest) Reset() {
+	*x = GetUserAccessRequest{}
+	mi := &file_authorizer_v1_auth_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserAccessRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserAccessRequest) ProtoMessage() {}
+
+func (x *GetUserAccessRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_authorizer_v1_auth_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserAccessRequest.ProtoReflect.Descriptor instead.
+func (*GetUserAccessRequest) Descriptor() ([]byte, []int) {
+	return file_authorizer_v1_auth_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetUserAccessRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *GetUserAccessRequest) GetSite() string {
+	if x != nil && x.Site != nil {
+		return *x.Site
+	}
+	return ""
+}
+
+// ListUserAccessRequest is used to query access profiles with pagination and filtering.
+type ListUserAccessRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: `json:"site,omitempty"`
+	Site *string `protobuf:"bytes,1,opt,name=site,proto3,oneof" json:"site,omitempty"`
+	// @gotags: `json:"limit,omitempty"`
+	Limit *int64 `protobuf:"varint,2,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
+	// @gotags: `json:"offset,omitempty"`
+	Offset        *int64 `protobuf:"varint,3,opt,name=offset,proto3,oneof" json:"offset,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUserAccessRequest) Reset() {
+	*x = ListUserAccessRequest{}
+	mi := &file_authorizer_v1_auth_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUserAccessRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUserAccessRequest) ProtoMessage() {}
+
+func (x *ListUserAccessRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_authorizer_v1_auth_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUserAccessRequest.ProtoReflect.Descriptor instead.
+func (*ListUserAccessRequest) Descriptor() ([]byte, []int) {
+	return file_authorizer_v1_auth_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ListUserAccessRequest) GetSite() string {
+	if x != nil && x.Site != nil {
+		return *x.Site
+	}
+	return ""
+}
+
+func (x *ListUserAccessRequest) GetLimit() int64 {
+	if x != nil && x.Limit != nil {
+		return *x.Limit
+	}
+	return 0
+}
+
+func (x *ListUserAccessRequest) GetOffset() int64 {
+	if x != nil && x.Offset != nil {
+		return *x.Offset
+	}
+	return 0
+}
+
+// ListUserAccessResponse is the paginated response containing access profiles.
+type ListUserAccessResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: `json:"records"`
+	Records []*UserAccess `protobuf:"bytes,1,rep,name=records,proto3" json:"records"`
+	// @gotags: `json:"count"`
+	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count"`
+	// @gotags: `json:"offset"`
+	Offset int64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset"`
+	// @gotags: `json:"limit"`
+	Limit         int64 `protobuf:"varint,4,opt,name=limit,proto3" json:"limit"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUserAccessResponse) Reset() {
+	*x = ListUserAccessResponse{}
+	mi := &file_authorizer_v1_auth_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUserAccessResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUserAccessResponse) ProtoMessage() {}
+
+func (x *ListUserAccessResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_authorizer_v1_auth_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUserAccessResponse.ProtoReflect.Descriptor instead.
+func (*ListUserAccessResponse) Descriptor() ([]byte, []int) {
+	return file_authorizer_v1_auth_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ListUserAccessResponse) GetRecords() []*UserAccess {
+	if x != nil {
+		return x.Records
+	}
+	return nil
+}
+
+func (x *ListUserAccessResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *ListUserAccessResponse) GetOffset() int64 {
+	if x != nil {
+		return x.Offset
+	}
+	return 0
+}
+
+func (x *ListUserAccessResponse) GetLimit() int64 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
 var File_authorizer_v1_auth_proto protoreflect.FileDescriptor
 
 const file_authorizer_v1_auth_proto_rawDesc = "" +
@@ -190,7 +1184,139 @@ const file_authorizer_v1_auth_proto_rawDesc = "" +
 	"\v_postalcodeB\f\n" +
 	"\n" +
 	"_device_idB\x18\n" +
-	"\x16_device_limit_exceededB=Z;github.com/AyuuSaxena/my-protos-go/authorizer/v1;authorizerb\x06proto3"
+	"\x16_device_limit_exceeded\"\x99\x03\n" +
+	"\rServiceAccess\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x19\n" +
+	"\x05level\x18\x02 \x01(\tH\x00R\x05level\x88\x01\x01\x12 \n" +
+	"\vpermissions\x18\x03 \x03(\tR\vpermissions\x12$\n" +
+	"\vquota_bytes\x18\x04 \x01(\x03H\x01R\n" +
+	"quotaBytes\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"granted_at\x18\x05 \x01(\tH\x02R\tgrantedAt\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"expires_at\x18\x06 \x01(\tH\x03R\texpiresAt\x88\x01\x01\x12L\n" +
+	"\n" +
+	"attributes\x18\a \x03(\v2,.authorizer.v1.ServiceAccess.AttributesEntryR\n" +
+	"attributes\x1a=\n" +
+	"\x0fAttributesEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
+	"\x06_levelB\x0e\n" +
+	"\f_quota_bytesB\r\n" +
+	"\v_granted_atB\r\n" +
+	"\v_expires_at\"\xa9\x05\n" +
+	"\n" +
+	"UserAccess\x12\x19\n" +
+	"\bmongo_id\x18\x01 \x01(\tR\amongoId\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\tR\x06userId\x12\x1c\n" +
+	"\aauth_id\x18\x04 \x01(\tH\x00R\x06authId\x88\x01\x01\x12\x1f\n" +
+	"\busername\x18\x05 \x01(\tH\x01R\busername\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x06 \x01(\tH\x02R\x05email\x88\x01\x01\x12\x12\n" +
+	"\x04site\x18\a \x01(\tR\x04site\x12\x16\n" +
+	"\x06status\x18\b \x01(\tR\x06status\x12\x1b\n" +
+	"\tis_active\x18\t \x01(\bR\bisActive\x12C\n" +
+	"\bservices\x18\n" +
+	" \x03(\v2'.authorizer.v1.UserAccess.ServicesEntryR\bservices\x12)\n" +
+	"\x10allowed_services\x18\v \x03(\tR\x0fallowedServices\x12I\n" +
+	"\n" +
+	"attributes\x18\f \x03(\v2).authorizer.v1.UserAccess.AttributesEntryR\n" +
+	"attributes\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\r \x01(\tR\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\x0e \x01(\tR\tupdatedAt\x1aY\n" +
+	"\rServicesEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x122\n" +
+	"\x05value\x18\x02 \x01(\v2\x1c.authorizer.v1.ServiceAccessR\x05value:\x028\x01\x1a=\n" +
+	"\x0fAttributesEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\n" +
+	"\n" +
+	"\b_auth_idB\v\n" +
+	"\t_usernameB\b\n" +
+	"\x06_email\"\x9c\x02\n" +
+	"\x12CheckAccessRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x19\n" +
+	"\x05email\x18\x02 \x01(\tH\x00R\x05email\x88\x01\x01\x12\x1f\n" +
+	"\busername\x18\x03 \x01(\tH\x01R\busername\x88\x01\x01\x12\x18\n" +
+	"\aservice\x18\x04 \x01(\tR\aservice\x12\x12\n" +
+	"\x04site\x18\x05 \x01(\tR\x04site\x12\x1b\n" +
+	"\x06action\x18\x06 \x01(\tH\x02R\x06action\x88\x01\x01\x12\x13\n" +
+	"\x02id\x18\a \x01(\tH\x03R\x02id\x88\x01\x01\x12\x1c\n" +
+	"\aauth_id\x18\b \x01(\tH\x04R\x06authId\x88\x01\x01B\b\n" +
+	"\x06_emailB\v\n" +
+	"\t_usernameB\t\n" +
+	"\a_actionB\x05\n" +
+	"\x03_idB\n" +
+	"\n" +
+	"\b_auth_id\"\xfd\x02\n" +
+	"\x13CheckAccessResponse\x12\x18\n" +
+	"\aallowed\x18\x01 \x01(\bR\aallowed\x12\x1b\n" +
+	"\tcan_login\x18\x02 \x01(\bR\bcanLogin\x12\x18\n" +
+	"\aservice\x18\x03 \x01(\tR\aservice\x12\x1c\n" +
+	"\auser_id\x18\x04 \x01(\tH\x00R\x06userId\x88\x01\x01\x12\x1f\n" +
+	"\busername\x18\x05 \x01(\tH\x01R\busername\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x06 \x01(\tH\x02R\x05email\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\a \x01(\tH\x03R\x06status\x88\x01\x01\x12\x17\n" +
+	"\x04site\x18\b \x01(\tH\x04R\x04site\x88\x01\x01\x12\x1d\n" +
+	"\amessage\x18\t \x01(\tH\x05R\amessage\x88\x01\x01\x12\x19\n" +
+	"\x05error\x18\n" +
+	" \x01(\tH\x06R\x05error\x88\x01\x01B\n" +
+	"\n" +
+	"\b_user_idB\v\n" +
+	"\t_usernameB\b\n" +
+	"\x06_emailB\t\n" +
+	"\a_statusB\a\n" +
+	"\x05_siteB\n" +
+	"\n" +
+	"\b_messageB\b\n" +
+	"\x06_error\"\xae\x03\n" +
+	"\x12GrantAccessRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x19\n" +
+	"\x05email\x18\x02 \x01(\tH\x00R\x05email\x88\x01\x01\x12\x1f\n" +
+	"\busername\x18\x03 \x01(\tH\x01R\busername\x88\x01\x01\x12\x18\n" +
+	"\aservice\x18\x04 \x01(\tR\aservice\x12\x14\n" +
+	"\x05level\x18\x05 \x01(\tR\x05level\x12 \n" +
+	"\vpermissions\x18\x06 \x03(\tR\vpermissions\x12\x12\n" +
+	"\x04site\x18\a \x01(\tR\x04site\x12$\n" +
+	"\vquota_bytes\x18\b \x01(\x03H\x02R\n" +
+	"quotaBytes\x88\x01\x01\x12Q\n" +
+	"\n" +
+	"attributes\x18\t \x03(\v21.authorizer.v1.GrantAccessRequest.AttributesEntryR\n" +
+	"attributes\x1a=\n" +
+	"\x0fAttributesEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
+	"\x06_emailB\v\n" +
+	"\t_usernameB\x0e\n" +
+	"\f_quota_bytes\"\\\n" +
+	"\x13RevokeAccessRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x18\n" +
+	"\aservice\x18\x02 \x01(\tR\aservice\x12\x12\n" +
+	"\x04site\x18\x03 \x01(\tR\x04site\"b\n" +
+	"\x13GrantAccessResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x121\n" +
+	"\x06access\x18\x02 \x01(\v2\x19.authorizer.v1.UserAccessR\x06access\"c\n" +
+	"\x14RevokeAccessResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x121\n" +
+	"\x06access\x18\x02 \x01(\v2\x19.authorizer.v1.UserAccessR\x06access\"Q\n" +
+	"\x14GetUserAccessRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x17\n" +
+	"\x04site\x18\x02 \x01(\tH\x00R\x04site\x88\x01\x01B\a\n" +
+	"\x05_site\"\x86\x01\n" +
+	"\x15ListUserAccessRequest\x12\x17\n" +
+	"\x04site\x18\x01 \x01(\tH\x00R\x04site\x88\x01\x01\x12\x19\n" +
+	"\x05limit\x18\x02 \x01(\x03H\x01R\x05limit\x88\x01\x01\x12\x1b\n" +
+	"\x06offset\x18\x03 \x01(\x03H\x02R\x06offset\x88\x01\x01B\a\n" +
+	"\x05_siteB\b\n" +
+	"\x06_limitB\t\n" +
+	"\a_offset\"\x91\x01\n" +
+	"\x16ListUserAccessResponse\x123\n" +
+	"\arecords\x18\x01 \x03(\v2\x19.authorizer.v1.UserAccessR\arecords\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\x12\x16\n" +
+	"\x06offset\x18\x03 \x01(\x03R\x06offset\x12\x14\n" +
+	"\x05limit\x18\x04 \x01(\x03R\x05limitB=Z;github.com/AyuuSaxena/my-protos-go/authorizer/v1;authorizerb\x06proto3"
 
 var (
 	file_authorizer_v1_auth_proto_rawDescOnce sync.Once
@@ -204,16 +1330,39 @@ func file_authorizer_v1_auth_proto_rawDescGZIP() []byte {
 	return file_authorizer_v1_auth_proto_rawDescData
 }
 
-var file_authorizer_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_authorizer_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_authorizer_v1_auth_proto_goTypes = []any{
-	(*UserTokenPayload)(nil), // 0: authorizer.v1.UserTokenPayload
+	(*UserTokenPayload)(nil),       // 0: authorizer.v1.UserTokenPayload
+	(*ServiceAccess)(nil),          // 1: authorizer.v1.ServiceAccess
+	(*UserAccess)(nil),             // 2: authorizer.v1.UserAccess
+	(*CheckAccessRequest)(nil),     // 3: authorizer.v1.CheckAccessRequest
+	(*CheckAccessResponse)(nil),    // 4: authorizer.v1.CheckAccessResponse
+	(*GrantAccessRequest)(nil),     // 5: authorizer.v1.GrantAccessRequest
+	(*RevokeAccessRequest)(nil),    // 6: authorizer.v1.RevokeAccessRequest
+	(*GrantAccessResponse)(nil),    // 7: authorizer.v1.GrantAccessResponse
+	(*RevokeAccessResponse)(nil),   // 8: authorizer.v1.RevokeAccessResponse
+	(*GetUserAccessRequest)(nil),   // 9: authorizer.v1.GetUserAccessRequest
+	(*ListUserAccessRequest)(nil),  // 10: authorizer.v1.ListUserAccessRequest
+	(*ListUserAccessResponse)(nil), // 11: authorizer.v1.ListUserAccessResponse
+	nil,                            // 12: authorizer.v1.ServiceAccess.AttributesEntry
+	nil,                            // 13: authorizer.v1.UserAccess.ServicesEntry
+	nil,                            // 14: authorizer.v1.UserAccess.AttributesEntry
+	nil,                            // 15: authorizer.v1.GrantAccessRequest.AttributesEntry
 }
 var file_authorizer_v1_auth_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	12, // 0: authorizer.v1.ServiceAccess.attributes:type_name -> authorizer.v1.ServiceAccess.AttributesEntry
+	13, // 1: authorizer.v1.UserAccess.services:type_name -> authorizer.v1.UserAccess.ServicesEntry
+	14, // 2: authorizer.v1.UserAccess.attributes:type_name -> authorizer.v1.UserAccess.AttributesEntry
+	15, // 3: authorizer.v1.GrantAccessRequest.attributes:type_name -> authorizer.v1.GrantAccessRequest.AttributesEntry
+	2,  // 4: authorizer.v1.GrantAccessResponse.access:type_name -> authorizer.v1.UserAccess
+	2,  // 5: authorizer.v1.RevokeAccessResponse.access:type_name -> authorizer.v1.UserAccess
+	2,  // 6: authorizer.v1.ListUserAccessResponse.records:type_name -> authorizer.v1.UserAccess
+	1,  // 7: authorizer.v1.UserAccess.ServicesEntry.value:type_name -> authorizer.v1.ServiceAccess
+	8,  // [8:8] is the sub-list for method output_type
+	8,  // [8:8] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_authorizer_v1_auth_proto_init() }
@@ -222,13 +1371,20 @@ func file_authorizer_v1_auth_proto_init() {
 		return
 	}
 	file_authorizer_v1_auth_proto_msgTypes[0].OneofWrappers = []any{}
+	file_authorizer_v1_auth_proto_msgTypes[1].OneofWrappers = []any{}
+	file_authorizer_v1_auth_proto_msgTypes[2].OneofWrappers = []any{}
+	file_authorizer_v1_auth_proto_msgTypes[3].OneofWrappers = []any{}
+	file_authorizer_v1_auth_proto_msgTypes[4].OneofWrappers = []any{}
+	file_authorizer_v1_auth_proto_msgTypes[5].OneofWrappers = []any{}
+	file_authorizer_v1_auth_proto_msgTypes[9].OneofWrappers = []any{}
+	file_authorizer_v1_auth_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_authorizer_v1_auth_proto_rawDesc), len(file_authorizer_v1_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
