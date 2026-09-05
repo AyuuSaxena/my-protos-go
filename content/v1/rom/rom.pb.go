@@ -2402,7 +2402,7 @@ const file_content_v1_rom_rom_proto_rawDesc = "" +
 	"\x04site\x18\x01 \x01(\tH\x00R\x04site\x88\x01\x01B\a\n" +
 	"\x05_site\"O\n" +
 	"\x14ListConsolesResponse\x127\n" +
-	"\bconsoles\x18\x01 \x03(\v2\x1b.content.v1.rom.ConsoleInfoR\bconsolesB7Z5github.com/AyuuSaxena/my-protos-go/content/v1/rom;romb\x06proto3"
+	"\bconsoles\x18\x01 \x03(\v2\x1b.content.v1.rom.ConsoleInfoR\bconsolesB4Z2github.com/AyuuSaxena/protos-go/content/v1/rom;romb\x06proto3"
 
 var (
 	file_content_v1_rom_rom_proto_rawDescOnce sync.Once

@@ -207,7 +207,7 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x16\n" +
 	"\x06offset\x18\x03 \x01(\x05R\x06offset\x12\x1f\n" +
 	"\vtotal_pages\x18\x04 \x01(\x05R\n" +
-	"totalPagesB5Z3github.com/AyuuSaxena/my-protos-go/common/v1;commonb\x06proto3"
+	"totalPagesB2Z0github.com/AyuuSaxena/protos-go/common/v1;commonb\x06proto3"
 
 var (
 	file_common_v1_common_proto_rawDescOnce sync.Once

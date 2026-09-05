@@ -35,7 +35,7 @@ const file_content_v1_rom_romService_proto_rawDesc = "" +
 	"\tRomUpdate\x12 .content.v1.rom.RomUpdateRequest\x1a\x1b.content.v1.rom.RomMetadata\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\x1a\x11/api/v1/roms/{id}\x12k\n" +
 	"\tRomDelete\x12 .content.v1.rom.RomDeleteRequest\x1a!.content.v1.rom.RomDeleteResponse\"\x19\x82\xd3\xe4\x93\x02\x13*\x11/api/v1/roms/{id}\x12r\n" +
 	"\vRomDownload\x12\".content.v1.rom.RomDownloadRequest\x1a\x19.content.v1.rom.FileChunk\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/v1/roms/{id}/download0\x01\x12q\n" +
-	"\bRomShare\x12\x1f.content.v1.rom.RomShareRequest\x1a .content.v1.rom.RomShareResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/v1/roms/{id}/shareB7Z5github.com/AyuuSaxena/my-protos-go/content/v1/rom;romb\x06proto3"
+	"\bRomShare\x12\x1f.content.v1.rom.RomShareRequest\x1a .content.v1.rom.RomShareResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/v1/roms/{id}/shareB4Z2github.com/AyuuSaxena/protos-go/content/v1/rom;romb\x06proto3"
 
 var file_content_v1_rom_romService_proto_goTypes = []any{
 	(*ListConsolesRequest)(nil),  // 0: content.v1.rom.ListConsolesRequest

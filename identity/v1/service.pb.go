@@ -31,7 +31,7 @@ const file_identity_v1_service_proto_rawDesc = "" +
 	"\x0eIdentityUpdate\x12\".identity.v1.IdentityUpdateRequest\x1a\x15.identity.v1.Identity\"\x00\x12c\n" +
 	"\x13IdentityOtpValidate\x12'.identity.v1.IdentityOtpValidateRequest\x1a!.identity.v1.IdentityAuthResponse\"\x00\x12V\n" +
 	"\rIdentityLogin\x12 .identity.v1.IdentityAuthRequest\x1a!.identity.v1.IdentityAuthResponse\"\x00\x12e\n" +
-	"\x14IdentityRefershToken\x12(.identity.v1.IdentityRefreshTokenRequest\x1a!.identity.v1.IdentityAuthResponse\"\x00B9Z7github.com/AyuuSaxena/my-protos-go/identity/v1;identityb\x06proto3"
+	"\x14IdentityRefershToken\x12(.identity.v1.IdentityRefreshTokenRequest\x1a!.identity.v1.IdentityAuthResponse\"\x00B6Z4github.com/AyuuSaxena/protos-go/identity/v1;identityb\x06proto3"
 
 var file_identity_v1_service_proto_goTypes = []any{
 	(*IdentityCreateAccountRequest)(nil),  // 0: identity.v1.IdentityCreateAccountRequest

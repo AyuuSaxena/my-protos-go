@@ -31,7 +31,7 @@ const file_authorizer_v1_authorizerService_proto_rawDesc = "" +
 	"\vGrantAccess\x12!.authorizer.v1.GrantAccessRequest\x1a\".authorizer.v1.GrantAccessResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/access/grant\x12y\n" +
 	"\fRevokeAccess\x12\".authorizer.v1.RevokeAccessRequest\x1a#.authorizer.v1.RevokeAccessResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/access/revoke\x12q\n" +
 	"\rGetUserAccess\x12#.authorizer.v1.GetUserAccessRequest\x1a\x19.authorizer.v1.UserAccess\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/api/v1/access/{user_id}\x12u\n" +
-	"\x0eListUserAccess\x12$.authorizer.v1.ListUserAccessRequest\x1a%.authorizer.v1.ListUserAccessResponse\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/api/v1/accessB=Z;github.com/AyuuSaxena/my-protos-go/authorizer/v1;authorizerb\x06proto3"
+	"\x0eListUserAccess\x12$.authorizer.v1.ListUserAccessRequest\x1a%.authorizer.v1.ListUserAccessResponse\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/api/v1/accessB:Z8github.com/AyuuSaxena/protos-go/authorizer/v1;authorizerb\x06proto3"
 
 var file_authorizer_v1_authorizerService_proto_goTypes = []any{
 	(*CheckAccessRequest)(nil),     // 0: authorizer.v1.CheckAccessRequest

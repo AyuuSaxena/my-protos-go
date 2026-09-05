@@ -38,7 +38,7 @@ const file_storage_v1_storageService_proto_rawDesc = "" +
 	"DeleteFile\x12\x1d.storage.v1.DeleteFileRequest\x1a\x1e.storage.v1.DeleteFileResponse\"d\x82\xd3\xe4\x93\x02^Z'*%/storage.v1.StorageService/DeleteFile*3/api/v1/storage/buckets/{bucket_id}/files/{file_id}\x12\x7f\n" +
 	"\n" +
 	"UploadFile\x12\x1d.storage.v1.UploadFileRequest\x1a\x1e.storage.v1.UploadFileResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/storage.v1.StorageService/UploadFile(\x01\x12\xb9\x01\n" +
-	"\fDownloadFile\x12\x1f.storage.v1.DownloadFileRequest\x1a\x15.storage.v1.FileChunk\"o\x82\xd3\xe4\x93\x02iZ)\x12'/storage.v1.StorageService/DownloadFile\x12</api/v1/storage/buckets/{bucket_id}/files/{file_id}/download0\x01B7Z5github.com/AyuuSaxena/my-protos-go/storage/v1;storageb\x06proto3"
+	"\fDownloadFile\x12\x1f.storage.v1.DownloadFileRequest\x1a\x15.storage.v1.FileChunk\"o\x82\xd3\xe4\x93\x02iZ)\x12'/storage.v1.StorageService/DownloadFile\x12</api/v1/storage/buckets/{bucket_id}/files/{file_id}/download0\x01B4Z2github.com/AyuuSaxena/protos-go/storage/v1;storageb\x06proto3"
 
 var file_storage_v1_storageService_proto_goTypes = []any{
 	(*CreateBucketRequest)(nil),  // 0: storage.v1.CreateBucketRequest

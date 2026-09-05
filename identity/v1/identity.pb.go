@@ -1070,7 +1070,7 @@ const file_identity_v1_identity_proto_rawDesc = "" +
 	"\x1aIdentityOtpValidateRequest\x12\x12\n" +
 	"\x04site\x18\x01 \x01(\tR\x04site\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x10\n" +
-	"\x03otp\x18\x03 \x01(\tR\x03otpB9Z7github.com/AyuuSaxena/my-protos-go/identity/v1;identityb\x06proto3"
+	"\x03otp\x18\x03 \x01(\tR\x03otpB6Z4github.com/AyuuSaxena/protos-go/identity/v1;identityb\x06proto3"
 
 var (
 	file_identity_v1_identity_proto_rawDescOnce sync.Once

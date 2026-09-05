@@ -1316,7 +1316,7 @@ const file_authorizer_v1_auth_proto_rawDesc = "" +
 	"\arecords\x18\x01 \x03(\v2\x19.authorizer.v1.UserAccessR\arecords\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x03R\x05count\x12\x16\n" +
 	"\x06offset\x18\x03 \x01(\x03R\x06offset\x12\x14\n" +
-	"\x05limit\x18\x04 \x01(\x03R\x05limitB=Z;github.com/AyuuSaxena/my-protos-go/authorizer/v1;authorizerb\x06proto3"
+	"\x05limit\x18\x04 \x01(\x03R\x05limitB:Z8github.com/AyuuSaxena/protos-go/authorizer/v1;authorizerb\x06proto3"
 
 var (
 	file_authorizer_v1_auth_proto_rawDescOnce sync.Once

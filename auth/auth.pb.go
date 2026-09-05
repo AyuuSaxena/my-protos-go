@@ -7,7 +7,7 @@
 package auth
 
 import (
-	identity "github.com/AyuuSaxena/my-protos-go/identity"
+	identity "github.com/AyuuSaxena/protos-go/identity"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"

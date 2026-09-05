@@ -7,7 +7,7 @@
 package storage
 
 import (
-	v1 "github.com/AyuuSaxena/my-protos-go/common/v1"
+	v1 "github.com/AyuuSaxena/protos-go/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1381,7 +1381,7 @@ const file_storage_v1_storage_proto_rawDesc = "" +
 	"\x04file\x18\x01 \x01(\v2\x18.storage.v1.FileMetadataR\x04file\"K\n" +
 	"\x13DownloadFileRequest\x12\x1b\n" +
 	"\tbucket_id\x18\x01 \x01(\tR\bbucketId\x12\x17\n" +
-	"\afile_id\x18\x02 \x01(\tR\x06fileIdB7Z5github.com/AyuuSaxena/my-protos-go/storage/v1;storageb\x06proto3"
+	"\afile_id\x18\x02 \x01(\tR\x06fileIdB4Z2github.com/AyuuSaxena/protos-go/storage/v1;storageb\x06proto3"
 
 var (
 	file_storage_v1_storage_proto_rawDescOnce sync.Once
