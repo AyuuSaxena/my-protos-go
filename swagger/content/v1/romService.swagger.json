@@ -33,6 +33,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "site",
+            "description": "Optional site identifier filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
         "tags": [
           "RomService"
         ]
@@ -141,6 +150,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "site",
+            "description": "Optional site identifier",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -177,6 +193,13 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "site",
+            "description": "Optional site identifier",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -268,6 +291,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "site",
+            "description": "Optional site identifier",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -323,6 +353,10 @@
           "type": "integer",
           "format": "int32",
           "title": "Pre-signed download URL expiration duration in seconds"
+        },
+        "site": {
+          "type": "string",
+          "title": "Optional site identifier"
         }
       }
     },
@@ -385,6 +419,10 @@
         "status": {
           "type": "string",
           "title": "Updated lifecycle status"
+        },
+        "site": {
+          "type": "string",
+          "title": "Updated site identifier"
         }
       }
     },
@@ -426,6 +464,10 @@
         "id": {
           "type": "string",
           "title": "Unique console identifier (UUID)"
+        },
+        "site": {
+          "type": "string",
+          "title": "Dynamic site/tenant key (e.g. retrogames)"
         },
         "key": {
           "type": "string",
@@ -565,6 +607,10 @@
         "uploaderUsername": {
           "type": "string",
           "title": "Uploader username"
+        },
+        "site": {
+          "type": "string",
+          "title": "Dynamic site/tenant key (e.g. retrogames)"
         }
       }
     },
@@ -578,6 +624,10 @@
         "id": {
           "type": "string",
           "title": "UUID file identifier in storage database"
+        },
+        "site": {
+          "type": "string",
+          "title": "Dynamic site/tenant key (e.g. retrogames)"
         },
         "bucketId": {
           "type": "string",
@@ -673,6 +723,10 @@
         "query": {
           "$ref": "#/definitions/v1RomQuery",
           "title": "Nested query filters for ROM properties"
+        },
+        "site": {
+          "type": "string",
+          "title": "Optional site identifier"
         }
       }
     },
@@ -719,6 +773,10 @@
         "id": {
           "type": "string",
           "title": "Unique ROM identifier (UUID)"
+        },
+        "site": {
+          "type": "string",
+          "title": "Dynamic site/tenant key (e.g. retrogames)"
         },
         "title": {
           "type": "string",
@@ -837,6 +895,10 @@
         "uploaderId": {
           "type": "string",
           "title": "Filter by uploader user ID"
+        },
+        "site": {
+          "type": "string",
+          "title": "Filter by site key (e.g. retrogames)"
         }
       }
     },

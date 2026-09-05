@@ -30,32 +30,35 @@ type ConsoleInfo struct {
 	// Unique console identifier (UUID)
 	// @gotags: `json:"id,omitempty" bson:"id,omitempty"`
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty" bson:"id,omitempty"`
+	// Dynamic site/tenant key (e.g. retrogames)
+	// @gotags: `json:"site,omitempty" bson:"site,omitempty"`
+	Site string `protobuf:"bytes,3,opt,name=site,proto3" json:"site,omitempty" bson:"site,omitempty"`
 	// Console system key (e.g. gba, snes, nds, psx)
-	Key string `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"`
+	Key string `protobuf:"bytes,4,opt,name=key,proto3" json:"key,omitempty"`
 	// Full display name of the console
 	// @gotags: `json:"fullName,omitempty" bson:"fullName,omitempty"`
-	FullName string `protobuf:"bytes,4,opt,name=full_name,json=fullName,proto3" json:"fullName,omitempty" bson:"fullName,omitempty"`
+	FullName string `protobuf:"bytes,5,opt,name=full_name,json=fullName,proto3" json:"fullName,omitempty" bson:"fullName,omitempty"`
 	// URL-friendly slug
-	Slug string `protobuf:"bytes,5,opt,name=slug,proto3" json:"slug,omitempty"`
+	Slug string `protobuf:"bytes,6,opt,name=slug,proto3" json:"slug,omitempty"`
 	// Supported file extensions (without leading dot)
-	Extensions []string `protobuf:"bytes,6,rep,name=extensions,proto3" json:"extensions,omitempty"`
+	Extensions []string `protobuf:"bytes,7,rep,name=extensions,proto3" json:"extensions,omitempty"`
 	// Hardware manufacturer (e.g. Nintendo, Sony, Sega)
-	Manufacturer string `protobuf:"bytes,7,opt,name=manufacturer,proto3" json:"manufacturer,omitempty"`
+	Manufacturer string `protobuf:"bytes,8,opt,name=manufacturer,proto3" json:"manufacturer,omitempty"`
 	// Release year
 	// @gotags: `json:"releaseYear,omitempty" bson:"releaseYear,omitempty"`
-	ReleaseYear int32 `protobuf:"varint,8,opt,name=release_year,json=releaseYear,proto3" json:"releaseYear,omitempty" bson:"releaseYear,omitempty"`
+	ReleaseYear int32 `protobuf:"varint,9,opt,name=release_year,json=releaseYear,proto3" json:"releaseYear,omitempty" bson:"releaseYear,omitempty"`
 	// Console icon or logo URL
 	// @gotags: `json:"iconUrl,omitempty" bson:"iconUrl,omitempty"`
-	IconUrl string `protobuf:"bytes,9,opt,name=icon_url,json=iconUrl,proto3" json:"iconUrl,omitempty" bson:"iconUrl,omitempty"`
+	IconUrl string `protobuf:"bytes,10,opt,name=icon_url,json=iconUrl,proto3" json:"iconUrl,omitempty" bson:"iconUrl,omitempty"`
 	// Total number of ROMs linked to this console
 	// @gotags: `json:"contentCount,omitempty" bson:"contentCount,omitempty"`
-	ContentCount int64 `protobuf:"varint,10,opt,name=content_count,json=contentCount,proto3" json:"contentCount,omitempty" bson:"contentCount,omitempty"`
+	ContentCount int64 `protobuf:"varint,11,opt,name=content_count,json=contentCount,proto3" json:"contentCount,omitempty" bson:"contentCount,omitempty"`
 	// Creation timestamp
 	// @gotags: `json:"createdAt,omitempty" bson:"createdAt,omitempty"`
-	CreatedAt string `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"createdAt,omitempty" bson:"createdAt,omitempty"`
+	CreatedAt string `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"createdAt,omitempty" bson:"createdAt,omitempty"`
 	// Last update timestamp
 	// @gotags: `json:"updatedAt,omitempty" bson:"updatedAt,omitempty"`
-	UpdatedAt     string `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updatedAt,omitempty" bson:"updatedAt,omitempty"`
+	UpdatedAt     string `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updatedAt,omitempty" bson:"updatedAt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -100,6 +103,13 @@ func (x *ConsoleInfo) GetMongoId() string {
 func (x *ConsoleInfo) GetId() string {
 	if x != nil {
 		return x.Id
+	}
+	return ""
+}
+
+func (x *ConsoleInfo) GetSite() string {
+	if x != nil {
+		return x.Site
 	}
 	return ""
 }
@@ -183,46 +193,49 @@ type RomMetadata struct {
 	// Unique ROM identifier (UUID)
 	// @gotags: `json:"id,omitempty" bson:"id,omitempty"`
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty" bson:"id,omitempty"`
+	// Dynamic site/tenant key (e.g. retrogames)
+	// @gotags: `json:"site,omitempty" bson:"site,omitempty"`
+	Site string `protobuf:"bytes,3,opt,name=site,proto3" json:"site,omitempty" bson:"site,omitempty"`
 	// Display title of the ROM
-	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Title string `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
 	// URL-friendly slug
-	Slug string `protobuf:"bytes,4,opt,name=slug,proto3" json:"slug,omitempty"`
+	Slug string `protobuf:"bytes,5,opt,name=slug,proto3" json:"slug,omitempty"`
 	// Detailed description
-	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Description string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
 	// Relational Foreign Keys
 	// @gotags: `json:"consoleId,omitempty" bson:"consoleId,omitempty"`
-	ConsoleId string `protobuf:"bytes,6,opt,name=console_id,json=consoleId,proto3" json:"consoleId,omitempty" bson:"consoleId,omitempty"`
+	ConsoleId string `protobuf:"bytes,7,opt,name=console_id,json=consoleId,proto3" json:"consoleId,omitempty" bson:"consoleId,omitempty"`
 	// @gotags: `json:"fileId,omitempty" bson:"fileId,omitempty"`
-	FileId string `protobuf:"bytes,7,opt,name=file_id,json=fileId,proto3" json:"fileId,omitempty" bson:"fileId,omitempty"`
+	FileId string `protobuf:"bytes,8,opt,name=file_id,json=fileId,proto3" json:"fileId,omitempty" bson:"fileId,omitempty"`
 	// Domain Metadata
-	Developer string `protobuf:"bytes,8,opt,name=developer,proto3" json:"developer,omitempty"`
-	Publisher string `protobuf:"bytes,9,opt,name=publisher,proto3" json:"publisher,omitempty"`
+	Developer string `protobuf:"bytes,9,opt,name=developer,proto3" json:"developer,omitempty"`
+	Publisher string `protobuf:"bytes,10,opt,name=publisher,proto3" json:"publisher,omitempty"`
 	// @gotags: `json:"releaseYear,omitempty" bson:"releaseYear,omitempty"`
-	ReleaseYear int32    `protobuf:"varint,10,opt,name=release_year,json=releaseYear,proto3" json:"releaseYear,omitempty" bson:"releaseYear,omitempty"`
-	Genre       string   `protobuf:"bytes,11,opt,name=genre,proto3" json:"genre,omitempty"`
-	Region      string   `protobuf:"bytes,12,opt,name=region,proto3" json:"region,omitempty"`
-	Players     int32    `protobuf:"varint,13,opt,name=players,proto3" json:"players,omitempty"`
-	Rating      string   `protobuf:"bytes,14,opt,name=rating,proto3" json:"rating,omitempty"`
-	Tags        []string `protobuf:"bytes,15,rep,name=tags,proto3" json:"tags,omitempty"`
+	ReleaseYear int32    `protobuf:"varint,11,opt,name=release_year,json=releaseYear,proto3" json:"releaseYear,omitempty" bson:"releaseYear,omitempty"`
+	Genre       string   `protobuf:"bytes,12,opt,name=genre,proto3" json:"genre,omitempty"`
+	Region      string   `protobuf:"bytes,13,opt,name=region,proto3" json:"region,omitempty"`
+	Players     int32    `protobuf:"varint,14,opt,name=players,proto3" json:"players,omitempty"`
+	Rating      string   `protobuf:"bytes,15,opt,name=rating,proto3" json:"rating,omitempty"`
+	Tags        []string `protobuf:"bytes,16,rep,name=tags,proto3" json:"tags,omitempty"`
 	// @gotags: `json:"isPublic,omitempty" bson:"isPublic,omitempty"`
-	IsPublic bool `protobuf:"varint,16,opt,name=is_public,json=isPublic,proto3" json:"isPublic,omitempty" bson:"isPublic,omitempty"`
+	IsPublic bool `protobuf:"varint,17,opt,name=is_public,json=isPublic,proto3" json:"isPublic,omitempty" bson:"isPublic,omitempty"`
 	// Lifecycle status (active, archived, draft)
-	Status string `protobuf:"bytes,17,opt,name=status,proto3" json:"status,omitempty"`
+	Status string `protobuf:"bytes,18,opt,name=status,proto3" json:"status,omitempty"`
 	// @gotags: `json:"uploaderId,omitempty" bson:"uploaderId,omitempty"`
-	UploaderId string `protobuf:"bytes,18,opt,name=uploader_id,json=uploaderId,proto3" json:"uploaderId,omitempty" bson:"uploaderId,omitempty"`
+	UploaderId string `protobuf:"bytes,19,opt,name=uploader_id,json=uploaderId,proto3" json:"uploaderId,omitempty" bson:"uploaderId,omitempty"`
 	// @gotags: `json:"uploaderUsername,omitempty" bson:"uploaderUsername,omitempty"`
-	UploaderUsername string `protobuf:"bytes,19,opt,name=uploader_username,json=uploaderUsername,proto3" json:"uploaderUsername,omitempty" bson:"uploaderUsername,omitempty"`
+	UploaderUsername string `protobuf:"bytes,20,opt,name=uploader_username,json=uploaderUsername,proto3" json:"uploaderUsername,omitempty" bson:"uploaderUsername,omitempty"`
 	// @gotags: `json:"createdAt,omitempty" bson:"createdAt,omitempty"`
-	CreatedAt string `protobuf:"bytes,20,opt,name=created_at,json=createdAt,proto3" json:"createdAt,omitempty" bson:"createdAt,omitempty"`
+	CreatedAt string `protobuf:"bytes,21,opt,name=created_at,json=createdAt,proto3" json:"createdAt,omitempty" bson:"createdAt,omitempty"`
 	// @gotags: `json:"updatedAt,omitempty" bson:"updatedAt,omitempty"`
-	UpdatedAt string `protobuf:"bytes,21,opt,name=updated_at,json=updatedAt,proto3" json:"updatedAt,omitempty" bson:"updatedAt,omitempty"`
+	UpdatedAt string `protobuf:"bytes,22,opt,name=updated_at,json=updatedAt,proto3" json:"updatedAt,omitempty" bson:"updatedAt,omitempty"`
 	// Enriched Relations (populated on read, not persisted in DB)
 	// Full console details resolved from consoleId
 	// @gotags: `json:"consoleMetadata,omitempty" bson:"consoleMetadata,omitempty"`
-	ConsoleMetadata *ConsoleInfo `protobuf:"bytes,22,opt,name=console_metadata,json=consoleMetadata,proto3" json:"consoleMetadata,omitempty" bson:"consoleMetadata,omitempty"`
+	ConsoleMetadata *ConsoleInfo `protobuf:"bytes,23,opt,name=console_metadata,json=consoleMetadata,proto3" json:"consoleMetadata,omitempty" bson:"consoleMetadata,omitempty"`
 	// Full file details resolved from fileId
 	// @gotags: `json:"fileMetadata,omitempty" bson:"fileMetadata,omitempty"`
-	FileMetadata  *FileMetadata `protobuf:"bytes,23,opt,name=file_metadata,json=fileMetadata,proto3" json:"fileMetadata,omitempty" bson:"fileMetadata,omitempty"`
+	FileMetadata  *FileMetadata `protobuf:"bytes,24,opt,name=file_metadata,json=fileMetadata,proto3" json:"fileMetadata,omitempty" bson:"fileMetadata,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -267,6 +280,13 @@ func (x *RomMetadata) GetMongoId() string {
 func (x *RomMetadata) GetId() string {
 	if x != nil {
 		return x.Id
+	}
+	return ""
+}
+
+func (x *RomMetadata) GetSite() string {
+	if x != nil {
+		return x.Site
 	}
 	return ""
 }
@@ -427,30 +447,33 @@ type FileMetadata struct {
 	// UUID file identifier in storage database
 	// @gotags: `json:"id,omitempty" bson:"id,omitempty"`
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty" bson:"id,omitempty"`
+	// Dynamic site/tenant key (e.g. retrogames)
+	// @gotags: `json:"site,omitempty" bson:"site,omitempty"`
+	Site string `protobuf:"bytes,3,opt,name=site,proto3" json:"site,omitempty" bson:"site,omitempty"`
 	// Bucket name containing this file
 	// @gotags: `json:"bucketId,omitempty" bson:"bucketId,omitempty"`
-	BucketId string `protobuf:"bytes,3,opt,name=bucket_id,json=bucketId,proto3" json:"bucketId,omitempty" bson:"bucketId,omitempty"`
+	BucketId string `protobuf:"bytes,4,opt,name=bucket_id,json=bucketId,proto3" json:"bucketId,omitempty" bson:"bucketId,omitempty"`
 	// Directory path within the bucket
-	Directory string `protobuf:"bytes,4,opt,name=directory,proto3" json:"directory,omitempty"`
+	Directory string `protobuf:"bytes,5,opt,name=directory,proto3" json:"directory,omitempty"`
 	// File base name
-	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
 	// File extension without leading dot
 	// @gotags: `json:"fileExtension,omitempty" bson:"fileExtension,omitempty"`
-	FileExtension string `protobuf:"bytes,6,opt,name=file_extension,json=fileExtension,proto3" json:"fileExtension,omitempty" bson:"fileExtension,omitempty"`
+	FileExtension string `protobuf:"bytes,7,opt,name=file_extension,json=fileExtension,proto3" json:"fileExtension,omitempty" bson:"fileExtension,omitempty"`
 	// Full storage path (directory/name)
 	// @gotags: `json:"fullPath,omitempty" bson:"fullPath,omitempty"`
-	FullPath string `protobuf:"bytes,7,opt,name=full_path,json=fullPath,proto3" json:"fullPath,omitempty" bson:"fullPath,omitempty"`
+	FullPath string `protobuf:"bytes,8,opt,name=full_path,json=fullPath,proto3" json:"fullPath,omitempty" bson:"fullPath,omitempty"`
 	// MIME content type
 	// @gotags: `json:"contentType,omitempty" bson:"contentType,omitempty"`
-	ContentType string `protobuf:"bytes,8,opt,name=content_type,json=contentType,proto3" json:"contentType,omitempty" bson:"contentType,omitempty"`
+	ContentType string `protobuf:"bytes,9,opt,name=content_type,json=contentType,proto3" json:"contentType,omitempty" bson:"contentType,omitempty"`
 	// File size in bytes
 	// @gotags: `json:"sizeBytes,omitempty" bson:"sizeBytes,omitempty"`
-	SizeBytes int64 `protobuf:"varint,9,opt,name=size_bytes,json=sizeBytes,proto3" json:"sizeBytes,omitempty" bson:"sizeBytes,omitempty"`
+	SizeBytes int64 `protobuf:"varint,10,opt,name=size_bytes,json=sizeBytes,proto3" json:"sizeBytes,omitempty" bson:"sizeBytes,omitempty"`
 	// ETag / checksum of the file
-	Etag string `protobuf:"bytes,10,opt,name=etag,proto3" json:"etag,omitempty"`
+	Etag string `protobuf:"bytes,11,opt,name=etag,proto3" json:"etag,omitempty"`
 	// ISO-8601 creation timestamp
 	// @gotags: `json:"createdAt,omitempty" bson:"createdAt,omitempty"`
-	CreatedAt     string `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"createdAt,omitempty" bson:"createdAt,omitempty"`
+	CreatedAt     string `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"createdAt,omitempty" bson:"createdAt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -495,6 +518,13 @@ func (x *FileMetadata) GetMongoId() string {
 func (x *FileMetadata) GetId() string {
 	if x != nil {
 		return x.Id
+	}
+	return ""
+}
+
+func (x *FileMetadata) GetSite() string {
+	if x != nil {
+		return x.Site
 	}
 	return ""
 }
@@ -569,7 +599,10 @@ type RomGetRequest struct {
 	// ROM name to match
 	Name *string `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
 	// ROM URL slug
-	Slug          *string `protobuf:"bytes,3,opt,name=slug,proto3,oneof" json:"slug,omitempty"`
+	Slug *string `protobuf:"bytes,3,opt,name=slug,proto3,oneof" json:"slug,omitempty"`
+	// Optional site identifier
+	// @gotags: `form:"site" json:"site,omitempty"`
+	Site          *string `protobuf:"bytes,4,opt,name=site,proto3,oneof" json:"site,omitempty" form:"site"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -625,6 +658,13 @@ func (x *RomGetRequest) GetSlug() string {
 	return ""
 }
 
+func (x *RomGetRequest) GetSite() string {
+	if x != nil && x.Site != nil {
+		return *x.Site
+	}
+	return ""
+}
+
 type RomDownloadRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ROM unique identifier
@@ -632,7 +672,10 @@ type RomDownloadRequest struct {
 	// ROM name to match
 	Name *string `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
 	// ROM URL slug
-	Slug          *string `protobuf:"bytes,3,opt,name=slug,proto3,oneof" json:"slug,omitempty"`
+	Slug *string `protobuf:"bytes,3,opt,name=slug,proto3,oneof" json:"slug,omitempty"`
+	// Optional site identifier
+	// @gotags: `form:"site" json:"site,omitempty"`
+	Site          *string `protobuf:"bytes,4,opt,name=site,proto3,oneof" json:"site,omitempty" form:"site"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -684,6 +727,13 @@ func (x *RomDownloadRequest) GetName() string {
 func (x *RomDownloadRequest) GetSlug() string {
 	if x != nil && x.Slug != nil {
 		return *x.Slug
+	}
+	return ""
+}
+
+func (x *RomDownloadRequest) GetSite() string {
+	if x != nil && x.Site != nil {
+		return *x.Site
 	}
 	return ""
 }
@@ -761,7 +811,10 @@ type RomQuery struct {
 	Tag *string `protobuf:"bytes,8,opt,name=tag,proto3,oneof" json:"tag,omitempty" form:"tag" bson:"tag,omitempty"`
 	// Filter by uploader user ID
 	// @gotags: `form:"uploaderId" json:"uploaderId,omitempty" bson:"uploaderId,omitempty"`
-	UploaderId    *string `protobuf:"bytes,9,opt,name=uploader_id,json=uploaderId,proto3,oneof" json:"uploaderId,omitempty" form:"uploaderId" bson:"uploaderId,omitempty"`
+	UploaderId *string `protobuf:"bytes,9,opt,name=uploader_id,json=uploaderId,proto3,oneof" json:"uploaderId,omitempty" form:"uploaderId" bson:"uploaderId,omitempty"`
+	// Filter by site key (e.g. retrogames)
+	// @gotags: `form:"site" json:"site,omitempty" bson:"site,omitempty"`
+	Site          *string `protobuf:"bytes,10,opt,name=site,proto3,oneof" json:"site,omitempty" form:"site" bson:"site,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -859,6 +912,13 @@ func (x *RomQuery) GetUploaderId() string {
 	return ""
 }
 
+func (x *RomQuery) GetSite() string {
+	if x != nil && x.Site != nil {
+		return *x.Site
+	}
+	return ""
+}
+
 type RomListRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Maximum number of items to return (default 20, max 100)
@@ -878,7 +938,10 @@ type RomListRequest struct {
 	SortOrder *string `protobuf:"bytes,5,opt,name=sort_order,json=sortOrder,proto3,oneof" json:"sortOrder,omitempty" form:"sortOrder" bson:"sortOrder,omitempty"`
 	// Nested query filters for ROM properties
 	// @gotags: `json:"query,omitempty" bson:"query,omitempty"`
-	Query         *RomQuery `protobuf:"bytes,6,opt,name=query,proto3,oneof" json:"query,omitempty" bson:"query,omitempty"`
+	Query *RomQuery `protobuf:"bytes,6,opt,name=query,proto3,oneof" json:"query,omitempty" bson:"query,omitempty"`
+	// Optional site identifier
+	// @gotags: `form:"site" json:"site,omitempty" bson:"site,omitempty"`
+	Site          *string `protobuf:"bytes,7,opt,name=site,proto3,oneof" json:"site,omitempty" form:"site" bson:"site,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -953,6 +1016,13 @@ func (x *RomListRequest) GetQuery() *RomQuery {
 		return x.Query
 	}
 	return nil
+}
+
+func (x *RomListRequest) GetSite() string {
+	if x != nil && x.Site != nil {
+		return *x.Site
+	}
+	return ""
 }
 
 type RomListResponse struct {
@@ -1084,8 +1154,11 @@ type FileInfo struct {
 	// Uploader username
 	// @gotags: `json:"uploaderUsername,omitempty" bson:"uploaderUsername,omitempty"`
 	UploaderUsername string `protobuf:"bytes,18,opt,name=uploader_username,json=uploaderUsername,proto3" json:"uploaderUsername,omitempty" bson:"uploaderUsername,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Dynamic site/tenant key (e.g. retrogames)
+	// @gotags: `json:"site,omitempty" bson:"site,omitempty"`
+	Site          string `protobuf:"bytes,19,opt,name=site,proto3" json:"site,omitempty" bson:"site,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FileInfo) Reset() {
@@ -1244,6 +1317,13 @@ func (x *FileInfo) GetUploaderUsername() string {
 	return ""
 }
 
+func (x *FileInfo) GetSite() string {
+	if x != nil {
+		return x.Site
+	}
+	return ""
+}
+
 type UploadRomRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ROM display title
@@ -1278,7 +1358,10 @@ type UploadRomRequest struct {
 	Tags []string `protobuf:"bytes,13,rep,name=tags,proto3" json:"tags,omitempty"`
 	// Custom storage key
 	// @gotags: `json:"customKey,omitempty" bson:"customKey,omitempty" form:"customKey"`
-	CustomKey     string `protobuf:"bytes,14,opt,name=custom_key,json=customKey,proto3" json:"customKey,omitempty" bson:"customKey,omitempty" form:"customKey"`
+	CustomKey string `protobuf:"bytes,14,opt,name=custom_key,json=customKey,proto3" json:"customKey,omitempty" bson:"customKey,omitempty" form:"customKey"`
+	// Dynamic site/tenant key (e.g. retrogames)
+	// @gotags: `json:"site,omitempty" bson:"site,omitempty" form:"site"`
+	Site          *string `protobuf:"bytes,15,opt,name=site,proto3,oneof" json:"site,omitempty" bson:"site,omitempty" form:"site"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1407,6 +1490,13 @@ func (x *UploadRomRequest) GetTags() []string {
 func (x *UploadRomRequest) GetCustomKey() string {
 	if x != nil {
 		return x.CustomKey
+	}
+	return ""
+}
+
+func (x *UploadRomRequest) GetSite() string {
+	if x != nil && x.Site != nil {
+		return *x.Site
 	}
 	return ""
 }
@@ -1575,7 +1665,10 @@ type RomUpdateRequest struct {
 	IsPublic *bool `protobuf:"varint,13,opt,name=is_public,json=isPublic,proto3,oneof" json:"isPublic,omitempty" bson:"isPublic,omitempty"`
 	// Updated lifecycle status
 	// @gotags: `json:"status,omitempty" bson:"status,omitempty"`
-	Status        *string `protobuf:"bytes,14,opt,name=status,proto3,oneof" json:"status,omitempty" bson:"status,omitempty"`
+	Status *string `protobuf:"bytes,14,opt,name=status,proto3,oneof" json:"status,omitempty" bson:"status,omitempty"`
+	// Updated site identifier
+	// @gotags: `json:"site,omitempty" bson:"site,omitempty"`
+	Site          *string `protobuf:"bytes,15,opt,name=site,proto3,oneof" json:"site,omitempty" bson:"site,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1708,13 +1801,23 @@ func (x *RomUpdateRequest) GetStatus() string {
 	return ""
 }
 
+func (x *RomUpdateRequest) GetSite() string {
+	if x != nil && x.Site != nil {
+		return *x.Site
+	}
+	return ""
+}
+
 type RomDeleteRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique ROM identifier to delete
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Hard delete flag (permanently remove file from storage and database)
 	// @gotags: `json:"hardDelete,omitempty" bson:"hardDelete,omitempty"`
-	HardDelete    bool `protobuf:"varint,2,opt,name=hard_delete,json=hardDelete,proto3" json:"hardDelete,omitempty" bson:"hardDelete,omitempty"`
+	HardDelete bool `protobuf:"varint,2,opt,name=hard_delete,json=hardDelete,proto3" json:"hardDelete,omitempty" bson:"hardDelete,omitempty"`
+	// Optional site identifier
+	// @gotags: `form:"site" json:"site,omitempty"`
+	Site          *string `protobuf:"bytes,3,opt,name=site,proto3,oneof" json:"site,omitempty" form:"site"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1761,6 +1864,13 @@ func (x *RomDeleteRequest) GetHardDelete() bool {
 		return x.HardDelete
 	}
 	return false
+}
+
+func (x *RomDeleteRequest) GetSite() string {
+	if x != nil && x.Site != nil {
+		return *x.Site
+	}
+	return ""
 }
 
 type RomDeleteResponse struct {
@@ -1823,7 +1933,10 @@ type RomShareRequest struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Pre-signed download URL expiration duration in seconds
 	// @gotags: `json:"expiresInSec,omitempty" bson:"expiresInSec,omitempty"`
-	ExpiresInSec  int32 `protobuf:"varint,2,opt,name=expires_in_sec,json=expiresInSec,proto3" json:"expiresInSec,omitempty" bson:"expiresInSec,omitempty"`
+	ExpiresInSec int32 `protobuf:"varint,2,opt,name=expires_in_sec,json=expiresInSec,proto3" json:"expiresInSec,omitempty" bson:"expiresInSec,omitempty"`
+	// Optional site identifier
+	// @gotags: `form:"site" json:"site,omitempty"`
+	Site          *string `protobuf:"bytes,3,opt,name=site,proto3,oneof" json:"site,omitempty" form:"site"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1870,6 +1983,13 @@ func (x *RomShareRequest) GetExpiresInSec() int32 {
 		return x.ExpiresInSec
 	}
 	return 0
+}
+
+func (x *RomShareRequest) GetSite() string {
+	if x != nil && x.Site != nil {
+		return *x.Site
+	}
+	return ""
 }
 
 type RomShareResponse struct {
@@ -1938,7 +2058,10 @@ func (x *RomShareResponse) GetExpiresAt() string {
 }
 
 type ListConsolesRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Optional site identifier filter
+	// @gotags: `form:"site" json:"site,omitempty"`
+	Site          *string `protobuf:"bytes,1,opt,name=site,proto3,oneof" json:"site,omitempty" form:"site"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1971,6 +2094,13 @@ func (x *ListConsolesRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListConsolesRequest.ProtoReflect.Descriptor instead.
 func (*ListConsolesRequest) Descriptor() ([]byte, []int) {
 	return file_content_v1_rom_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *ListConsolesRequest) GetSite() string {
+	if x != nil && x.Site != nil {
+		return *x.Site
+	}
+	return ""
 }
 
 type ListConsolesResponse struct {
@@ -2023,85 +2153,92 @@ var File_content_v1_rom_proto protoreflect.FileDescriptor
 const file_content_v1_rom_proto_rawDesc = "" +
 	"\n" +
 	"\x14content/v1/rom.proto\x12\n" +
-	"content.v1\"\xe0\x02\n" +
+	"content.v1\"\xf4\x02\n" +
 	"\vConsoleInfo\x12\x19\n" +
 	"\bmongo_id\x18\x01 \x01(\tR\amongoId\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\tR\x02id\x12\x10\n" +
-	"\x03key\x18\x03 \x01(\tR\x03key\x12\x1b\n" +
-	"\tfull_name\x18\x04 \x01(\tR\bfullName\x12\x12\n" +
-	"\x04slug\x18\x05 \x01(\tR\x04slug\x12\x1e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n" +
+	"\x04site\x18\x03 \x01(\tR\x04site\x12\x10\n" +
+	"\x03key\x18\x04 \x01(\tR\x03key\x12\x1b\n" +
+	"\tfull_name\x18\x05 \x01(\tR\bfullName\x12\x12\n" +
+	"\x04slug\x18\x06 \x01(\tR\x04slug\x12\x1e\n" +
 	"\n" +
-	"extensions\x18\x06 \x03(\tR\n" +
+	"extensions\x18\a \x03(\tR\n" +
 	"extensions\x12\"\n" +
-	"\fmanufacturer\x18\a \x01(\tR\fmanufacturer\x12!\n" +
-	"\frelease_year\x18\b \x01(\x05R\vreleaseYear\x12\x19\n" +
-	"\bicon_url\x18\t \x01(\tR\aiconUrl\x12#\n" +
-	"\rcontent_count\x18\n" +
-	" \x01(\x03R\fcontentCount\x12\x1d\n" +
+	"\fmanufacturer\x18\b \x01(\tR\fmanufacturer\x12!\n" +
+	"\frelease_year\x18\t \x01(\x05R\vreleaseYear\x12\x19\n" +
+	"\bicon_url\x18\n" +
+	" \x01(\tR\aiconUrl\x12#\n" +
+	"\rcontent_count\x18\v \x01(\x03R\fcontentCount\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\v \x01(\tR\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\f \x01(\tR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\f \x01(\tR\tupdatedAt\"\xd3\x05\n" +
+	"updated_at\x18\r \x01(\tR\tupdatedAt\"\xe7\x05\n" +
 	"\vRomMetadata\x12\x19\n" +
 	"\bmongo_id\x18\x01 \x01(\tR\amongoId\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\tR\x02id\x12\x14\n" +
-	"\x05title\x18\x03 \x01(\tR\x05title\x12\x12\n" +
-	"\x04slug\x18\x04 \x01(\tR\x04slug\x12 \n" +
-	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1d\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n" +
+	"\x04site\x18\x03 \x01(\tR\x04site\x12\x14\n" +
+	"\x05title\x18\x04 \x01(\tR\x05title\x12\x12\n" +
+	"\x04slug\x18\x05 \x01(\tR\x04slug\x12 \n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\x12\x1d\n" +
 	"\n" +
-	"console_id\x18\x06 \x01(\tR\tconsoleId\x12\x17\n" +
-	"\afile_id\x18\a \x01(\tR\x06fileId\x12\x1c\n" +
-	"\tdeveloper\x18\b \x01(\tR\tdeveloper\x12\x1c\n" +
-	"\tpublisher\x18\t \x01(\tR\tpublisher\x12!\n" +
-	"\frelease_year\x18\n" +
-	" \x01(\x05R\vreleaseYear\x12\x14\n" +
-	"\x05genre\x18\v \x01(\tR\x05genre\x12\x16\n" +
-	"\x06region\x18\f \x01(\tR\x06region\x12\x18\n" +
-	"\aplayers\x18\r \x01(\x05R\aplayers\x12\x16\n" +
-	"\x06rating\x18\x0e \x01(\tR\x06rating\x12\x12\n" +
-	"\x04tags\x18\x0f \x03(\tR\x04tags\x12\x1b\n" +
-	"\tis_public\x18\x10 \x01(\bR\bisPublic\x12\x16\n" +
-	"\x06status\x18\x11 \x01(\tR\x06status\x12\x1f\n" +
-	"\vuploader_id\x18\x12 \x01(\tR\n" +
+	"console_id\x18\a \x01(\tR\tconsoleId\x12\x17\n" +
+	"\afile_id\x18\b \x01(\tR\x06fileId\x12\x1c\n" +
+	"\tdeveloper\x18\t \x01(\tR\tdeveloper\x12\x1c\n" +
+	"\tpublisher\x18\n" +
+	" \x01(\tR\tpublisher\x12!\n" +
+	"\frelease_year\x18\v \x01(\x05R\vreleaseYear\x12\x14\n" +
+	"\x05genre\x18\f \x01(\tR\x05genre\x12\x16\n" +
+	"\x06region\x18\r \x01(\tR\x06region\x12\x18\n" +
+	"\aplayers\x18\x0e \x01(\x05R\aplayers\x12\x16\n" +
+	"\x06rating\x18\x0f \x01(\tR\x06rating\x12\x12\n" +
+	"\x04tags\x18\x10 \x03(\tR\x04tags\x12\x1b\n" +
+	"\tis_public\x18\x11 \x01(\bR\bisPublic\x12\x16\n" +
+	"\x06status\x18\x12 \x01(\tR\x06status\x12\x1f\n" +
+	"\vuploader_id\x18\x13 \x01(\tR\n" +
 	"uploaderId\x12+\n" +
-	"\x11uploader_username\x18\x13 \x01(\tR\x10uploaderUsername\x12\x1d\n" +
+	"\x11uploader_username\x18\x14 \x01(\tR\x10uploaderUsername\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x14 \x01(\tR\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\x15 \x01(\tR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x15 \x01(\tR\tupdatedAt\x12B\n" +
-	"\x10console_metadata\x18\x16 \x01(\v2\x17.content.v1.ConsoleInfoR\x0fconsoleMetadata\x12=\n" +
-	"\rfile_metadata\x18\x17 \x01(\v2\x18.content.v1.FileMetadataR\ffileMetadata\"\xc1\x02\n" +
+	"updated_at\x18\x16 \x01(\tR\tupdatedAt\x12B\n" +
+	"\x10console_metadata\x18\x17 \x01(\v2\x17.content.v1.ConsoleInfoR\x0fconsoleMetadata\x12=\n" +
+	"\rfile_metadata\x18\x18 \x01(\v2\x18.content.v1.FileMetadataR\ffileMetadata\"\xd5\x02\n" +
 	"\fFileMetadata\x12\x19\n" +
 	"\bmongo_id\x18\x01 \x01(\tR\amongoId\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1b\n" +
-	"\tbucket_id\x18\x03 \x01(\tR\bbucketId\x12\x1c\n" +
-	"\tdirectory\x18\x04 \x01(\tR\tdirectory\x12\x12\n" +
-	"\x04name\x18\x05 \x01(\tR\x04name\x12%\n" +
-	"\x0efile_extension\x18\x06 \x01(\tR\rfileExtension\x12\x1b\n" +
-	"\tfull_path\x18\a \x01(\tR\bfullPath\x12!\n" +
-	"\fcontent_type\x18\b \x01(\tR\vcontentType\x12\x1d\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n" +
+	"\x04site\x18\x03 \x01(\tR\x04site\x12\x1b\n" +
+	"\tbucket_id\x18\x04 \x01(\tR\bbucketId\x12\x1c\n" +
+	"\tdirectory\x18\x05 \x01(\tR\tdirectory\x12\x12\n" +
+	"\x04name\x18\x06 \x01(\tR\x04name\x12%\n" +
+	"\x0efile_extension\x18\a \x01(\tR\rfileExtension\x12\x1b\n" +
+	"\tfull_path\x18\b \x01(\tR\bfullPath\x12!\n" +
+	"\fcontent_type\x18\t \x01(\tR\vcontentType\x12\x1d\n" +
 	"\n" +
-	"size_bytes\x18\t \x01(\x03R\tsizeBytes\x12\x12\n" +
-	"\x04etag\x18\n" +
-	" \x01(\tR\x04etag\x12\x1d\n" +
+	"size_bytes\x18\n" +
+	" \x01(\x03R\tsizeBytes\x12\x12\n" +
+	"\x04etag\x18\v \x01(\tR\x04etag\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\v \x01(\tR\tcreatedAt\"o\n" +
+	"created_at\x18\f \x01(\tR\tcreatedAt\"\x91\x01\n" +
 	"\rRomGetRequest\x12\x13\n" +
 	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tH\x01R\x04name\x88\x01\x01\x12\x17\n" +
-	"\x04slug\x18\x03 \x01(\tH\x02R\x04slug\x88\x01\x01B\x05\n" +
+	"\x04slug\x18\x03 \x01(\tH\x02R\x04slug\x88\x01\x01\x12\x17\n" +
+	"\x04site\x18\x04 \x01(\tH\x03R\x04site\x88\x01\x01B\x05\n" +
 	"\x03_idB\a\n" +
 	"\x05_nameB\a\n" +
-	"\x05_slug\"t\n" +
+	"\x05_slugB\a\n" +
+	"\x05_site\"\x96\x01\n" +
 	"\x12RomDownloadRequest\x12\x13\n" +
 	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tH\x01R\x04name\x88\x01\x01\x12\x17\n" +
-	"\x04slug\x18\x03 \x01(\tH\x02R\x04slug\x88\x01\x01B\x05\n" +
+	"\x04slug\x18\x03 \x01(\tH\x02R\x04slug\x88\x01\x01\x12\x17\n" +
+	"\x04site\x18\x04 \x01(\tH\x03R\x04site\x88\x01\x01B\x05\n" +
 	"\x03_idB\a\n" +
 	"\x05_nameB\a\n" +
-	"\x05_slug\"\x1f\n" +
+	"\x05_slugB\a\n" +
+	"\x05_site\"\x1f\n" +
 	"\tFileChunk\x12\x12\n" +
-	"\x04data\x18\x01 \x01(\fR\x04data\"\x8f\x03\n" +
+	"\x04data\x18\x01 \x01(\fR\x04data\"\xb1\x03\n" +
 	"\bRomQuery\x12\x17\n" +
 	"\x04name\x18\x01 \x01(\tH\x00R\x04name\x88\x01\x01\x12\"\n" +
 	"\n" +
@@ -2114,7 +2251,9 @@ const file_content_v1_rom_proto_rawDesc = "" +
 	"\tis_public\x18\a \x01(\bH\x06R\bisPublic\x88\x01\x01\x12\x15\n" +
 	"\x03tag\x18\b \x01(\tH\aR\x03tag\x88\x01\x01\x12$\n" +
 	"\vuploader_id\x18\t \x01(\tH\bR\n" +
-	"uploaderId\x88\x01\x01B\a\n" +
+	"uploaderId\x88\x01\x01\x12\x17\n" +
+	"\x04site\x18\n" +
+	" \x01(\tH\tR\x04site\x88\x01\x01B\a\n" +
 	"\x05_nameB\r\n" +
 	"\v_console_idB\x0e\n" +
 	"\f_console_keyB\b\n" +
@@ -2124,7 +2263,8 @@ const file_content_v1_rom_proto_rawDesc = "" +
 	"\n" +
 	"_is_publicB\x06\n" +
 	"\x04_tagB\x0e\n" +
-	"\f_uploader_id\"\x9e\x02\n" +
+	"\f_uploader_idB\a\n" +
+	"\x05_site\"\xc0\x02\n" +
 	"\x0eRomListRequest\x12\x19\n" +
 	"\x05limit\x18\x01 \x01(\x05H\x00R\x05limit\x88\x01\x01\x12\x1b\n" +
 	"\x06offset\x18\x02 \x01(\x05H\x01R\x06offset\x88\x01\x01\x12\x1d\n" +
@@ -2132,14 +2272,16 @@ const file_content_v1_rom_proto_rawDesc = "" +
 	"\x06sortby\x18\x04 \x01(\tH\x03R\x06sortby\x88\x01\x01\x12\"\n" +
 	"\n" +
 	"sort_order\x18\x05 \x01(\tH\x04R\tsortOrder\x88\x01\x01\x12/\n" +
-	"\x05query\x18\x06 \x01(\v2\x14.content.v1.RomQueryH\x05R\x05query\x88\x01\x01B\b\n" +
+	"\x05query\x18\x06 \x01(\v2\x14.content.v1.RomQueryH\x05R\x05query\x88\x01\x01\x12\x17\n" +
+	"\x04site\x18\a \x01(\tH\x06R\x04site\x88\x01\x01B\b\n" +
 	"\x06_limitB\t\n" +
 	"\a_offsetB\n" +
 	"\n" +
 	"\b_keywordB\t\n" +
 	"\a_sortbyB\r\n" +
 	"\v_sort_orderB\b\n" +
-	"\x06_query\"\xae\x01\n" +
+	"\x06_queryB\a\n" +
+	"\x05_site\"\xae\x01\n" +
 	"\x0fRomListResponse\x12+\n" +
 	"\x04roms\x18\x01 \x03(\v2\x17.content.v1.RomMetadataR\x04roms\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x03R\n" +
@@ -2147,7 +2289,7 @@ const file_content_v1_rom_proto_rawDesc = "" +
 	"\x05limit\x18\x03 \x01(\x05R\x05limit\x12\x16\n" +
 	"\x06offset\x18\x04 \x01(\x05R\x06offset\x12\x1f\n" +
 	"\vtotal_pages\x18\x05 \x01(\x05R\n" +
-	"totalPages\"\x8e\x04\n" +
+	"totalPages\"\xa2\x04\n" +
 	"\bFileInfo\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1b\n" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x12\x1d\n" +
@@ -2171,7 +2313,8 @@ const file_content_v1_rom_proto_rawDesc = "" +
 	"custom_key\x18\x10 \x01(\tR\tcustomKey\x12\x1f\n" +
 	"\vuploader_id\x18\x11 \x01(\tR\n" +
 	"uploaderId\x12+\n" +
-	"\x11uploader_username\x18\x12 \x01(\tR\x10uploaderUsername\"\xa5\x03\n" +
+	"\x11uploader_username\x18\x12 \x01(\tR\x10uploaderUsername\x12\x12\n" +
+	"\x04site\x18\x13 \x01(\tR\x04site\"\xc7\x03\n" +
 	"\x10UploadRomRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x1d\n" +
@@ -2189,16 +2332,18 @@ const file_content_v1_rom_proto_rawDesc = "" +
 	"\tis_public\x18\f \x01(\bH\x00R\bisPublic\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\r \x03(\tR\x04tags\x12\x1d\n" +
 	"\n" +
-	"custom_key\x18\x0e \x01(\tR\tcustomKeyB\f\n" +
+	"custom_key\x18\x0e \x01(\tR\tcustomKey\x12\x17\n" +
+	"\x04site\x18\x0f \x01(\tH\x01R\x04site\x88\x01\x01B\f\n" +
 	"\n" +
-	"_is_public\"x\n" +
+	"_is_publicB\a\n" +
+	"\x05_site\"x\n" +
 	"\x10RomUploadRequest\x123\n" +
 	"\tfile_info\x18\x01 \x01(\v2\x14.content.v1.FileInfoH\x00R\bfileInfo\x12\x1f\n" +
 	"\n" +
 	"chunk_data\x18\x02 \x01(\fH\x00R\tchunkDataB\x0e\n" +
 	"\frequest_data\">\n" +
 	"\x11RomUploadResponse\x12)\n" +
-	"\x03rom\x18\x01 \x01(\v2\x17.content.v1.RomMetadataR\x03rom\"\xd8\x04\n" +
+	"\x03rom\x18\x01 \x01(\v2\x17.content.v1.RomMetadataR\x03rom\"\xfa\x04\n" +
 	"\x10RomUpdateRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\x05title\x18\x02 \x01(\tH\x00R\x05title\x88\x01\x01\x12%\n" +
@@ -2216,7 +2361,8 @@ const file_content_v1_rom_proto_rawDesc = "" +
 	"\x04tags\x18\f \x03(\tR\x04tags\x12 \n" +
 	"\tis_public\x18\r \x01(\bH\n" +
 	"R\bisPublic\x88\x01\x01\x12\x1b\n" +
-	"\x06status\x18\x0e \x01(\tH\vR\x06status\x88\x01\x01B\b\n" +
+	"\x06status\x18\x0e \x01(\tH\vR\x06status\x88\x01\x01\x12\x17\n" +
+	"\x04site\x18\x0f \x01(\tH\fR\x04site\x88\x01\x01B\b\n" +
 	"\x06_titleB\x0e\n" +
 	"\f_descriptionB\r\n" +
 	"\v_console_idB\f\n" +
@@ -2232,23 +2378,30 @@ const file_content_v1_rom_proto_rawDesc = "" +
 	"\a_ratingB\f\n" +
 	"\n" +
 	"_is_publicB\t\n" +
-	"\a_status\"C\n" +
+	"\a_statusB\a\n" +
+	"\x05_site\"e\n" +
 	"\x10RomDeleteRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
 	"\vhard_delete\x18\x02 \x01(\bR\n" +
-	"hardDelete\"G\n" +
+	"hardDelete\x12\x17\n" +
+	"\x04site\x18\x03 \x01(\tH\x00R\x04site\x88\x01\x01B\a\n" +
+	"\x05_site\"G\n" +
 	"\x11RomDeleteResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"G\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"i\n" +
 	"\x0fRomShareRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12$\n" +
-	"\x0eexpires_in_sec\x18\x02 \x01(\x05R\fexpiresInSec\"d\n" +
+	"\x0eexpires_in_sec\x18\x02 \x01(\x05R\fexpiresInSec\x12\x17\n" +
+	"\x04site\x18\x03 \x01(\tH\x00R\x04site\x88\x01\x01B\a\n" +
+	"\x05_site\"d\n" +
 	"\x10RomShareResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
 	"\fdownload_url\x18\x02 \x01(\tR\vdownloadUrl\x12\x1d\n" +
 	"\n" +
-	"expires_at\x18\x03 \x01(\tR\texpiresAt\"\x15\n" +
-	"\x13ListConsolesRequest\"K\n" +
+	"expires_at\x18\x03 \x01(\tR\texpiresAt\"7\n" +
+	"\x13ListConsolesRequest\x12\x17\n" +
+	"\x04site\x18\x01 \x01(\tH\x00R\x04site\x88\x01\x01B\a\n" +
+	"\x05_site\"K\n" +
 	"\x14ListConsolesResponse\x123\n" +
 	"\bconsoles\x18\x01 \x03(\v2\x17.content.v1.ConsoleInfoR\bconsolesB7Z5github.com/AyuuSaxena/my-protos-go/content/v1;contentb\x06proto3"
 
@@ -2317,6 +2470,9 @@ func file_content_v1_rom_proto_init() {
 		(*RomUploadRequest_ChunkData)(nil),
 	}
 	file_content_v1_rom_proto_msgTypes[13].OneofWrappers = []any{}
+	file_content_v1_rom_proto_msgTypes[14].OneofWrappers = []any{}
+	file_content_v1_rom_proto_msgTypes[16].OneofWrappers = []any{}
+	file_content_v1_rom_proto_msgTypes[18].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
