@@ -7,6 +7,7 @@
 package rom
 
 import (
+	v1 "github.com/AyuuSaxena/protos-go/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -235,7 +236,7 @@ type RomMetadata struct {
 	ConsoleMetadata *ConsoleInfo `protobuf:"bytes,23,opt,name=console_metadata,json=consoleMetadata,proto3" json:"consoleMetadata,omitempty" bson:"consoleMetadata,omitempty"`
 	// Full file details resolved from fileId
 	// @gotags: `json:"fileMetadata,omitempty" bson:"fileMetadata,omitempty"`
-	FileMetadata  *FileMetadata `protobuf:"bytes,24,opt,name=file_metadata,json=fileMetadata,proto3" json:"fileMetadata,omitempty" bson:"fileMetadata,omitempty"`
+	FileMetadata  *v1.FileMetadata `protobuf:"bytes,24,opt,name=file_metadata,json=fileMetadata,proto3" json:"fileMetadata,omitempty" bson:"fileMetadata,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -431,165 +432,11 @@ func (x *RomMetadata) GetConsoleMetadata() *ConsoleInfo {
 	return nil
 }
 
-func (x *RomMetadata) GetFileMetadata() *FileMetadata {
+func (x *RomMetadata) GetFileMetadata() *v1.FileMetadata {
 	if x != nil {
 		return x.FileMetadata
 	}
 	return nil
-}
-
-// FileMetadata describes a storage file record returned from the S3-Free database.
-type FileMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// MongoDB internal record identifier (_id)
-	// @gotags: `json:"mongoId,omitempty" bson:"_id,omitempty"`
-	MongoId string `protobuf:"bytes,1,opt,name=mongo_id,json=mongoId,proto3" json:"mongoId,omitempty" bson:"_id,omitempty"`
-	// UUID file identifier in storage database
-	// @gotags: `json:"id,omitempty" bson:"id,omitempty"`
-	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty" bson:"id,omitempty"`
-	// Dynamic site/tenant key (e.g. retrogames)
-	// @gotags: `json:"site,omitempty" bson:"site,omitempty"`
-	Site string `protobuf:"bytes,3,opt,name=site,proto3" json:"site,omitempty" bson:"site,omitempty"`
-	// Bucket name containing this file
-	// @gotags: `json:"bucketId,omitempty" bson:"bucketId,omitempty"`
-	BucketId string `protobuf:"bytes,4,opt,name=bucket_id,json=bucketId,proto3" json:"bucketId,omitempty" bson:"bucketId,omitempty"`
-	// Directory path within the bucket
-	Directory string `protobuf:"bytes,5,opt,name=directory,proto3" json:"directory,omitempty"`
-	// File base name
-	Name string `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	// File extension without leading dot
-	// @gotags: `json:"fileExtension,omitempty" bson:"fileExtension,omitempty"`
-	FileExtension string `protobuf:"bytes,7,opt,name=file_extension,json=fileExtension,proto3" json:"fileExtension,omitempty" bson:"fileExtension,omitempty"`
-	// Full storage path (directory/name)
-	// @gotags: `json:"fullPath,omitempty" bson:"fullPath,omitempty"`
-	FullPath string `protobuf:"bytes,8,opt,name=full_path,json=fullPath,proto3" json:"fullPath,omitempty" bson:"fullPath,omitempty"`
-	// MIME content type
-	// @gotags: `json:"contentType,omitempty" bson:"contentType,omitempty"`
-	ContentType string `protobuf:"bytes,9,opt,name=content_type,json=contentType,proto3" json:"contentType,omitempty" bson:"contentType,omitempty"`
-	// File size in bytes
-	// @gotags: `json:"sizeBytes,omitempty" bson:"sizeBytes,omitempty"`
-	SizeBytes int64 `protobuf:"varint,10,opt,name=size_bytes,json=sizeBytes,proto3" json:"sizeBytes,omitempty" bson:"sizeBytes,omitempty"`
-	// ETag / checksum of the file
-	Etag string `protobuf:"bytes,11,opt,name=etag,proto3" json:"etag,omitempty"`
-	// ISO-8601 creation timestamp
-	// @gotags: `json:"createdAt,omitempty" bson:"createdAt,omitempty"`
-	CreatedAt     string `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"createdAt,omitempty" bson:"createdAt,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *FileMetadata) Reset() {
-	*x = FileMetadata{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *FileMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FileMetadata) ProtoMessage() {}
-
-func (x *FileMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FileMetadata.ProtoReflect.Descriptor instead.
-func (*FileMetadata) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *FileMetadata) GetMongoId() string {
-	if x != nil {
-		return x.MongoId
-	}
-	return ""
-}
-
-func (x *FileMetadata) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *FileMetadata) GetSite() string {
-	if x != nil {
-		return x.Site
-	}
-	return ""
-}
-
-func (x *FileMetadata) GetBucketId() string {
-	if x != nil {
-		return x.BucketId
-	}
-	return ""
-}
-
-func (x *FileMetadata) GetDirectory() string {
-	if x != nil {
-		return x.Directory
-	}
-	return ""
-}
-
-func (x *FileMetadata) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *FileMetadata) GetFileExtension() string {
-	if x != nil {
-		return x.FileExtension
-	}
-	return ""
-}
-
-func (x *FileMetadata) GetFullPath() string {
-	if x != nil {
-		return x.FullPath
-	}
-	return ""
-}
-
-func (x *FileMetadata) GetContentType() string {
-	if x != nil {
-		return x.ContentType
-	}
-	return ""
-}
-
-func (x *FileMetadata) GetSizeBytes() int64 {
-	if x != nil {
-		return x.SizeBytes
-	}
-	return 0
-}
-
-func (x *FileMetadata) GetEtag() string {
-	if x != nil {
-		return x.Etag
-	}
-	return ""
-}
-
-func (x *FileMetadata) GetCreatedAt() string {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return ""
 }
 
 type RomGetRequest struct {
@@ -609,7 +456,7 @@ type RomGetRequest struct {
 
 func (x *RomGetRequest) Reset() {
 	*x = RomGetRequest{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[3]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -621,7 +468,7 @@ func (x *RomGetRequest) String() string {
 func (*RomGetRequest) ProtoMessage() {}
 
 func (x *RomGetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[3]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -634,7 +481,7 @@ func (x *RomGetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RomGetRequest.ProtoReflect.Descriptor instead.
 func (*RomGetRequest) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{3}
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *RomGetRequest) GetId() string {
@@ -682,7 +529,7 @@ type RomDownloadRequest struct {
 
 func (x *RomDownloadRequest) Reset() {
 	*x = RomDownloadRequest{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[4]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -694,7 +541,7 @@ func (x *RomDownloadRequest) String() string {
 func (*RomDownloadRequest) ProtoMessage() {}
 
 func (x *RomDownloadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[4]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -707,7 +554,7 @@ func (x *RomDownloadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RomDownloadRequest.ProtoReflect.Descriptor instead.
 func (*RomDownloadRequest) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{4}
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *RomDownloadRequest) GetId() string {
@@ -736,51 +583,6 @@ func (x *RomDownloadRequest) GetSite() string {
 		return *x.Site
 	}
 	return ""
-}
-
-type FileChunk struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Binary chunk data
-	Data          []byte `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *FileChunk) Reset() {
-	*x = FileChunk{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *FileChunk) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FileChunk) ProtoMessage() {}
-
-func (x *FileChunk) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FileChunk.ProtoReflect.Descriptor instead.
-func (*FileChunk) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *FileChunk) GetData() []byte {
-	if x != nil {
-		return x.Data
-	}
-	return nil
 }
 
 type RomQuery struct {
@@ -821,7 +623,7 @@ type RomQuery struct {
 
 func (x *RomQuery) Reset() {
 	*x = RomQuery{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[6]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -833,7 +635,7 @@ func (x *RomQuery) String() string {
 func (*RomQuery) ProtoMessage() {}
 
 func (x *RomQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[6]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -846,7 +648,7 @@ func (x *RomQuery) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RomQuery.ProtoReflect.Descriptor instead.
 func (*RomQuery) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{6}
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *RomQuery) GetName() string {
@@ -919,7 +721,7 @@ func (x *RomQuery) GetSite() string {
 	return ""
 }
 
-type RomListRequest struct {
+type RomSearchRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Maximum number of items to return (default 20, max 100)
 	// @gotags: `form:"limit" json:"limit,omitempty" bson:"limit,omitempty"`
@@ -946,21 +748,21 @@ type RomListRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RomListRequest) Reset() {
-	*x = RomListRequest{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[7]
+func (x *RomSearchRequest) Reset() {
+	*x = RomSearchRequest{}
+	mi := &file_content_v1_rom_rom_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RomListRequest) String() string {
+func (x *RomSearchRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RomListRequest) ProtoMessage() {}
+func (*RomSearchRequest) ProtoMessage() {}
 
-func (x *RomListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[7]
+func (x *RomSearchRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_content_v1_rom_rom_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -971,61 +773,61 @@ func (x *RomListRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RomListRequest.ProtoReflect.Descriptor instead.
-func (*RomListRequest) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{7}
+// Deprecated: Use RomSearchRequest.ProtoReflect.Descriptor instead.
+func (*RomSearchRequest) Descriptor() ([]byte, []int) {
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *RomListRequest) GetLimit() int32 {
+func (x *RomSearchRequest) GetLimit() int32 {
 	if x != nil && x.Limit != nil {
 		return *x.Limit
 	}
 	return 0
 }
 
-func (x *RomListRequest) GetOffset() int32 {
+func (x *RomSearchRequest) GetOffset() int32 {
 	if x != nil && x.Offset != nil {
 		return *x.Offset
 	}
 	return 0
 }
 
-func (x *RomListRequest) GetKeyword() string {
+func (x *RomSearchRequest) GetKeyword() string {
 	if x != nil && x.Keyword != nil {
 		return *x.Keyword
 	}
 	return ""
 }
 
-func (x *RomListRequest) GetSortby() string {
+func (x *RomSearchRequest) GetSortby() string {
 	if x != nil && x.Sortby != nil {
 		return *x.Sortby
 	}
 	return ""
 }
 
-func (x *RomListRequest) GetSortOrder() string {
+func (x *RomSearchRequest) GetSortOrder() string {
 	if x != nil && x.SortOrder != nil {
 		return *x.SortOrder
 	}
 	return ""
 }
 
-func (x *RomListRequest) GetQuery() *RomQuery {
+func (x *RomSearchRequest) GetQuery() *RomQuery {
 	if x != nil {
 		return x.Query
 	}
 	return nil
 }
 
-func (x *RomListRequest) GetSite() string {
+func (x *RomSearchRequest) GetSite() string {
 	if x != nil && x.Site != nil {
 		return *x.Site
 	}
 	return ""
 }
 
-type RomListResponse struct {
+type RomSearchResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of ROM metadata items for the current page
 	Roms []*RomMetadata `protobuf:"bytes,1,rep,name=roms,proto3" json:"roms,omitempty"`
@@ -1043,21 +845,21 @@ type RomListResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RomListResponse) Reset() {
-	*x = RomListResponse{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[8]
+func (x *RomSearchResponse) Reset() {
+	*x = RomSearchResponse{}
+	mi := &file_content_v1_rom_rom_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RomListResponse) String() string {
+func (x *RomSearchResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RomListResponse) ProtoMessage() {}
+func (*RomSearchResponse) ProtoMessage() {}
 
-func (x *RomListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[8]
+func (x *RomSearchResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_content_v1_rom_rom_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1068,40 +870,40 @@ func (x *RomListResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RomListResponse.ProtoReflect.Descriptor instead.
-func (*RomListResponse) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{8}
+// Deprecated: Use RomSearchResponse.ProtoReflect.Descriptor instead.
+func (*RomSearchResponse) Descriptor() ([]byte, []int) {
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *RomListResponse) GetRoms() []*RomMetadata {
+func (x *RomSearchResponse) GetRoms() []*RomMetadata {
 	if x != nil {
 		return x.Roms
 	}
 	return nil
 }
 
-func (x *RomListResponse) GetTotalCount() int64 {
+func (x *RomSearchResponse) GetTotalCount() int64 {
 	if x != nil {
 		return x.TotalCount
 	}
 	return 0
 }
 
-func (x *RomListResponse) GetLimit() int32 {
+func (x *RomSearchResponse) GetLimit() int32 {
 	if x != nil {
 		return x.Limit
 	}
 	return 0
 }
 
-func (x *RomListResponse) GetOffset() int32 {
+func (x *RomSearchResponse) GetOffset() int32 {
 	if x != nil {
 		return x.Offset
 	}
 	return 0
 }
 
-func (x *RomListResponse) GetTotalPages() int32 {
+func (x *RomSearchResponse) GetTotalPages() int32 {
 	if x != nil {
 		return x.TotalPages
 	}
@@ -1163,7 +965,7 @@ type FileInfo struct {
 
 func (x *FileInfo) Reset() {
 	*x = FileInfo{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[9]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1175,7 +977,7 @@ func (x *FileInfo) String() string {
 func (*FileInfo) ProtoMessage() {}
 
 func (x *FileInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[9]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1188,7 +990,7 @@ func (x *FileInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FileInfo.ProtoReflect.Descriptor instead.
 func (*FileInfo) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{9}
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *FileInfo) GetName() string {
@@ -1368,7 +1170,7 @@ type UploadRomRequest struct {
 
 func (x *UploadRomRequest) Reset() {
 	*x = UploadRomRequest{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[10]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1380,7 +1182,7 @@ func (x *UploadRomRequest) String() string {
 func (*UploadRomRequest) ProtoMessage() {}
 
 func (x *UploadRomRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[10]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1393,7 +1195,7 @@ func (x *UploadRomRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadRomRequest.ProtoReflect.Descriptor instead.
 func (*UploadRomRequest) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{10}
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UploadRomRequest) GetTitle() string {
@@ -1514,7 +1316,7 @@ type RomUploadRequest struct {
 
 func (x *RomUploadRequest) Reset() {
 	*x = RomUploadRequest{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[11]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1526,7 +1328,7 @@ func (x *RomUploadRequest) String() string {
 func (*RomUploadRequest) ProtoMessage() {}
 
 func (x *RomUploadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[11]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1539,7 +1341,7 @@ func (x *RomUploadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RomUploadRequest.ProtoReflect.Descriptor instead.
 func (*RomUploadRequest) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{11}
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *RomUploadRequest) GetRequestData() isRomUploadRequest_RequestData {
@@ -1597,7 +1399,7 @@ type RomUploadResponse struct {
 
 func (x *RomUploadResponse) Reset() {
 	*x = RomUploadResponse{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[12]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1609,7 +1411,7 @@ func (x *RomUploadResponse) String() string {
 func (*RomUploadResponse) ProtoMessage() {}
 
 func (x *RomUploadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[12]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1622,7 +1424,7 @@ func (x *RomUploadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RomUploadResponse.ProtoReflect.Descriptor instead.
 func (*RomUploadResponse) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{12}
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *RomUploadResponse) GetRom() *RomMetadata {
@@ -1675,7 +1477,7 @@ type RomUpdateRequest struct {
 
 func (x *RomUpdateRequest) Reset() {
 	*x = RomUpdateRequest{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[13]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1687,7 +1489,7 @@ func (x *RomUpdateRequest) String() string {
 func (*RomUpdateRequest) ProtoMessage() {}
 
 func (x *RomUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[13]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1700,7 +1502,7 @@ func (x *RomUpdateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RomUpdateRequest.ProtoReflect.Descriptor instead.
 func (*RomUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{13}
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *RomUpdateRequest) GetId() string {
@@ -1824,7 +1626,7 @@ type RomDeleteRequest struct {
 
 func (x *RomDeleteRequest) Reset() {
 	*x = RomDeleteRequest{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[14]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1836,7 +1638,7 @@ func (x *RomDeleteRequest) String() string {
 func (*RomDeleteRequest) ProtoMessage() {}
 
 func (x *RomDeleteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[14]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1849,7 +1651,7 @@ func (x *RomDeleteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RomDeleteRequest.ProtoReflect.Descriptor instead.
 func (*RomDeleteRequest) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{14}
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *RomDeleteRequest) GetId() string {
@@ -1885,7 +1687,7 @@ type RomDeleteResponse struct {
 
 func (x *RomDeleteResponse) Reset() {
 	*x = RomDeleteResponse{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[15]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1897,7 +1699,7 @@ func (x *RomDeleteResponse) String() string {
 func (*RomDeleteResponse) ProtoMessage() {}
 
 func (x *RomDeleteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[15]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1910,7 +1712,7 @@ func (x *RomDeleteResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RomDeleteResponse.ProtoReflect.Descriptor instead.
 func (*RomDeleteResponse) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{15}
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *RomDeleteResponse) GetSuccess() bool {
@@ -1943,7 +1745,7 @@ type RomShareRequest struct {
 
 func (x *RomShareRequest) Reset() {
 	*x = RomShareRequest{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[16]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1955,7 +1757,7 @@ func (x *RomShareRequest) String() string {
 func (*RomShareRequest) ProtoMessage() {}
 
 func (x *RomShareRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[16]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1968,7 +1770,7 @@ func (x *RomShareRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RomShareRequest.ProtoReflect.Descriptor instead.
 func (*RomShareRequest) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{16}
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *RomShareRequest) GetId() string {
@@ -2008,7 +1810,7 @@ type RomShareResponse struct {
 
 func (x *RomShareResponse) Reset() {
 	*x = RomShareResponse{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[17]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2020,7 +1822,7 @@ func (x *RomShareResponse) String() string {
 func (*RomShareResponse) ProtoMessage() {}
 
 func (x *RomShareResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[17]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2033,7 +1835,7 @@ func (x *RomShareResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RomShareResponse.ProtoReflect.Descriptor instead.
 func (*RomShareResponse) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{17}
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *RomShareResponse) GetId() string {
@@ -2068,7 +1870,7 @@ type ListConsolesRequest struct {
 
 func (x *ListConsolesRequest) Reset() {
 	*x = ListConsolesRequest{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[18]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2080,7 +1882,7 @@ func (x *ListConsolesRequest) String() string {
 func (*ListConsolesRequest) ProtoMessage() {}
 
 func (x *ListConsolesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[18]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2093,7 +1895,7 @@ func (x *ListConsolesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListConsolesRequest.ProtoReflect.Descriptor instead.
 func (*ListConsolesRequest) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{18}
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ListConsolesRequest) GetSite() string {
@@ -2113,7 +1915,7 @@ type ListConsolesResponse struct {
 
 func (x *ListConsolesResponse) Reset() {
 	*x = ListConsolesResponse{}
-	mi := &file_content_v1_rom_rom_proto_msgTypes[19]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2125,7 +1927,7 @@ func (x *ListConsolesResponse) String() string {
 func (*ListConsolesResponse) ProtoMessage() {}
 
 func (x *ListConsolesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_content_v1_rom_rom_proto_msgTypes[19]
+	mi := &file_content_v1_rom_rom_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2138,7 +1940,7 @@ func (x *ListConsolesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListConsolesResponse.ProtoReflect.Descriptor instead.
 func (*ListConsolesResponse) Descriptor() ([]byte, []int) {
-	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{19}
+	return file_content_v1_rom_rom_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ListConsolesResponse) GetConsoles() []*ConsoleInfo {
@@ -2152,7 +1954,7 @@ var File_content_v1_rom_rom_proto protoreflect.FileDescriptor
 
 const file_content_v1_rom_rom_proto_rawDesc = "" +
 	"\n" +
-	"\x18content/v1/rom/rom.proto\x12\x0econtent.v1.rom\"\xf4\x02\n" +
+	"\x18content/v1/rom/rom.proto\x12\x0econtent.v1.rom\x1a\x16common/v1/common.proto\"\xf4\x02\n" +
 	"\vConsoleInfo\x12\x19\n" +
 	"\bmongo_id\x18\x01 \x01(\tR\amongoId\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n" +
@@ -2171,7 +1973,7 @@ const file_content_v1_rom_rom_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\f \x01(\tR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\r \x01(\tR\tupdatedAt\"\xef\x05\n" +
+	"updated_at\x18\r \x01(\tR\tupdatedAt\"\xea\x05\n" +
 	"\vRomMetadata\x12\x19\n" +
 	"\bmongo_id\x18\x01 \x01(\tR\amongoId\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n" +
@@ -2200,24 +2002,8 @@ const file_content_v1_rom_rom_proto_rawDesc = "" +
 	"created_at\x18\x15 \x01(\tR\tcreatedAt\x12\x1d\n" +
 	"\n" +
 	"updated_at\x18\x16 \x01(\tR\tupdatedAt\x12F\n" +
-	"\x10console_metadata\x18\x17 \x01(\v2\x1b.content.v1.rom.ConsoleInfoR\x0fconsoleMetadata\x12A\n" +
-	"\rfile_metadata\x18\x18 \x01(\v2\x1c.content.v1.rom.FileMetadataR\ffileMetadata\"\xd5\x02\n" +
-	"\fFileMetadata\x12\x19\n" +
-	"\bmongo_id\x18\x01 \x01(\tR\amongoId\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n" +
-	"\x04site\x18\x03 \x01(\tR\x04site\x12\x1b\n" +
-	"\tbucket_id\x18\x04 \x01(\tR\bbucketId\x12\x1c\n" +
-	"\tdirectory\x18\x05 \x01(\tR\tdirectory\x12\x12\n" +
-	"\x04name\x18\x06 \x01(\tR\x04name\x12%\n" +
-	"\x0efile_extension\x18\a \x01(\tR\rfileExtension\x12\x1b\n" +
-	"\tfull_path\x18\b \x01(\tR\bfullPath\x12!\n" +
-	"\fcontent_type\x18\t \x01(\tR\vcontentType\x12\x1d\n" +
-	"\n" +
-	"size_bytes\x18\n" +
-	" \x01(\x03R\tsizeBytes\x12\x12\n" +
-	"\x04etag\x18\v \x01(\tR\x04etag\x12\x1d\n" +
-	"\n" +
-	"created_at\x18\f \x01(\tR\tcreatedAt\"\x91\x01\n" +
+	"\x10console_metadata\x18\x17 \x01(\v2\x1b.content.v1.rom.ConsoleInfoR\x0fconsoleMetadata\x12<\n" +
+	"\rfile_metadata\x18\x18 \x01(\v2\x17.common.v1.FileMetadataR\ffileMetadata\"\x91\x01\n" +
 	"\rRomGetRequest\x12\x13\n" +
 	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tH\x01R\x04name\x88\x01\x01\x12\x17\n" +
@@ -2235,9 +2021,7 @@ const file_content_v1_rom_rom_proto_rawDesc = "" +
 	"\x03_idB\a\n" +
 	"\x05_nameB\a\n" +
 	"\x05_slugB\a\n" +
-	"\x05_site\"\x1f\n" +
-	"\tFileChunk\x12\x12\n" +
-	"\x04data\x18\x01 \x01(\fR\x04data\"\xb1\x03\n" +
+	"\x05_site\"\xb1\x03\n" +
 	"\bRomQuery\x12\x17\n" +
 	"\x04name\x18\x01 \x01(\tH\x00R\x04name\x88\x01\x01\x12\"\n" +
 	"\n" +
@@ -2263,8 +2047,8 @@ const file_content_v1_rom_rom_proto_rawDesc = "" +
 	"_is_publicB\x06\n" +
 	"\x04_tagB\x0e\n" +
 	"\f_uploader_idB\a\n" +
-	"\x05_site\"\xc4\x02\n" +
-	"\x0eRomListRequest\x12\x19\n" +
+	"\x05_site\"\xc6\x02\n" +
+	"\x10RomSearchRequest\x12\x19\n" +
 	"\x05limit\x18\x01 \x01(\x05H\x00R\x05limit\x88\x01\x01\x12\x1b\n" +
 	"\x06offset\x18\x02 \x01(\x05H\x01R\x06offset\x88\x01\x01\x12\x1d\n" +
 	"\akeyword\x18\x03 \x01(\tH\x02R\akeyword\x88\x01\x01\x12\x1b\n" +
@@ -2280,8 +2064,8 @@ const file_content_v1_rom_rom_proto_rawDesc = "" +
 	"\a_sortbyB\r\n" +
 	"\v_sort_orderB\b\n" +
 	"\x06_queryB\a\n" +
-	"\x05_site\"\xb2\x01\n" +
-	"\x0fRomListResponse\x12/\n" +
+	"\x05_site\"\xb4\x01\n" +
+	"\x11RomSearchResponse\x12/\n" +
 	"\x04roms\x18\x01 \x03(\v2\x1b.content.v1.rom.RomMetadataR\x04roms\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x03R\n" +
 	"totalCount\x12\x14\n" +
@@ -2416,42 +2200,41 @@ func file_content_v1_rom_rom_proto_rawDescGZIP() []byte {
 	return file_content_v1_rom_rom_proto_rawDescData
 }
 
-var file_content_v1_rom_rom_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_content_v1_rom_rom_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_content_v1_rom_rom_proto_goTypes = []any{
 	(*ConsoleInfo)(nil),          // 0: content.v1.rom.ConsoleInfo
 	(*RomMetadata)(nil),          // 1: content.v1.rom.RomMetadata
-	(*FileMetadata)(nil),         // 2: content.v1.rom.FileMetadata
-	(*RomGetRequest)(nil),        // 3: content.v1.rom.RomGetRequest
-	(*RomDownloadRequest)(nil),   // 4: content.v1.rom.RomDownloadRequest
-	(*FileChunk)(nil),            // 5: content.v1.rom.FileChunk
-	(*RomQuery)(nil),             // 6: content.v1.rom.RomQuery
-	(*RomListRequest)(nil),       // 7: content.v1.rom.RomListRequest
-	(*RomListResponse)(nil),      // 8: content.v1.rom.RomListResponse
-	(*FileInfo)(nil),             // 9: content.v1.rom.FileInfo
-	(*UploadRomRequest)(nil),     // 10: content.v1.rom.UploadRomRequest
-	(*RomUploadRequest)(nil),     // 11: content.v1.rom.RomUploadRequest
-	(*RomUploadResponse)(nil),    // 12: content.v1.rom.RomUploadResponse
-	(*RomUpdateRequest)(nil),     // 13: content.v1.rom.RomUpdateRequest
-	(*RomDeleteRequest)(nil),     // 14: content.v1.rom.RomDeleteRequest
-	(*RomDeleteResponse)(nil),    // 15: content.v1.rom.RomDeleteResponse
-	(*RomShareRequest)(nil),      // 16: content.v1.rom.RomShareRequest
-	(*RomShareResponse)(nil),     // 17: content.v1.rom.RomShareResponse
-	(*ListConsolesRequest)(nil),  // 18: content.v1.rom.ListConsolesRequest
-	(*ListConsolesResponse)(nil), // 19: content.v1.rom.ListConsolesResponse
+	(*RomGetRequest)(nil),        // 2: content.v1.rom.RomGetRequest
+	(*RomDownloadRequest)(nil),   // 3: content.v1.rom.RomDownloadRequest
+	(*RomQuery)(nil),             // 4: content.v1.rom.RomQuery
+	(*RomSearchRequest)(nil),     // 5: content.v1.rom.RomSearchRequest
+	(*RomSearchResponse)(nil),    // 6: content.v1.rom.RomSearchResponse
+	(*FileInfo)(nil),             // 7: content.v1.rom.FileInfo
+	(*UploadRomRequest)(nil),     // 8: content.v1.rom.UploadRomRequest
+	(*RomUploadRequest)(nil),     // 9: content.v1.rom.RomUploadRequest
+	(*RomUploadResponse)(nil),    // 10: content.v1.rom.RomUploadResponse
+	(*RomUpdateRequest)(nil),     // 11: content.v1.rom.RomUpdateRequest
+	(*RomDeleteRequest)(nil),     // 12: content.v1.rom.RomDeleteRequest
+	(*RomDeleteResponse)(nil),    // 13: content.v1.rom.RomDeleteResponse
+	(*RomShareRequest)(nil),      // 14: content.v1.rom.RomShareRequest
+	(*RomShareResponse)(nil),     // 15: content.v1.rom.RomShareResponse
+	(*ListConsolesRequest)(nil),  // 16: content.v1.rom.ListConsolesRequest
+	(*ListConsolesResponse)(nil), // 17: content.v1.rom.ListConsolesResponse
+	(*v1.FileMetadata)(nil),      // 18: common.v1.FileMetadata
 }
 var file_content_v1_rom_rom_proto_depIdxs = []int32{
-	0, // 0: content.v1.rom.RomMetadata.console_metadata:type_name -> content.v1.rom.ConsoleInfo
-	2, // 1: content.v1.rom.RomMetadata.file_metadata:type_name -> content.v1.rom.FileMetadata
-	6, // 2: content.v1.rom.RomListRequest.query:type_name -> content.v1.rom.RomQuery
-	1, // 3: content.v1.rom.RomListResponse.roms:type_name -> content.v1.rom.RomMetadata
-	9, // 4: content.v1.rom.RomUploadRequest.file_info:type_name -> content.v1.rom.FileInfo
-	1, // 5: content.v1.rom.RomUploadResponse.rom:type_name -> content.v1.rom.RomMetadata
-	0, // 6: content.v1.rom.ListConsolesResponse.consoles:type_name -> content.v1.rom.ConsoleInfo
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	0,  // 0: content.v1.rom.RomMetadata.console_metadata:type_name -> content.v1.rom.ConsoleInfo
+	18, // 1: content.v1.rom.RomMetadata.file_metadata:type_name -> common.v1.FileMetadata
+	4,  // 2: content.v1.rom.RomSearchRequest.query:type_name -> content.v1.rom.RomQuery
+	1,  // 3: content.v1.rom.RomSearchResponse.roms:type_name -> content.v1.rom.RomMetadata
+	7,  // 4: content.v1.rom.RomUploadRequest.file_info:type_name -> content.v1.rom.FileInfo
+	1,  // 5: content.v1.rom.RomUploadResponse.rom:type_name -> content.v1.rom.RomMetadata
+	0,  // 6: content.v1.rom.ListConsolesResponse.consoles:type_name -> content.v1.rom.ConsoleInfo
+	7,  // [7:7] is the sub-list for method output_type
+	7,  // [7:7] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_content_v1_rom_rom_proto_init() }
@@ -2459,26 +2242,26 @@ func file_content_v1_rom_rom_proto_init() {
 	if File_content_v1_rom_rom_proto != nil {
 		return
 	}
+	file_content_v1_rom_rom_proto_msgTypes[2].OneofWrappers = []any{}
 	file_content_v1_rom_rom_proto_msgTypes[3].OneofWrappers = []any{}
 	file_content_v1_rom_rom_proto_msgTypes[4].OneofWrappers = []any{}
-	file_content_v1_rom_rom_proto_msgTypes[6].OneofWrappers = []any{}
-	file_content_v1_rom_rom_proto_msgTypes[7].OneofWrappers = []any{}
-	file_content_v1_rom_rom_proto_msgTypes[10].OneofWrappers = []any{}
-	file_content_v1_rom_rom_proto_msgTypes[11].OneofWrappers = []any{
+	file_content_v1_rom_rom_proto_msgTypes[5].OneofWrappers = []any{}
+	file_content_v1_rom_rom_proto_msgTypes[8].OneofWrappers = []any{}
+	file_content_v1_rom_rom_proto_msgTypes[9].OneofWrappers = []any{
 		(*RomUploadRequest_FileInfo)(nil),
 		(*RomUploadRequest_ChunkData)(nil),
 	}
-	file_content_v1_rom_rom_proto_msgTypes[13].OneofWrappers = []any{}
+	file_content_v1_rom_rom_proto_msgTypes[11].OneofWrappers = []any{}
+	file_content_v1_rom_rom_proto_msgTypes[12].OneofWrappers = []any{}
 	file_content_v1_rom_rom_proto_msgTypes[14].OneofWrappers = []any{}
 	file_content_v1_rom_rom_proto_msgTypes[16].OneofWrappers = []any{}
-	file_content_v1_rom_rom_proto_msgTypes[18].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_content_v1_rom_rom_proto_rawDesc), len(file_content_v1_rom_rom_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   20,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

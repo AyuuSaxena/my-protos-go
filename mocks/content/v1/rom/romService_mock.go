@@ -13,6 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
+	v1 "github.com/AyuuSaxena/protos-go/common/v1"
 	rom "github.com/AyuuSaxena/protos-go/content/v1/rom"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
@@ -83,14 +84,14 @@ func (mr *MockRomServiceClientMockRecorder) RomDelete(ctx, in any, opts ...any) 
 }
 
 // RomDownload mocks base method.
-func (m *MockRomServiceClient) RomDownload(ctx context.Context, in *rom.RomDownloadRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[rom.FileChunk], error) {
+func (m *MockRomServiceClient) RomDownload(ctx context.Context, in *rom.RomDownloadRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[v1.FileChunk], error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "RomDownload", varargs...)
-	ret0, _ := ret[0].(grpc.ServerStreamingClient[rom.FileChunk])
+	ret0, _ := ret[0].(grpc.ServerStreamingClient[v1.FileChunk])
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -122,24 +123,24 @@ func (mr *MockRomServiceClientMockRecorder) RomGet(ctx, in any, opts ...any) *go
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RomGet", reflect.TypeOf((*MockRomServiceClient)(nil).RomGet), varargs...)
 }
 
-// RomList mocks base method.
-func (m *MockRomServiceClient) RomList(ctx context.Context, in *rom.RomListRequest, opts ...grpc.CallOption) (*rom.RomListResponse, error) {
+// RomSearch mocks base method.
+func (m *MockRomServiceClient) RomSearch(ctx context.Context, in *rom.RomSearchRequest, opts ...grpc.CallOption) (*rom.RomSearchResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
-	ret := m.ctrl.Call(m, "RomList", varargs...)
-	ret0, _ := ret[0].(*rom.RomListResponse)
+	ret := m.ctrl.Call(m, "RomSearch", varargs...)
+	ret0, _ := ret[0].(*rom.RomSearchResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// RomList indicates an expected call of RomList.
-func (mr *MockRomServiceClientMockRecorder) RomList(ctx, in any, opts ...any) *gomock.Call {
+// RomSearch indicates an expected call of RomSearch.
+func (mr *MockRomServiceClientMockRecorder) RomSearch(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RomList", reflect.TypeOf((*MockRomServiceClient)(nil).RomList), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RomSearch", reflect.TypeOf((*MockRomServiceClient)(nil).RomSearch), varargs...)
 }
 
 // RomShare mocks base method.
@@ -257,7 +258,7 @@ func (mr *MockRomServiceServerMockRecorder) RomDelete(arg0, arg1 any) *gomock.Ca
 }
 
 // RomDownload mocks base method.
-func (m *MockRomServiceServer) RomDownload(arg0 *rom.RomDownloadRequest, arg1 grpc.ServerStreamingServer[rom.FileChunk]) error {
+func (m *MockRomServiceServer) RomDownload(arg0 *rom.RomDownloadRequest, arg1 grpc.ServerStreamingServer[v1.FileChunk]) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "RomDownload", arg0, arg1)
 	ret0, _ := ret[0].(error)
@@ -285,19 +286,19 @@ func (mr *MockRomServiceServerMockRecorder) RomGet(arg0, arg1 any) *gomock.Call 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RomGet", reflect.TypeOf((*MockRomServiceServer)(nil).RomGet), arg0, arg1)
 }
 
-// RomList mocks base method.
-func (m *MockRomServiceServer) RomList(arg0 context.Context, arg1 *rom.RomListRequest) (*rom.RomListResponse, error) {
+// RomSearch mocks base method.
+func (m *MockRomServiceServer) RomSearch(arg0 context.Context, arg1 *rom.RomSearchRequest) (*rom.RomSearchResponse, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "RomList", arg0, arg1)
-	ret0, _ := ret[0].(*rom.RomListResponse)
+	ret := m.ctrl.Call(m, "RomSearch", arg0, arg1)
+	ret0, _ := ret[0].(*rom.RomSearchResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// RomList indicates an expected call of RomList.
-func (mr *MockRomServiceServerMockRecorder) RomList(arg0, arg1 any) *gomock.Call {
+// RomSearch indicates an expected call of RomSearch.
+func (mr *MockRomServiceServerMockRecorder) RomSearch(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RomList", reflect.TypeOf((*MockRomServiceServer)(nil).RomList), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RomSearch", reflect.TypeOf((*MockRomServiceServer)(nil).RomSearch), arg0, arg1)
 }
 
 // RomShare mocks base method.

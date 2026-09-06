@@ -1,12 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "content/v1/rom/romService.proto",
+    "title": "content/v1/image/imageService.proto",
     "version": "version not set"
   },
   "tags": [
     {
-      "name": "RomService"
+      "name": "ImageService"
     }
   ],
   "consumes": [
@@ -16,59 +16,14 @@
     "application/json"
   ],
   "paths": {
-    "/api/v1/consoles": {
-      "get": {
-        "operationId": "RomService_ListConsoles",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/romListConsolesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
-          },
-          "403": {
-            "description": "Forbidden - Insufficient permissions or invalid token claims"
-          }
-        },
-        "parameters": [
-          {
-            "name": "site",
-            "description": "Optional site identifier filter",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "RomService"
-        ],
-        "security": [
-          {
-            "BearerAuth": []
-          },
-          {
-            "ApiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/api/v1/roms/search": {
+    "/api/v1/images/search": {
       "post": {
-        "operationId": "RomService_RomSearch",
+        "operationId": "ImageService_ImageSearch",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/romRomSearchResponse"
+              "$ref": "#/definitions/imageImageSearchResponse"
             }
           },
           "default": {
@@ -90,12 +45,12 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/romRomSearchRequest"
+              "$ref": "#/definitions/imageImageSearchRequest"
             }
           }
         ],
         "tags": [
-          "RomService"
+          "ImageService"
         ],
         "security": [
           {
@@ -107,14 +62,14 @@
         ]
       }
     },
-    "/api/v1/roms/upload": {
+    "/api/v1/images/upload": {
       "post": {
-        "operationId": "RomService_RomUpload",
+        "operationId": "ImageService_ImageUpload",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/romRomUploadResponse"
+              "$ref": "#/definitions/imageImageUploadResponse"
             }
           },
           "default": {
@@ -137,12 +92,12 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/romRomUploadRequest"
+              "$ref": "#/definitions/imageImageUploadRequest"
             }
           }
         ],
         "tags": [
-          "RomService"
+          "ImageService"
         ],
         "security": [
           {
@@ -154,14 +109,14 @@
         ]
       }
     },
-    "/api/v1/roms/{id}": {
+    "/api/v1/images/{id}": {
       "get": {
-        "operationId": "RomService_RomGet",
+        "operationId": "ImageService_ImageGet",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/romRomMetadata"
+              "$ref": "#/definitions/imageImageMetadata"
             }
           },
           "default": {
@@ -180,21 +135,21 @@
         "parameters": [
           {
             "name": "id",
-            "description": "ROM unique identifier",
+            "description": "Image unique identifier",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "name",
-            "description": "ROM name to match",
+            "description": "Image name to match",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "slug",
-            "description": "ROM URL slug",
+            "description": "Image URL slug",
             "in": "query",
             "required": false,
             "type": "string"
@@ -208,7 +163,7 @@
           }
         ],
         "tags": [
-          "RomService"
+          "ImageService"
         ],
         "security": [
           {
@@ -220,12 +175,12 @@
         ]
       },
       "delete": {
-        "operationId": "RomService_RomDelete",
+        "operationId": "ImageService_ImageDelete",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/romRomDeleteResponse"
+              "$ref": "#/definitions/imageImageDeleteResponse"
             }
           },
           "default": {
@@ -244,7 +199,7 @@
         "parameters": [
           {
             "name": "id",
-            "description": "Unique ROM identifier to delete",
+            "description": "Unique Image identifier to delete",
             "in": "path",
             "required": true,
             "type": "string"
@@ -265,7 +220,7 @@
           }
         ],
         "tags": [
-          "RomService"
+          "ImageService"
         ],
         "security": [
           {
@@ -277,12 +232,12 @@
         ]
       },
       "put": {
-        "operationId": "RomService_RomUpdate",
+        "operationId": "ImageService_ImageUpdate",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/romRomMetadata"
+              "$ref": "#/definitions/imageImageMetadata"
             }
           },
           "default": {
@@ -301,7 +256,7 @@
         "parameters": [
           {
             "name": "id",
-            "description": "Unique ROM identifier",
+            "description": "Unique Image identifier",
             "in": "path",
             "required": true,
             "type": "string"
@@ -311,12 +266,12 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RomServiceRomUpdateBody"
+              "$ref": "#/definitions/ImageServiceImageUpdateBody"
             }
           }
         ],
         "tags": [
-          "RomService"
+          "ImageService"
         ],
         "security": [
           {
@@ -328,9 +283,9 @@
         ]
       }
     },
-    "/api/v1/roms/{id}/download": {
+    "/api/v1/images/{id}/download": {
       "get": {
-        "operationId": "RomService_RomDownload",
+        "operationId": "ImageService_ImageDownload",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -363,21 +318,21 @@
         "parameters": [
           {
             "name": "id",
-            "description": "ROM unique identifier",
+            "description": "Image unique identifier",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "name",
-            "description": "ROM name to match",
+            "description": "Image name to match",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "slug",
-            "description": "ROM URL slug",
+            "description": "Image URL slug",
             "in": "query",
             "required": false,
             "type": "string"
@@ -391,7 +346,7 @@
           }
         ],
         "tags": [
-          "RomService"
+          "ImageService"
         ],
         "security": [
           {
@@ -403,14 +358,14 @@
         ]
       }
     },
-    "/api/v1/roms/{id}/share": {
+    "/api/v1/images/{id}/share": {
       "post": {
-        "operationId": "RomService_RomShare",
+        "operationId": "ImageService_ImageShare",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/romRomShareResponse"
+              "$ref": "#/definitions/imageImageShareResponse"
             }
           },
           "default": {
@@ -429,7 +384,7 @@
         "parameters": [
           {
             "name": "id",
-            "description": "Unique ROM identifier to share",
+            "description": "Unique Image identifier to share",
             "in": "path",
             "required": true,
             "type": "string"
@@ -439,12 +394,12 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RomServiceRomShareBody"
+              "$ref": "#/definitions/ImageServiceImageShareBody"
             }
           }
         ],
         "tags": [
-          "RomService"
+          "ImageService"
         ],
         "security": [
           {
@@ -458,7 +413,7 @@
     }
   },
   "definitions": {
-    "RomServiceRomShareBody": {
+    "ImageServiceImageShareBody": {
       "type": "object",
       "properties": {
         "expiresInSec": {
@@ -472,50 +427,24 @@
         }
       }
     },
-    "RomServiceRomUpdateBody": {
+    "ImageServiceImageUpdateBody": {
       "type": "object",
       "properties": {
         "title": {
           "type": "string",
-          "title": "Updated ROM title"
+          "title": "Updated Image title"
         },
         "description": {
           "type": "string",
-          "title": "Updated ROM description"
+          "title": "Updated Image description"
         },
-        "consoleId": {
+        "altText": {
           "type": "string",
-          "title": "Updated console ID"
+          "title": "Updated alt text"
         },
-        "developer": {
+        "category": {
           "type": "string",
-          "title": "Updated developer"
-        },
-        "publisher": {
-          "type": "string",
-          "title": "Updated publisher"
-        },
-        "releaseYear": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Updated release year"
-        },
-        "genre": {
-          "type": "string",
-          "title": "Updated genre"
-        },
-        "region": {
-          "type": "string",
-          "title": "Updated region"
-        },
-        "players": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Updated player count"
-        },
-        "rating": {
-          "type": "string",
-          "title": "Updated content rating"
+          "title": "Updated category"
         },
         "tags": {
           "type": "array",
@@ -538,79 +467,20 @@
         }
       }
     },
-    "protobufAny": {
+    "imageImageDeleteResponse": {
       "type": "object",
       "properties": {
-        "@type": {
-          "type": "string"
+        "success": {
+          "type": "boolean",
+          "title": "Operation success flag"
+        },
+        "message": {
+          "type": "string",
+          "title": "Status message"
         }
-      },
-      "additionalProperties": {}
+      }
     },
-    "romConsoleInfo": {
-      "type": "object",
-      "properties": {
-        "mongoId": {
-          "type": "string",
-          "title": "MongoDB internal record identifier (_id)"
-        },
-        "id": {
-          "type": "string",
-          "title": "Unique console identifier (UUID)"
-        },
-        "site": {
-          "type": "string",
-          "title": "Dynamic site/tenant key (e.g. retrogames)"
-        },
-        "key": {
-          "type": "string",
-          "title": "Console system key (e.g. gba, snes, nds, psx)"
-        },
-        "fullName": {
-          "type": "string",
-          "title": "Full display name of the console"
-        },
-        "slug": {
-          "type": "string",
-          "title": "URL-friendly slug"
-        },
-        "extensions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "Supported file extensions (without leading dot)"
-        },
-        "manufacturer": {
-          "type": "string",
-          "title": "Hardware manufacturer (e.g. Nintendo, Sony, Sega)"
-        },
-        "releaseYear": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Release year"
-        },
-        "iconUrl": {
-          "type": "string",
-          "title": "Console icon or logo URL"
-        },
-        "contentCount": {
-          "type": "string",
-          "format": "int64",
-          "title": "Total number of ROMs linked to this console"
-        },
-        "createdAt": {
-          "type": "string",
-          "title": "Creation timestamp"
-        },
-        "updatedAt": {
-          "type": "string",
-          "title": "Last update timestamp"
-        }
-      },
-      "description": "ConsoleInfo represents a gaming console system stored in the database taxonomy."
-    },
-    "romFileInfo": {
+    "imageImageFileInfo": {
       "type": "object",
       "properties": {
         "name": {
@@ -628,45 +498,19 @@
         },
         "title": {
           "type": "string",
-          "title": "ROM title"
+          "title": "Image title"
         },
         "description": {
           "type": "string",
-          "title": "ROM description"
+          "title": "Image description"
         },
-        "consoleId": {
+        "altText": {
           "type": "string",
-          "title": "Console system database ID or key"
+          "title": "Alt text"
         },
-        "developer": {
+        "category": {
           "type": "string",
-          "title": "Game developer"
-        },
-        "publisher": {
-          "type": "string",
-          "title": "Game publisher"
-        },
-        "releaseYear": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Release year"
-        },
-        "genre": {
-          "type": "string",
-          "title": "Game genre"
-        },
-        "region": {
-          "type": "string",
-          "title": "Release region"
-        },
-        "players": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Supported players"
-        },
-        "rating": {
-          "type": "string",
-          "title": "Content rating"
+          "title": "Category (e.g. cover, screenshot, wallpaper)"
         },
         "tags": {
           "type": "array",
@@ -697,33 +541,7 @@
         }
       }
     },
-    "romListConsolesResponse": {
-      "type": "object",
-      "properties": {
-        "consoles": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/romConsoleInfo"
-          },
-          "title": "List of supported console systems"
-        }
-      }
-    },
-    "romRomDeleteResponse": {
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean",
-          "title": "Operation success flag"
-        },
-        "message": {
-          "type": "string",
-          "title": "Status message"
-        }
-      }
-    },
-    "romRomMetadata": {
+    "imageImageMetadata": {
       "type": "object",
       "properties": {
         "mongoId": {
@@ -732,7 +550,7 @@
         },
         "id": {
           "type": "string",
-          "title": "Unique ROM identifier (UUID)"
+          "title": "Unique Image identifier (UUID)"
         },
         "site": {
           "type": "string",
@@ -740,7 +558,7 @@
         },
         "title": {
           "type": "string",
-          "title": "Display title of the ROM"
+          "title": "Display title of the Image"
         },
         "slug": {
           "type": "string",
@@ -750,35 +568,29 @@
           "type": "string",
           "title": "Detailed description"
         },
-        "consoleId": {
-          "type": "string",
-          "title": "Relational Foreign Keys"
-        },
         "fileId": {
-          "type": "string"
-        },
-        "developer": {
           "type": "string",
-          "title": "Domain Metadata"
+          "title": "Relational Foreign Key to storage file"
         },
-        "publisher": {
-          "type": "string"
+        "altText": {
+          "type": "string",
+          "title": "Domain & Visual Metadata"
         },
-        "releaseYear": {
+        "width": {
           "type": "integer",
           "format": "int32"
         },
-        "genre": {
-          "type": "string"
-        },
-        "region": {
-          "type": "string"
-        },
-        "players": {
+        "height": {
           "type": "integer",
           "format": "int32"
         },
-        "rating": {
+        "aspectRatio": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string"
+        },
+        "category": {
           "type": "string"
         },
         "tags": {
@@ -806,39 +618,27 @@
         "updatedAt": {
           "type": "string"
         },
-        "consoleMetadata": {
-          "$ref": "#/definitions/romConsoleInfo",
-          "title": "Enriched Relations (populated on read, not persisted in DB)\nFull console details resolved from consoleId"
-        },
         "fileMetadata": {
           "$ref": "#/definitions/v1FileMetadata",
-          "title": "Full file details resolved from fileId"
+          "title": "Enriched Relations (populated on read, not persisted in DB)\nFull file details resolved from fileId"
         }
       },
-      "description": "RomMetadata represents the core normalized ROM entity with relational IDs."
+      "description": "ImageMetadata represents the core normalized Image entity with relational IDs."
     },
-    "romRomQuery": {
+    "imageImageQuery": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "title": "Filter by ROM name (partial or exact)"
+          "title": "Filter by Image name (partial or exact)"
         },
-        "consoleId": {
+        "category": {
           "type": "string",
-          "title": "Filter by console database ID"
+          "title": "Filter by category (e.g. cover, screenshot, wallpaper)"
         },
-        "consoleKey": {
+        "format": {
           "type": "string",
-          "title": "Filter by console key (e.g. gba, snes, nds, psx)"
-        },
-        "genre": {
-          "type": "string",
-          "title": "Filter by genre"
-        },
-        "region": {
-          "type": "string",
-          "title": "Filter by release region (e.g. USA, EUR, JPN)"
+          "title": "Filter by format (e.g. png, jpeg, webp)"
         },
         "status": {
           "type": "string",
@@ -862,7 +662,7 @@
         }
       }
     },
-    "romRomSearchRequest": {
+    "imageImageSearchRequest": {
       "type": "object",
       "properties": {
         "limit": {
@@ -881,15 +681,15 @@
         },
         "sortby": {
           "type": "string",
-          "title": "Field name to sort by (e.g. title, createdAt, releaseYear)"
+          "title": "Field name to sort by (e.g. title, createdAt)"
         },
         "sortOrder": {
           "type": "string",
           "title": "Sort direction order (asc or desc, default desc)"
         },
         "query": {
-          "$ref": "#/definitions/romRomQuery",
-          "title": "Nested query filters for ROM properties"
+          "$ref": "#/definitions/imageImageQuery",
+          "title": "Nested query filters for Image properties"
         },
         "site": {
           "type": "string",
@@ -897,16 +697,16 @@
         }
       }
     },
-    "romRomSearchResponse": {
+    "imageImageSearchResponse": {
       "type": "object",
       "properties": {
-        "roms": {
+        "images": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/romRomMetadata"
+            "$ref": "#/definitions/imageImageMetadata"
           },
-          "title": "List of ROM metadata items for the current page"
+          "title": "List of Image metadata items for the current page"
         },
         "totalCount": {
           "type": "string",
@@ -930,12 +730,12 @@
         }
       }
     },
-    "romRomShareResponse": {
+    "imageImageShareResponse": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
-          "title": "ROM identifier"
+          "title": "Image identifier"
         },
         "downloadUrl": {
           "type": "string",
@@ -947,12 +747,12 @@
         }
       }
     },
-    "romRomUploadRequest": {
+    "imageImageUploadRequest": {
       "type": "object",
       "properties": {
         "fileInfo": {
-          "$ref": "#/definitions/romFileInfo",
-          "title": "ROM metadata for initial chunk"
+          "$ref": "#/definitions/imageImageFileInfo",
+          "title": "Image metadata for initial chunk"
         },
         "chunkData": {
           "type": "string",
@@ -961,14 +761,23 @@
         }
       }
     },
-    "romRomUploadResponse": {
+    "imageImageUploadResponse": {
       "type": "object",
       "properties": {
-        "rom": {
-          "$ref": "#/definitions/romRomMetadata",
-          "title": "Uploaded ROM metadata"
+        "image": {
+          "$ref": "#/definitions/imageImageMetadata",
+          "title": "Uploaded Image metadata"
         }
       }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
     },
     "rpcStatus": {
       "type": "object",
