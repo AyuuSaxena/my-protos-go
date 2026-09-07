@@ -25,9 +25,9 @@ var File_authorizer_v1_authorizerService_proto protoreflect.FileDescriptor
 
 const file_authorizer_v1_authorizerService_proto_rawDesc = "" +
 	"\n" +
-	"%authorizer/v1/authorizerService.proto\x12\rauthorizer.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x18authorizer/v1/auth.proto2\xf5\x05\n" +
-	"\x11AuthorizerService\x12\x83\x02\n" +
-	"\vCheckAccess\x12!.authorizer.v1.CheckAccessRequest\x1a\".authorizer.v1.CheckAccessResponse\"\xac\x01\x82\xd3\xe4\x93\x02\xa5\x01:\x01*Z\x1b\x12\x19/api/v1/auth/check-accessZ\x1b:\x01*\"\x16/api/v1/auth/pre-loginZ\x18\x12\x16/api/v1/auth/pre-loginZ\x19:\x01*\"\x14/api/v1/access/checkZ\x16\x12\x14/api/v1/access/check\"\x19/api/v1/auth/check-access\x12u\n" +
+	"%authorizer/v1/authorizerService.proto\x12\rauthorizer.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x18authorizer/v1/auth.proto2\xe6\x04\n" +
+	"\x11AuthorizerService\x12u\n" +
+	"\vCheckAccess\x12!.authorizer.v1.CheckAccessRequest\x1a\".authorizer.v1.CheckAccessResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/access/check\x12u\n" +
 	"\vGrantAccess\x12!.authorizer.v1.GrantAccessRequest\x1a\".authorizer.v1.GrantAccessResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/access/grant\x12y\n" +
 	"\fRevokeAccess\x12\".authorizer.v1.RevokeAccessRequest\x1a#.authorizer.v1.RevokeAccessResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/access/revoke\x12q\n" +
 	"\rGetUserAccess\x12#.authorizer.v1.GetUserAccessRequest\x1a\x19.authorizer.v1.UserAccess\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/api/v1/access/{user_id}\x12u\n" +

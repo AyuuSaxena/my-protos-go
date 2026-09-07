@@ -269,27 +269,22 @@ type UserAccess struct {
 	// Unique UUID identifier
 	// @gotags: `json:"id,omitempty" bson:"id,omitempty"`
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty" bson:"id,omitempty"`
-	// User identifier (external ID, email, or username)
-	// @gotags: `json:"userId,omitempty" bson:"userId,omitempty"`
-	UserId string `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"userId,omitempty" bson:"userId,omitempty"`
-	// Auth ID
-	// @gotags: `json:"authId,omitempty" bson:"authId,omitempty"`
-	AuthId *string `protobuf:"bytes,4,opt,name=auth_id,json=authId,proto3,oneof" json:"authId,omitempty" bson:"authId,omitempty"`
-	// @gotags: `json:"username,omitempty" bson:"username,omitempty"`
-	Username *string `protobuf:"bytes,5,opt,name=username,proto3,oneof" json:"username,omitempty" bson:"username,omitempty"`
-	// @gotags: `json:"email,omitempty" bson:"email,omitempty"`
-	Email *string `protobuf:"bytes,6,opt,name=email,proto3,oneof" json:"email,omitempty" bson:"email,omitempty"`
 	// Multi-tenant site identifier
 	// @gotags: `json:"site,omitempty" bson:"site,omitempty"`
-	Site string `protobuf:"bytes,7,opt,name=site,proto3" json:"site,omitempty" bson:"site,omitempty"`
+	Site string `protobuf:"bytes,3,opt,name=site,proto3" json:"site,omitempty" bson:"site,omitempty"`
+	// User identifier (external ID, email, or username)
+	// @gotags: `json:"userId,omitempty" bson:"userId,omitempty"`
+	UserId string `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"userId,omitempty" bson:"userId,omitempty"`
+	// @gotags: `json:"email,omitempty" bson:"email,omitempty"`
+	Email *string `protobuf:"bytes,5,opt,name=email,proto3,oneof" json:"email,omitempty" bson:"email,omitempty"`
 	// User access status (active, suspended, revoked)
 	// @gotags: `json:"status,omitempty" bson:"status,omitempty"`
-	Status string `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty" bson:"status,omitempty"`
+	Status string `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty" bson:"status,omitempty"`
 	// @gotags: `json:"isActive" bson:"isActive"`
-	IsActive bool `protobuf:"varint,9,opt,name=is_active,json=isActive,proto3" json:"isActive" bson:"isActive"`
+	IsActive bool `protobuf:"varint,7,opt,name=is_active,json=isActive,proto3" json:"isActive" bson:"isActive"`
 	// Dynamic service access map
 	// @gotags: `json:"services,omitempty" bson:"services,omitempty"`
-	Services map[string]*ServiceAccess `protobuf:"bytes,10,rep,name=services,proto3" json:"services,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value" bson:"services,omitempty"`
+	Services map[string]*ServiceAccess `protobuf:"bytes,8,rep,name=services,proto3" json:"services,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value" bson:"services,omitempty"`
 	// List of allowed service names
 	// @gotags: `json:"allowedServices,omitempty" bson:"allowedServices,omitempty"`
 	AllowedServices []string `protobuf:"bytes,11,rep,name=allowed_services,json=allowedServices,proto3" json:"allowedServices,omitempty" bson:"allowedServices,omitempty"`
@@ -350,6 +345,13 @@ func (x *UserAccess) GetId() string {
 	return ""
 }
 
+func (x *UserAccess) GetSite() string {
+	if x != nil {
+		return x.Site
+	}
+	return ""
+}
+
 func (x *UserAccess) GetUserId() string {
 	if x != nil {
 		return x.UserId
@@ -357,30 +359,9 @@ func (x *UserAccess) GetUserId() string {
 	return ""
 }
 
-func (x *UserAccess) GetAuthId() string {
-	if x != nil && x.AuthId != nil {
-		return *x.AuthId
-	}
-	return ""
-}
-
-func (x *UserAccess) GetUsername() string {
-	if x != nil && x.Username != nil {
-		return *x.Username
-	}
-	return ""
-}
-
 func (x *UserAccess) GetEmail() string {
 	if x != nil && x.Email != nil {
 		return *x.Email
-	}
-	return ""
-}
-
-func (x *UserAccess) GetSite() string {
-	if x != nil {
-		return x.Site
 	}
 	return ""
 }
@@ -437,22 +418,18 @@ func (x *UserAccess) GetUpdatedAt() string {
 // CheckAccessRequest represents incoming parameters to check user service access before login or action.
 type CheckAccessRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// @gotags: `json:"userId,omitempty" form:"userId"`
-	UserId string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"userId,omitempty" form:"userId"`
-	// @gotags: `json:"email,omitempty" form:"email"`
-	Email *string `protobuf:"bytes,2,opt,name=email,proto3,oneof" json:"email,omitempty" form:"email"`
-	// @gotags: `json:"username,omitempty" form:"username"`
-	Username *string `protobuf:"bytes,3,opt,name=username,proto3,oneof" json:"username,omitempty" form:"username"`
-	// @gotags: `json:"service,omitempty" form:"service"`
-	Service string `protobuf:"bytes,4,opt,name=service,proto3" json:"service,omitempty" form:"service"`
-	// @gotags: `json:"site,omitempty" form:"site"`
-	Site string `protobuf:"bytes,5,opt,name=site,proto3" json:"site,omitempty" form:"site"`
-	// @gotags: `json:"action,omitempty" form:"action"`
-	Action *string `protobuf:"bytes,6,opt,name=action,proto3,oneof" json:"action,omitempty" form:"action"`
 	// @gotags: `json:"id,omitempty" form:"id"`
-	Id *string `protobuf:"bytes,7,opt,name=id,proto3,oneof" json:"id,omitempty" form:"id"`
-	// @gotags: `json:"authId,omitempty" form:"authId"`
-	AuthId        *string `protobuf:"bytes,8,opt,name=auth_id,json=authId,proto3,oneof" json:"authId,omitempty" form:"authId"`
+	Id *string `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty" form:"id"`
+	// @gotags: `json:"site,omitempty" form:"site"`
+	Site *string `protobuf:"bytes,2,opt,name=site,proto3,oneof" json:"site,omitempty" form:"site"`
+	// @gotags: `json:"userId,omitempty" form:"userId"`
+	UserId *string `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3,oneof" json:"userId,omitempty" form:"userId"`
+	// @gotags: `json:"email,omitempty" form:"email"`
+	Email *string `protobuf:"bytes,4,opt,name=email,proto3,oneof" json:"email,omitempty" form:"email"`
+	// @gotags: `json:"service,omitempty" form:"service"`
+	Service string `protobuf:"bytes,10,opt,name=service,proto3" json:"service,omitempty" form:"service"`
+	// @gotags: `json:"action,omitempty" form:"action"`
+	Action        *string `protobuf:"bytes,11,opt,name=action,proto3,oneof" json:"action,omitempty" form:"action"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -487,9 +464,23 @@ func (*CheckAccessRequest) Descriptor() ([]byte, []int) {
 	return file_authorizer_v1_auth_proto_rawDescGZIP(), []int{3}
 }
 
+func (x *CheckAccessRequest) GetId() string {
+	if x != nil && x.Id != nil {
+		return *x.Id
+	}
+	return ""
+}
+
+func (x *CheckAccessRequest) GetSite() string {
+	if x != nil && x.Site != nil {
+		return *x.Site
+	}
+	return ""
+}
+
 func (x *CheckAccessRequest) GetUserId() string {
-	if x != nil {
-		return x.UserId
+	if x != nil && x.UserId != nil {
+		return *x.UserId
 	}
 	return ""
 }
@@ -501,13 +492,6 @@ func (x *CheckAccessRequest) GetEmail() string {
 	return ""
 }
 
-func (x *CheckAccessRequest) GetUsername() string {
-	if x != nil && x.Username != nil {
-		return *x.Username
-	}
-	return ""
-}
-
 func (x *CheckAccessRequest) GetService() string {
 	if x != nil {
 		return x.Service
@@ -515,30 +499,9 @@ func (x *CheckAccessRequest) GetService() string {
 	return ""
 }
 
-func (x *CheckAccessRequest) GetSite() string {
-	if x != nil {
-		return x.Site
-	}
-	return ""
-}
-
 func (x *CheckAccessRequest) GetAction() string {
 	if x != nil && x.Action != nil {
 		return *x.Action
-	}
-	return ""
-}
-
-func (x *CheckAccessRequest) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
-	}
-	return ""
-}
-
-func (x *CheckAccessRequest) GetAuthId() string {
-	if x != nil && x.AuthId != nil {
-		return *x.AuthId
 	}
 	return ""
 }
@@ -673,20 +636,20 @@ func (x *CheckAccessResponse) GetError() string {
 // GrantAccessRequest is used by administrative endpoints to grant access to a user.
 type GrantAccessRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// @gotags: `json:"userId" binding:"required"`
-	UserId string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"userId" binding:"required"`
-	// @gotags: `json:"email,omitempty"`
-	Email *string `protobuf:"bytes,2,opt,name=email,proto3,oneof" json:"email,omitempty"`
-	// @gotags: `json:"username,omitempty"`
-	Username *string `protobuf:"bytes,3,opt,name=username,proto3,oneof" json:"username,omitempty"`
-	// @gotags: `json:"service,omitempty"`
-	Service string `protobuf:"bytes,4,opt,name=service,proto3" json:"service,omitempty"`
-	// @gotags: `json:"level,omitempty"`
-	Level string `protobuf:"bytes,5,opt,name=level,proto3" json:"level,omitempty"`
-	// @gotags: `json:"permissions,omitempty"`
-	Permissions []string `protobuf:"bytes,6,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	// @gotags: `json:"id,omitempty" form:"id"`
+	Id *string `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty" form:"id"`
 	// @gotags: `json:"site,omitempty"`
-	Site string `protobuf:"bytes,7,opt,name=site,proto3" json:"site,omitempty"`
+	Site string `protobuf:"bytes,2,opt,name=site,proto3" json:"site,omitempty"`
+	// @gotags: `json:"userId" binding:"required"`
+	UserId string `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"userId" binding:"required"`
+	// @gotags: `json:"email,omitempty"`
+	Email *string `protobuf:"bytes,4,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	// @gotags: `json:"service,omitempty"`
+	Service string `protobuf:"bytes,5,opt,name=service,proto3" json:"service,omitempty"`
+	// @gotags: `json:"level,omitempty"`
+	Level string `protobuf:"bytes,6,opt,name=level,proto3" json:"level,omitempty"`
+	// @gotags: `json:"permissions,omitempty"`
+	Permissions []string `protobuf:"bytes,7,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	// @gotags: `json:"quotaBytes,omitempty"`
 	QuotaBytes *int64 `protobuf:"varint,8,opt,name=quota_bytes,json=quotaBytes,proto3,oneof" json:"quotaBytes,omitempty"`
 	// @gotags: `json:"attributes,omitempty"`
@@ -725,6 +688,20 @@ func (*GrantAccessRequest) Descriptor() ([]byte, []int) {
 	return file_authorizer_v1_auth_proto_rawDescGZIP(), []int{5}
 }
 
+func (x *GrantAccessRequest) GetId() string {
+	if x != nil && x.Id != nil {
+		return *x.Id
+	}
+	return ""
+}
+
+func (x *GrantAccessRequest) GetSite() string {
+	if x != nil {
+		return x.Site
+	}
+	return ""
+}
+
 func (x *GrantAccessRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
@@ -735,13 +712,6 @@ func (x *GrantAccessRequest) GetUserId() string {
 func (x *GrantAccessRequest) GetEmail() string {
 	if x != nil && x.Email != nil {
 		return *x.Email
-	}
-	return ""
-}
-
-func (x *GrantAccessRequest) GetUsername() string {
-	if x != nil && x.Username != nil {
-		return *x.Username
 	}
 	return ""
 }
@@ -767,13 +737,6 @@ func (x *GrantAccessRequest) GetPermissions() []string {
 	return nil
 }
 
-func (x *GrantAccessRequest) GetSite() string {
-	if x != nil {
-		return x.Site
-	}
-	return ""
-}
-
 func (x *GrantAccessRequest) GetQuotaBytes() int64 {
 	if x != nil && x.QuotaBytes != nil {
 		return *x.QuotaBytes
@@ -791,12 +754,14 @@ func (x *GrantAccessRequest) GetAttributes() map[string]string {
 // RevokeAccessRequest is used to revoke or disable access for a user.
 type RevokeAccessRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// @gotags: `json:"userId" binding:"required"`
-	UserId string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"userId" binding:"required"`
-	// @gotags: `json:"service,omitempty"`
-	Service string `protobuf:"bytes,2,opt,name=service,proto3" json:"service,omitempty"`
+	// @gotags: `json:"id,omitempty" form:"id"`
+	Id *string `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty" form:"id"`
 	// @gotags: `json:"site,omitempty"`
-	Site          string `protobuf:"bytes,3,opt,name=site,proto3" json:"site,omitempty"`
+	Site string `protobuf:"bytes,2,opt,name=site,proto3" json:"site,omitempty"`
+	// @gotags: `json:"userId" binding:"required"`
+	UserId string `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"userId" binding:"required"`
+	// @gotags: `json:"service,omitempty"`
+	Service       string `protobuf:"bytes,4,opt,name=service,proto3" json:"service,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -831,6 +796,20 @@ func (*RevokeAccessRequest) Descriptor() ([]byte, []int) {
 	return file_authorizer_v1_auth_proto_rawDescGZIP(), []int{6}
 }
 
+func (x *RevokeAccessRequest) GetId() string {
+	if x != nil && x.Id != nil {
+		return *x.Id
+	}
+	return ""
+}
+
+func (x *RevokeAccessRequest) GetSite() string {
+	if x != nil {
+		return x.Site
+	}
+	return ""
+}
+
 func (x *RevokeAccessRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
@@ -841,13 +820,6 @@ func (x *RevokeAccessRequest) GetUserId() string {
 func (x *RevokeAccessRequest) GetService() string {
 	if x != nil {
 		return x.Service
-	}
-	return ""
-}
-
-func (x *RevokeAccessRequest) GetSite() string {
-	if x != nil {
-		return x.Site
 	}
 	return ""
 }
@@ -965,10 +937,10 @@ func (x *RevokeAccessResponse) GetAccess() *UserAccess {
 // GetUserAccessRequest is used to retrieve a user's full access profile.
 type GetUserAccessRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// @gotags: `json:"userId"`
-	UserId string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"userId"`
 	// @gotags: `json:"site,omitempty"`
-	Site          *string `protobuf:"bytes,2,opt,name=site,proto3,oneof" json:"site,omitempty"`
+	Site *string `protobuf:"bytes,1,opt,name=site,proto3,oneof" json:"site,omitempty"`
+	// @gotags: `json:"userId"`
+	UserId        string `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"userId"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1003,16 +975,16 @@ func (*GetUserAccessRequest) Descriptor() ([]byte, []int) {
 	return file_authorizer_v1_auth_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *GetUserAccessRequest) GetUserId() string {
-	if x != nil {
-		return x.UserId
+func (x *GetUserAccessRequest) GetSite() string {
+	if x != nil && x.Site != nil {
+		return *x.Site
 	}
 	return ""
 }
 
-func (x *GetUserAccessRequest) GetSite() string {
-	if x != nil && x.Site != nil {
-		return *x.Site
+func (x *GetUserAccessRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
 	}
 	return ""
 }
@@ -1204,20 +1176,17 @@ const file_authorizer_v1_auth_proto_rawDesc = "" +
 	"\x06_levelB\x0e\n" +
 	"\f_quota_bytesB\r\n" +
 	"\v_granted_atB\r\n" +
-	"\v_expires_at\"\xa9\x05\n" +
+	"\v_expires_at\"\xd1\x04\n" +
 	"\n" +
 	"UserAccess\x12\x19\n" +
 	"\bmongo_id\x18\x01 \x01(\tR\amongoId\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\tR\x02id\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\tR\x06userId\x12\x1c\n" +
-	"\aauth_id\x18\x04 \x01(\tH\x00R\x06authId\x88\x01\x01\x12\x1f\n" +
-	"\busername\x18\x05 \x01(\tH\x01R\busername\x88\x01\x01\x12\x19\n" +
-	"\x05email\x18\x06 \x01(\tH\x02R\x05email\x88\x01\x01\x12\x12\n" +
-	"\x04site\x18\a \x01(\tR\x04site\x12\x16\n" +
-	"\x06status\x18\b \x01(\tR\x06status\x12\x1b\n" +
-	"\tis_active\x18\t \x01(\bR\bisActive\x12C\n" +
-	"\bservices\x18\n" +
-	" \x03(\v2'.authorizer.v1.UserAccess.ServicesEntryR\bservices\x12)\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n" +
+	"\x04site\x18\x03 \x01(\tR\x04site\x12\x17\n" +
+	"\auser_id\x18\x04 \x01(\tR\x06userId\x12\x19\n" +
+	"\x05email\x18\x05 \x01(\tH\x00R\x05email\x88\x01\x01\x12\x16\n" +
+	"\x06status\x18\x06 \x01(\tR\x06status\x12\x1b\n" +
+	"\tis_active\x18\a \x01(\bR\bisActive\x12C\n" +
+	"\bservices\x18\b \x03(\v2'.authorizer.v1.UserAccess.ServicesEntryR\bservices\x12)\n" +
 	"\x10allowed_services\x18\v \x03(\tR\x0fallowedServices\x12I\n" +
 	"\n" +
 	"attributes\x18\f \x03(\v2).authorizer.v1.UserAccess.AttributesEntryR\n" +
@@ -1231,26 +1200,22 @@ const file_authorizer_v1_auth_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\v2\x1c.authorizer.v1.ServiceAccessR\x05value:\x028\x01\x1a=\n" +
 	"\x0fAttributesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
+	"\x06_email\"\xe3\x01\n" +
+	"\x12CheckAccessRequest\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
+	"\x04site\x18\x02 \x01(\tH\x01R\x04site\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\x03 \x01(\tH\x02R\x06userId\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x04 \x01(\tH\x03R\x05email\x88\x01\x01\x12\x18\n" +
+	"\aservice\x18\n" +
+	" \x01(\tR\aservice\x12\x1b\n" +
+	"\x06action\x18\v \x01(\tH\x04R\x06action\x88\x01\x01B\x05\n" +
+	"\x03_idB\a\n" +
+	"\x05_siteB\n" +
 	"\n" +
-	"\b_auth_idB\v\n" +
-	"\t_usernameB\b\n" +
-	"\x06_email\"\x9c\x02\n" +
-	"\x12CheckAccessRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x19\n" +
-	"\x05email\x18\x02 \x01(\tH\x00R\x05email\x88\x01\x01\x12\x1f\n" +
-	"\busername\x18\x03 \x01(\tH\x01R\busername\x88\x01\x01\x12\x18\n" +
-	"\aservice\x18\x04 \x01(\tR\aservice\x12\x12\n" +
-	"\x04site\x18\x05 \x01(\tR\x04site\x12\x1b\n" +
-	"\x06action\x18\x06 \x01(\tH\x02R\x06action\x88\x01\x01\x12\x13\n" +
-	"\x02id\x18\a \x01(\tH\x03R\x02id\x88\x01\x01\x12\x1c\n" +
-	"\aauth_id\x18\b \x01(\tH\x04R\x06authId\x88\x01\x01B\b\n" +
-	"\x06_emailB\v\n" +
-	"\t_usernameB\t\n" +
-	"\a_actionB\x05\n" +
-	"\x03_idB\n" +
-	"\n" +
-	"\b_auth_id\"\xfd\x02\n" +
+	"\b_user_idB\b\n" +
+	"\x06_emailB\t\n" +
+	"\a_action\"\xfd\x02\n" +
 	"\x13CheckAccessResponse\x12\x18\n" +
 	"\aallowed\x18\x01 \x01(\bR\aallowed\x12\x1b\n" +
 	"\tcan_login\x18\x02 \x01(\bR\bcanLogin\x12\x18\n" +
@@ -1271,15 +1236,15 @@ const file_authorizer_v1_auth_proto_rawDesc = "" +
 	"\x05_siteB\n" +
 	"\n" +
 	"\b_messageB\b\n" +
-	"\x06_error\"\xae\x03\n" +
-	"\x12GrantAccessRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x19\n" +
-	"\x05email\x18\x02 \x01(\tH\x00R\x05email\x88\x01\x01\x12\x1f\n" +
-	"\busername\x18\x03 \x01(\tH\x01R\busername\x88\x01\x01\x12\x18\n" +
-	"\aservice\x18\x04 \x01(\tR\aservice\x12\x14\n" +
-	"\x05level\x18\x05 \x01(\tR\x05level\x12 \n" +
-	"\vpermissions\x18\x06 \x03(\tR\vpermissions\x12\x12\n" +
-	"\x04site\x18\a \x01(\tR\x04site\x12$\n" +
+	"\x06_error\"\x9c\x03\n" +
+	"\x12GrantAccessRequest\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x12\n" +
+	"\x04site\x18\x02 \x01(\tR\x04site\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\tR\x06userId\x12\x19\n" +
+	"\x05email\x18\x04 \x01(\tH\x01R\x05email\x88\x01\x01\x12\x18\n" +
+	"\aservice\x18\x05 \x01(\tR\aservice\x12\x14\n" +
+	"\x05level\x18\x06 \x01(\tR\x05level\x12 \n" +
+	"\vpermissions\x18\a \x03(\tR\vpermissions\x12$\n" +
 	"\vquota_bytes\x18\b \x01(\x03H\x02R\n" +
 	"quotaBytes\x88\x01\x01\x12Q\n" +
 	"\n" +
@@ -1287,14 +1252,16 @@ const file_authorizer_v1_auth_proto_rawDesc = "" +
 	"attributes\x1a=\n" +
 	"\x0fAttributesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
-	"\x06_emailB\v\n" +
-	"\t_usernameB\x0e\n" +
-	"\f_quota_bytes\"\\\n" +
-	"\x13RevokeAccessRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x18\n" +
-	"\aservice\x18\x02 \x01(\tR\aservice\x12\x12\n" +
-	"\x04site\x18\x03 \x01(\tR\x04site\"b\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x05\n" +
+	"\x03_idB\b\n" +
+	"\x06_emailB\x0e\n" +
+	"\f_quota_bytes\"x\n" +
+	"\x13RevokeAccessRequest\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x12\n" +
+	"\x04site\x18\x02 \x01(\tR\x04site\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\tR\x06userId\x12\x18\n" +
+	"\aservice\x18\x04 \x01(\tR\aserviceB\x05\n" +
+	"\x03_id\"b\n" +
 	"\x13GrantAccessResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x121\n" +
 	"\x06access\x18\x02 \x01(\v2\x19.authorizer.v1.UserAccessR\x06access\"c\n" +
@@ -1302,8 +1269,8 @@ const file_authorizer_v1_auth_proto_rawDesc = "" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x121\n" +
 	"\x06access\x18\x02 \x01(\v2\x19.authorizer.v1.UserAccessR\x06access\"Q\n" +
 	"\x14GetUserAccessRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x17\n" +
-	"\x04site\x18\x02 \x01(\tH\x00R\x04site\x88\x01\x01B\a\n" +
+	"\x04site\x18\x01 \x01(\tH\x00R\x04site\x88\x01\x01\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userIdB\a\n" +
 	"\x05_site\"\x86\x01\n" +
 	"\x15ListUserAccessRequest\x12\x17\n" +
 	"\x04site\x18\x01 \x01(\tH\x00R\x04site\x88\x01\x01\x12\x19\n" +
@@ -1376,6 +1343,7 @@ func file_authorizer_v1_auth_proto_init() {
 	file_authorizer_v1_auth_proto_msgTypes[3].OneofWrappers = []any{}
 	file_authorizer_v1_auth_proto_msgTypes[4].OneofWrappers = []any{}
 	file_authorizer_v1_auth_proto_msgTypes[5].OneofWrappers = []any{}
+	file_authorizer_v1_auth_proto_msgTypes[6].OneofWrappers = []any{}
 	file_authorizer_v1_auth_proto_msgTypes[9].OneofWrappers = []any{}
 	file_authorizer_v1_auth_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
