@@ -6,7 +6,7 @@
   },
   "tags": [
     {
-      "name": "ImageService"
+      "name": "Images"
     }
   ],
   "consumes": [
@@ -50,7 +50,7 @@
           }
         ],
         "tags": [
-          "ImageService"
+          "Images"
         ],
         "security": [
           {
@@ -97,7 +97,7 @@
           }
         ],
         "tags": [
-          "ImageService"
+          "Images"
         ],
         "security": [
           {
@@ -163,7 +163,7 @@
           }
         ],
         "tags": [
-          "ImageService"
+          "Images"
         ],
         "security": [
           {
@@ -220,7 +220,7 @@
           }
         ],
         "tags": [
-          "ImageService"
+          "Images"
         ],
         "security": [
           {
@@ -271,7 +271,7 @@
           }
         ],
         "tags": [
-          "ImageService"
+          "Images"
         ],
         "security": [
           {
@@ -346,7 +346,7 @@
           }
         ],
         "tags": [
-          "ImageService"
+          "Images"
         ],
         "security": [
           {
@@ -399,7 +399,7 @@
           }
         ],
         "tags": [
-          "ImageService"
+          "Images"
         ],
         "security": [
           {

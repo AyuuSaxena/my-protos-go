@@ -13,8 +13,8 @@ import (
 	context "context"
 	reflect "reflect"
 
-	image "github.com/AyuuSaxena/my-protos-go/content/v1/image"
 	v1 "github.com/AyuuSaxena/protos-go/common/v1"
+	image "github.com/AyuuSaxena/protos-go/content/v1/image"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )

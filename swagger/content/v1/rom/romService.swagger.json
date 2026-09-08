@@ -6,7 +6,10 @@
   },
   "tags": [
     {
-      "name": "RomService"
+      "name": "Consoles"
+    },
+    {
+      "name": "Roms"
     }
   ],
   "consumes": [
@@ -49,7 +52,7 @@
           }
         ],
         "tags": [
-          "RomService"
+          "Consoles"
         ],
         "security": [
           {
@@ -95,7 +98,7 @@
           }
         ],
         "tags": [
-          "RomService"
+          "Roms"
         ],
         "security": [
           {
@@ -142,7 +145,7 @@
           }
         ],
         "tags": [
-          "RomService"
+          "Roms"
         ],
         "security": [
           {
@@ -208,7 +211,7 @@
           }
         ],
         "tags": [
-          "RomService"
+          "Roms"
         ],
         "security": [
           {
@@ -265,7 +268,7 @@
           }
         ],
         "tags": [
-          "RomService"
+          "Roms"
         ],
         "security": [
           {
@@ -316,7 +319,7 @@
           }
         ],
         "tags": [
-          "RomService"
+          "Roms"
         ],
         "security": [
           {
@@ -391,7 +394,7 @@
           }
         ],
         "tags": [
-          "RomService"
+          "Roms"
         ],
         "security": [
           {
@@ -444,7 +447,7 @@
           }
         ],
         "tags": [
-          "RomService"
+          "Roms"
         ],
         "security": [
           {

@@ -13,8 +13,8 @@ import (
 	context "context"
 	reflect "reflect"
 
-	rom "github.com/AyuuSaxena/my-protos-go/content/v1/rom"
 	v1 "github.com/AyuuSaxena/protos-go/common/v1"
+	rom "github.com/AyuuSaxena/protos-go/content/v1/rom"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 )

@@ -6,7 +6,16 @@
   },
   "tags": [
     {
-      "name": "AuthorizerService"
+      "name": "Access"
+    },
+    {
+      "name": "Permissions"
+    },
+    {
+      "name": "Roles"
+    },
+    {
+      "name": "Services"
     }
   ],
   "consumes": [
@@ -32,19 +41,23 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
           {
             "name": "site",
-            "description": "@gotags: `json:\"site\"`",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "limit",
-            "description": "@gotags: `json:\"limit,omitempty\"`",
             "in": "query",
             "required": false,
             "type": "string",
@@ -52,7 +65,6 @@
           },
           {
             "name": "offset",
-            "description": "@gotags: `json:\"offset,omitempty\"`",
             "in": "query",
             "required": false,
             "type": "string",
@@ -60,7 +72,6 @@
           },
           {
             "name": "status",
-            "description": "@gotags: `json:\"status,omitempty\"`",
             "in": "query",
             "required": false,
             "type": "string",
@@ -74,7 +85,15 @@
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Access"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -94,6 +113,12 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
@@ -107,7 +132,15 @@
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Access"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -127,6 +160,12 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
@@ -140,7 +179,15 @@
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Access"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -160,6 +207,12 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
@@ -173,7 +226,15 @@
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Access"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -193,6 +254,12 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
@@ -206,7 +273,15 @@
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Access"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -226,26 +301,38 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
           {
             "name": "userId",
-            "description": "@gotags: `json:\"userId\"`",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "site",
-            "description": "@gotags: `json:\"site\"`",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Access"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -265,26 +352,38 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
           {
             "name": "site",
-            "description": "@gotags: `json:\"site\"`",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "service",
-            "description": "@gotags: `json:\"service\"`",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Permissions"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       },
       "post": {
@@ -302,6 +401,12 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
@@ -315,7 +420,15 @@
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Permissions"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -335,19 +448,32 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
           {
             "name": "id",
-            "description": "@gotags: `json:\"id\"`",
             "in": "path",
             "required": true,
             "type": "string"
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Permissions"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       },
       "patch": {
@@ -365,12 +491,17 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
           {
             "name": "id",
-            "description": "@gotags: `json:\"id\"`",
             "in": "path",
             "required": true,
             "type": "string"
@@ -385,7 +516,15 @@
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Permissions"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -405,33 +544,44 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
           {
             "name": "name",
-            "description": "@gotags: `json:\"name\"`",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "site",
-            "description": "@gotags: `json:\"site\"`",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "service",
-            "description": "@gotags: `json:\"service\"`",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Permissions"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -451,26 +601,38 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
           {
             "name": "site",
-            "description": "@gotags: `json:\"site\"`",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "service",
-            "description": "@gotags: `json:\"service\"`",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Roles"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       },
       "post": {
@@ -488,6 +650,12 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
@@ -501,7 +669,15 @@
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Roles"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -521,19 +697,32 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
           {
             "name": "id",
-            "description": "@gotags: `json:\"id\"`",
             "in": "path",
             "required": true,
             "type": "string"
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Roles"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       },
       "patch": {
@@ -551,12 +740,17 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
           {
             "name": "id",
-            "description": "@gotags: `json:\"id\"`",
             "in": "path",
             "required": true,
             "type": "string"
@@ -571,7 +765,15 @@
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Roles"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -591,33 +793,44 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
           {
             "name": "name",
-            "description": "@gotags: `json:\"name\"`",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "site",
-            "description": "@gotags: `json:\"site\"`",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "service",
-            "description": "@gotags: `json:\"service\"`",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Roles"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -637,19 +850,23 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
           {
             "name": "site",
-            "description": "@gotags: `json:\"site\"`",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "limit",
-            "description": "@gotags: `json:\"limit,omitempty\"`",
             "in": "query",
             "required": false,
             "type": "string",
@@ -657,7 +874,6 @@
           },
           {
             "name": "offset",
-            "description": "@gotags: `json:\"offset,omitempty\"`",
             "in": "query",
             "required": false,
             "type": "string",
@@ -665,7 +881,15 @@
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Services"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       },
       "post": {
@@ -683,6 +907,12 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
@@ -696,7 +926,15 @@
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Services"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -716,19 +954,32 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
           {
             "name": "id",
-            "description": "@gotags: `json:\"id\"`",
             "in": "path",
             "required": true,
             "type": "string"
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Services"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       },
       "patch": {
@@ -746,12 +997,17 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
           {
             "name": "id",
-            "description": "@gotags: `json:\"id\"`",
             "in": "path",
             "required": true,
             "type": "string"
@@ -766,7 +1022,15 @@
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Services"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -786,26 +1050,38 @@
             "schema": {
               "$ref": "#/definitions/rpcStatus"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           }
         },
         "parameters": [
           {
             "name": "slug",
-            "description": "@gotags: `json:\"slug\"`",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "site",
-            "description": "@gotags: `json:\"site\"`",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "AuthorizerService"
+          "Services"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     }
@@ -815,12 +1091,10 @@
       "type": "object",
       "properties": {
         "description": {
-          "type": "string",
-          "title": "@gotags: `json:\"description,omitempty\"`"
+          "type": "string"
         },
         "enabled": {
-          "type": "boolean",
-          "title": "@gotags: `json:\"enabled,omitempty\"`"
+          "type": "boolean"
         }
       }
     },
@@ -828,19 +1102,16 @@
       "type": "object",
       "properties": {
         "description": {
-          "type": "string",
-          "title": "@gotags: `json:\"description,omitempty\"`"
+          "type": "string"
         },
         "permissions": {
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "title": "@gotags: `json:\"permissions,omitempty\"`"
+          }
         },
         "enabled": {
-          "type": "boolean",
-          "title": "@gotags: `json:\"enabled,omitempty\"`"
+          "type": "boolean"
         }
       }
     },
@@ -848,16 +1119,13 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string",
-          "title": "@gotags: `json:\"name,omitempty\"`"
+          "type": "string"
         },
         "description": {
-          "type": "string",
-          "title": "@gotags: `json:\"description,omitempty\"`"
+          "type": "string"
         },
         "enabled": {
-          "type": "boolean",
-          "title": "@gotags: `json:\"enabled,omitempty\"`"
+          "type": "boolean"
         }
       }
     },
@@ -893,12 +1161,10 @@
       "type": "object",
       "properties": {
         "service": {
-          "type": "string",
-          "title": "@gotags: `json:\"service,omitempty\"`"
+          "type": "string"
         },
         "permission": {
-          "type": "string",
-          "title": "@gotags: `json:\"permission,omitempty\"`"
+          "type": "string"
         }
       }
     },
@@ -906,16 +1172,13 @@
       "type": "object",
       "properties": {
         "service": {
-          "type": "string",
-          "title": "@gotags: `json:\"service,omitempty\"`"
+          "type": "string"
         },
         "allowed": {
-          "type": "boolean",
-          "title": "@gotags: `json:\"allowed\"`"
+          "type": "boolean"
         },
         "reason": {
-          "$ref": "#/definitions/v1AccessDecisionReason",
-          "title": "@gotags: `json:\"reason,omitempty\"`"
+          "$ref": "#/definitions/v1AccessDecisionReason"
         }
       }
     },
@@ -940,20 +1203,18 @@
       "type": "object",
       "properties": {
         "site": {
-          "type": "string",
-          "title": "@gotags: `json:\"site,omitempty\"`"
+          "type": "string"
         },
         "userId": {
-          "type": "string",
-          "title": "@gotags: `json:\"userId,omitempty\"`"
+          "type": "string"
         },
         "service": {
           "type": "string",
-          "title": "Service slug\n@gotags: `json:\"service,omitempty\"`"
+          "title": "Service slug"
         },
         "permission": {
           "type": "string",
-          "title": "Optional permission\n@gotags: `json:\"permission,omitempty\"`"
+          "title": "Optional permission"
         }
       }
     },
@@ -961,27 +1222,22 @@
       "type": "object",
       "properties": {
         "allowed": {
-          "type": "boolean",
-          "title": "@gotags: `json:\"allowed\"`"
+          "type": "boolean"
         },
         "status": {
-          "$ref": "#/definitions/v1UserAccessStatus",
-          "title": "@gotags: `json:\"status,omitempty\"`"
+          "$ref": "#/definitions/v1UserAccessStatus"
         },
         "reason": {
-          "$ref": "#/definitions/v1AccessDecisionReason",
-          "title": "@gotags: `json:\"reason,omitempty\"`"
+          "$ref": "#/definitions/v1AccessDecisionReason"
         },
         "message": {
-          "type": "string",
-          "title": "@gotags: `json:\"message,omitempty\"`"
+          "type": "string"
         },
         "roles": {
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "title": "@gotags: `json:\"roles,omitempty\"`"
+          }
         }
       }
     },
@@ -989,20 +1245,17 @@
       "type": "object",
       "properties": {
         "site": {
-          "type": "string",
-          "title": "@gotags: `json:\"site,omitempty\"`"
+          "type": "string"
         },
         "userId": {
-          "type": "string",
-          "title": "@gotags: `json:\"userId,omitempty\"`"
+          "type": "string"
         },
         "checks": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1AccessCheck"
-          },
-          "title": "@gotags: `json:\"checks,omitempty\"`"
+          }
         }
       }
     },
@@ -1014,8 +1267,7 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1AccessCheckResult"
-          },
-          "title": "@gotags: `json:\"results,omitempty\"`"
+          }
         }
       }
     },
@@ -1023,20 +1275,17 @@
       "type": "object",
       "properties": {
         "site": {
-          "type": "string",
-          "title": "@gotags: `json:\"site\"`"
+          "type": "string"
         },
         "service": {
-          "type": "string",
-          "title": "@gotags: `json:\"service\"`"
+          "type": "string"
         },
         "name": {
           "type": "string",
-          "title": "Example: content.read\n@gotags: `json:\"name\"`"
+          "title": "Example: content.read"
         },
         "description": {
-          "type": "string",
-          "title": "@gotags: `json:\"description,omitempty\"`"
+          "type": "string"
         }
       }
     },
@@ -1044,8 +1293,7 @@
       "type": "object",
       "properties": {
         "permission": {
-          "$ref": "#/definitions/v1Permission",
-          "title": "@gotags: `json:\"permission\"`"
+          "$ref": "#/definitions/v1Permission"
         }
       }
     },
@@ -1053,27 +1301,22 @@
       "type": "object",
       "properties": {
         "site": {
-          "type": "string",
-          "title": "@gotags: `json:\"site\"`"
+          "type": "string"
         },
         "service": {
-          "type": "string",
-          "title": "@gotags: `json:\"service\"`"
+          "type": "string"
         },
         "name": {
-          "type": "string",
-          "title": "@gotags: `json:\"name\"`"
+          "type": "string"
         },
         "description": {
-          "type": "string",
-          "title": "@gotags: `json:\"description,omitempty\"`"
+          "type": "string"
         },
         "permissions": {
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "title": "@gotags: `json:\"permissions,omitempty\"`"
+          }
         }
       }
     },
@@ -1081,8 +1324,7 @@
       "type": "object",
       "properties": {
         "role": {
-          "$ref": "#/definitions/v1Role",
-          "title": "@gotags: `json:\"role\"`"
+          "$ref": "#/definitions/v1Role"
         }
       }
     },
@@ -1090,20 +1332,16 @@
       "type": "object",
       "properties": {
         "site": {
-          "type": "string",
-          "title": "@gotags: `json:\"site\"`"
+          "type": "string"
         },
         "name": {
-          "type": "string",
-          "title": "@gotags: `json:\"name\"`"
+          "type": "string"
         },
         "slug": {
-          "type": "string",
-          "title": "@gotags: `json:\"slug\"`"
+          "type": "string"
         },
         "description": {
-          "type": "string",
-          "title": "@gotags: `json:\"description,omitempty\"`"
+          "type": "string"
         }
       }
     },
@@ -1111,8 +1349,7 @@
       "type": "object",
       "properties": {
         "service": {
-          "$ref": "#/definitions/v1Service",
-          "title": "@gotags: `json:\"service\"`"
+          "$ref": "#/definitions/v1Service"
         }
       }
     },
@@ -1120,8 +1357,7 @@
       "type": "object",
       "properties": {
         "message": {
-          "type": "string",
-          "title": "@gotags: `json:\"message\"`"
+          "type": "string"
         }
       }
     },
@@ -1129,8 +1365,7 @@
       "type": "object",
       "properties": {
         "message": {
-          "type": "string",
-          "title": "@gotags: `json:\"message\"`"
+          "type": "string"
         }
       }
     },
@@ -1138,8 +1373,7 @@
       "type": "object",
       "properties": {
         "message": {
-          "type": "string",
-          "title": "@gotags: `json:\"message\"`"
+          "type": "string"
         }
       }
     },
@@ -1147,8 +1381,7 @@
       "type": "object",
       "properties": {
         "permission": {
-          "$ref": "#/definitions/v1Permission",
-          "title": "@gotags: `json:\"permission\"`"
+          "$ref": "#/definitions/v1Permission"
         }
       }
     },
@@ -1156,8 +1389,7 @@
       "type": "object",
       "properties": {
         "role": {
-          "$ref": "#/definitions/v1Role",
-          "title": "@gotags: `json:\"role\"`"
+          "$ref": "#/definitions/v1Role"
         }
       }
     },
@@ -1165,8 +1397,7 @@
       "type": "object",
       "properties": {
         "service": {
-          "$ref": "#/definitions/v1Service",
-          "title": "@gotags: `json:\"service\"`"
+          "$ref": "#/definitions/v1Service"
         }
       }
     },
@@ -1174,27 +1405,22 @@
       "type": "object",
       "properties": {
         "site": {
-          "type": "string",
-          "title": "@gotags: `json:\"site\"`"
+          "type": "string"
         },
         "userId": {
-          "type": "string",
-          "title": "@gotags: `json:\"userId\"`"
+          "type": "string"
         },
         "service": {
-          "type": "string",
-          "title": "@gotags: `json:\"service\"`"
+          "type": "string"
         },
         "roles": {
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "title": "@gotags: `json:\"roles,omitempty\"`"
+          }
         },
         "expiresAt": {
-          "type": "string",
-          "title": "@gotags: `json:\"expiresAt,omitempty\"`"
+          "type": "string"
         }
       }
     },
@@ -1202,12 +1428,10 @@
       "type": "object",
       "properties": {
         "message": {
-          "type": "string",
-          "title": "@gotags: `json:\"message\"`"
+          "type": "string"
         },
         "access": {
-          "$ref": "#/definitions/v1UserAccess",
-          "title": "@gotags: `json:\"access\"`"
+          "$ref": "#/definitions/v1UserAccess"
         }
       }
     },
@@ -1219,8 +1443,7 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1Permission"
-          },
-          "title": "@gotags: `json:\"records\"`"
+          }
         }
       }
     },
@@ -1232,8 +1455,7 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1Role"
-          },
-          "title": "@gotags: `json:\"records\"`"
+          }
         }
       }
     },
@@ -1245,23 +1467,19 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1Service"
-          },
-          "title": "@gotags: `json:\"records\"`"
+          }
         },
         "count": {
           "type": "string",
-          "format": "int64",
-          "title": "@gotags: `json:\"count\"`"
+          "format": "int64"
         },
         "offset": {
           "type": "string",
-          "format": "int64",
-          "title": "@gotags: `json:\"offset\"`"
+          "format": "int64"
         },
         "limit": {
           "type": "string",
-          "format": "int64",
-          "title": "@gotags: `json:\"limit\"`"
+          "format": "int64"
         }
       }
     },
@@ -1273,23 +1491,19 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1UserAccess"
-          },
-          "title": "@gotags: `json:\"records\"`"
+          }
         },
         "count": {
           "type": "string",
-          "format": "int64",
-          "title": "@gotags: `json:\"count\"`"
+          "format": "int64"
         },
         "offset": {
           "type": "string",
-          "format": "int64",
-          "title": "@gotags: `json:\"offset\"`"
+          "format": "int64"
         },
         "limit": {
           "type": "string",
-          "format": "int64",
-          "title": "@gotags: `json:\"limit\"`"
+          "format": "int64"
         }
       }
     },
@@ -1298,43 +1512,37 @@
       "properties": {
         "mongoId": {
           "type": "string",
-          "title": "MongoDB internal record identifier (_id)\n@gotags: `json:\"mongoId,omitempty\" bson:\"_id,omitempty\"`"
+          "title": "MongoDB internal record identifier (_id)"
         },
         "id": {
-          "type": "string",
-          "title": "@gotags: `json:\"id,omitempty\" bson:\"id,omitempty\"`"
+          "type": "string"
         },
         "serviceId": {
-          "type": "string",
-          "title": "@gotags: `json:\"serviceId,omitempty\" bson:\"serviceId,omitempty\"`"
+          "type": "string"
         },
         "name": {
           "type": "string",
-          "title": "Example: content.read\n@gotags: `json:\"name,omitempty\" bson:\"name,omitempty\"`"
+          "title": "Example: content.read"
         },
         "resource": {
           "type": "string",
-          "title": "Example: video, image, folder\n@gotags: `json:\"resource,omitempty\" bson:\"resource,omitempty\"`"
+          "title": "Example: video, image, folder"
         },
         "action": {
           "type": "string",
-          "title": "Example: read, create, update, delete\n@gotags: `json:\"action,omitempty\" bson:\"action,omitempty\"`"
+          "title": "Example: read, create, update, delete"
         },
         "description": {
-          "type": "string",
-          "title": "@gotags: `json:\"description,omitempty\" bson:\"description,omitempty\"`"
+          "type": "string"
         },
         "enabled": {
-          "type": "boolean",
-          "title": "@gotags: `json:\"enabled\" bson:\"enabled\"`"
+          "type": "boolean"
         },
         "createdAt": {
-          "type": "string",
-          "title": "@gotags: `json:\"createdAt,omitempty\" bson:\"createdAt,omitempty\"`"
+          "type": "string"
         },
         "updatedAt": {
-          "type": "string",
-          "title": "@gotags: `json:\"updatedAt,omitempty\" bson:\"updatedAt,omitempty\"`"
+          "type": "string"
         }
       }
     },
@@ -1342,16 +1550,13 @@
       "type": "object",
       "properties": {
         "site": {
-          "type": "string",
-          "title": "@gotags: `json:\"site\"`"
+          "type": "string"
         },
         "userId": {
-          "type": "string",
-          "title": "@gotags: `json:\"userId\"`"
+          "type": "string"
         },
         "service": {
-          "type": "string",
-          "title": "@gotags: `json:\"service\"`"
+          "type": "string"
         }
       }
     },
@@ -1359,12 +1564,10 @@
       "type": "object",
       "properties": {
         "message": {
-          "type": "string",
-          "title": "@gotags: `json:\"message\"`"
+          "type": "string"
         },
         "access": {
-          "$ref": "#/definitions/v1UserAccess",
-          "title": "@gotags: `json:\"access\"`"
+          "$ref": "#/definitions/v1UserAccess"
         }
       }
     },
@@ -1373,42 +1576,35 @@
       "properties": {
         "mongoId": {
           "type": "string",
-          "title": "MongoDB internal record identifier (_id)\n@gotags: `json:\"mongoId,omitempty\" bson:\"_id,omitempty\"`"
+          "title": "MongoDB internal record identifier (_id)"
         },
         "id": {
-          "type": "string",
-          "title": "@gotags: `json:\"id,omitempty\" bson:\"id,omitempty\"`"
+          "type": "string"
         },
         "serviceId": {
-          "type": "string",
-          "title": "@gotags: `json:\"serviceId,omitempty\" bson:\"serviceId,omitempty\"`"
+          "type": "string"
         },
         "name": {
-          "type": "string",
-          "title": "@gotags: `json:\"name,omitempty\" bson:\"name,omitempty\"`"
+          "type": "string"
         },
         "description": {
-          "type": "string",
-          "title": "@gotags: `json:\"description,omitempty\" bson:\"description,omitempty\"`"
+          "type": "string"
         },
         "permissions": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "title": "Permission identifiers\n@gotags: `json:\"permissions,omitempty\" bson:\"permissions,omitempty\"`"
+          "title": "Permission identifiers"
         },
         "enabled": {
-          "type": "boolean",
-          "title": "@gotags: `json:\"enabled\" bson:\"enabled\"`"
+          "type": "boolean"
         },
         "createdAt": {
-          "type": "string",
-          "title": "@gotags: `json:\"createdAt,omitempty\" bson:\"createdAt,omitempty\"`"
+          "type": "string"
         },
         "updatedAt": {
-          "type": "string",
-          "title": "@gotags: `json:\"updatedAt,omitempty\" bson:\"updatedAt,omitempty\"`"
+          "type": "string"
         }
       }
     },
@@ -1417,39 +1613,32 @@
       "properties": {
         "mongoId": {
           "type": "string",
-          "title": "MongoDB internal record identifier (_id)\n@gotags: `json:\"mongoId,omitempty\" bson:\"_id,omitempty\"`"
+          "title": "MongoDB internal record identifier (_id)"
         },
         "id": {
-          "type": "string",
-          "title": "@gotags: `json:\"id,omitempty\" bson:\"id,omitempty\"`"
+          "type": "string"
         },
         "site": {
-          "type": "string",
-          "title": "@gotags: `json:\"site,omitempty\" bson:\"site,omitempty\"`"
+          "type": "string"
         },
         "name": {
-          "type": "string",
-          "title": "@gotags: `json:\"name,omitempty\" bson:\"name,omitempty\"`"
+          "type": "string"
         },
         "slug": {
           "type": "string",
-          "title": "Unique service identifier\n@gotags: `json:\"slug,omitempty\" bson:\"slug,omitempty\"`"
+          "title": "Unique service identifier"
         },
         "description": {
-          "type": "string",
-          "title": "@gotags: `json:\"description,omitempty\" bson:\"description,omitempty\"`"
+          "type": "string"
         },
         "enabled": {
-          "type": "boolean",
-          "title": "@gotags: `json:\"enabled\" bson:\"enabled\"`"
+          "type": "boolean"
         },
         "createdAt": {
-          "type": "string",
-          "title": "@gotags: `json:\"createdAt,omitempty\" bson:\"createdAt,omitempty\"`"
+          "type": "string"
         },
         "updatedAt": {
-          "type": "string",
-          "title": "@gotags: `json:\"updatedAt,omitempty\" bson:\"updatedAt,omitempty\"`"
+          "type": "string"
         }
       }
     },
@@ -1458,30 +1647,25 @@
       "properties": {
         "mongoId": {
           "type": "string",
-          "title": "MongoDB internal record identifier (_id)\n@gotags: `json:\"mongoId,omitempty\" bson:\"_id,omitempty\"`"
+          "title": "MongoDB internal record identifier (_id)"
         },
         "serviceId": {
-          "type": "string",
-          "title": "@gotags: `json:\"serviceId,omitempty\" bson:\"serviceId,omitempty\"`"
+          "type": "string"
         },
         "roles": {
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "title": "@gotags: `json:\"roles,omitempty\" bson:\"roles,omitempty\"`"
+          }
         },
         "enabled": {
-          "type": "boolean",
-          "title": "@gotags: `json:\"enabled\" bson:\"enabled\"`"
+          "type": "boolean"
         },
         "grantedAt": {
-          "type": "string",
-          "title": "@gotags: `json:\"grantedAt,omitempty\" bson:\"grantedAt,omitempty\"`"
+          "type": "string"
         },
         "expiresAt": {
-          "type": "string",
-          "title": "@gotags: `json:\"expiresAt,omitempty\" bson:\"expiresAt,omitempty\"`"
+          "type": "string"
         }
       }
     },
@@ -1489,8 +1673,7 @@
       "type": "object",
       "properties": {
         "permission": {
-          "$ref": "#/definitions/v1Permission",
-          "title": "@gotags: `json:\"permission\"`"
+          "$ref": "#/definitions/v1Permission"
         }
       }
     },
@@ -1498,8 +1681,7 @@
       "type": "object",
       "properties": {
         "role": {
-          "$ref": "#/definitions/v1Role",
-          "title": "@gotags: `json:\"role\"`"
+          "$ref": "#/definitions/v1Role"
         }
       }
     },
@@ -1507,8 +1689,7 @@
       "type": "object",
       "properties": {
         "service": {
-          "$ref": "#/definitions/v1Service",
-          "title": "@gotags: `json:\"service\"`"
+          "$ref": "#/definitions/v1Service"
         }
       }
     },
@@ -1517,39 +1698,32 @@
       "properties": {
         "mongoId": {
           "type": "string",
-          "title": "MongoDB internal record identifier (_id)\n@gotags: `json:\"mongoId,omitempty\" bson:\"_id,omitempty\"`"
+          "title": "MongoDB internal record identifier (_id)"
         },
         "id": {
-          "type": "string",
-          "title": "@gotags: `json:\"id,omitempty\" bson:\"id,omitempty\"`"
+          "type": "string"
         },
         "site": {
-          "type": "string",
-          "title": "@gotags: `json:\"site,omitempty\" bson:\"site,omitempty\"`"
+          "type": "string"
         },
         "userId": {
-          "type": "string",
-          "title": "@gotags: `json:\"userId,omitempty\" bson:\"userId,omitempty\"`"
+          "type": "string"
         },
         "status": {
-          "$ref": "#/definitions/v1UserAccessStatus",
-          "title": "@gotags: `json:\"status,omitempty\" bson:\"status,omitempty\"`"
+          "$ref": "#/definitions/v1UserAccessStatus"
         },
         "services": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1ServiceAccess"
-          },
-          "title": "@gotags: `json:\"services,omitempty\" bson:\"services,omitempty\"`"
+          }
         },
         "createdAt": {
-          "type": "string",
-          "title": "@gotags: `json:\"createdAt,omitempty\" bson:\"createdAt,omitempty\"`"
+          "type": "string"
         },
         "updatedAt": {
-          "type": "string",
-          "title": "@gotags: `json:\"updatedAt,omitempty\" bson:\"updatedAt,omitempty\"`"
+          "type": "string"
         }
       }
     },
@@ -1563,5 +1737,27 @@
       ],
       "default": "USER_ACCESS_STATUS_UNSPECIFIED"
     }
-  }
+  },
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "JWT Authorization header using the Bearer scheme. Enter: 'Bearer <token>'"
+    },
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "x-api-key",
+      "in": "header",
+      "description": "Admin or Identity API key (header: x-api-key)"
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    },
+    {
+      "ApiKeyAuth": []
+    }
+  ]
 }
