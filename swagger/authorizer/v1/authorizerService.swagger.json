@@ -1,0 +1,1567 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "authorizer/v1/authorizerService.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "AuthorizerService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/access": {
+      "get": {
+        "summary": "ListUserAccess lists access records with pagination.",
+        "operationId": "AuthorizerService_ListUserAccess",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListUserAccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "site",
+            "description": "@gotags: `json:\"site\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "@gotags: `json:\"limit,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "@gotags: `json:\"offset,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "status",
+            "description": "@gotags: `json:\"status,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "USER_ACCESS_STATUS_UNSPECIFIED",
+              "USER_ACCESS_STATUS_ACTIVE",
+              "USER_ACCESS_STATUS_SUSPENDED",
+              "USER_ACCESS_STATUS_REVOKED"
+            ],
+            "default": "USER_ACCESS_STATUS_UNSPECIFIED"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/access/check": {
+      "post": {
+        "summary": "CheckAccess verifies user permissions prior to login or action.",
+        "operationId": "AuthorizerService_CheckAccess",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CheckAccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CheckAccessRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/access/check/bulk": {
+      "post": {
+        "summary": "CheckBulkAccess verifies multiple permissions in a single request.",
+        "operationId": "AuthorizerService_CheckBulkAccess",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CheckBulkAccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CheckBulkAccessRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/access/grant": {
+      "post": {
+        "summary": "GrantAccess grants or updates permissions for a user on a service.",
+        "operationId": "AuthorizerService_GrantAccess",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GrantAccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GrantAccessRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/access/revoke": {
+      "post": {
+        "summary": "RevokeAccess revokes access to a service for a user.",
+        "operationId": "AuthorizerService_RevokeAccess",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RevokeAccessResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RevokeAccessRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/access/{userId}": {
+      "get": {
+        "summary": "GetUserAccess retrieves a user's full access profile.",
+        "operationId": "AuthorizerService_GetUserAccess",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UserAccess"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "@gotags: `json:\"userId\"`",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "site",
+            "description": "@gotags: `json:\"site\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/permissions": {
+      "get": {
+        "summary": "ListPermissions lists permissions for a service.",
+        "operationId": "AuthorizerService_ListPermissions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListPermissionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "site",
+            "description": "@gotags: `json:\"site\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "description": "@gotags: `json:\"service\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      },
+      "post": {
+        "summary": "CreatePermission creates a permission for a service.",
+        "operationId": "AuthorizerService_CreatePermission",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreatePermissionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreatePermissionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/permissions/{id}": {
+      "delete": {
+        "summary": "DeletePermission removes a permission.",
+        "operationId": "AuthorizerService_DeletePermission",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeletePermissionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "@gotags: `json:\"id\"`",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      },
+      "patch": {
+        "summary": "UpdatePermission updates a permission.",
+        "operationId": "AuthorizerService_UpdatePermission",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdatePermissionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "@gotags: `json:\"id\"`",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthorizerServiceUpdatePermissionBody"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/permissions/{name}": {
+      "get": {
+        "summary": "GetPermission retrieves a permission.",
+        "operationId": "AuthorizerService_GetPermission",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetPermissionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "@gotags: `json:\"name\"`",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "site",
+            "description": "@gotags: `json:\"site\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "description": "@gotags: `json:\"service\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/roles": {
+      "get": {
+        "summary": "ListRoles lists roles for a service.",
+        "operationId": "AuthorizerService_ListRoles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListRolesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "site",
+            "description": "@gotags: `json:\"site\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "description": "@gotags: `json:\"service\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      },
+      "post": {
+        "summary": "CreateRole creates a role for a service.",
+        "operationId": "AuthorizerService_CreateRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateRoleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateRoleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/roles/{id}": {
+      "delete": {
+        "summary": "DeleteRole removes a role.",
+        "operationId": "AuthorizerService_DeleteRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteRoleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "@gotags: `json:\"id\"`",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      },
+      "patch": {
+        "summary": "UpdateRole updates a role.",
+        "operationId": "AuthorizerService_UpdateRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateRoleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "@gotags: `json:\"id\"`",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthorizerServiceUpdateRoleBody"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/roles/{name}": {
+      "get": {
+        "summary": "GetRole retrieves a role.",
+        "operationId": "AuthorizerService_GetRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetRoleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "@gotags: `json:\"name\"`",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "site",
+            "description": "@gotags: `json:\"site\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "description": "@gotags: `json:\"service\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/services": {
+      "get": {
+        "summary": "ListServices lists registered services.",
+        "operationId": "AuthorizerService_ListServices",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListServicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "site",
+            "description": "@gotags: `json:\"site\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "@gotags: `json:\"limit,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "@gotags: `json:\"offset,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      },
+      "post": {
+        "summary": "CreateService registers a new service.",
+        "operationId": "AuthorizerService_CreateService",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateServiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateServiceRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/services/{id}": {
+      "delete": {
+        "summary": "DeleteService removes a registered service.",
+        "operationId": "AuthorizerService_DeleteService",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteServiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "@gotags: `json:\"id\"`",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      },
+      "patch": {
+        "summary": "UpdateService updates a registered service.",
+        "operationId": "AuthorizerService_UpdateService",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateServiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "@gotags: `json:\"id\"`",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthorizerServiceUpdateServiceBody"
+            }
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    },
+    "/api/v1/services/{slug}": {
+      "get": {
+        "summary": "GetService retrieves a service by slug.",
+        "operationId": "AuthorizerService_GetService",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetServiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "slug",
+            "description": "@gotags: `json:\"slug\"`",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "site",
+            "description": "@gotags: `json:\"site\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthorizerService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AuthorizerServiceUpdatePermissionBody": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "title": "@gotags: `json:\"description,omitempty\"`"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "@gotags: `json:\"enabled,omitempty\"`"
+        }
+      }
+    },
+    "AuthorizerServiceUpdateRoleBody": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "title": "@gotags: `json:\"description,omitempty\"`"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "@gotags: `json:\"permissions,omitempty\"`"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "@gotags: `json:\"enabled,omitempty\"`"
+        }
+      }
+    },
+    "AuthorizerServiceUpdateServiceBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "@gotags: `json:\"name,omitempty\"`"
+        },
+        "description": {
+          "type": "string",
+          "title": "@gotags: `json:\"description,omitempty\"`"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "@gotags: `json:\"enabled,omitempty\"`"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AccessCheck": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "type": "string",
+          "title": "@gotags: `json:\"service,omitempty\"`"
+        },
+        "permission": {
+          "type": "string",
+          "title": "@gotags: `json:\"permission,omitempty\"`"
+        }
+      }
+    },
+    "v1AccessCheckResult": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "type": "string",
+          "title": "@gotags: `json:\"service,omitempty\"`"
+        },
+        "allowed": {
+          "type": "boolean",
+          "title": "@gotags: `json:\"allowed\"`"
+        },
+        "reason": {
+          "$ref": "#/definitions/v1AccessDecisionReason",
+          "title": "@gotags: `json:\"reason,omitempty\"`"
+        }
+      }
+    },
+    "v1AccessDecisionReason": {
+      "type": "string",
+      "enum": [
+        "ACCESS_DECISION_REASON_UNSPECIFIED",
+        "ACCESS_DECISION_REASON_ALLOWED",
+        "ACCESS_DECISION_REASON_USER_NOT_FOUND",
+        "ACCESS_DECISION_REASON_USER_SUSPENDED",
+        "ACCESS_DECISION_REASON_USER_REVOKED",
+        "ACCESS_DECISION_REASON_SERVICE_NOT_FOUND",
+        "ACCESS_DECISION_REASON_SERVICE_DISABLED",
+        "ACCESS_DECISION_REASON_SERVICE_ACCESS_NOT_FOUND",
+        "ACCESS_DECISION_REASON_ACCESS_EXPIRED",
+        "ACCESS_DECISION_REASON_PERMISSION_DENIED",
+        "ACCESS_DECISION_REASON_INVALID_REQUEST"
+      ],
+      "default": "ACCESS_DECISION_REASON_UNSPECIFIED"
+    },
+    "v1CheckAccessRequest": {
+      "type": "object",
+      "properties": {
+        "site": {
+          "type": "string",
+          "title": "@gotags: `json:\"site,omitempty\"`"
+        },
+        "userId": {
+          "type": "string",
+          "title": "@gotags: `json:\"userId,omitempty\"`"
+        },
+        "service": {
+          "type": "string",
+          "title": "Service slug\n@gotags: `json:\"service,omitempty\"`"
+        },
+        "permission": {
+          "type": "string",
+          "title": "Optional permission\n@gotags: `json:\"permission,omitempty\"`"
+        }
+      }
+    },
+    "v1CheckAccessResponse": {
+      "type": "object",
+      "properties": {
+        "allowed": {
+          "type": "boolean",
+          "title": "@gotags: `json:\"allowed\"`"
+        },
+        "status": {
+          "$ref": "#/definitions/v1UserAccessStatus",
+          "title": "@gotags: `json:\"status,omitempty\"`"
+        },
+        "reason": {
+          "$ref": "#/definitions/v1AccessDecisionReason",
+          "title": "@gotags: `json:\"reason,omitempty\"`"
+        },
+        "message": {
+          "type": "string",
+          "title": "@gotags: `json:\"message,omitempty\"`"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "@gotags: `json:\"roles,omitempty\"`"
+        }
+      }
+    },
+    "v1CheckBulkAccessRequest": {
+      "type": "object",
+      "properties": {
+        "site": {
+          "type": "string",
+          "title": "@gotags: `json:\"site,omitempty\"`"
+        },
+        "userId": {
+          "type": "string",
+          "title": "@gotags: `json:\"userId,omitempty\"`"
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1AccessCheck"
+          },
+          "title": "@gotags: `json:\"checks,omitempty\"`"
+        }
+      }
+    },
+    "v1CheckBulkAccessResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1AccessCheckResult"
+          },
+          "title": "@gotags: `json:\"results,omitempty\"`"
+        }
+      }
+    },
+    "v1CreatePermissionRequest": {
+      "type": "object",
+      "properties": {
+        "site": {
+          "type": "string",
+          "title": "@gotags: `json:\"site\"`"
+        },
+        "service": {
+          "type": "string",
+          "title": "@gotags: `json:\"service\"`"
+        },
+        "name": {
+          "type": "string",
+          "title": "Example: content.read\n@gotags: `json:\"name\"`"
+        },
+        "description": {
+          "type": "string",
+          "title": "@gotags: `json:\"description,omitempty\"`"
+        }
+      }
+    },
+    "v1CreatePermissionResponse": {
+      "type": "object",
+      "properties": {
+        "permission": {
+          "$ref": "#/definitions/v1Permission",
+          "title": "@gotags: `json:\"permission\"`"
+        }
+      }
+    },
+    "v1CreateRoleRequest": {
+      "type": "object",
+      "properties": {
+        "site": {
+          "type": "string",
+          "title": "@gotags: `json:\"site\"`"
+        },
+        "service": {
+          "type": "string",
+          "title": "@gotags: `json:\"service\"`"
+        },
+        "name": {
+          "type": "string",
+          "title": "@gotags: `json:\"name\"`"
+        },
+        "description": {
+          "type": "string",
+          "title": "@gotags: `json:\"description,omitempty\"`"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "@gotags: `json:\"permissions,omitempty\"`"
+        }
+      }
+    },
+    "v1CreateRoleResponse": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/v1Role",
+          "title": "@gotags: `json:\"role\"`"
+        }
+      }
+    },
+    "v1CreateServiceRequest": {
+      "type": "object",
+      "properties": {
+        "site": {
+          "type": "string",
+          "title": "@gotags: `json:\"site\"`"
+        },
+        "name": {
+          "type": "string",
+          "title": "@gotags: `json:\"name\"`"
+        },
+        "slug": {
+          "type": "string",
+          "title": "@gotags: `json:\"slug\"`"
+        },
+        "description": {
+          "type": "string",
+          "title": "@gotags: `json:\"description,omitempty\"`"
+        }
+      }
+    },
+    "v1CreateServiceResponse": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "$ref": "#/definitions/v1Service",
+          "title": "@gotags: `json:\"service\"`"
+        }
+      }
+    },
+    "v1DeletePermissionResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "@gotags: `json:\"message\"`"
+        }
+      }
+    },
+    "v1DeleteRoleResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "@gotags: `json:\"message\"`"
+        }
+      }
+    },
+    "v1DeleteServiceResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "@gotags: `json:\"message\"`"
+        }
+      }
+    },
+    "v1GetPermissionResponse": {
+      "type": "object",
+      "properties": {
+        "permission": {
+          "$ref": "#/definitions/v1Permission",
+          "title": "@gotags: `json:\"permission\"`"
+        }
+      }
+    },
+    "v1GetRoleResponse": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/v1Role",
+          "title": "@gotags: `json:\"role\"`"
+        }
+      }
+    },
+    "v1GetServiceResponse": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "$ref": "#/definitions/v1Service",
+          "title": "@gotags: `json:\"service\"`"
+        }
+      }
+    },
+    "v1GrantAccessRequest": {
+      "type": "object",
+      "properties": {
+        "site": {
+          "type": "string",
+          "title": "@gotags: `json:\"site\"`"
+        },
+        "userId": {
+          "type": "string",
+          "title": "@gotags: `json:\"userId\"`"
+        },
+        "service": {
+          "type": "string",
+          "title": "@gotags: `json:\"service\"`"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "@gotags: `json:\"roles,omitempty\"`"
+        },
+        "expiresAt": {
+          "type": "string",
+          "title": "@gotags: `json:\"expiresAt,omitempty\"`"
+        }
+      }
+    },
+    "v1GrantAccessResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "@gotags: `json:\"message\"`"
+        },
+        "access": {
+          "$ref": "#/definitions/v1UserAccess",
+          "title": "@gotags: `json:\"access\"`"
+        }
+      }
+    },
+    "v1ListPermissionsResponse": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Permission"
+          },
+          "title": "@gotags: `json:\"records\"`"
+        }
+      }
+    },
+    "v1ListRolesResponse": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Role"
+          },
+          "title": "@gotags: `json:\"records\"`"
+        }
+      }
+    },
+    "v1ListServicesResponse": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Service"
+          },
+          "title": "@gotags: `json:\"records\"`"
+        },
+        "count": {
+          "type": "string",
+          "format": "int64",
+          "title": "@gotags: `json:\"count\"`"
+        },
+        "offset": {
+          "type": "string",
+          "format": "int64",
+          "title": "@gotags: `json:\"offset\"`"
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64",
+          "title": "@gotags: `json:\"limit\"`"
+        }
+      }
+    },
+    "v1ListUserAccessResponse": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1UserAccess"
+          },
+          "title": "@gotags: `json:\"records\"`"
+        },
+        "count": {
+          "type": "string",
+          "format": "int64",
+          "title": "@gotags: `json:\"count\"`"
+        },
+        "offset": {
+          "type": "string",
+          "format": "int64",
+          "title": "@gotags: `json:\"offset\"`"
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64",
+          "title": "@gotags: `json:\"limit\"`"
+        }
+      }
+    },
+    "v1Permission": {
+      "type": "object",
+      "properties": {
+        "mongoId": {
+          "type": "string",
+          "title": "MongoDB internal record identifier (_id)\n@gotags: `json:\"mongoId,omitempty\" bson:\"_id,omitempty\"`"
+        },
+        "id": {
+          "type": "string",
+          "title": "@gotags: `json:\"id,omitempty\" bson:\"id,omitempty\"`"
+        },
+        "serviceId": {
+          "type": "string",
+          "title": "@gotags: `json:\"serviceId,omitempty\" bson:\"serviceId,omitempty\"`"
+        },
+        "name": {
+          "type": "string",
+          "title": "Example: content.read\n@gotags: `json:\"name,omitempty\" bson:\"name,omitempty\"`"
+        },
+        "resource": {
+          "type": "string",
+          "title": "Example: video, image, folder\n@gotags: `json:\"resource,omitempty\" bson:\"resource,omitempty\"`"
+        },
+        "action": {
+          "type": "string",
+          "title": "Example: read, create, update, delete\n@gotags: `json:\"action,omitempty\" bson:\"action,omitempty\"`"
+        },
+        "description": {
+          "type": "string",
+          "title": "@gotags: `json:\"description,omitempty\" bson:\"description,omitempty\"`"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "@gotags: `json:\"enabled\" bson:\"enabled\"`"
+        },
+        "createdAt": {
+          "type": "string",
+          "title": "@gotags: `json:\"createdAt,omitempty\" bson:\"createdAt,omitempty\"`"
+        },
+        "updatedAt": {
+          "type": "string",
+          "title": "@gotags: `json:\"updatedAt,omitempty\" bson:\"updatedAt,omitempty\"`"
+        }
+      }
+    },
+    "v1RevokeAccessRequest": {
+      "type": "object",
+      "properties": {
+        "site": {
+          "type": "string",
+          "title": "@gotags: `json:\"site\"`"
+        },
+        "userId": {
+          "type": "string",
+          "title": "@gotags: `json:\"userId\"`"
+        },
+        "service": {
+          "type": "string",
+          "title": "@gotags: `json:\"service\"`"
+        }
+      }
+    },
+    "v1RevokeAccessResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "@gotags: `json:\"message\"`"
+        },
+        "access": {
+          "$ref": "#/definitions/v1UserAccess",
+          "title": "@gotags: `json:\"access\"`"
+        }
+      }
+    },
+    "v1Role": {
+      "type": "object",
+      "properties": {
+        "mongoId": {
+          "type": "string",
+          "title": "MongoDB internal record identifier (_id)\n@gotags: `json:\"mongoId,omitempty\" bson:\"_id,omitempty\"`"
+        },
+        "id": {
+          "type": "string",
+          "title": "@gotags: `json:\"id,omitempty\" bson:\"id,omitempty\"`"
+        },
+        "serviceId": {
+          "type": "string",
+          "title": "@gotags: `json:\"serviceId,omitempty\" bson:\"serviceId,omitempty\"`"
+        },
+        "name": {
+          "type": "string",
+          "title": "@gotags: `json:\"name,omitempty\" bson:\"name,omitempty\"`"
+        },
+        "description": {
+          "type": "string",
+          "title": "@gotags: `json:\"description,omitempty\" bson:\"description,omitempty\"`"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Permission identifiers\n@gotags: `json:\"permissions,omitempty\" bson:\"permissions,omitempty\"`"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "@gotags: `json:\"enabled\" bson:\"enabled\"`"
+        },
+        "createdAt": {
+          "type": "string",
+          "title": "@gotags: `json:\"createdAt,omitempty\" bson:\"createdAt,omitempty\"`"
+        },
+        "updatedAt": {
+          "type": "string",
+          "title": "@gotags: `json:\"updatedAt,omitempty\" bson:\"updatedAt,omitempty\"`"
+        }
+      }
+    },
+    "v1Service": {
+      "type": "object",
+      "properties": {
+        "mongoId": {
+          "type": "string",
+          "title": "MongoDB internal record identifier (_id)\n@gotags: `json:\"mongoId,omitempty\" bson:\"_id,omitempty\"`"
+        },
+        "id": {
+          "type": "string",
+          "title": "@gotags: `json:\"id,omitempty\" bson:\"id,omitempty\"`"
+        },
+        "site": {
+          "type": "string",
+          "title": "@gotags: `json:\"site,omitempty\" bson:\"site,omitempty\"`"
+        },
+        "name": {
+          "type": "string",
+          "title": "@gotags: `json:\"name,omitempty\" bson:\"name,omitempty\"`"
+        },
+        "slug": {
+          "type": "string",
+          "title": "Unique service identifier\n@gotags: `json:\"slug,omitempty\" bson:\"slug,omitempty\"`"
+        },
+        "description": {
+          "type": "string",
+          "title": "@gotags: `json:\"description,omitempty\" bson:\"description,omitempty\"`"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "@gotags: `json:\"enabled\" bson:\"enabled\"`"
+        },
+        "createdAt": {
+          "type": "string",
+          "title": "@gotags: `json:\"createdAt,omitempty\" bson:\"createdAt,omitempty\"`"
+        },
+        "updatedAt": {
+          "type": "string",
+          "title": "@gotags: `json:\"updatedAt,omitempty\" bson:\"updatedAt,omitempty\"`"
+        }
+      }
+    },
+    "v1ServiceAccess": {
+      "type": "object",
+      "properties": {
+        "mongoId": {
+          "type": "string",
+          "title": "MongoDB internal record identifier (_id)\n@gotags: `json:\"mongoId,omitempty\" bson:\"_id,omitempty\"`"
+        },
+        "serviceId": {
+          "type": "string",
+          "title": "@gotags: `json:\"serviceId,omitempty\" bson:\"serviceId,omitempty\"`"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "@gotags: `json:\"roles,omitempty\" bson:\"roles,omitempty\"`"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "@gotags: `json:\"enabled\" bson:\"enabled\"`"
+        },
+        "grantedAt": {
+          "type": "string",
+          "title": "@gotags: `json:\"grantedAt,omitempty\" bson:\"grantedAt,omitempty\"`"
+        },
+        "expiresAt": {
+          "type": "string",
+          "title": "@gotags: `json:\"expiresAt,omitempty\" bson:\"expiresAt,omitempty\"`"
+        }
+      }
+    },
+    "v1UpdatePermissionResponse": {
+      "type": "object",
+      "properties": {
+        "permission": {
+          "$ref": "#/definitions/v1Permission",
+          "title": "@gotags: `json:\"permission\"`"
+        }
+      }
+    },
+    "v1UpdateRoleResponse": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/v1Role",
+          "title": "@gotags: `json:\"role\"`"
+        }
+      }
+    },
+    "v1UpdateServiceResponse": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "$ref": "#/definitions/v1Service",
+          "title": "@gotags: `json:\"service\"`"
+        }
+      }
+    },
+    "v1UserAccess": {
+      "type": "object",
+      "properties": {
+        "mongoId": {
+          "type": "string",
+          "title": "MongoDB internal record identifier (_id)\n@gotags: `json:\"mongoId,omitempty\" bson:\"_id,omitempty\"`"
+        },
+        "id": {
+          "type": "string",
+          "title": "@gotags: `json:\"id,omitempty\" bson:\"id,omitempty\"`"
+        },
+        "site": {
+          "type": "string",
+          "title": "@gotags: `json:\"site,omitempty\" bson:\"site,omitempty\"`"
+        },
+        "userId": {
+          "type": "string",
+          "title": "@gotags: `json:\"userId,omitempty\" bson:\"userId,omitempty\"`"
+        },
+        "status": {
+          "$ref": "#/definitions/v1UserAccessStatus",
+          "title": "@gotags: `json:\"status,omitempty\" bson:\"status,omitempty\"`"
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ServiceAccess"
+          },
+          "title": "@gotags: `json:\"services,omitempty\" bson:\"services,omitempty\"`"
+        },
+        "createdAt": {
+          "type": "string",
+          "title": "@gotags: `json:\"createdAt,omitempty\" bson:\"createdAt,omitempty\"`"
+        },
+        "updatedAt": {
+          "type": "string",
+          "title": "@gotags: `json:\"updatedAt,omitempty\" bson:\"updatedAt,omitempty\"`"
+        }
+      }
+    },
+    "v1UserAccessStatus": {
+      "type": "string",
+      "enum": [
+        "USER_ACCESS_STATUS_UNSPECIFIED",
+        "USER_ACCESS_STATUS_ACTIVE",
+        "USER_ACCESS_STATUS_SUSPENDED",
+        "USER_ACCESS_STATUS_REVOKED"
+      ],
+      "default": "USER_ACCESS_STATUS_UNSPECIFIED"
+    }
+  }
+}

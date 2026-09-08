@@ -1,0 +1,1081 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "content/v1/rom/romService.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "RomService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/consoles": {
+      "get": {
+        "operationId": "RomService_ListConsoles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/romListConsolesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
+          }
+        },
+        "parameters": [
+          {
+            "name": "site",
+            "description": "Optional site identifier filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "RomService"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/roms/search": {
+      "post": {
+        "operationId": "RomService_RomSearch",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/romRomSearchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/romRomSearchRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RomService"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/roms/upload": {
+      "post": {
+        "operationId": "RomService_RomUpload",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/romRomUploadResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "(streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/romRomUploadRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RomService"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/roms/{id}": {
+      "get": {
+        "operationId": "RomService_RomGet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/romRomMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "ROM unique identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "description": "ROM name to match",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "slug",
+            "description": "ROM URL slug",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "site",
+            "description": "Optional site identifier",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "RomService"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "RomService_RomDelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/romRomDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique ROM identifier to delete",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hardDelete",
+            "description": "Hard delete flag (permanently remove file from storage and database)",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "site",
+            "description": "Optional site identifier",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "RomService"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "put": {
+        "operationId": "RomService_RomUpdate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/romRomMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique ROM identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RomServiceRomUpdateBody"
+            }
+          }
+        ],
+        "tags": [
+          "RomService"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/roms/{id}/download": {
+      "get": {
+        "operationId": "RomService_RomDownload",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/v1FileChunk"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of v1FileChunk"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "ROM unique identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "description": "ROM name to match",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "slug",
+            "description": "ROM URL slug",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "site",
+            "description": "Optional site identifier",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "RomService"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/roms/{id}/share": {
+      "post": {
+        "operationId": "RomService_RomShare",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/romRomShareResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique ROM identifier to share",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RomServiceRomShareBody"
+            }
+          }
+        ],
+        "tags": [
+          "RomService"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "RomServiceRomShareBody": {
+      "type": "object",
+      "properties": {
+        "expiresInSec": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Pre-signed download URL expiration duration in seconds"
+        },
+        "site": {
+          "type": "string",
+          "title": "Optional site identifier"
+        }
+      }
+    },
+    "RomServiceRomUpdateBody": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "Updated ROM title"
+        },
+        "description": {
+          "type": "string",
+          "title": "Updated ROM description"
+        },
+        "consoleId": {
+          "type": "string",
+          "title": "Updated console ID"
+        },
+        "developer": {
+          "type": "string",
+          "title": "Updated developer"
+        },
+        "publisher": {
+          "type": "string",
+          "title": "Updated publisher"
+        },
+        "releaseYear": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Updated release year"
+        },
+        "genre": {
+          "type": "string",
+          "title": "Updated genre"
+        },
+        "region": {
+          "type": "string",
+          "title": "Updated region"
+        },
+        "players": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Updated player count"
+        },
+        "rating": {
+          "type": "string",
+          "title": "Updated content rating"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Updated tags"
+        },
+        "isPublic": {
+          "type": "boolean",
+          "title": "Updated public visibility flag"
+        },
+        "status": {
+          "type": "string",
+          "title": "Updated lifecycle status"
+        },
+        "site": {
+          "type": "string",
+          "title": "Updated site identifier"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "romConsoleInfo": {
+      "type": "object",
+      "properties": {
+        "mongoId": {
+          "type": "string",
+          "title": "MongoDB internal record identifier (_id)"
+        },
+        "id": {
+          "type": "string",
+          "title": "Unique console identifier (UUID)"
+        },
+        "site": {
+          "type": "string",
+          "title": "Dynamic site/tenant key (e.g. retrogames)"
+        },
+        "key": {
+          "type": "string",
+          "title": "Console system key (e.g. gba, snes, nds, psx)"
+        },
+        "fullName": {
+          "type": "string",
+          "title": "Full display name of the console"
+        },
+        "slug": {
+          "type": "string",
+          "title": "URL-friendly slug"
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Supported file extensions (without leading dot)"
+        },
+        "manufacturer": {
+          "type": "string",
+          "title": "Hardware manufacturer (e.g. Nintendo, Sony, Sega)"
+        },
+        "releaseYear": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Release year"
+        },
+        "iconUrl": {
+          "type": "string",
+          "title": "Console icon or logo URL"
+        },
+        "contentCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "Total number of ROMs linked to this console"
+        },
+        "createdAt": {
+          "type": "string",
+          "title": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "title": "Last update timestamp"
+        }
+      },
+      "description": "ConsoleInfo represents a gaming console system stored in the database taxonomy."
+    },
+    "romFileInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "File name"
+        },
+        "mimeType": {
+          "type": "string",
+          "title": "MIME type"
+        },
+        "sizeBytes": {
+          "type": "string",
+          "format": "int64",
+          "title": "File size in bytes"
+        },
+        "title": {
+          "type": "string",
+          "title": "ROM title"
+        },
+        "description": {
+          "type": "string",
+          "title": "ROM description"
+        },
+        "consoleId": {
+          "type": "string",
+          "title": "Console system database ID or key"
+        },
+        "developer": {
+          "type": "string",
+          "title": "Game developer"
+        },
+        "publisher": {
+          "type": "string",
+          "title": "Game publisher"
+        },
+        "releaseYear": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Release year"
+        },
+        "genre": {
+          "type": "string",
+          "title": "Game genre"
+        },
+        "region": {
+          "type": "string",
+          "title": "Release region"
+        },
+        "players": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Supported players"
+        },
+        "rating": {
+          "type": "string",
+          "title": "Content rating"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Category tags"
+        },
+        "isPublic": {
+          "type": "boolean",
+          "title": "Public visibility flag"
+        },
+        "customKey": {
+          "type": "string",
+          "title": "Custom storage key if specified"
+        },
+        "uploaderId": {
+          "type": "string",
+          "title": "Uploader user ID"
+        },
+        "uploaderUsername": {
+          "type": "string",
+          "title": "Uploader username"
+        },
+        "site": {
+          "type": "string",
+          "title": "Dynamic site/tenant key (e.g. retrogames)"
+        }
+      }
+    },
+    "romListConsolesResponse": {
+      "type": "object",
+      "properties": {
+        "consoles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/romConsoleInfo"
+          },
+          "title": "List of supported console systems"
+        }
+      }
+    },
+    "romRomDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "Operation success flag"
+        },
+        "message": {
+          "type": "string",
+          "title": "Status message"
+        }
+      }
+    },
+    "romRomMetadata": {
+      "type": "object",
+      "properties": {
+        "mongoId": {
+          "type": "string",
+          "title": "MongoDB internal record identifier (_id)"
+        },
+        "id": {
+          "type": "string",
+          "title": "Unique ROM identifier (UUID)"
+        },
+        "site": {
+          "type": "string",
+          "title": "Dynamic site/tenant key (e.g. retrogames)"
+        },
+        "title": {
+          "type": "string",
+          "title": "Display title of the ROM"
+        },
+        "slug": {
+          "type": "string",
+          "title": "URL-friendly slug"
+        },
+        "description": {
+          "type": "string",
+          "title": "Detailed description"
+        },
+        "consoleId": {
+          "type": "string",
+          "title": "Relational Foreign Keys"
+        },
+        "fileId": {
+          "type": "string"
+        },
+        "developer": {
+          "type": "string",
+          "title": "Domain Metadata"
+        },
+        "publisher": {
+          "type": "string"
+        },
+        "releaseYear": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "genre": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "players": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rating": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isPublic": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "title": "Lifecycle status (active, archived, draft)"
+        },
+        "uploaderId": {
+          "type": "string"
+        },
+        "uploaderUsername": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "consoleMetadata": {
+          "$ref": "#/definitions/romConsoleInfo",
+          "title": "Enriched Relations (populated on read, not persisted in DB)\nFull console details resolved from consoleId"
+        },
+        "fileMetadata": {
+          "$ref": "#/definitions/v1FileMetadata",
+          "title": "Full file details resolved from fileId"
+        }
+      },
+      "description": "RomMetadata represents the core normalized ROM entity with relational IDs."
+    },
+    "romRomQuery": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Filter by ROM name (partial or exact)"
+        },
+        "consoleId": {
+          "type": "string",
+          "title": "Filter by console database ID"
+        },
+        "consoleKey": {
+          "type": "string",
+          "title": "Filter by console key (e.g. gba, snes, nds, psx)"
+        },
+        "genre": {
+          "type": "string",
+          "title": "Filter by genre"
+        },
+        "region": {
+          "type": "string",
+          "title": "Filter by release region (e.g. USA, EUR, JPN)"
+        },
+        "status": {
+          "type": "string",
+          "title": "Filter by content status (e.g. active, archived)"
+        },
+        "isPublic": {
+          "type": "boolean",
+          "title": "Filter by public visibility"
+        },
+        "tag": {
+          "type": "string",
+          "title": "Filter by tag"
+        },
+        "uploaderId": {
+          "type": "string",
+          "title": "Filter by uploader user ID"
+        },
+        "site": {
+          "type": "string",
+          "title": "Filter by site key (e.g. retrogames)"
+        }
+      }
+    },
+    "romRomSearchRequest": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Maximum number of items to return (default 20, max 100)"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Number of items to skip for pagination (default 0)"
+        },
+        "keyword": {
+          "type": "string",
+          "title": "Keyword search across title, description, and tags"
+        },
+        "sortby": {
+          "type": "string",
+          "title": "Field name to sort by (e.g. title, createdAt, releaseYear)"
+        },
+        "sortOrder": {
+          "type": "string",
+          "title": "Sort direction order (asc or desc, default desc)"
+        },
+        "query": {
+          "$ref": "#/definitions/romRomQuery",
+          "title": "Nested query filters for ROM properties"
+        },
+        "site": {
+          "type": "string",
+          "title": "Optional site identifier"
+        }
+      }
+    },
+    "romRomSearchResponse": {
+      "type": "object",
+      "properties": {
+        "roms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/romRomMetadata"
+          },
+          "title": "List of ROM metadata items for the current page"
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "Total count of items matching the query"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Page size limit applied"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Offset applied"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Calculated total number of pages"
+        }
+      }
+    },
+    "romRomShareResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "ROM identifier"
+        },
+        "downloadUrl": {
+          "type": "string",
+          "title": "Generated pre-signed download URL"
+        },
+        "expiresAt": {
+          "type": "string",
+          "title": "ISO-8601 expiration timestamp"
+        }
+      }
+    },
+    "romRomUploadRequest": {
+      "type": "object",
+      "properties": {
+        "fileInfo": {
+          "$ref": "#/definitions/romFileInfo",
+          "title": "ROM metadata for initial chunk"
+        },
+        "chunkData": {
+          "type": "string",
+          "format": "byte",
+          "title": "Binary chunk data"
+        }
+      }
+    },
+    "romRomUploadResponse": {
+      "type": "object",
+      "properties": {
+        "rom": {
+          "$ref": "#/definitions/romRomMetadata",
+          "title": "Uploaded ROM metadata"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1FileChunk": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "byte",
+          "title": "Binary chunk data"
+        }
+      },
+      "description": "FileChunk represents binary chunk data for file streaming."
+    },
+    "v1FileMetadata": {
+      "type": "object",
+      "properties": {
+        "mongoId": {
+          "type": "string",
+          "title": "MongoDB internal record identifier (_id)"
+        },
+        "id": {
+          "type": "string",
+          "title": "UUID file identifier in storage database"
+        },
+        "site": {
+          "type": "string",
+          "title": "Dynamic site/tenant key (e.g. retrogames)"
+        },
+        "bucketId": {
+          "type": "string",
+          "title": "Bucket name containing this file"
+        },
+        "directory": {
+          "type": "string",
+          "title": "Directory path within the bucket"
+        },
+        "name": {
+          "type": "string",
+          "title": "File base name"
+        },
+        "fileExtension": {
+          "type": "string",
+          "title": "File extension without leading dot"
+        },
+        "fullPath": {
+          "type": "string",
+          "title": "Full storage path (directory/name)"
+        },
+        "contentType": {
+          "type": "string",
+          "title": "MIME content type"
+        },
+        "sizeBytes": {
+          "type": "string",
+          "format": "int64",
+          "title": "File size in bytes"
+        },
+        "etag": {
+          "type": "string",
+          "title": "ETag / checksum of the file"
+        },
+        "createdAt": {
+          "type": "string",
+          "title": "ISO-8601 creation timestamp"
+        }
+      },
+      "description": "FileMetadata describes a storage file record returned from the S3-Free database."
+    }
+  },
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "JWT Authorization header using the Bearer scheme. Enter: 'Bearer <token>'"
+    },
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "x-api-key",
+      "in": "header",
+      "description": "Admin or Identity API key (header: x-api-key)"
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    },
+    {
+      "ApiKeyAuth": []
+    }
+  ]
+}

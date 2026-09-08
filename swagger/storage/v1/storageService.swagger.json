@@ -1,0 +1,1110 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "storage/v1/storageService.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "StorageService",
+      "description": "StorageService exposes gRPC and REST-transcoded APIs for bucket and object storage management."
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/storage/buckets": {
+      "get": {
+        "summary": "ListBuckets lists all buckets for the authenticated user.",
+        "operationId": "StorageService_ListBuckets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListBucketsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pagination.limit",
+            "description": "Maximum number of items to return (default 20, max 100)\n@gotags: `form:\"limit\" json:\"limit,omitempty\" bson:\"limit,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pagination.offset",
+            "description": "Number of items to skip for pagination (default 0)\n@gotags: `form:\"offset\" json:\"offset,omitempty\" bson:\"offset,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pagination.keyword",
+            "description": "Search keyword across text fields\n@gotags: `form:\"keyword\" json:\"keyword,omitempty\" bson:\"keyword,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pagination.sortby",
+            "description": "Field name to sort by (e.g. title, createdAt)\n@gotags: `form:\"sortby\" json:\"sortby,omitempty\" bson:\"sortby,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pagination.sortOrder",
+            "description": "Sort direction order (asc or desc, default desc)\n@gotags: `form:\"sortOrder\" json:\"sortOrder,omitempty\" bson:\"sortOrder,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      },
+      "post": {
+        "summary": "CreateBucket creates a new storage bucket.",
+        "operationId": "StorageService_CreateBucket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateBucketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "CreateBucketRequest is the payload to create a new storage bucket.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateBucketRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
+    "/api/v1/storage/buckets/{bucketId}/files": {
+      "get": {
+        "summary": "ListFiles lists files in a bucket with optional directory filtering and search.",
+        "operationId": "StorageService_ListFiles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListFilesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "bucketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "directory",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pagination.limit",
+            "description": "Maximum number of items to return (default 20, max 100)\n@gotags: `form:\"limit\" json:\"limit,omitempty\" bson:\"limit,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pagination.offset",
+            "description": "Number of items to skip for pagination (default 0)\n@gotags: `form:\"offset\" json:\"offset,omitempty\" bson:\"offset,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pagination.keyword",
+            "description": "Search keyword across text fields\n@gotags: `form:\"keyword\" json:\"keyword,omitempty\" bson:\"keyword,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pagination.sortby",
+            "description": "Field name to sort by (e.g. title, createdAt)\n@gotags: `form:\"sortby\" json:\"sortby,omitempty\" bson:\"sortby,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pagination.sortOrder",
+            "description": "Sort direction order (asc or desc, default desc)\n@gotags: `form:\"sortOrder\" json:\"sortOrder,omitempty\" bson:\"sortOrder,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
+    "/api/v1/storage/buckets/{bucketId}/files/{fileId}": {
+      "get": {
+        "summary": "GetFile retrieves metadata for a single stored file.",
+        "operationId": "StorageService_GetFile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1FileMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "bucketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      },
+      "delete": {
+        "summary": "DeleteFile removes a file from a bucket.",
+        "operationId": "StorageService_DeleteFile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteFileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "bucketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
+    "/api/v1/storage/buckets/{bucketId}/files/{fileId}/download": {
+      "get": {
+        "summary": "DownloadFile streams file chunks from storage.",
+        "operationId": "StorageService_DownloadFile",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/v1FileChunk"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of v1FileChunk"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "bucketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
+    "/api/v1/storage/buckets/{id}": {
+      "get": {
+        "summary": "GetBucket retrieves bucket metadata.",
+        "operationId": "StorageService_GetBucket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1BucketMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      },
+      "delete": {
+        "summary": "DeleteBucket deletes a bucket and its attached metadata.",
+        "operationId": "StorageService_DeleteBucket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteBucketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
+    "/storage.v1.StorageService/CreateBucket": {
+      "post": {
+        "summary": "CreateBucket creates a new storage bucket.",
+        "operationId": "StorageService_CreateBucket2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateBucketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "CreateBucketRequest is the payload to create a new storage bucket.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateBucketRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
+    "/storage.v1.StorageService/DeleteBucket": {
+      "delete": {
+        "summary": "DeleteBucket deletes a bucket and its attached metadata.",
+        "operationId": "StorageService_DeleteBucket2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteBucketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
+    "/storage.v1.StorageService/DeleteFile": {
+      "delete": {
+        "summary": "DeleteFile removes a file from a bucket.",
+        "operationId": "StorageService_DeleteFile2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteFileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "bucketId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fileId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
+    "/storage.v1.StorageService/DownloadFile": {
+      "get": {
+        "summary": "DownloadFile streams file chunks from storage.",
+        "operationId": "StorageService_DownloadFile2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/v1FileChunk"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of v1FileChunk"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "bucketId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fileId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
+    "/storage.v1.StorageService/GetBucket": {
+      "get": {
+        "summary": "GetBucket retrieves bucket metadata.",
+        "operationId": "StorageService_GetBucket2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1BucketMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
+    "/storage.v1.StorageService/GetFile": {
+      "get": {
+        "summary": "GetFile retrieves metadata for a single stored file.",
+        "operationId": "StorageService_GetFile2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1FileMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "bucketId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fileId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
+    "/storage.v1.StorageService/ListBuckets": {
+      "get": {
+        "summary": "ListBuckets lists all buckets for the authenticated user.",
+        "operationId": "StorageService_ListBuckets2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListBucketsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pagination.limit",
+            "description": "Maximum number of items to return (default 20, max 100)\n@gotags: `form:\"limit\" json:\"limit,omitempty\" bson:\"limit,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pagination.offset",
+            "description": "Number of items to skip for pagination (default 0)\n@gotags: `form:\"offset\" json:\"offset,omitempty\" bson:\"offset,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pagination.keyword",
+            "description": "Search keyword across text fields\n@gotags: `form:\"keyword\" json:\"keyword,omitempty\" bson:\"keyword,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pagination.sortby",
+            "description": "Field name to sort by (e.g. title, createdAt)\n@gotags: `form:\"sortby\" json:\"sortby,omitempty\" bson:\"sortby,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pagination.sortOrder",
+            "description": "Sort direction order (asc or desc, default desc)\n@gotags: `form:\"sortOrder\" json:\"sortOrder,omitempty\" bson:\"sortOrder,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
+    "/storage.v1.StorageService/ListFiles": {
+      "get": {
+        "summary": "ListFiles lists files in a bucket with optional directory filtering and search.",
+        "operationId": "StorageService_ListFiles2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListFilesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "bucketId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "directory",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pagination.limit",
+            "description": "Maximum number of items to return (default 20, max 100)\n@gotags: `form:\"limit\" json:\"limit,omitempty\" bson:\"limit,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pagination.offset",
+            "description": "Number of items to skip for pagination (default 0)\n@gotags: `form:\"offset\" json:\"offset,omitempty\" bson:\"offset,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pagination.keyword",
+            "description": "Search keyword across text fields\n@gotags: `form:\"keyword\" json:\"keyword,omitempty\" bson:\"keyword,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pagination.sortby",
+            "description": "Field name to sort by (e.g. title, createdAt)\n@gotags: `form:\"sortby\" json:\"sortby,omitempty\" bson:\"sortby,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pagination.sortOrder",
+            "description": "Sort direction order (asc or desc, default desc)\n@gotags: `form:\"sortOrder\" json:\"sortOrder,omitempty\" bson:\"sortOrder,omitempty\"`",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    },
+    "/storage.v1.StorageService/UploadFile": {
+      "post": {
+        "summary": "UploadFile streams file chunks to store in a bucket.",
+        "operationId": "StorageService_UploadFile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UploadFileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "UploadFileRequest represents a client-streaming message for file uploads. (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UploadFileRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StorageService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1BucketMetadata": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Unique bucket identifier\n@gotags: `json:\"id,omitempty\" bson:\"id,omitempty\"`"
+        },
+        "key": {
+          "type": "string",
+          "title": "Bucket unique name/key\n@gotags: `json:\"key,omitempty\" bson:\"key,omitempty\"`"
+        },
+        "userId": {
+          "type": "string",
+          "title": "Owner user identifier\n@gotags: `json:\"userId,omitempty\" bson:\"userId,omitempty\"`"
+        },
+        "accessKey": {
+          "type": "string",
+          "title": "Access key for S3 compatibility\n@gotags: `json:\"accessKey,omitempty\" bson:\"accessKey,omitempty\"`"
+        },
+        "createdAt": {
+          "type": "string",
+          "title": "Creation timestamp in RFC3339 format\n@gotags: `json:\"createdAt,omitempty\" bson:\"createdAt,omitempty\"`"
+        },
+        "sourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Source storage IDs attached to this bucket\n@gotags: `json:\"sourceIds,omitempty\" bson:\"sourceIds,omitempty\"`"
+        },
+        "distributionStrategy": {
+          "type": "string",
+          "title": "Distribution strategy (e.g. round_robin, weighted)\n@gotags: `json:\"distributionStrategy,omitempty\" bson:\"distributionStrategy,omitempty\"`"
+        },
+        "sourceWeights": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": "Weight map for weighted distribution strategy\n@gotags: `json:\"sourceWeights,omitempty\" bson:\"sourceWeights,omitempty\"`"
+        }
+      },
+      "description": "BucketMetadata represents a storage bucket entity."
+    },
+    "v1CommonListRequest": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Maximum number of items to return (default 20, max 100)\n@gotags: `form:\"limit\" json:\"limit,omitempty\" bson:\"limit,omitempty\"`"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Number of items to skip for pagination (default 0)\n@gotags: `form:\"offset\" json:\"offset,omitempty\" bson:\"offset,omitempty\"`"
+        },
+        "keyword": {
+          "type": "string",
+          "title": "Search keyword across text fields\n@gotags: `form:\"keyword\" json:\"keyword,omitempty\" bson:\"keyword,omitempty\"`"
+        },
+        "sortby": {
+          "type": "string",
+          "title": "Field name to sort by (e.g. title, createdAt)\n@gotags: `form:\"sortby\" json:\"sortby,omitempty\" bson:\"sortby,omitempty\"`"
+        },
+        "sortOrder": {
+          "type": "string",
+          "title": "Sort direction order (asc or desc, default desc)\n@gotags: `form:\"sortOrder\" json:\"sortOrder,omitempty\" bson:\"sortOrder,omitempty\"`"
+        }
+      }
+    },
+    "v1CommonListResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "string",
+          "format": "int64",
+          "title": "Total count of matching items\n@gotags: `json:\"totalCount,omitempty\" bson:\"totalCount,omitempty\"`"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Page size limit applied"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Offset applied"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Total calculated number of pages\n@gotags: `json:\"totalPages,omitempty\" bson:\"totalPages,omitempty\"`"
+        }
+      },
+      "description": "CommonListResponse represents standardized pagination metadata across all services."
+    },
+    "v1CreateBucketRequest": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "sourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "riskAcknowledged": {
+          "type": "boolean"
+        },
+        "distributionStrategy": {
+          "type": "string"
+        },
+        "sourceWeights": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "description": "CreateBucketRequest is the payload to create a new storage bucket."
+    },
+    "v1CreateBucketResponse": {
+      "type": "object",
+      "properties": {
+        "bucket": {
+          "$ref": "#/definitions/v1BucketMetadata"
+        },
+        "accessSecret": {
+          "type": "string"
+        }
+      },
+      "description": "CreateBucketResponse returns the created bucket metadata."
+    },
+    "v1DeleteBucketResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "description": "DeleteBucketResponse confirms bucket deletion."
+    },
+    "v1DeleteFileResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "description": "DeleteFileResponse confirms file deletion."
+    },
+    "v1FileChunk": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "byte",
+          "title": "Binary payload"
+        },
+        "chunkNumber": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Current chunk index (0-based)"
+        },
+        "totalChunks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Total expected chunks if known"
+        }
+      },
+      "description": "FileChunk represents a chunk of binary file content for streaming upload/download."
+    },
+    "v1FileMetadata": {
+      "type": "object",
+      "properties": {
+        "mongoId": {
+          "type": "string",
+          "title": "MongoDB internal record identifier\n@gotags: `json:\"mongoId,omitempty\" bson:\"_id,omitempty\"`"
+        },
+        "id": {
+          "type": "string",
+          "title": "Unique file identifier (UUID)\n@gotags: `json:\"id,omitempty\" bson:\"id,omitempty\"`"
+        },
+        "bucketId": {
+          "type": "string",
+          "title": "Bucket identifier\n@gotags: `json:\"bucketId,omitempty\" bson:\"bucketId,omitempty\"`"
+        },
+        "directory": {
+          "type": "string",
+          "title": "Directory path within the bucket\n@gotags: `json:\"directory,omitempty\" bson:\"directory,omitempty\"`"
+        },
+        "name": {
+          "type": "string",
+          "title": "File name\n@gotags: `json:\"name,omitempty\" bson:\"name,omitempty\"`"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64",
+          "title": "File size in bytes\n@gotags: `json:\"size,omitempty\" bson:\"size,omitempty\"`"
+        },
+        "contentType": {
+          "type": "string",
+          "title": "MIME content type\n@gotags: `json:\"contentType,omitempty\" bson:\"contentType,omitempty\"`"
+        },
+        "etag": {
+          "type": "string",
+          "title": "ETag / Checksum\n@gotags: `json:\"etag,omitempty\" bson:\"etag,omitempty\"`"
+        },
+        "userMetadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Custom user metadata\n@gotags: `json:\"userMetadata,omitempty\" bson:\"userMetadata,omitempty\"`"
+        },
+        "createdAt": {
+          "type": "string",
+          "title": "Creation timestamp in RFC3339 format\n@gotags: `json:\"createdAt,omitempty\" bson:\"createdAt,omitempty\"`"
+        }
+      },
+      "description": "FileMetadata represents a stored file/object record."
+    },
+    "v1ListBucketsResponse": {
+      "type": "object",
+      "properties": {
+        "buckets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1BucketMetadata"
+          }
+        },
+        "pagination": {
+          "$ref": "#/definitions/v1CommonListResponse"
+        }
+      },
+      "description": "ListBucketsResponse returns a list of bucket metadata."
+    },
+    "v1ListFilesResponse": {
+      "type": "object",
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1FileMetadata"
+          }
+        },
+        "pagination": {
+          "$ref": "#/definitions/v1CommonListResponse"
+        }
+      },
+      "description": "ListFilesResponse returns matching files."
+    },
+    "v1UploadFileInfo": {
+      "type": "object",
+      "properties": {
+        "bucketId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "directory": {
+          "type": "string"
+        },
+        "contentType": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userMetadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "UploadFileInfo contains initial metadata for a streaming upload."
+    },
+    "v1UploadFileRequest": {
+      "type": "object",
+      "properties": {
+        "info": {
+          "$ref": "#/definitions/v1UploadFileInfo"
+        },
+        "chunkData": {
+          "type": "string",
+          "format": "byte"
+        }
+      },
+      "description": "UploadFileRequest represents a client-streaming message for file uploads."
+    },
+    "v1UploadFileResponse": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "$ref": "#/definitions/v1FileMetadata"
+        }
+      },
+      "description": "UploadFileResponse returns uploaded file metadata."
+    }
+  }
+}
