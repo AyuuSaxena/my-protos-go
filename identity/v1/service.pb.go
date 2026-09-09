@@ -7,6 +7,7 @@
 package identity
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -24,44 +25,69 @@ var File_identity_v1_service_proto protoreflect.FileDescriptor
 
 const file_identity_v1_service_proto_rawDesc = "" +
 	"\n" +
-	"\x19identity/v1/service.proto\x12\videntity.v1\x1a\x1aidentity/v1/identity.proto2\xb8\x04\n" +
-	"\x0fIdentityService\x12i\n" +
-	"\x0eIdentityCreate\x12).identity.v1.IdentityCreateAccountRequest\x1a*.identity.v1.IdentityCreateAccountResponse\"\x00\x12G\n" +
-	"\vIdentityGet\x12\x1f.identity.v1.IdentityGetRequest\x1a\x15.identity.v1.Identity\"\x00\x12M\n" +
-	"\x0eIdentityUpdate\x12\".identity.v1.IdentityUpdateRequest\x1a\x15.identity.v1.Identity\"\x00\x12c\n" +
-	"\x13IdentityOtpValidate\x12'.identity.v1.IdentityOtpValidateRequest\x1a!.identity.v1.IdentityAuthResponse\"\x00\x12V\n" +
-	"\rIdentityLogin\x12 .identity.v1.IdentityAuthRequest\x1a!.identity.v1.IdentityAuthResponse\"\x00\x12e\n" +
-	"\x14IdentityRefershToken\x12(.identity.v1.IdentityRefreshTokenRequest\x1a!.identity.v1.IdentityAuthResponse\"\x00B6Z4github.com/AyuuSaxena/protos-go/identity/v1;identityb\x06proto3"
+	"\x19identity/v1/service.proto\x12\videntity.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1aidentity/v1/identity.proto2\xff\v\n" +
+	"\x0fIdentityService\x12|\n" +
+	"\x0eIdentityCreate\x12).identity.v1.IdentityCreateAccountRequest\x1a\".identity.v1.IdentityBasicResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/identity/signup\x12\x84\x01\n" +
+	"\x13IdentityOtpValidate\x12'.identity.v1.IdentityOtpValidateRequest\x1a!.identity.v1.IdentityAuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/identity/otp/validate\x12q\n" +
+	"\rIdentityLogin\x12 .identity.v1.IdentityAuthRequest\x1a!.identity.v1.IdentityAuthResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/identity/signin\x12c\n" +
+	"\vIdentityGet\x12\x1f.identity.v1.IdentityGetRequest\x1a .identity.v1.IdentityGetResponse\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/identity\x12k\n" +
+	"\x0eIdentityDelete\x12\".identity.v1.IdentityDeleteRequest\x1a\".identity.v1.IdentityBasicResponse\"\x11\x82\xd3\xe4\x93\x02\v*\t/identity\x12z\n" +
+	"\x0eIdentityVerify\x12'.identity.v1.IdentityVerifyEmailRequest\x1a\".identity.v1.IdentityBasicResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/identity/verify\x12\x81\x01\n" +
+	"\x15IdentityResetPassword\x12).identity.v1.IdentityResetPasswordRequest\x1a!.identity.v1.IdentityAuthResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\x1a\x0f/identity/reset\x12s\n" +
+	"\x0eIdentityUpdate\x12\".identity.v1.IdentityUpdateRequest\x1a .identity.v1.IdentityGetResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\x1a\x10/identity/update\x12\x86\x01\n" +
+	"\x14IdentityRefershToken\x12(.identity.v1.IdentityRefreshTokenRequest\x1a!.identity.v1.IdentityAuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/identity/access-token\x12u\n" +
+	"\x0fIdentitySignOut\x12#.identity.v1.IdentitySignOutRequest\x1a\".identity.v1.IdentityBasicResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/identity/signout\x12\x9d\x01\n" +
+	"\x17IdentityGoogleProtected\x12+.identity.v1.IdentityGoogleProtectedRequest\x1a,.identity.v1.IdentityGoogleProtectedResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/identity/auth/google/protected\x12\x8c\x01\n" +
+	"\x14IdentityExchangeCode\x12(.identity.v1.IdentityExchangeCodeRequest\x1a!.identity.v1.IdentityAuthResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/identity/auth/exchange-codeB6Z4github.com/AyuuSaxena/protos-go/identity/v1;identityb\x06proto3"
 
 var file_identity_v1_service_proto_goTypes = []any{
-	(*IdentityCreateAccountRequest)(nil),  // 0: identity.v1.IdentityCreateAccountRequest
-	(*IdentityGetRequest)(nil),            // 1: identity.v1.IdentityGetRequest
-	(*IdentityUpdateRequest)(nil),         // 2: identity.v1.IdentityUpdateRequest
-	(*IdentityOtpValidateRequest)(nil),    // 3: identity.v1.IdentityOtpValidateRequest
-	(*IdentityAuthRequest)(nil),           // 4: identity.v1.IdentityAuthRequest
-	(*IdentityRefreshTokenRequest)(nil),   // 5: identity.v1.IdentityRefreshTokenRequest
-	(*IdentityCreateAccountResponse)(nil), // 6: identity.v1.IdentityCreateAccountResponse
-	(*Identity)(nil),                      // 7: identity.v1.Identity
-	(*IdentityAuthResponse)(nil),          // 8: identity.v1.IdentityAuthResponse
+	(*IdentityCreateAccountRequest)(nil),    // 0: identity.v1.IdentityCreateAccountRequest
+	(*IdentityOtpValidateRequest)(nil),      // 1: identity.v1.IdentityOtpValidateRequest
+	(*IdentityAuthRequest)(nil),             // 2: identity.v1.IdentityAuthRequest
+	(*IdentityGetRequest)(nil),              // 3: identity.v1.IdentityGetRequest
+	(*IdentityDeleteRequest)(nil),           // 4: identity.v1.IdentityDeleteRequest
+	(*IdentityVerifyEmailRequest)(nil),      // 5: identity.v1.IdentityVerifyEmailRequest
+	(*IdentityResetPasswordRequest)(nil),    // 6: identity.v1.IdentityResetPasswordRequest
+	(*IdentityUpdateRequest)(nil),           // 7: identity.v1.IdentityUpdateRequest
+	(*IdentityRefreshTokenRequest)(nil),     // 8: identity.v1.IdentityRefreshTokenRequest
+	(*IdentitySignOutRequest)(nil),          // 9: identity.v1.IdentitySignOutRequest
+	(*IdentityGoogleProtectedRequest)(nil),  // 10: identity.v1.IdentityGoogleProtectedRequest
+	(*IdentityExchangeCodeRequest)(nil),     // 11: identity.v1.IdentityExchangeCodeRequest
+	(*IdentityBasicResponse)(nil),           // 12: identity.v1.IdentityBasicResponse
+	(*IdentityAuthResponse)(nil),            // 13: identity.v1.IdentityAuthResponse
+	(*IdentityGetResponse)(nil),             // 14: identity.v1.IdentityGetResponse
+	(*IdentityGoogleProtectedResponse)(nil), // 15: identity.v1.IdentityGoogleProtectedResponse
 }
 var file_identity_v1_service_proto_depIdxs = []int32{
-	0, // 0: identity.v1.IdentityService.IdentityCreate:input_type -> identity.v1.IdentityCreateAccountRequest
-	1, // 1: identity.v1.IdentityService.IdentityGet:input_type -> identity.v1.IdentityGetRequest
-	2, // 2: identity.v1.IdentityService.IdentityUpdate:input_type -> identity.v1.IdentityUpdateRequest
-	3, // 3: identity.v1.IdentityService.IdentityOtpValidate:input_type -> identity.v1.IdentityOtpValidateRequest
-	4, // 4: identity.v1.IdentityService.IdentityLogin:input_type -> identity.v1.IdentityAuthRequest
-	5, // 5: identity.v1.IdentityService.IdentityRefershToken:input_type -> identity.v1.IdentityRefreshTokenRequest
-	6, // 6: identity.v1.IdentityService.IdentityCreate:output_type -> identity.v1.IdentityCreateAccountResponse
-	7, // 7: identity.v1.IdentityService.IdentityGet:output_type -> identity.v1.Identity
-	7, // 8: identity.v1.IdentityService.IdentityUpdate:output_type -> identity.v1.Identity
-	8, // 9: identity.v1.IdentityService.IdentityOtpValidate:output_type -> identity.v1.IdentityAuthResponse
-	8, // 10: identity.v1.IdentityService.IdentityLogin:output_type -> identity.v1.IdentityAuthResponse
-	8, // 11: identity.v1.IdentityService.IdentityRefershToken:output_type -> identity.v1.IdentityAuthResponse
-	6, // [6:12] is the sub-list for method output_type
-	0, // [0:6] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0,  // 0: identity.v1.IdentityService.IdentityCreate:input_type -> identity.v1.IdentityCreateAccountRequest
+	1,  // 1: identity.v1.IdentityService.IdentityOtpValidate:input_type -> identity.v1.IdentityOtpValidateRequest
+	2,  // 2: identity.v1.IdentityService.IdentityLogin:input_type -> identity.v1.IdentityAuthRequest
+	3,  // 3: identity.v1.IdentityService.IdentityGet:input_type -> identity.v1.IdentityGetRequest
+	4,  // 4: identity.v1.IdentityService.IdentityDelete:input_type -> identity.v1.IdentityDeleteRequest
+	5,  // 5: identity.v1.IdentityService.IdentityVerify:input_type -> identity.v1.IdentityVerifyEmailRequest
+	6,  // 6: identity.v1.IdentityService.IdentityResetPassword:input_type -> identity.v1.IdentityResetPasswordRequest
+	7,  // 7: identity.v1.IdentityService.IdentityUpdate:input_type -> identity.v1.IdentityUpdateRequest
+	8,  // 8: identity.v1.IdentityService.IdentityRefershToken:input_type -> identity.v1.IdentityRefreshTokenRequest
+	9,  // 9: identity.v1.IdentityService.IdentitySignOut:input_type -> identity.v1.IdentitySignOutRequest
+	10, // 10: identity.v1.IdentityService.IdentityGoogleProtected:input_type -> identity.v1.IdentityGoogleProtectedRequest
+	11, // 11: identity.v1.IdentityService.IdentityExchangeCode:input_type -> identity.v1.IdentityExchangeCodeRequest
+	12, // 12: identity.v1.IdentityService.IdentityCreate:output_type -> identity.v1.IdentityBasicResponse
+	13, // 13: identity.v1.IdentityService.IdentityOtpValidate:output_type -> identity.v1.IdentityAuthResponse
+	13, // 14: identity.v1.IdentityService.IdentityLogin:output_type -> identity.v1.IdentityAuthResponse
+	14, // 15: identity.v1.IdentityService.IdentityGet:output_type -> identity.v1.IdentityGetResponse
+	12, // 16: identity.v1.IdentityService.IdentityDelete:output_type -> identity.v1.IdentityBasicResponse
+	12, // 17: identity.v1.IdentityService.IdentityVerify:output_type -> identity.v1.IdentityBasicResponse
+	13, // 18: identity.v1.IdentityService.IdentityResetPassword:output_type -> identity.v1.IdentityAuthResponse
+	14, // 19: identity.v1.IdentityService.IdentityUpdate:output_type -> identity.v1.IdentityGetResponse
+	13, // 20: identity.v1.IdentityService.IdentityRefershToken:output_type -> identity.v1.IdentityAuthResponse
+	12, // 21: identity.v1.IdentityService.IdentitySignOut:output_type -> identity.v1.IdentityBasicResponse
+	15, // 22: identity.v1.IdentityService.IdentityGoogleProtected:output_type -> identity.v1.IdentityGoogleProtectedResponse
+	13, // 23: identity.v1.IdentityService.IdentityExchangeCode:output_type -> identity.v1.IdentityAuthResponse
+	12, // [12:24] is the sub-list for method output_type
+	0,  // [0:12] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_identity_v1_service_proto_init() }

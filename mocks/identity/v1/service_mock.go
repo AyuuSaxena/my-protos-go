@@ -43,14 +43,14 @@ func (m *MockIdentityServiceClient) EXPECT() *MockIdentityServiceClientMockRecor
 }
 
 // IdentityCreate mocks base method.
-func (m *MockIdentityServiceClient) IdentityCreate(ctx context.Context, in *v1.IdentityCreateAccountRequest, opts ...grpc.CallOption) (*v1.IdentityCreateAccountResponse, error) {
+func (m *MockIdentityServiceClient) IdentityCreate(ctx context.Context, in *v1.IdentityCreateAccountRequest, opts ...grpc.CallOption) (*v1.IdentityBasicResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "IdentityCreate", varargs...)
-	ret0, _ := ret[0].(*v1.IdentityCreateAccountResponse)
+	ret0, _ := ret[0].(*v1.IdentityBasicResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -62,15 +62,55 @@ func (mr *MockIdentityServiceClientMockRecorder) IdentityCreate(ctx, in any, opt
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityCreate", reflect.TypeOf((*MockIdentityServiceClient)(nil).IdentityCreate), varargs...)
 }
 
+// IdentityDelete mocks base method.
+func (m *MockIdentityServiceClient) IdentityDelete(ctx context.Context, in *v1.IdentityDeleteRequest, opts ...grpc.CallOption) (*v1.IdentityBasicResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "IdentityDelete", varargs...)
+	ret0, _ := ret[0].(*v1.IdentityBasicResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IdentityDelete indicates an expected call of IdentityDelete.
+func (mr *MockIdentityServiceClientMockRecorder) IdentityDelete(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityDelete", reflect.TypeOf((*MockIdentityServiceClient)(nil).IdentityDelete), varargs...)
+}
+
+// IdentityExchangeCode mocks base method.
+func (m *MockIdentityServiceClient) IdentityExchangeCode(ctx context.Context, in *v1.IdentityExchangeCodeRequest, opts ...grpc.CallOption) (*v1.IdentityAuthResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "IdentityExchangeCode", varargs...)
+	ret0, _ := ret[0].(*v1.IdentityAuthResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IdentityExchangeCode indicates an expected call of IdentityExchangeCode.
+func (mr *MockIdentityServiceClientMockRecorder) IdentityExchangeCode(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityExchangeCode", reflect.TypeOf((*MockIdentityServiceClient)(nil).IdentityExchangeCode), varargs...)
+}
+
 // IdentityGet mocks base method.
-func (m *MockIdentityServiceClient) IdentityGet(ctx context.Context, in *v1.IdentityGetRequest, opts ...grpc.CallOption) (*v1.Identity, error) {
+func (m *MockIdentityServiceClient) IdentityGet(ctx context.Context, in *v1.IdentityGetRequest, opts ...grpc.CallOption) (*v1.IdentityGetResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "IdentityGet", varargs...)
-	ret0, _ := ret[0].(*v1.Identity)
+	ret0, _ := ret[0].(*v1.IdentityGetResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -80,6 +120,26 @@ func (mr *MockIdentityServiceClientMockRecorder) IdentityGet(ctx, in any, opts .
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityGet", reflect.TypeOf((*MockIdentityServiceClient)(nil).IdentityGet), varargs...)
+}
+
+// IdentityGoogleProtected mocks base method.
+func (m *MockIdentityServiceClient) IdentityGoogleProtected(ctx context.Context, in *v1.IdentityGoogleProtectedRequest, opts ...grpc.CallOption) (*v1.IdentityGoogleProtectedResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "IdentityGoogleProtected", varargs...)
+	ret0, _ := ret[0].(*v1.IdentityGoogleProtectedResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IdentityGoogleProtected indicates an expected call of IdentityGoogleProtected.
+func (mr *MockIdentityServiceClientMockRecorder) IdentityGoogleProtected(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityGoogleProtected", reflect.TypeOf((*MockIdentityServiceClient)(nil).IdentityGoogleProtected), varargs...)
 }
 
 // IdentityLogin mocks base method.
@@ -142,15 +202,55 @@ func (mr *MockIdentityServiceClientMockRecorder) IdentityRefershToken(ctx, in an
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityRefershToken", reflect.TypeOf((*MockIdentityServiceClient)(nil).IdentityRefershToken), varargs...)
 }
 
+// IdentityResetPassword mocks base method.
+func (m *MockIdentityServiceClient) IdentityResetPassword(ctx context.Context, in *v1.IdentityResetPasswordRequest, opts ...grpc.CallOption) (*v1.IdentityAuthResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "IdentityResetPassword", varargs...)
+	ret0, _ := ret[0].(*v1.IdentityAuthResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IdentityResetPassword indicates an expected call of IdentityResetPassword.
+func (mr *MockIdentityServiceClientMockRecorder) IdentityResetPassword(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityResetPassword", reflect.TypeOf((*MockIdentityServiceClient)(nil).IdentityResetPassword), varargs...)
+}
+
+// IdentitySignOut mocks base method.
+func (m *MockIdentityServiceClient) IdentitySignOut(ctx context.Context, in *v1.IdentitySignOutRequest, opts ...grpc.CallOption) (*v1.IdentityBasicResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "IdentitySignOut", varargs...)
+	ret0, _ := ret[0].(*v1.IdentityBasicResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IdentitySignOut indicates an expected call of IdentitySignOut.
+func (mr *MockIdentityServiceClientMockRecorder) IdentitySignOut(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentitySignOut", reflect.TypeOf((*MockIdentityServiceClient)(nil).IdentitySignOut), varargs...)
+}
+
 // IdentityUpdate mocks base method.
-func (m *MockIdentityServiceClient) IdentityUpdate(ctx context.Context, in *v1.IdentityUpdateRequest, opts ...grpc.CallOption) (*v1.Identity, error) {
+func (m *MockIdentityServiceClient) IdentityUpdate(ctx context.Context, in *v1.IdentityUpdateRequest, opts ...grpc.CallOption) (*v1.IdentityGetResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "IdentityUpdate", varargs...)
-	ret0, _ := ret[0].(*v1.Identity)
+	ret0, _ := ret[0].(*v1.IdentityGetResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -160,6 +260,26 @@ func (mr *MockIdentityServiceClientMockRecorder) IdentityUpdate(ctx, in any, opt
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityUpdate", reflect.TypeOf((*MockIdentityServiceClient)(nil).IdentityUpdate), varargs...)
+}
+
+// IdentityVerify mocks base method.
+func (m *MockIdentityServiceClient) IdentityVerify(ctx context.Context, in *v1.IdentityVerifyEmailRequest, opts ...grpc.CallOption) (*v1.IdentityBasicResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "IdentityVerify", varargs...)
+	ret0, _ := ret[0].(*v1.IdentityBasicResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IdentityVerify indicates an expected call of IdentityVerify.
+func (mr *MockIdentityServiceClientMockRecorder) IdentityVerify(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityVerify", reflect.TypeOf((*MockIdentityServiceClient)(nil).IdentityVerify), varargs...)
 }
 
 // MockIdentityServiceServer is a mock of IdentityServiceServer interface.
@@ -187,10 +307,10 @@ func (m *MockIdentityServiceServer) EXPECT() *MockIdentityServiceServerMockRecor
 }
 
 // IdentityCreate mocks base method.
-func (m *MockIdentityServiceServer) IdentityCreate(arg0 context.Context, arg1 *v1.IdentityCreateAccountRequest) (*v1.IdentityCreateAccountResponse, error) {
+func (m *MockIdentityServiceServer) IdentityCreate(arg0 context.Context, arg1 *v1.IdentityCreateAccountRequest) (*v1.IdentityBasicResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "IdentityCreate", arg0, arg1)
-	ret0, _ := ret[0].(*v1.IdentityCreateAccountResponse)
+	ret0, _ := ret[0].(*v1.IdentityBasicResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -201,11 +321,41 @@ func (mr *MockIdentityServiceServerMockRecorder) IdentityCreate(arg0, arg1 any) 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityCreate", reflect.TypeOf((*MockIdentityServiceServer)(nil).IdentityCreate), arg0, arg1)
 }
 
+// IdentityDelete mocks base method.
+func (m *MockIdentityServiceServer) IdentityDelete(arg0 context.Context, arg1 *v1.IdentityDeleteRequest) (*v1.IdentityBasicResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "IdentityDelete", arg0, arg1)
+	ret0, _ := ret[0].(*v1.IdentityBasicResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IdentityDelete indicates an expected call of IdentityDelete.
+func (mr *MockIdentityServiceServerMockRecorder) IdentityDelete(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityDelete", reflect.TypeOf((*MockIdentityServiceServer)(nil).IdentityDelete), arg0, arg1)
+}
+
+// IdentityExchangeCode mocks base method.
+func (m *MockIdentityServiceServer) IdentityExchangeCode(arg0 context.Context, arg1 *v1.IdentityExchangeCodeRequest) (*v1.IdentityAuthResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "IdentityExchangeCode", arg0, arg1)
+	ret0, _ := ret[0].(*v1.IdentityAuthResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IdentityExchangeCode indicates an expected call of IdentityExchangeCode.
+func (mr *MockIdentityServiceServerMockRecorder) IdentityExchangeCode(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityExchangeCode", reflect.TypeOf((*MockIdentityServiceServer)(nil).IdentityExchangeCode), arg0, arg1)
+}
+
 // IdentityGet mocks base method.
-func (m *MockIdentityServiceServer) IdentityGet(arg0 context.Context, arg1 *v1.IdentityGetRequest) (*v1.Identity, error) {
+func (m *MockIdentityServiceServer) IdentityGet(arg0 context.Context, arg1 *v1.IdentityGetRequest) (*v1.IdentityGetResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "IdentityGet", arg0, arg1)
-	ret0, _ := ret[0].(*v1.Identity)
+	ret0, _ := ret[0].(*v1.IdentityGetResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -214,6 +364,21 @@ func (m *MockIdentityServiceServer) IdentityGet(arg0 context.Context, arg1 *v1.I
 func (mr *MockIdentityServiceServerMockRecorder) IdentityGet(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityGet", reflect.TypeOf((*MockIdentityServiceServer)(nil).IdentityGet), arg0, arg1)
+}
+
+// IdentityGoogleProtected mocks base method.
+func (m *MockIdentityServiceServer) IdentityGoogleProtected(arg0 context.Context, arg1 *v1.IdentityGoogleProtectedRequest) (*v1.IdentityGoogleProtectedResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "IdentityGoogleProtected", arg0, arg1)
+	ret0, _ := ret[0].(*v1.IdentityGoogleProtectedResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IdentityGoogleProtected indicates an expected call of IdentityGoogleProtected.
+func (mr *MockIdentityServiceServerMockRecorder) IdentityGoogleProtected(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityGoogleProtected", reflect.TypeOf((*MockIdentityServiceServer)(nil).IdentityGoogleProtected), arg0, arg1)
 }
 
 // IdentityLogin mocks base method.
@@ -261,11 +426,41 @@ func (mr *MockIdentityServiceServerMockRecorder) IdentityRefershToken(arg0, arg1
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityRefershToken", reflect.TypeOf((*MockIdentityServiceServer)(nil).IdentityRefershToken), arg0, arg1)
 }
 
+// IdentityResetPassword mocks base method.
+func (m *MockIdentityServiceServer) IdentityResetPassword(arg0 context.Context, arg1 *v1.IdentityResetPasswordRequest) (*v1.IdentityAuthResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "IdentityResetPassword", arg0, arg1)
+	ret0, _ := ret[0].(*v1.IdentityAuthResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IdentityResetPassword indicates an expected call of IdentityResetPassword.
+func (mr *MockIdentityServiceServerMockRecorder) IdentityResetPassword(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityResetPassword", reflect.TypeOf((*MockIdentityServiceServer)(nil).IdentityResetPassword), arg0, arg1)
+}
+
+// IdentitySignOut mocks base method.
+func (m *MockIdentityServiceServer) IdentitySignOut(arg0 context.Context, arg1 *v1.IdentitySignOutRequest) (*v1.IdentityBasicResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "IdentitySignOut", arg0, arg1)
+	ret0, _ := ret[0].(*v1.IdentityBasicResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IdentitySignOut indicates an expected call of IdentitySignOut.
+func (mr *MockIdentityServiceServerMockRecorder) IdentitySignOut(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentitySignOut", reflect.TypeOf((*MockIdentityServiceServer)(nil).IdentitySignOut), arg0, arg1)
+}
+
 // IdentityUpdate mocks base method.
-func (m *MockIdentityServiceServer) IdentityUpdate(arg0 context.Context, arg1 *v1.IdentityUpdateRequest) (*v1.Identity, error) {
+func (m *MockIdentityServiceServer) IdentityUpdate(arg0 context.Context, arg1 *v1.IdentityUpdateRequest) (*v1.IdentityGetResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "IdentityUpdate", arg0, arg1)
-	ret0, _ := ret[0].(*v1.Identity)
+	ret0, _ := ret[0].(*v1.IdentityGetResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -274,6 +469,21 @@ func (m *MockIdentityServiceServer) IdentityUpdate(arg0 context.Context, arg1 *v
 func (mr *MockIdentityServiceServerMockRecorder) IdentityUpdate(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityUpdate", reflect.TypeOf((*MockIdentityServiceServer)(nil).IdentityUpdate), arg0, arg1)
+}
+
+// IdentityVerify mocks base method.
+func (m *MockIdentityServiceServer) IdentityVerify(arg0 context.Context, arg1 *v1.IdentityVerifyEmailRequest) (*v1.IdentityBasicResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "IdentityVerify", arg0, arg1)
+	ret0, _ := ret[0].(*v1.IdentityBasicResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IdentityVerify indicates an expected call of IdentityVerify.
+func (mr *MockIdentityServiceServerMockRecorder) IdentityVerify(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IdentityVerify", reflect.TypeOf((*MockIdentityServiceServer)(nil).IdentityVerify), arg0, arg1)
 }
 
 // mustEmbedUnimplementedIdentityServiceServer mocks base method.

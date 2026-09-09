@@ -14,3 +14,8 @@ var FS embed.FS
 //
 //go:embed content/v1/rom/romService.swagger.json
 var ContentRomServiceSwaggerJSON []byte
+
+// IdentityServiceSwaggerJSON contains the raw OpenAPI 2.0 JSON for IdentityService.
+//
+//go:embed identity/v1/service.swagger.json
+var IdentityServiceSwaggerJSON []byte

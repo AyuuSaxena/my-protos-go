@@ -45,8 +45,8 @@ type Identity struct {
 	State       *string `protobuf:"bytes,14,opt,name=state,proto3,oneof" json:"state,omitempty"`
 	Country     *string `protobuf:"bytes,15,opt,name=country,proto3,oneof" json:"country,omitempty"`
 	Timezone    *string `protobuf:"bytes,16,opt,name=timezone,proto3,oneof" json:"timezone,omitempty"`
-	// @gotags: `json:"isVerifi6ed,omitempty" bson:"isVerified,omitempty"`
-	IsVerified bool `protobuf:"varint,30,opt,name=is_verified,json=isVerified,proto3" json:"isVerifi6ed,omitempty" bson:"isVerified,omitempty"`
+	// @gotags: `json:"isVerified,omitempty" bson:"isVerified,omitempty"`
+	IsVerified bool `protobuf:"varint,30,opt,name=is_verified,json=isVerified,proto3" json:"isVerified,omitempty" bson:"isVerified,omitempty"`
 	// @gotags: `json:"isActive,omitempty" bson:"isActive,omitempty"`
 	IsActive bool `protobuf:"varint,31,opt,name=is_active,json=isActive,proto3" json:"isActive,omitempty" bson:"isActive,omitempty"`
 	// @gotags: `json:"addedDate,omitempty" bson:"addedDate,omitempty"`
@@ -227,30 +227,192 @@ func (x *Identity) GetUpdatedAt() int64 {
 	return 0
 }
 
-type IdentityCreateAccountRequest struct {
-	state    protoimpl.MessageState `protogen:"open.v1"`
-	Site     string                 `protobuf:"bytes,1,opt,name=site,proto3" json:"site,omitempty"`
-	Id       string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
-	Username *string                `protobuf:"bytes,3,opt,name=username,proto3,oneof" json:"username,omitempty"`
-	// @gotags: `json:"fullName,omitempty" bson:"fullName,omitempty"`
-	FullName string `protobuf:"bytes,4,opt,name=full_name,json=fullName,proto3" json:"fullName,omitempty" bson:"fullName,omitempty"`
+type IdentityGetResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Site  string                 `protobuf:"bytes,1,opt,name=site,proto3" json:"site,omitempty"`
+	Id    string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	// @gotags: `json:"googleId,omitempty" bson:"googleId,omitempty"`
+	GoogleId *string `protobuf:"bytes,3,opt,name=google_id,json=googleId,proto3,oneof" json:"googleId,omitempty" bson:"googleId,omitempty"`
 	// @gotags: `json:"profileUrl,omitempty" bson:"profileUrl,omitempty"`
-	ProfileUrl    *string `protobuf:"bytes,5,opt,name=profile_url,json=profileUrl,proto3,oneof" json:"profileUrl,omitempty" bson:"profileUrl,omitempty"`
-	PhoneNumber   *string `protobuf:"bytes,6,opt,name=phone_number,json=phoneNumber,proto3,oneof" json:"phone_number,omitempty"`
-	Email         string  `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
-	Password      string  `protobuf:"bytes,8,opt,name=password,proto3" json:"password,omitempty"`
-	Postalcode    *string `protobuf:"bytes,21,opt,name=postalcode,proto3,oneof" json:"postalcode,omitempty"`
-	City          *string `protobuf:"bytes,22,opt,name=city,proto3,oneof" json:"city,omitempty"`
-	State         *string `protobuf:"bytes,23,opt,name=state,proto3,oneof" json:"state,omitempty"`
-	Country       *string `protobuf:"bytes,24,opt,name=country,proto3,oneof" json:"country,omitempty"`
-	Timezone      *string `protobuf:"bytes,25,opt,name=timezone,proto3,oneof" json:"timezone,omitempty"`
+	ProfileUrl *string `protobuf:"bytes,4,opt,name=profile_url,json=profileUrl,proto3,oneof" json:"profileUrl,omitempty" bson:"profileUrl,omitempty"`
+	Username   *string `protobuf:"bytes,5,opt,name=username,proto3,oneof" json:"username,omitempty"`
+	// @gotags: `json:"firstName,omitempty" bson:"firstName,omitempty"`
+	FirstName *string `protobuf:"bytes,6,opt,name=first_name,json=firstName,proto3,oneof" json:"firstName,omitempty" bson:"firstName,omitempty"`
+	// @gotags: `json:"lastName,omitempty" bson:"lastName,omitempty"`
+	LastName *string `protobuf:"bytes,7,opt,name=last_name,json=lastName,proto3,oneof" json:"lastName,omitempty" bson:"lastName,omitempty"`
+	// @gotags: `json:"fullName,omitempty" bson:"fullName,omitempty"`
+	FullName string `protobuf:"bytes,8,opt,name=full_name,json=fullName,proto3" json:"fullName,omitempty" bson:"fullName,omitempty"`
+	// @gotags: `json:"phoneNumber,omitempty" bson:"phoneNumber,omitempty"`
+	PhoneNumber   *string `protobuf:"bytes,9,opt,name=phone_number,json=phoneNumber,proto3,oneof" json:"phoneNumber,omitempty" bson:"phoneNumber,omitempty"`
+	Email         string  `protobuf:"bytes,10,opt,name=email,proto3" json:"email,omitempty"`
+	Postalcode    *string `protobuf:"bytes,11,opt,name=postalcode,proto3,oneof" json:"postalcode,omitempty"`
+	City          *string `protobuf:"bytes,12,opt,name=city,proto3,oneof" json:"city,omitempty"`
+	State         *string `protobuf:"bytes,13,opt,name=state,proto3,oneof" json:"state,omitempty"`
+	Country       *string `protobuf:"bytes,14,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	Timezone      *string `protobuf:"bytes,15,opt,name=timezone,proto3,oneof" json:"timezone,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IdentityGetResponse) Reset() {
+	*x = IdentityGetResponse{}
+	mi := &file_identity_v1_identity_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IdentityGetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IdentityGetResponse) ProtoMessage() {}
+
+func (x *IdentityGetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_identity_v1_identity_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IdentityGetResponse.ProtoReflect.Descriptor instead.
+func (*IdentityGetResponse) Descriptor() ([]byte, []int) {
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *IdentityGetResponse) GetSite() string {
+	if x != nil {
+		return x.Site
+	}
+	return ""
+}
+
+func (x *IdentityGetResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *IdentityGetResponse) GetGoogleId() string {
+	if x != nil && x.GoogleId != nil {
+		return *x.GoogleId
+	}
+	return ""
+}
+
+func (x *IdentityGetResponse) GetProfileUrl() string {
+	if x != nil && x.ProfileUrl != nil {
+		return *x.ProfileUrl
+	}
+	return ""
+}
+
+func (x *IdentityGetResponse) GetUsername() string {
+	if x != nil && x.Username != nil {
+		return *x.Username
+	}
+	return ""
+}
+
+func (x *IdentityGetResponse) GetFirstName() string {
+	if x != nil && x.FirstName != nil {
+		return *x.FirstName
+	}
+	return ""
+}
+
+func (x *IdentityGetResponse) GetLastName() string {
+	if x != nil && x.LastName != nil {
+		return *x.LastName
+	}
+	return ""
+}
+
+func (x *IdentityGetResponse) GetFullName() string {
+	if x != nil {
+		return x.FullName
+	}
+	return ""
+}
+
+func (x *IdentityGetResponse) GetPhoneNumber() string {
+	if x != nil && x.PhoneNumber != nil {
+		return *x.PhoneNumber
+	}
+	return ""
+}
+
+func (x *IdentityGetResponse) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *IdentityGetResponse) GetPostalcode() string {
+	if x != nil && x.Postalcode != nil {
+		return *x.Postalcode
+	}
+	return ""
+}
+
+func (x *IdentityGetResponse) GetCity() string {
+	if x != nil && x.City != nil {
+		return *x.City
+	}
+	return ""
+}
+
+func (x *IdentityGetResponse) GetState() string {
+	if x != nil && x.State != nil {
+		return *x.State
+	}
+	return ""
+}
+
+func (x *IdentityGetResponse) GetCountry() string {
+	if x != nil && x.Country != nil {
+		return *x.Country
+	}
+	return ""
+}
+
+func (x *IdentityGetResponse) GetTimezone() string {
+	if x != nil && x.Timezone != nil {
+		return *x.Timezone
+	}
+	return ""
+}
+
+type IdentityCreateAccountRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Site  string                 `protobuf:"bytes,1,opt,name=site,proto3" json:"site,omitempty"`
+	// @gotags: `json:"fullName,omitempty" bson:"fullName,omitempty"`
+	FullName string `protobuf:"bytes,2,opt,name=full_name,json=fullName,proto3" json:"fullName,omitempty" bson:"fullName,omitempty"`
+	Email    string `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	Password string `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
+	// @gotags: `json:"phoneNumber,omitempty" bson:"phoneNumber,omitempty"`
+	PhoneNumber *string `protobuf:"bytes,5,opt,name=phone_number,json=phoneNumber,proto3,oneof" json:"phoneNumber,omitempty" bson:"phoneNumber,omitempty"`
+	Username    *string `protobuf:"bytes,6,opt,name=username,proto3,oneof" json:"username,omitempty"`
+	// @gotags: `json:"profileUrl,omitempty" bson:"profileUrl,omitempty"`
+	ProfileUrl    *string `protobuf:"bytes,7,opt,name=profile_url,json=profileUrl,proto3,oneof" json:"profileUrl,omitempty" bson:"profileUrl,omitempty"`
+	Postalcode    *string `protobuf:"bytes,8,opt,name=postalcode,proto3,oneof" json:"postalcode,omitempty"`
+	City          *string `protobuf:"bytes,9,opt,name=city,proto3,oneof" json:"city,omitempty"`
+	State         *string `protobuf:"bytes,10,opt,name=state,proto3,oneof" json:"state,omitempty"`
+	Country       *string `protobuf:"bytes,11,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	Timezone      *string `protobuf:"bytes,12,opt,name=timezone,proto3,oneof" json:"timezone,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *IdentityCreateAccountRequest) Reset() {
 	*x = IdentityCreateAccountRequest{}
-	mi := &file_identity_v1_identity_proto_msgTypes[1]
+	mi := &file_identity_v1_identity_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -262,7 +424,7 @@ func (x *IdentityCreateAccountRequest) String() string {
 func (*IdentityCreateAccountRequest) ProtoMessage() {}
 
 func (x *IdentityCreateAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_identity_v1_identity_proto_msgTypes[1]
+	mi := &file_identity_v1_identity_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -275,7 +437,7 @@ func (x *IdentityCreateAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IdentityCreateAccountRequest.ProtoReflect.Descriptor instead.
 func (*IdentityCreateAccountRequest) Descriptor() ([]byte, []int) {
-	return file_identity_v1_identity_proto_rawDescGZIP(), []int{1}
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *IdentityCreateAccountRequest) GetSite() string {
@@ -285,37 +447,9 @@ func (x *IdentityCreateAccountRequest) GetSite() string {
 	return ""
 }
 
-func (x *IdentityCreateAccountRequest) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *IdentityCreateAccountRequest) GetUsername() string {
-	if x != nil && x.Username != nil {
-		return *x.Username
-	}
-	return ""
-}
-
 func (x *IdentityCreateAccountRequest) GetFullName() string {
 	if x != nil {
 		return x.FullName
-	}
-	return ""
-}
-
-func (x *IdentityCreateAccountRequest) GetProfileUrl() string {
-	if x != nil && x.ProfileUrl != nil {
-		return *x.ProfileUrl
-	}
-	return ""
-}
-
-func (x *IdentityCreateAccountRequest) GetPhoneNumber() string {
-	if x != nil && x.PhoneNumber != nil {
-		return *x.PhoneNumber
 	}
 	return ""
 }
@@ -330,6 +464,27 @@ func (x *IdentityCreateAccountRequest) GetEmail() string {
 func (x *IdentityCreateAccountRequest) GetPassword() string {
 	if x != nil {
 		return x.Password
+	}
+	return ""
+}
+
+func (x *IdentityCreateAccountRequest) GetPhoneNumber() string {
+	if x != nil && x.PhoneNumber != nil {
+		return *x.PhoneNumber
+	}
+	return ""
+}
+
+func (x *IdentityCreateAccountRequest) GetUsername() string {
+	if x != nil && x.Username != nil {
+		return *x.Username
+	}
+	return ""
+}
+
+func (x *IdentityCreateAccountRequest) GetProfileUrl() string {
+	if x != nil && x.ProfileUrl != nil {
+		return *x.ProfileUrl
 	}
 	return ""
 }
@@ -379,7 +534,7 @@ type IdentityCreateAccountResponse struct {
 
 func (x *IdentityCreateAccountResponse) Reset() {
 	*x = IdentityCreateAccountResponse{}
-	mi := &file_identity_v1_identity_proto_msgTypes[2]
+	mi := &file_identity_v1_identity_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -391,7 +546,7 @@ func (x *IdentityCreateAccountResponse) String() string {
 func (*IdentityCreateAccountResponse) ProtoMessage() {}
 
 func (x *IdentityCreateAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_identity_v1_identity_proto_msgTypes[2]
+	mi := &file_identity_v1_identity_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -404,7 +559,7 @@ func (x *IdentityCreateAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IdentityCreateAccountResponse.ProtoReflect.Descriptor instead.
 func (*IdentityCreateAccountResponse) Descriptor() ([]byte, []int) {
-	return file_identity_v1_identity_proto_rawDescGZIP(), []int{2}
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *IdentityCreateAccountResponse) GetSite() string {
@@ -421,6 +576,76 @@ func (x *IdentityCreateAccountResponse) GetId() string {
 	return ""
 }
 
+type IdentityBasicResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Site  string                 `protobuf:"bytes,1,opt,name=site,proto3" json:"site,omitempty"`
+	Id    string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	// @gotags: `json:"isVerified" bson:"isVerified"`
+	IsVerified bool `protobuf:"varint,3,opt,name=is_verified,json=isVerified,proto3" json:"isVerified" bson:"isVerified"`
+	// @gotags: `json:"isOtpSent" bson:"isOtpSent"`
+	IsOtpSent     bool `protobuf:"varint,4,opt,name=is_otp_sent,json=isOtpSent,proto3" json:"isOtpSent" bson:"isOtpSent"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IdentityBasicResponse) Reset() {
+	*x = IdentityBasicResponse{}
+	mi := &file_identity_v1_identity_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IdentityBasicResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IdentityBasicResponse) ProtoMessage() {}
+
+func (x *IdentityBasicResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_identity_v1_identity_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IdentityBasicResponse.ProtoReflect.Descriptor instead.
+func (*IdentityBasicResponse) Descriptor() ([]byte, []int) {
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *IdentityBasicResponse) GetSite() string {
+	if x != nil {
+		return x.Site
+	}
+	return ""
+}
+
+func (x *IdentityBasicResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *IdentityBasicResponse) GetIsVerified() bool {
+	if x != nil {
+		return x.IsVerified
+	}
+	return false
+}
+
+func (x *IdentityBasicResponse) GetIsOtpSent() bool {
+	if x != nil {
+		return x.IsOtpSent
+	}
+	return false
+}
+
 type IdentityOtpVerifyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Site          string                 `protobuf:"bytes,1,opt,name=site,proto3" json:"site,omitempty"`
@@ -432,7 +657,7 @@ type IdentityOtpVerifyRequest struct {
 
 func (x *IdentityOtpVerifyRequest) Reset() {
 	*x = IdentityOtpVerifyRequest{}
-	mi := &file_identity_v1_identity_proto_msgTypes[3]
+	mi := &file_identity_v1_identity_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -444,7 +669,7 @@ func (x *IdentityOtpVerifyRequest) String() string {
 func (*IdentityOtpVerifyRequest) ProtoMessage() {}
 
 func (x *IdentityOtpVerifyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_identity_v1_identity_proto_msgTypes[3]
+	mi := &file_identity_v1_identity_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -457,7 +682,7 @@ func (x *IdentityOtpVerifyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IdentityOtpVerifyRequest.ProtoReflect.Descriptor instead.
 func (*IdentityOtpVerifyRequest) Descriptor() ([]byte, []int) {
-	return file_identity_v1_identity_proto_rawDescGZIP(), []int{3}
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *IdentityOtpVerifyRequest) GetSite() string {
@@ -485,14 +710,14 @@ type IdentityGetRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Site          string                 `protobuf:"bytes,1,opt,name=site,proto3" json:"site,omitempty"`
 	Id            string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
-	Token         string                 `protobuf:"bytes,3,opt,name=token,proto3" json:"token,omitempty"`
+	Token         *string                `protobuf:"bytes,3,opt,name=token,proto3,oneof" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *IdentityGetRequest) Reset() {
 	*x = IdentityGetRequest{}
-	mi := &file_identity_v1_identity_proto_msgTypes[4]
+	mi := &file_identity_v1_identity_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -504,7 +729,7 @@ func (x *IdentityGetRequest) String() string {
 func (*IdentityGetRequest) ProtoMessage() {}
 
 func (x *IdentityGetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_identity_v1_identity_proto_msgTypes[4]
+	mi := &file_identity_v1_identity_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -517,7 +742,7 @@ func (x *IdentityGetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IdentityGetRequest.ProtoReflect.Descriptor instead.
 func (*IdentityGetRequest) Descriptor() ([]byte, []int) {
-	return file_identity_v1_identity_proto_rawDescGZIP(), []int{4}
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *IdentityGetRequest) GetSite() string {
@@ -535,18 +760,18 @@ func (x *IdentityGetRequest) GetId() string {
 }
 
 func (x *IdentityGetRequest) GetToken() string {
-	if x != nil {
-		return x.Token
+	if x != nil && x.Token != nil {
+		return *x.Token
 	}
 	return ""
 }
 
 type IdentityUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	Site  string                 `protobuf:"bytes,1,opt,name=site,proto3" json:"site,omitempty"`
-	Id    string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	Site  *string                `protobuf:"bytes,1,opt,name=site,proto3,oneof" json:"site,omitempty"`
+	Id    *string                `protobuf:"bytes,2,opt,name=id,proto3,oneof" json:"id,omitempty"`
 	// @gotags: `json:"googleId,omitempty" bson:"googleId,omitempty"`
-	GoogleId string `protobuf:"bytes,3,opt,name=google_id,json=googleId,proto3" json:"googleId,omitempty" bson:"googleId,omitempty"`
+	GoogleId *string `protobuf:"bytes,3,opt,name=google_id,json=googleId,proto3,oneof" json:"googleId,omitempty" bson:"googleId,omitempty"`
 	// @gotags: `json:"profileUrl,omitempty" bson:"profileUrl,omitempty"`
 	ProfileUrl *string `protobuf:"bytes,4,opt,name=profile_url,json=profileUrl,proto3,oneof" json:"profileUrl,omitempty" bson:"profileUrl,omitempty"`
 	Username   *string `protobuf:"bytes,5,opt,name=username,proto3,oneof" json:"username,omitempty"`
@@ -556,18 +781,18 @@ type IdentityUpdateRequest struct {
 	PhoneNumber   *string `protobuf:"bytes,7,opt,name=phone_number,json=phoneNumber,proto3,oneof" json:"phoneNumber,omitempty" bson:"phoneNumber,omitempty"`
 	Email         *string `protobuf:"bytes,8,opt,name=email,proto3,oneof" json:"email,omitempty"`
 	Password      *string `protobuf:"bytes,9,opt,name=password,proto3,oneof" json:"password,omitempty"`
-	Postalcode    *string `protobuf:"bytes,21,opt,name=postalcode,proto3,oneof" json:"postalcode,omitempty"`
-	City          *string `protobuf:"bytes,22,opt,name=city,proto3,oneof" json:"city,omitempty"`
-	State         *string `protobuf:"bytes,23,opt,name=state,proto3,oneof" json:"state,omitempty"`
-	Country       *string `protobuf:"bytes,24,opt,name=country,proto3,oneof" json:"country,omitempty"`
-	Timezone      *string `protobuf:"bytes,25,opt,name=timezone,proto3,oneof" json:"timezone,omitempty"`
+	Postalcode    *string `protobuf:"bytes,10,opt,name=postalcode,proto3,oneof" json:"postalcode,omitempty"`
+	City          *string `protobuf:"bytes,11,opt,name=city,proto3,oneof" json:"city,omitempty"`
+	State         *string `protobuf:"bytes,12,opt,name=state,proto3,oneof" json:"state,omitempty"`
+	Country       *string `protobuf:"bytes,13,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	Timezone      *string `protobuf:"bytes,14,opt,name=timezone,proto3,oneof" json:"timezone,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *IdentityUpdateRequest) Reset() {
 	*x = IdentityUpdateRequest{}
-	mi := &file_identity_v1_identity_proto_msgTypes[5]
+	mi := &file_identity_v1_identity_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -579,7 +804,7 @@ func (x *IdentityUpdateRequest) String() string {
 func (*IdentityUpdateRequest) ProtoMessage() {}
 
 func (x *IdentityUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_identity_v1_identity_proto_msgTypes[5]
+	mi := &file_identity_v1_identity_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -592,26 +817,26 @@ func (x *IdentityUpdateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IdentityUpdateRequest.ProtoReflect.Descriptor instead.
 func (*IdentityUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_identity_v1_identity_proto_rawDescGZIP(), []int{5}
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *IdentityUpdateRequest) GetSite() string {
-	if x != nil {
-		return x.Site
+	if x != nil && x.Site != nil {
+		return *x.Site
 	}
 	return ""
 }
 
 func (x *IdentityUpdateRequest) GetId() string {
-	if x != nil {
-		return x.Id
+	if x != nil && x.Id != nil {
+		return *x.Id
 	}
 	return ""
 }
 
 func (x *IdentityUpdateRequest) GetGoogleId() string {
-	if x != nil {
-		return x.GoogleId
+	if x != nil && x.GoogleId != nil {
+		return *x.GoogleId
 	}
 	return ""
 }
@@ -697,7 +922,7 @@ type IdentityAuthRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Site          string                 `protobuf:"bytes,1,opt,name=site,proto3" json:"site,omitempty"`
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	Password      string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	Password      *string                `protobuf:"bytes,3,opt,name=password,proto3,oneof" json:"password,omitempty"`
 	Otp           *int32                 `protobuf:"varint,4,opt,name=otp,proto3,oneof" json:"otp,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -705,7 +930,7 @@ type IdentityAuthRequest struct {
 
 func (x *IdentityAuthRequest) Reset() {
 	*x = IdentityAuthRequest{}
-	mi := &file_identity_v1_identity_proto_msgTypes[6]
+	mi := &file_identity_v1_identity_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -717,7 +942,7 @@ func (x *IdentityAuthRequest) String() string {
 func (*IdentityAuthRequest) ProtoMessage() {}
 
 func (x *IdentityAuthRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_identity_v1_identity_proto_msgTypes[6]
+	mi := &file_identity_v1_identity_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -730,7 +955,7 @@ func (x *IdentityAuthRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IdentityAuthRequest.ProtoReflect.Descriptor instead.
 func (*IdentityAuthRequest) Descriptor() ([]byte, []int) {
-	return file_identity_v1_identity_proto_rawDescGZIP(), []int{6}
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *IdentityAuthRequest) GetSite() string {
@@ -748,8 +973,8 @@ func (x *IdentityAuthRequest) GetEmail() string {
 }
 
 func (x *IdentityAuthRequest) GetPassword() string {
-	if x != nil {
-		return x.Password
+	if x != nil && x.Password != nil {
+		return *x.Password
 	}
 	return ""
 }
@@ -763,19 +988,21 @@ func (x *IdentityAuthRequest) GetOtp() int32 {
 
 type IdentityAuthResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// @gotags: `json:"authorizationToken,omitempty" bson:"authorizationToken,omitempty"`
-	AuthorizationToken string `protobuf:"bytes,1,opt,name=authorization_token,json=authorizationToken,proto3" json:"authorizationToken,omitempty" bson:"authorizationToken,omitempty"`
+	// @gotags: `json:"accessToken,omitempty" bson:"accessToken,omitempty"`
+	AccessToken string `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"accessToken,omitempty" bson:"accessToken,omitempty"`
 	// @gotags: `json:"refreshToken,omitempty" bson:"refreshToken,omitempty"`
-	RefreshToken string `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refreshToken,omitempty" bson:"refreshToken,omitempty"`
+	RefreshToken *string `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3,oneof" json:"refreshToken,omitempty" bson:"refreshToken,omitempty"`
 	// @gotags: `json:"userId,omitempty" bson:"userId,omitempty"`
-	UserId        string `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"userId,omitempty" bson:"userId,omitempty"`
+	UserId string `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"userId,omitempty" bson:"userId,omitempty"`
+	// @gotags: `json:"site,omitempty" bson:"site,omitempty"`
+	Site          string `protobuf:"bytes,4,opt,name=site,proto3" json:"site,omitempty" bson:"site,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *IdentityAuthResponse) Reset() {
 	*x = IdentityAuthResponse{}
-	mi := &file_identity_v1_identity_proto_msgTypes[7]
+	mi := &file_identity_v1_identity_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -787,7 +1014,7 @@ func (x *IdentityAuthResponse) String() string {
 func (*IdentityAuthResponse) ProtoMessage() {}
 
 func (x *IdentityAuthResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_identity_v1_identity_proto_msgTypes[7]
+	mi := &file_identity_v1_identity_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -800,19 +1027,19 @@ func (x *IdentityAuthResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IdentityAuthResponse.ProtoReflect.Descriptor instead.
 func (*IdentityAuthResponse) Descriptor() ([]byte, []int) {
-	return file_identity_v1_identity_proto_rawDescGZIP(), []int{7}
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *IdentityAuthResponse) GetAuthorizationToken() string {
+func (x *IdentityAuthResponse) GetAccessToken() string {
 	if x != nil {
-		return x.AuthorizationToken
+		return x.AccessToken
 	}
 	return ""
 }
 
 func (x *IdentityAuthResponse) GetRefreshToken() string {
-	if x != nil {
-		return x.RefreshToken
+	if x != nil && x.RefreshToken != nil {
+		return *x.RefreshToken
 	}
 	return ""
 }
@@ -824,10 +1051,17 @@ func (x *IdentityAuthResponse) GetUserId() string {
 	return ""
 }
 
+func (x *IdentityAuthResponse) GetSite() string {
+	if x != nil {
+		return x.Site
+	}
+	return ""
+}
+
 type IdentityRefreshTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Site          string                 `protobuf:"bytes,1,opt,name=site,proto3" json:"site,omitempty"`
-	Id            string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	Site          *string                `protobuf:"bytes,1,opt,name=site,proto3,oneof" json:"site,omitempty"`
+	Id            *string                `protobuf:"bytes,2,opt,name=id,proto3,oneof" json:"id,omitempty"`
 	Token         string                 `protobuf:"bytes,3,opt,name=token,proto3" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -835,7 +1069,7 @@ type IdentityRefreshTokenRequest struct {
 
 func (x *IdentityRefreshTokenRequest) Reset() {
 	*x = IdentityRefreshTokenRequest{}
-	mi := &file_identity_v1_identity_proto_msgTypes[8]
+	mi := &file_identity_v1_identity_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -847,7 +1081,7 @@ func (x *IdentityRefreshTokenRequest) String() string {
 func (*IdentityRefreshTokenRequest) ProtoMessage() {}
 
 func (x *IdentityRefreshTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_identity_v1_identity_proto_msgTypes[8]
+	mi := &file_identity_v1_identity_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -860,19 +1094,19 @@ func (x *IdentityRefreshTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IdentityRefreshTokenRequest.ProtoReflect.Descriptor instead.
 func (*IdentityRefreshTokenRequest) Descriptor() ([]byte, []int) {
-	return file_identity_v1_identity_proto_rawDescGZIP(), []int{8}
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *IdentityRefreshTokenRequest) GetSite() string {
-	if x != nil {
-		return x.Site
+	if x != nil && x.Site != nil {
+		return *x.Site
 	}
 	return ""
 }
 
 func (x *IdentityRefreshTokenRequest) GetId() string {
-	if x != nil {
-		return x.Id
+	if x != nil && x.Id != nil {
+		return *x.Id
 	}
 	return ""
 }
@@ -888,14 +1122,14 @@ type IdentityOtpValidateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Site          string                 `protobuf:"bytes,1,opt,name=site,proto3" json:"site,omitempty"`
 	Id            string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
-	Otp           string                 `protobuf:"bytes,3,opt,name=otp,proto3" json:"otp,omitempty"`
+	Otp           int32                  `protobuf:"varint,3,opt,name=otp,proto3" json:"otp,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *IdentityOtpValidateRequest) Reset() {
 	*x = IdentityOtpValidateRequest{}
-	mi := &file_identity_v1_identity_proto_msgTypes[9]
+	mi := &file_identity_v1_identity_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -907,7 +1141,7 @@ func (x *IdentityOtpValidateRequest) String() string {
 func (*IdentityOtpValidateRequest) ProtoMessage() {}
 
 func (x *IdentityOtpValidateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_identity_v1_identity_proto_msgTypes[9]
+	mi := &file_identity_v1_identity_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -920,7 +1154,7 @@ func (x *IdentityOtpValidateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IdentityOtpValidateRequest.ProtoReflect.Descriptor instead.
 func (*IdentityOtpValidateRequest) Descriptor() ([]byte, []int) {
-	return file_identity_v1_identity_proto_rawDescGZIP(), []int{9}
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *IdentityOtpValidateRequest) GetSite() string {
@@ -937,9 +1171,368 @@ func (x *IdentityOtpValidateRequest) GetId() string {
 	return ""
 }
 
-func (x *IdentityOtpValidateRequest) GetOtp() string {
+func (x *IdentityOtpValidateRequest) GetOtp() int32 {
 	if x != nil {
 		return x.Otp
+	}
+	return 0
+}
+
+type IdentityDeleteRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Site          string                 `protobuf:"bytes,1,opt,name=site,proto3" json:"site,omitempty"`
+	Id            string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IdentityDeleteRequest) Reset() {
+	*x = IdentityDeleteRequest{}
+	mi := &file_identity_v1_identity_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IdentityDeleteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IdentityDeleteRequest) ProtoMessage() {}
+
+func (x *IdentityDeleteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_identity_v1_identity_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IdentityDeleteRequest.ProtoReflect.Descriptor instead.
+func (*IdentityDeleteRequest) Descriptor() ([]byte, []int) {
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *IdentityDeleteRequest) GetSite() string {
+	if x != nil {
+		return x.Site
+	}
+	return ""
+}
+
+func (x *IdentityDeleteRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type IdentityVerifyEmailRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Site          string                 `protobuf:"bytes,1,opt,name=site,proto3" json:"site,omitempty"`
+	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IdentityVerifyEmailRequest) Reset() {
+	*x = IdentityVerifyEmailRequest{}
+	mi := &file_identity_v1_identity_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IdentityVerifyEmailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IdentityVerifyEmailRequest) ProtoMessage() {}
+
+func (x *IdentityVerifyEmailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_identity_v1_identity_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IdentityVerifyEmailRequest.ProtoReflect.Descriptor instead.
+func (*IdentityVerifyEmailRequest) Descriptor() ([]byte, []int) {
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *IdentityVerifyEmailRequest) GetSite() string {
+	if x != nil {
+		return x.Site
+	}
+	return ""
+}
+
+func (x *IdentityVerifyEmailRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+type IdentityResetPasswordRequest struct {
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	Site     *string                `protobuf:"bytes,1,opt,name=site,proto3,oneof" json:"site,omitempty"`
+	Id       *string                `protobuf:"bytes,2,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	Password string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	// @gotags: `json:"verifyPassword,omitempty" bson:"verifyPassword,omitempty"`
+	VerifyPassword string `protobuf:"bytes,4,opt,name=verify_password,json=verifyPassword,proto3" json:"verifyPassword,omitempty" bson:"verifyPassword,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *IdentityResetPasswordRequest) Reset() {
+	*x = IdentityResetPasswordRequest{}
+	mi := &file_identity_v1_identity_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IdentityResetPasswordRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IdentityResetPasswordRequest) ProtoMessage() {}
+
+func (x *IdentityResetPasswordRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_identity_v1_identity_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IdentityResetPasswordRequest.ProtoReflect.Descriptor instead.
+func (*IdentityResetPasswordRequest) Descriptor() ([]byte, []int) {
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *IdentityResetPasswordRequest) GetSite() string {
+	if x != nil && x.Site != nil {
+		return *x.Site
+	}
+	return ""
+}
+
+func (x *IdentityResetPasswordRequest) GetId() string {
+	if x != nil && x.Id != nil {
+		return *x.Id
+	}
+	return ""
+}
+
+func (x *IdentityResetPasswordRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *IdentityResetPasswordRequest) GetVerifyPassword() string {
+	if x != nil {
+		return x.VerifyPassword
+	}
+	return ""
+}
+
+type IdentitySignOutRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IdentitySignOutRequest) Reset() {
+	*x = IdentitySignOutRequest{}
+	mi := &file_identity_v1_identity_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IdentitySignOutRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IdentitySignOutRequest) ProtoMessage() {}
+
+func (x *IdentitySignOutRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_identity_v1_identity_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IdentitySignOutRequest.ProtoReflect.Descriptor instead.
+func (*IdentitySignOutRequest) Descriptor() ([]byte, []int) {
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *IdentitySignOutRequest) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
+type IdentityGoogleProtectedRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Host  *string                `protobuf:"bytes,1,opt,name=host,proto3,oneof" json:"host,omitempty"`
+	// @gotags: `json:"isSecured,omitempty"`
+	IsSecured     *bool `protobuf:"varint,2,opt,name=is_secured,json=isSecured,proto3,oneof" json:"isSecured,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IdentityGoogleProtectedRequest) Reset() {
+	*x = IdentityGoogleProtectedRequest{}
+	mi := &file_identity_v1_identity_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IdentityGoogleProtectedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IdentityGoogleProtectedRequest) ProtoMessage() {}
+
+func (x *IdentityGoogleProtectedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_identity_v1_identity_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IdentityGoogleProtectedRequest.ProtoReflect.Descriptor instead.
+func (*IdentityGoogleProtectedRequest) Descriptor() ([]byte, []int) {
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *IdentityGoogleProtectedRequest) GetHost() string {
+	if x != nil && x.Host != nil {
+		return *x.Host
+	}
+	return ""
+}
+
+func (x *IdentityGoogleProtectedRequest) GetIsSecured() bool {
+	if x != nil && x.IsSecured != nil {
+		return *x.IsSecured
+	}
+	return false
+}
+
+type IdentityGoogleProtectedResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: `json:"redirectUrl,omitempty"`
+	RedirectUrl   string `protobuf:"bytes,1,opt,name=redirect_url,json=redirectUrl,proto3" json:"redirectUrl,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IdentityGoogleProtectedResponse) Reset() {
+	*x = IdentityGoogleProtectedResponse{}
+	mi := &file_identity_v1_identity_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IdentityGoogleProtectedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IdentityGoogleProtectedResponse) ProtoMessage() {}
+
+func (x *IdentityGoogleProtectedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_identity_v1_identity_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IdentityGoogleProtectedResponse.ProtoReflect.Descriptor instead.
+func (*IdentityGoogleProtectedResponse) Descriptor() ([]byte, []int) {
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *IdentityGoogleProtectedResponse) GetRedirectUrl() string {
+	if x != nil {
+		return x.RedirectUrl
+	}
+	return ""
+}
+
+type IdentityExchangeCodeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IdentityExchangeCodeRequest) Reset() {
+	*x = IdentityExchangeCodeRequest{}
+	mi := &file_identity_v1_identity_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IdentityExchangeCodeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IdentityExchangeCodeRequest) ProtoMessage() {}
+
+func (x *IdentityExchangeCodeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_identity_v1_identity_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IdentityExchangeCodeRequest.ProtoReflect.Descriptor instead.
+func (*IdentityExchangeCodeRequest) Descriptor() ([]byte, []int) {
+	return file_identity_v1_identity_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *IdentityExchangeCodeRequest) GetCode() string {
+	if x != nil {
+		return x.Code
 	}
 	return ""
 }
@@ -983,27 +1576,63 @@ const file_identity_v1_identity_proto_rawDesc = "" +
 	"\x06_stateB\n" +
 	"\n" +
 	"\b_countryB\v\n" +
-	"\t_timezone\"\x82\x04\n" +
-	"\x1cIdentityCreateAccountRequest\x12\x12\n" +
+	"\t_timezone\"\xf0\x04\n" +
+	"\x13IdentityGetResponse\x12\x12\n" +
 	"\x04site\x18\x01 \x01(\tR\x04site\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1f\n" +
-	"\busername\x18\x03 \x01(\tH\x00R\busername\x88\x01\x01\x12\x1b\n" +
-	"\tfull_name\x18\x04 \x01(\tR\bfullName\x12$\n" +
-	"\vprofile_url\x18\x05 \x01(\tH\x01R\n" +
-	"profileUrl\x88\x01\x01\x12&\n" +
-	"\fphone_number\x18\x06 \x01(\tH\x02R\vphoneNumber\x88\x01\x01\x12\x14\n" +
-	"\x05email\x18\a \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\b \x01(\tR\bpassword\x12#\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12 \n" +
+	"\tgoogle_id\x18\x03 \x01(\tH\x00R\bgoogleId\x88\x01\x01\x12$\n" +
+	"\vprofile_url\x18\x04 \x01(\tH\x01R\n" +
+	"profileUrl\x88\x01\x01\x12\x1f\n" +
+	"\busername\x18\x05 \x01(\tH\x02R\busername\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"postalcode\x18\x15 \x01(\tH\x03R\n" +
+	"first_name\x18\x06 \x01(\tH\x03R\tfirstName\x88\x01\x01\x12 \n" +
+	"\tlast_name\x18\a \x01(\tH\x04R\blastName\x88\x01\x01\x12\x1b\n" +
+	"\tfull_name\x18\b \x01(\tR\bfullName\x12&\n" +
+	"\fphone_number\x18\t \x01(\tH\x05R\vphoneNumber\x88\x01\x01\x12\x14\n" +
+	"\x05email\x18\n" +
+	" \x01(\tR\x05email\x12#\n" +
+	"\n" +
+	"postalcode\x18\v \x01(\tH\x06R\n" +
 	"postalcode\x88\x01\x01\x12\x17\n" +
-	"\x04city\x18\x16 \x01(\tH\x04R\x04city\x88\x01\x01\x12\x19\n" +
-	"\x05state\x18\x17 \x01(\tH\x05R\x05state\x88\x01\x01\x12\x1d\n" +
-	"\acountry\x18\x18 \x01(\tH\x06R\acountry\x88\x01\x01\x12\x1f\n" +
-	"\btimezone\x18\x19 \x01(\tH\aR\btimezone\x88\x01\x01B\v\n" +
-	"\t_usernameB\x0e\n" +
-	"\f_profile_urlB\x0f\n" +
+	"\x04city\x18\f \x01(\tH\aR\x04city\x88\x01\x01\x12\x19\n" +
+	"\x05state\x18\r \x01(\tH\bR\x05state\x88\x01\x01\x12\x1d\n" +
+	"\acountry\x18\x0e \x01(\tH\tR\acountry\x88\x01\x01\x12\x1f\n" +
+	"\btimezone\x18\x0f \x01(\tH\n" +
+	"R\btimezone\x88\x01\x01B\f\n" +
+	"\n" +
+	"_google_idB\x0e\n" +
+	"\f_profile_urlB\v\n" +
+	"\t_usernameB\r\n" +
+	"\v_first_nameB\f\n" +
+	"\n" +
+	"_last_nameB\x0f\n" +
 	"\r_phone_numberB\r\n" +
+	"\v_postalcodeB\a\n" +
+	"\x05_cityB\b\n" +
+	"\x06_stateB\n" +
+	"\n" +
+	"\b_countryB\v\n" +
+	"\t_timezone\"\xf2\x03\n" +
+	"\x1cIdentityCreateAccountRequest\x12\x12\n" +
+	"\x04site\x18\x01 \x01(\tR\x04site\x12\x1b\n" +
+	"\tfull_name\x18\x02 \x01(\tR\bfullName\x12\x14\n" +
+	"\x05email\x18\x03 \x01(\tR\x05email\x12\x1a\n" +
+	"\bpassword\x18\x04 \x01(\tR\bpassword\x12&\n" +
+	"\fphone_number\x18\x05 \x01(\tH\x00R\vphoneNumber\x88\x01\x01\x12\x1f\n" +
+	"\busername\x18\x06 \x01(\tH\x01R\busername\x88\x01\x01\x12$\n" +
+	"\vprofile_url\x18\a \x01(\tH\x02R\n" +
+	"profileUrl\x88\x01\x01\x12#\n" +
+	"\n" +
+	"postalcode\x18\b \x01(\tH\x03R\n" +
+	"postalcode\x88\x01\x01\x12\x17\n" +
+	"\x04city\x18\t \x01(\tH\x04R\x04city\x88\x01\x01\x12\x19\n" +
+	"\x05state\x18\n" +
+	" \x01(\tH\x05R\x05state\x88\x01\x01\x12\x1d\n" +
+	"\acountry\x18\v \x01(\tH\x06R\acountry\x88\x01\x01\x12\x1f\n" +
+	"\btimezone\x18\f \x01(\tH\aR\btimezone\x88\x01\x01B\x0f\n" +
+	"\r_phone_numberB\v\n" +
+	"\t_usernameB\x0e\n" +
+	"\f_profile_urlB\r\n" +
 	"\v_postalcodeB\a\n" +
 	"\x05_cityB\b\n" +
 	"\x06_stateB\n" +
@@ -1012,34 +1641,46 @@ const file_identity_v1_identity_proto_rawDesc = "" +
 	"\t_timezone\"C\n" +
 	"\x1dIdentityCreateAccountResponse\x12\x12\n" +
 	"\x04site\x18\x01 \x01(\tR\x04site\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\tR\x02id\"P\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\"|\n" +
+	"\x15IdentityBasicResponse\x12\x12\n" +
+	"\x04site\x18\x01 \x01(\tR\x04site\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1f\n" +
+	"\vis_verified\x18\x03 \x01(\bR\n" +
+	"isVerified\x12\x1e\n" +
+	"\vis_otp_sent\x18\x04 \x01(\bR\tisOtpSent\"P\n" +
 	"\x18IdentityOtpVerifyRequest\x12\x12\n" +
 	"\x04site\x18\x01 \x01(\tR\x04site\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x10\n" +
-	"\x03otp\x18\x03 \x01(\tR\x03otp\"N\n" +
+	"\x03otp\x18\x03 \x01(\tR\x03otp\"]\n" +
 	"\x12IdentityGetRequest\x12\x12\n" +
 	"\x04site\x18\x01 \x01(\tR\x04site\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\tR\x02id\x12\x14\n" +
-	"\x05token\x18\x03 \x01(\tR\x05token\"\xcc\x04\n" +
-	"\x15IdentityUpdateRequest\x12\x12\n" +
-	"\x04site\x18\x01 \x01(\tR\x04site\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1b\n" +
-	"\tgoogle_id\x18\x03 \x01(\tR\bgoogleId\x12$\n" +
-	"\vprofile_url\x18\x04 \x01(\tH\x00R\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x19\n" +
+	"\x05token\x18\x03 \x01(\tH\x00R\x05token\x88\x01\x01B\b\n" +
+	"\x06_token\"\xf9\x04\n" +
+	"\x15IdentityUpdateRequest\x12\x17\n" +
+	"\x04site\x18\x01 \x01(\tH\x00R\x04site\x88\x01\x01\x12\x13\n" +
+	"\x02id\x18\x02 \x01(\tH\x01R\x02id\x88\x01\x01\x12 \n" +
+	"\tgoogle_id\x18\x03 \x01(\tH\x02R\bgoogleId\x88\x01\x01\x12$\n" +
+	"\vprofile_url\x18\x04 \x01(\tH\x03R\n" +
 	"profileUrl\x88\x01\x01\x12\x1f\n" +
-	"\busername\x18\x05 \x01(\tH\x01R\busername\x88\x01\x01\x12 \n" +
-	"\tfull_name\x18\x06 \x01(\tH\x02R\bfullName\x88\x01\x01\x12&\n" +
-	"\fphone_number\x18\a \x01(\tH\x03R\vphoneNumber\x88\x01\x01\x12\x19\n" +
-	"\x05email\x18\b \x01(\tH\x04R\x05email\x88\x01\x01\x12\x1f\n" +
-	"\bpassword\x18\t \x01(\tH\x05R\bpassword\x88\x01\x01\x12#\n" +
+	"\busername\x18\x05 \x01(\tH\x04R\busername\x88\x01\x01\x12 \n" +
+	"\tfull_name\x18\x06 \x01(\tH\x05R\bfullName\x88\x01\x01\x12&\n" +
+	"\fphone_number\x18\a \x01(\tH\x06R\vphoneNumber\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\b \x01(\tH\aR\x05email\x88\x01\x01\x12\x1f\n" +
+	"\bpassword\x18\t \x01(\tH\bR\bpassword\x88\x01\x01\x12#\n" +
 	"\n" +
-	"postalcode\x18\x15 \x01(\tH\x06R\n" +
+	"postalcode\x18\n" +
+	" \x01(\tH\tR\n" +
 	"postalcode\x88\x01\x01\x12\x17\n" +
-	"\x04city\x18\x16 \x01(\tH\aR\x04city\x88\x01\x01\x12\x19\n" +
-	"\x05state\x18\x17 \x01(\tH\bR\x05state\x88\x01\x01\x12\x1d\n" +
-	"\acountry\x18\x18 \x01(\tH\tR\acountry\x88\x01\x01\x12\x1f\n" +
-	"\btimezone\x18\x19 \x01(\tH\n" +
-	"R\btimezone\x88\x01\x01B\x0e\n" +
+	"\x04city\x18\v \x01(\tH\n" +
+	"R\x04city\x88\x01\x01\x12\x19\n" +
+	"\x05state\x18\f \x01(\tH\vR\x05state\x88\x01\x01\x12\x1d\n" +
+	"\acountry\x18\r \x01(\tH\fR\acountry\x88\x01\x01\x12\x1f\n" +
+	"\btimezone\x18\x0e \x01(\tH\rR\btimezone\x88\x01\x01B\a\n" +
+	"\x05_siteB\x05\n" +
+	"\x03_idB\f\n" +
+	"\n" +
+	"_google_idB\x0e\n" +
 	"\f_profile_urlB\v\n" +
 	"\t_usernameB\f\n" +
 	"\n" +
@@ -1052,25 +1693,55 @@ const file_identity_v1_identity_proto_rawDesc = "" +
 	"\x06_stateB\n" +
 	"\n" +
 	"\b_countryB\v\n" +
-	"\t_timezone\"z\n" +
+	"\t_timezone\"\x8c\x01\n" +
 	"\x13IdentityAuthRequest\x12\x12\n" +
 	"\x04site\x18\x01 \x01(\tR\x04site\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\x12\x15\n" +
-	"\x03otp\x18\x04 \x01(\x05H\x00R\x03otp\x88\x01\x01B\x06\n" +
-	"\x04_otp\"\x85\x01\n" +
-	"\x14IdentityAuthResponse\x12/\n" +
-	"\x13authorization_token\x18\x01 \x01(\tR\x12authorizationToken\x12#\n" +
-	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\tR\x06userId\"W\n" +
-	"\x1bIdentityRefreshTokenRequest\x12\x12\n" +
-	"\x04site\x18\x01 \x01(\tR\x04site\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\tR\x02id\x12\x14\n" +
-	"\x05token\x18\x03 \x01(\tR\x05token\"R\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1f\n" +
+	"\bpassword\x18\x03 \x01(\tH\x00R\bpassword\x88\x01\x01\x12\x15\n" +
+	"\x03otp\x18\x04 \x01(\x05H\x01R\x03otp\x88\x01\x01B\v\n" +
+	"\t_passwordB\x06\n" +
+	"\x04_otp\"\xa2\x01\n" +
+	"\x14IdentityAuthResponse\x12!\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12(\n" +
+	"\rrefresh_token\x18\x02 \x01(\tH\x00R\frefreshToken\x88\x01\x01\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\tR\x06userId\x12\x12\n" +
+	"\x04site\x18\x04 \x01(\tR\x04siteB\x10\n" +
+	"\x0e_refresh_token\"q\n" +
+	"\x1bIdentityRefreshTokenRequest\x12\x17\n" +
+	"\x04site\x18\x01 \x01(\tH\x00R\x04site\x88\x01\x01\x12\x13\n" +
+	"\x02id\x18\x02 \x01(\tH\x01R\x02id\x88\x01\x01\x12\x14\n" +
+	"\x05token\x18\x03 \x01(\tR\x05tokenB\a\n" +
+	"\x05_siteB\x05\n" +
+	"\x03_id\"R\n" +
 	"\x1aIdentityOtpValidateRequest\x12\x12\n" +
 	"\x04site\x18\x01 \x01(\tR\x04site\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x10\n" +
-	"\x03otp\x18\x03 \x01(\tR\x03otpB6Z4github.com/AyuuSaxena/protos-go/identity/v1;identityb\x06proto3"
+	"\x03otp\x18\x03 \x01(\x05R\x03otp\";\n" +
+	"\x15IdentityDeleteRequest\x12\x12\n" +
+	"\x04site\x18\x01 \x01(\tR\x04site\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\"F\n" +
+	"\x1aIdentityVerifyEmailRequest\x12\x12\n" +
+	"\x04site\x18\x01 \x01(\tR\x04site\x12\x14\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\"\xa1\x01\n" +
+	"\x1cIdentityResetPasswordRequest\x12\x17\n" +
+	"\x04site\x18\x01 \x01(\tH\x00R\x04site\x88\x01\x01\x12\x13\n" +
+	"\x02id\x18\x02 \x01(\tH\x01R\x02id\x88\x01\x01\x12\x1a\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\x12'\n" +
+	"\x0fverify_password\x18\x04 \x01(\tR\x0everifyPasswordB\a\n" +
+	"\x05_siteB\x05\n" +
+	"\x03_id\".\n" +
+	"\x16IdentitySignOutRequest\x12\x14\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"u\n" +
+	"\x1eIdentityGoogleProtectedRequest\x12\x17\n" +
+	"\x04host\x18\x01 \x01(\tH\x00R\x04host\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"is_secured\x18\x02 \x01(\bH\x01R\tisSecured\x88\x01\x01B\a\n" +
+	"\x05_hostB\r\n" +
+	"\v_is_secured\"D\n" +
+	"\x1fIdentityGoogleProtectedResponse\x12!\n" +
+	"\fredirect_url\x18\x01 \x01(\tR\vredirectUrl\"1\n" +
+	"\x1bIdentityExchangeCodeRequest\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\tR\x04codeB6Z4github.com/AyuuSaxena/protos-go/identity/v1;identityb\x06proto3"
 
 var (
 	file_identity_v1_identity_proto_rawDescOnce sync.Once
@@ -1084,18 +1755,27 @@ func file_identity_v1_identity_proto_rawDescGZIP() []byte {
 	return file_identity_v1_identity_proto_rawDescData
 }
 
-var file_identity_v1_identity_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_identity_v1_identity_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_identity_v1_identity_proto_goTypes = []any{
-	(*Identity)(nil),                      // 0: identity.v1.Identity
-	(*IdentityCreateAccountRequest)(nil),  // 1: identity.v1.IdentityCreateAccountRequest
-	(*IdentityCreateAccountResponse)(nil), // 2: identity.v1.IdentityCreateAccountResponse
-	(*IdentityOtpVerifyRequest)(nil),      // 3: identity.v1.IdentityOtpVerifyRequest
-	(*IdentityGetRequest)(nil),            // 4: identity.v1.IdentityGetRequest
-	(*IdentityUpdateRequest)(nil),         // 5: identity.v1.IdentityUpdateRequest
-	(*IdentityAuthRequest)(nil),           // 6: identity.v1.IdentityAuthRequest
-	(*IdentityAuthResponse)(nil),          // 7: identity.v1.IdentityAuthResponse
-	(*IdentityRefreshTokenRequest)(nil),   // 8: identity.v1.IdentityRefreshTokenRequest
-	(*IdentityOtpValidateRequest)(nil),    // 9: identity.v1.IdentityOtpValidateRequest
+	(*Identity)(nil),                        // 0: identity.v1.Identity
+	(*IdentityGetResponse)(nil),             // 1: identity.v1.IdentityGetResponse
+	(*IdentityCreateAccountRequest)(nil),    // 2: identity.v1.IdentityCreateAccountRequest
+	(*IdentityCreateAccountResponse)(nil),   // 3: identity.v1.IdentityCreateAccountResponse
+	(*IdentityBasicResponse)(nil),           // 4: identity.v1.IdentityBasicResponse
+	(*IdentityOtpVerifyRequest)(nil),        // 5: identity.v1.IdentityOtpVerifyRequest
+	(*IdentityGetRequest)(nil),              // 6: identity.v1.IdentityGetRequest
+	(*IdentityUpdateRequest)(nil),           // 7: identity.v1.IdentityUpdateRequest
+	(*IdentityAuthRequest)(nil),             // 8: identity.v1.IdentityAuthRequest
+	(*IdentityAuthResponse)(nil),            // 9: identity.v1.IdentityAuthResponse
+	(*IdentityRefreshTokenRequest)(nil),     // 10: identity.v1.IdentityRefreshTokenRequest
+	(*IdentityOtpValidateRequest)(nil),      // 11: identity.v1.IdentityOtpValidateRequest
+	(*IdentityDeleteRequest)(nil),           // 12: identity.v1.IdentityDeleteRequest
+	(*IdentityVerifyEmailRequest)(nil),      // 13: identity.v1.IdentityVerifyEmailRequest
+	(*IdentityResetPasswordRequest)(nil),    // 14: identity.v1.IdentityResetPasswordRequest
+	(*IdentitySignOutRequest)(nil),          // 15: identity.v1.IdentitySignOutRequest
+	(*IdentityGoogleProtectedRequest)(nil),  // 16: identity.v1.IdentityGoogleProtectedRequest
+	(*IdentityGoogleProtectedResponse)(nil), // 17: identity.v1.IdentityGoogleProtectedResponse
+	(*IdentityExchangeCodeRequest)(nil),     // 18: identity.v1.IdentityExchangeCodeRequest
 }
 var file_identity_v1_identity_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -1112,15 +1792,21 @@ func file_identity_v1_identity_proto_init() {
 	}
 	file_identity_v1_identity_proto_msgTypes[0].OneofWrappers = []any{}
 	file_identity_v1_identity_proto_msgTypes[1].OneofWrappers = []any{}
-	file_identity_v1_identity_proto_msgTypes[5].OneofWrappers = []any{}
+	file_identity_v1_identity_proto_msgTypes[2].OneofWrappers = []any{}
 	file_identity_v1_identity_proto_msgTypes[6].OneofWrappers = []any{}
+	file_identity_v1_identity_proto_msgTypes[7].OneofWrappers = []any{}
+	file_identity_v1_identity_proto_msgTypes[8].OneofWrappers = []any{}
+	file_identity_v1_identity_proto_msgTypes[9].OneofWrappers = []any{}
+	file_identity_v1_identity_proto_msgTypes[10].OneofWrappers = []any{}
+	file_identity_v1_identity_proto_msgTypes[14].OneofWrappers = []any{}
+	file_identity_v1_identity_proto_msgTypes[16].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_identity_v1_identity_proto_rawDesc), len(file_identity_v1_identity_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

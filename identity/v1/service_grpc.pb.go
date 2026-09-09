@@ -19,25 +19,48 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	IdentityService_IdentityCreate_FullMethodName       = "/identity.v1.IdentityService/IdentityCreate"
-	IdentityService_IdentityGet_FullMethodName          = "/identity.v1.IdentityService/IdentityGet"
-	IdentityService_IdentityUpdate_FullMethodName       = "/identity.v1.IdentityService/IdentityUpdate"
-	IdentityService_IdentityOtpValidate_FullMethodName  = "/identity.v1.IdentityService/IdentityOtpValidate"
-	IdentityService_IdentityLogin_FullMethodName        = "/identity.v1.IdentityService/IdentityLogin"
-	IdentityService_IdentityRefershToken_FullMethodName = "/identity.v1.IdentityService/IdentityRefershToken"
+	IdentityService_IdentityCreate_FullMethodName          = "/identity.v1.IdentityService/IdentityCreate"
+	IdentityService_IdentityOtpValidate_FullMethodName     = "/identity.v1.IdentityService/IdentityOtpValidate"
+	IdentityService_IdentityLogin_FullMethodName           = "/identity.v1.IdentityService/IdentityLogin"
+	IdentityService_IdentityGet_FullMethodName             = "/identity.v1.IdentityService/IdentityGet"
+	IdentityService_IdentityDelete_FullMethodName          = "/identity.v1.IdentityService/IdentityDelete"
+	IdentityService_IdentityVerify_FullMethodName          = "/identity.v1.IdentityService/IdentityVerify"
+	IdentityService_IdentityResetPassword_FullMethodName   = "/identity.v1.IdentityService/IdentityResetPassword"
+	IdentityService_IdentityUpdate_FullMethodName          = "/identity.v1.IdentityService/IdentityUpdate"
+	IdentityService_IdentityRefershToken_FullMethodName    = "/identity.v1.IdentityService/IdentityRefershToken"
+	IdentityService_IdentitySignOut_FullMethodName         = "/identity.v1.IdentityService/IdentitySignOut"
+	IdentityService_IdentityGoogleProtected_FullMethodName = "/identity.v1.IdentityService/IdentityGoogleProtected"
+	IdentityService_IdentityExchangeCode_FullMethodName    = "/identity.v1.IdentityService/IdentityExchangeCode"
 )
 
 // IdentityServiceClient is the client API for IdentityService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type IdentityServiceClient interface {
-	IdentityCreate(ctx context.Context, in *IdentityCreateAccountRequest, opts ...grpc.CallOption) (*IdentityCreateAccountResponse, error)
-	IdentityGet(ctx context.Context, in *IdentityGetRequest, opts ...grpc.CallOption) (*Identity, error)
-	IdentityUpdate(ctx context.Context, in *IdentityUpdateRequest, opts ...grpc.CallOption) (*Identity, error)
+	// Create a new identity
+	IdentityCreate(ctx context.Context, in *IdentityCreateAccountRequest, opts ...grpc.CallOption) (*IdentityBasicResponse, error)
+	// Verify a new identity using OTP
 	IdentityOtpValidate(ctx context.Context, in *IdentityOtpValidateRequest, opts ...grpc.CallOption) (*IdentityAuthResponse, error)
-	// Auth
+	// Signin an identity using OTP or password
 	IdentityLogin(ctx context.Context, in *IdentityAuthRequest, opts ...grpc.CallOption) (*IdentityAuthResponse, error)
+	// Get an identity
+	IdentityGet(ctx context.Context, in *IdentityGetRequest, opts ...grpc.CallOption) (*IdentityGetResponse, error)
+	// Mark identity as inactive
+	IdentityDelete(ctx context.Context, in *IdentityDeleteRequest, opts ...grpc.CallOption) (*IdentityBasicResponse, error)
+	// Verify identity by email and send OTP
+	IdentityVerify(ctx context.Context, in *IdentityVerifyEmailRequest, opts ...grpc.CallOption) (*IdentityBasicResponse, error)
+	// Reset identity password
+	IdentityResetPassword(ctx context.Context, in *IdentityResetPasswordRequest, opts ...grpc.CallOption) (*IdentityAuthResponse, error)
+	// Update identity details
+	IdentityUpdate(ctx context.Context, in *IdentityUpdateRequest, opts ...grpc.CallOption) (*IdentityGetResponse, error)
+	// Get access token from refresh token
 	IdentityRefershToken(ctx context.Context, in *IdentityRefreshTokenRequest, opts ...grpc.CallOption) (*IdentityAuthResponse, error)
+	// Sign out an identity and invalidate the access token
+	IdentitySignOut(ctx context.Context, in *IdentitySignOutRequest, opts ...grpc.CallOption) (*IdentityBasicResponse, error)
+	// Google authentication protected
+	IdentityGoogleProtected(ctx context.Context, in *IdentityGoogleProtectedRequest, opts ...grpc.CallOption) (*IdentityGoogleProtectedResponse, error)
+	// Exchange single-use authorization code for authentication tokens
+	IdentityExchangeCode(ctx context.Context, in *IdentityExchangeCodeRequest, opts ...grpc.CallOption) (*IdentityAuthResponse, error)
 }
 
 type identityServiceClient struct {
@@ -48,30 +71,10 @@ func NewIdentityServiceClient(cc grpc.ClientConnInterface) IdentityServiceClient
 	return &identityServiceClient{cc}
 }
 
-func (c *identityServiceClient) IdentityCreate(ctx context.Context, in *IdentityCreateAccountRequest, opts ...grpc.CallOption) (*IdentityCreateAccountResponse, error) {
+func (c *identityServiceClient) IdentityCreate(ctx context.Context, in *IdentityCreateAccountRequest, opts ...grpc.CallOption) (*IdentityBasicResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IdentityCreateAccountResponse)
+	out := new(IdentityBasicResponse)
 	err := c.cc.Invoke(ctx, IdentityService_IdentityCreate_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *identityServiceClient) IdentityGet(ctx context.Context, in *IdentityGetRequest, opts ...grpc.CallOption) (*Identity, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Identity)
-	err := c.cc.Invoke(ctx, IdentityService_IdentityGet_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *identityServiceClient) IdentityUpdate(ctx context.Context, in *IdentityUpdateRequest, opts ...grpc.CallOption) (*Identity, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Identity)
-	err := c.cc.Invoke(ctx, IdentityService_IdentityUpdate_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -98,6 +101,56 @@ func (c *identityServiceClient) IdentityLogin(ctx context.Context, in *IdentityA
 	return out, nil
 }
 
+func (c *identityServiceClient) IdentityGet(ctx context.Context, in *IdentityGetRequest, opts ...grpc.CallOption) (*IdentityGetResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentityGetResponse)
+	err := c.cc.Invoke(ctx, IdentityService_IdentityGet_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityServiceClient) IdentityDelete(ctx context.Context, in *IdentityDeleteRequest, opts ...grpc.CallOption) (*IdentityBasicResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentityBasicResponse)
+	err := c.cc.Invoke(ctx, IdentityService_IdentityDelete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityServiceClient) IdentityVerify(ctx context.Context, in *IdentityVerifyEmailRequest, opts ...grpc.CallOption) (*IdentityBasicResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentityBasicResponse)
+	err := c.cc.Invoke(ctx, IdentityService_IdentityVerify_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityServiceClient) IdentityResetPassword(ctx context.Context, in *IdentityResetPasswordRequest, opts ...grpc.CallOption) (*IdentityAuthResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentityAuthResponse)
+	err := c.cc.Invoke(ctx, IdentityService_IdentityResetPassword_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityServiceClient) IdentityUpdate(ctx context.Context, in *IdentityUpdateRequest, opts ...grpc.CallOption) (*IdentityGetResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentityGetResponse)
+	err := c.cc.Invoke(ctx, IdentityService_IdentityUpdate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *identityServiceClient) IdentityRefershToken(ctx context.Context, in *IdentityRefreshTokenRequest, opts ...grpc.CallOption) (*IdentityAuthResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IdentityAuthResponse)
@@ -108,17 +161,64 @@ func (c *identityServiceClient) IdentityRefershToken(ctx context.Context, in *Id
 	return out, nil
 }
 
+func (c *identityServiceClient) IdentitySignOut(ctx context.Context, in *IdentitySignOutRequest, opts ...grpc.CallOption) (*IdentityBasicResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentityBasicResponse)
+	err := c.cc.Invoke(ctx, IdentityService_IdentitySignOut_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityServiceClient) IdentityGoogleProtected(ctx context.Context, in *IdentityGoogleProtectedRequest, opts ...grpc.CallOption) (*IdentityGoogleProtectedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentityGoogleProtectedResponse)
+	err := c.cc.Invoke(ctx, IdentityService_IdentityGoogleProtected_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityServiceClient) IdentityExchangeCode(ctx context.Context, in *IdentityExchangeCodeRequest, opts ...grpc.CallOption) (*IdentityAuthResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IdentityAuthResponse)
+	err := c.cc.Invoke(ctx, IdentityService_IdentityExchangeCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IdentityServiceServer is the server API for IdentityService service.
 // All implementations must embed UnimplementedIdentityServiceServer
 // for forward compatibility.
 type IdentityServiceServer interface {
-	IdentityCreate(context.Context, *IdentityCreateAccountRequest) (*IdentityCreateAccountResponse, error)
-	IdentityGet(context.Context, *IdentityGetRequest) (*Identity, error)
-	IdentityUpdate(context.Context, *IdentityUpdateRequest) (*Identity, error)
+	// Create a new identity
+	IdentityCreate(context.Context, *IdentityCreateAccountRequest) (*IdentityBasicResponse, error)
+	// Verify a new identity using OTP
 	IdentityOtpValidate(context.Context, *IdentityOtpValidateRequest) (*IdentityAuthResponse, error)
-	// Auth
+	// Signin an identity using OTP or password
 	IdentityLogin(context.Context, *IdentityAuthRequest) (*IdentityAuthResponse, error)
+	// Get an identity
+	IdentityGet(context.Context, *IdentityGetRequest) (*IdentityGetResponse, error)
+	// Mark identity as inactive
+	IdentityDelete(context.Context, *IdentityDeleteRequest) (*IdentityBasicResponse, error)
+	// Verify identity by email and send OTP
+	IdentityVerify(context.Context, *IdentityVerifyEmailRequest) (*IdentityBasicResponse, error)
+	// Reset identity password
+	IdentityResetPassword(context.Context, *IdentityResetPasswordRequest) (*IdentityAuthResponse, error)
+	// Update identity details
+	IdentityUpdate(context.Context, *IdentityUpdateRequest) (*IdentityGetResponse, error)
+	// Get access token from refresh token
 	IdentityRefershToken(context.Context, *IdentityRefreshTokenRequest) (*IdentityAuthResponse, error)
+	// Sign out an identity and invalidate the access token
+	IdentitySignOut(context.Context, *IdentitySignOutRequest) (*IdentityBasicResponse, error)
+	// Google authentication protected
+	IdentityGoogleProtected(context.Context, *IdentityGoogleProtectedRequest) (*IdentityGoogleProtectedResponse, error)
+	// Exchange single-use authorization code for authentication tokens
+	IdentityExchangeCode(context.Context, *IdentityExchangeCodeRequest) (*IdentityAuthResponse, error)
 	mustEmbedUnimplementedIdentityServiceServer()
 }
 
@@ -129,14 +229,8 @@ type IdentityServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedIdentityServiceServer struct{}
 
-func (UnimplementedIdentityServiceServer) IdentityCreate(context.Context, *IdentityCreateAccountRequest) (*IdentityCreateAccountResponse, error) {
+func (UnimplementedIdentityServiceServer) IdentityCreate(context.Context, *IdentityCreateAccountRequest) (*IdentityBasicResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method IdentityCreate not implemented")
-}
-func (UnimplementedIdentityServiceServer) IdentityGet(context.Context, *IdentityGetRequest) (*Identity, error) {
-	return nil, status.Error(codes.Unimplemented, "method IdentityGet not implemented")
-}
-func (UnimplementedIdentityServiceServer) IdentityUpdate(context.Context, *IdentityUpdateRequest) (*Identity, error) {
-	return nil, status.Error(codes.Unimplemented, "method IdentityUpdate not implemented")
 }
 func (UnimplementedIdentityServiceServer) IdentityOtpValidate(context.Context, *IdentityOtpValidateRequest) (*IdentityAuthResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method IdentityOtpValidate not implemented")
@@ -144,8 +238,32 @@ func (UnimplementedIdentityServiceServer) IdentityOtpValidate(context.Context, *
 func (UnimplementedIdentityServiceServer) IdentityLogin(context.Context, *IdentityAuthRequest) (*IdentityAuthResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method IdentityLogin not implemented")
 }
+func (UnimplementedIdentityServiceServer) IdentityGet(context.Context, *IdentityGetRequest) (*IdentityGetResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IdentityGet not implemented")
+}
+func (UnimplementedIdentityServiceServer) IdentityDelete(context.Context, *IdentityDeleteRequest) (*IdentityBasicResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IdentityDelete not implemented")
+}
+func (UnimplementedIdentityServiceServer) IdentityVerify(context.Context, *IdentityVerifyEmailRequest) (*IdentityBasicResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IdentityVerify not implemented")
+}
+func (UnimplementedIdentityServiceServer) IdentityResetPassword(context.Context, *IdentityResetPasswordRequest) (*IdentityAuthResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IdentityResetPassword not implemented")
+}
+func (UnimplementedIdentityServiceServer) IdentityUpdate(context.Context, *IdentityUpdateRequest) (*IdentityGetResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IdentityUpdate not implemented")
+}
 func (UnimplementedIdentityServiceServer) IdentityRefershToken(context.Context, *IdentityRefreshTokenRequest) (*IdentityAuthResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method IdentityRefershToken not implemented")
+}
+func (UnimplementedIdentityServiceServer) IdentitySignOut(context.Context, *IdentitySignOutRequest) (*IdentityBasicResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IdentitySignOut not implemented")
+}
+func (UnimplementedIdentityServiceServer) IdentityGoogleProtected(context.Context, *IdentityGoogleProtectedRequest) (*IdentityGoogleProtectedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IdentityGoogleProtected not implemented")
+}
+func (UnimplementedIdentityServiceServer) IdentityExchangeCode(context.Context, *IdentityExchangeCodeRequest) (*IdentityAuthResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IdentityExchangeCode not implemented")
 }
 func (UnimplementedIdentityServiceServer) mustEmbedUnimplementedIdentityServiceServer() {}
 func (UnimplementedIdentityServiceServer) testEmbeddedByValue()                         {}
@@ -186,42 +304,6 @@ func _IdentityService_IdentityCreate_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IdentityService_IdentityGet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IdentityGetRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IdentityServiceServer).IdentityGet(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IdentityService_IdentityGet_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).IdentityGet(ctx, req.(*IdentityGetRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IdentityService_IdentityUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IdentityUpdateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IdentityServiceServer).IdentityUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IdentityService_IdentityUpdate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).IdentityUpdate(ctx, req.(*IdentityUpdateRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _IdentityService_IdentityOtpValidate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(IdentityOtpValidateRequest)
 	if err := dec(in); err != nil {
@@ -258,6 +340,96 @@ func _IdentityService_IdentityLogin_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IdentityService_IdentityGet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdentityGetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).IdentityGet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_IdentityGet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).IdentityGet(ctx, req.(*IdentityGetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IdentityService_IdentityDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdentityDeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).IdentityDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_IdentityDelete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).IdentityDelete(ctx, req.(*IdentityDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IdentityService_IdentityVerify_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdentityVerifyEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).IdentityVerify(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_IdentityVerify_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).IdentityVerify(ctx, req.(*IdentityVerifyEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IdentityService_IdentityResetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdentityResetPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).IdentityResetPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_IdentityResetPassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).IdentityResetPassword(ctx, req.(*IdentityResetPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IdentityService_IdentityUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdentityUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).IdentityUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_IdentityUpdate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).IdentityUpdate(ctx, req.(*IdentityUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _IdentityService_IdentityRefershToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(IdentityRefreshTokenRequest)
 	if err := dec(in); err != nil {
@@ -276,6 +448,60 @@ func _IdentityService_IdentityRefershToken_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IdentityService_IdentitySignOut_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdentitySignOutRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).IdentitySignOut(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_IdentitySignOut_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).IdentitySignOut(ctx, req.(*IdentitySignOutRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IdentityService_IdentityGoogleProtected_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdentityGoogleProtectedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).IdentityGoogleProtected(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_IdentityGoogleProtected_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).IdentityGoogleProtected(ctx, req.(*IdentityGoogleProtectedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IdentityService_IdentityExchangeCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdentityExchangeCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).IdentityExchangeCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_IdentityExchangeCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).IdentityExchangeCode(ctx, req.(*IdentityExchangeCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // IdentityService_ServiceDesc is the grpc.ServiceDesc for IdentityService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -288,14 +514,6 @@ var IdentityService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _IdentityService_IdentityCreate_Handler,
 		},
 		{
-			MethodName: "IdentityGet",
-			Handler:    _IdentityService_IdentityGet_Handler,
-		},
-		{
-			MethodName: "IdentityUpdate",
-			Handler:    _IdentityService_IdentityUpdate_Handler,
-		},
-		{
 			MethodName: "IdentityOtpValidate",
 			Handler:    _IdentityService_IdentityOtpValidate_Handler,
 		},
@@ -304,8 +522,40 @@ var IdentityService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _IdentityService_IdentityLogin_Handler,
 		},
 		{
+			MethodName: "IdentityGet",
+			Handler:    _IdentityService_IdentityGet_Handler,
+		},
+		{
+			MethodName: "IdentityDelete",
+			Handler:    _IdentityService_IdentityDelete_Handler,
+		},
+		{
+			MethodName: "IdentityVerify",
+			Handler:    _IdentityService_IdentityVerify_Handler,
+		},
+		{
+			MethodName: "IdentityResetPassword",
+			Handler:    _IdentityService_IdentityResetPassword_Handler,
+		},
+		{
+			MethodName: "IdentityUpdate",
+			Handler:    _IdentityService_IdentityUpdate_Handler,
+		},
+		{
 			MethodName: "IdentityRefershToken",
 			Handler:    _IdentityService_IdentityRefershToken_Handler,
+		},
+		{
+			MethodName: "IdentitySignOut",
+			Handler:    _IdentityService_IdentitySignOut_Handler,
+		},
+		{
+			MethodName: "IdentityGoogleProtected",
+			Handler:    _IdentityService_IdentityGoogleProtected_Handler,
+		},
+		{
+			MethodName: "IdentityExchangeCode",
+			Handler:    _IdentityService_IdentityExchangeCode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
