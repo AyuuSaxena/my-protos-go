@@ -6,8 +6,7 @@
   },
   "tags": [
     {
-      "name": "StorageService",
-      "description": "StorageService exposes gRPC and REST-transcoded APIs for bucket and object storage management."
+      "name": "Storage"
     }
   ],
   "consumes": [
@@ -28,6 +27,12 @@
               "$ref": "#/definitions/v1ListBucketsResponse"
             }
           },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -38,7 +43,7 @@
         "parameters": [
           {
             "name": "pagination.limit",
-            "description": "Maximum number of items to return (default 20, max 100)\n@gotags: `form:\"limit\" json:\"limit,omitempty\" bson:\"limit,omitempty\"`",
+            "description": "Maximum number of items to return (default 20, max 100)",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -46,7 +51,7 @@
           },
           {
             "name": "pagination.offset",
-            "description": "Number of items to skip for pagination (default 0)\n@gotags: `form:\"offset\" json:\"offset,omitempty\" bson:\"offset,omitempty\"`",
+            "description": "Number of items to skip for pagination (default 0)",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -54,28 +59,36 @@
           },
           {
             "name": "pagination.keyword",
-            "description": "Search keyword across text fields\n@gotags: `form:\"keyword\" json:\"keyword,omitempty\" bson:\"keyword,omitempty\"`",
+            "description": "Search keyword across text fields",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "pagination.sortby",
-            "description": "Field name to sort by (e.g. title, createdAt)\n@gotags: `form:\"sortby\" json:\"sortby,omitempty\" bson:\"sortby,omitempty\"`",
+            "description": "Field name to sort by (e.g. title, createdAt)",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "pagination.sortOrder",
-            "description": "Sort direction order (asc or desc, default desc)\n@gotags: `form:\"sortOrder\" json:\"sortOrder,omitempty\" bson:\"sortOrder,omitempty\"`",
+            "description": "Sort direction order (asc or desc, default desc)",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       },
       "post": {
@@ -87,6 +100,12 @@
             "schema": {
               "$ref": "#/definitions/v1CreateBucketResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           },
           "default": {
             "description": "An unexpected error response.",
@@ -107,7 +126,15 @@
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -121,6 +148,12 @@
             "schema": {
               "$ref": "#/definitions/v1ListFilesResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           },
           "default": {
             "description": "An unexpected error response.",
@@ -150,7 +183,7 @@
           },
           {
             "name": "pagination.limit",
-            "description": "Maximum number of items to return (default 20, max 100)\n@gotags: `form:\"limit\" json:\"limit,omitempty\" bson:\"limit,omitempty\"`",
+            "description": "Maximum number of items to return (default 20, max 100)",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -158,7 +191,7 @@
           },
           {
             "name": "pagination.offset",
-            "description": "Number of items to skip for pagination (default 0)\n@gotags: `form:\"offset\" json:\"offset,omitempty\" bson:\"offset,omitempty\"`",
+            "description": "Number of items to skip for pagination (default 0)",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -166,28 +199,36 @@
           },
           {
             "name": "pagination.keyword",
-            "description": "Search keyword across text fields\n@gotags: `form:\"keyword\" json:\"keyword,omitempty\" bson:\"keyword,omitempty\"`",
+            "description": "Search keyword across text fields",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "pagination.sortby",
-            "description": "Field name to sort by (e.g. title, createdAt)\n@gotags: `form:\"sortby\" json:\"sortby,omitempty\" bson:\"sortby,omitempty\"`",
+            "description": "Field name to sort by (e.g. title, createdAt)",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "pagination.sortOrder",
-            "description": "Sort direction order (asc or desc, default desc)\n@gotags: `form:\"sortOrder\" json:\"sortOrder,omitempty\" bson:\"sortOrder,omitempty\"`",
+            "description": "Sort direction order (asc or desc, default desc)",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -202,6 +243,12 @@
               "$ref": "#/definitions/v1FileMetadata"
             }
           },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -224,7 +271,15 @@
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       },
       "delete": {
@@ -237,6 +292,12 @@
               "$ref": "#/definitions/v1DeleteFileResponse"
             }
           },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -259,7 +320,15 @@
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -283,6 +352,12 @@
               "title": "Stream result of v1FileChunk"
             }
           },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -305,7 +380,15 @@
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -320,34 +403,11 @@
               "$ref": "#/definitions/v1BucketMetadata"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "StorageService"
-        ]
-      },
-      "delete": {
-        "summary": "DeleteBucket deletes a bucket and its attached metadata.",
-        "operationId": "StorageService_DeleteBucket",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1DeleteBucketResponse"
-            }
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           },
           "default": {
             "description": "An unexpected error response.",
@@ -365,7 +425,58 @@
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "DeleteBucket deletes a bucket and its attached metadata.",
+        "operationId": "StorageService_DeleteBucket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteBucketResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -379,6 +490,12 @@
             "schema": {
               "$ref": "#/definitions/v1CreateBucketResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           },
           "default": {
             "description": "An unexpected error response.",
@@ -399,7 +516,15 @@
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -413,6 +538,12 @@
             "schema": {
               "$ref": "#/definitions/v1DeleteBucketResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           },
           "default": {
             "description": "An unexpected error response.",
@@ -430,7 +561,15 @@
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -444,6 +583,12 @@
             "schema": {
               "$ref": "#/definitions/v1DeleteFileResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           },
           "default": {
             "description": "An unexpected error response.",
@@ -467,7 +612,15 @@
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -491,6 +644,12 @@
               "title": "Stream result of v1FileChunk"
             }
           },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -513,7 +672,15 @@
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -527,6 +694,12 @@
             "schema": {
               "$ref": "#/definitions/v1BucketMetadata"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           },
           "default": {
             "description": "An unexpected error response.",
@@ -544,7 +717,15 @@
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -558,6 +739,12 @@
             "schema": {
               "$ref": "#/definitions/v1FileMetadata"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           },
           "default": {
             "description": "An unexpected error response.",
@@ -581,7 +768,15 @@
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -596,6 +791,12 @@
               "$ref": "#/definitions/v1ListBucketsResponse"
             }
           },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -606,7 +807,7 @@
         "parameters": [
           {
             "name": "pagination.limit",
-            "description": "Maximum number of items to return (default 20, max 100)\n@gotags: `form:\"limit\" json:\"limit,omitempty\" bson:\"limit,omitempty\"`",
+            "description": "Maximum number of items to return (default 20, max 100)",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -614,7 +815,7 @@
           },
           {
             "name": "pagination.offset",
-            "description": "Number of items to skip for pagination (default 0)\n@gotags: `form:\"offset\" json:\"offset,omitempty\" bson:\"offset,omitempty\"`",
+            "description": "Number of items to skip for pagination (default 0)",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -622,28 +823,36 @@
           },
           {
             "name": "pagination.keyword",
-            "description": "Search keyword across text fields\n@gotags: `form:\"keyword\" json:\"keyword,omitempty\" bson:\"keyword,omitempty\"`",
+            "description": "Search keyword across text fields",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "pagination.sortby",
-            "description": "Field name to sort by (e.g. title, createdAt)\n@gotags: `form:\"sortby\" json:\"sortby,omitempty\" bson:\"sortby,omitempty\"`",
+            "description": "Field name to sort by (e.g. title, createdAt)",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "pagination.sortOrder",
-            "description": "Sort direction order (asc or desc, default desc)\n@gotags: `form:\"sortOrder\" json:\"sortOrder,omitempty\" bson:\"sortOrder,omitempty\"`",
+            "description": "Sort direction order (asc or desc, default desc)",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -657,6 +866,12 @@
             "schema": {
               "$ref": "#/definitions/v1ListFilesResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           },
           "default": {
             "description": "An unexpected error response.",
@@ -686,7 +901,7 @@
           },
           {
             "name": "pagination.limit",
-            "description": "Maximum number of items to return (default 20, max 100)\n@gotags: `form:\"limit\" json:\"limit,omitempty\" bson:\"limit,omitempty\"`",
+            "description": "Maximum number of items to return (default 20, max 100)",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -694,7 +909,7 @@
           },
           {
             "name": "pagination.offset",
-            "description": "Number of items to skip for pagination (default 0)\n@gotags: `form:\"offset\" json:\"offset,omitempty\" bson:\"offset,omitempty\"`",
+            "description": "Number of items to skip for pagination (default 0)",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -702,28 +917,36 @@
           },
           {
             "name": "pagination.keyword",
-            "description": "Search keyword across text fields\n@gotags: `form:\"keyword\" json:\"keyword,omitempty\" bson:\"keyword,omitempty\"`",
+            "description": "Search keyword across text fields",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "pagination.sortby",
-            "description": "Field name to sort by (e.g. title, createdAt)\n@gotags: `form:\"sortby\" json:\"sortby,omitempty\" bson:\"sortby,omitempty\"`",
+            "description": "Field name to sort by (e.g. title, createdAt)",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "pagination.sortOrder",
-            "description": "Sort direction order (asc or desc, default desc)\n@gotags: `form:\"sortOrder\" json:\"sortOrder,omitempty\" bson:\"sortOrder,omitempty\"`",
+            "description": "Sort direction order (asc or desc, default desc)",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     },
@@ -737,6 +960,12 @@
             "schema": {
               "$ref": "#/definitions/v1UploadFileResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions or invalid token claims"
           },
           "default": {
             "description": "An unexpected error response.",
@@ -757,7 +986,15 @@
           }
         ],
         "tags": [
-          "StorageService"
+          "Storage"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
         ]
       }
     }
@@ -796,34 +1033,34 @@
       "properties": {
         "id": {
           "type": "string",
-          "title": "Unique bucket identifier\n@gotags: `json:\"id,omitempty\" bson:\"id,omitempty\"`"
+          "title": "Unique bucket identifier"
         },
         "key": {
           "type": "string",
-          "title": "Bucket unique name/key\n@gotags: `json:\"key,omitempty\" bson:\"key,omitempty\"`"
+          "title": "Bucket unique name/key"
         },
         "userId": {
           "type": "string",
-          "title": "Owner user identifier\n@gotags: `json:\"userId,omitempty\" bson:\"userId,omitempty\"`"
+          "title": "Owner user identifier"
         },
         "accessKey": {
           "type": "string",
-          "title": "Access key for S3 compatibility\n@gotags: `json:\"accessKey,omitempty\" bson:\"accessKey,omitempty\"`"
+          "title": "Access key for S3 compatibility"
         },
         "createdAt": {
           "type": "string",
-          "title": "Creation timestamp in RFC3339 format\n@gotags: `json:\"createdAt,omitempty\" bson:\"createdAt,omitempty\"`"
+          "title": "Creation timestamp in RFC3339 format"
         },
         "sourceIds": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "title": "Source storage IDs attached to this bucket\n@gotags: `json:\"sourceIds,omitempty\" bson:\"sourceIds,omitempty\"`"
+          "title": "Source storage IDs attached to this bucket"
         },
         "distributionStrategy": {
           "type": "string",
-          "title": "Distribution strategy (e.g. round_robin, weighted)\n@gotags: `json:\"distributionStrategy,omitempty\" bson:\"distributionStrategy,omitempty\"`"
+          "title": "Distribution strategy (e.g. round_robin, weighted)"
         },
         "sourceWeights": {
           "type": "object",
@@ -831,7 +1068,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "title": "Weight map for weighted distribution strategy\n@gotags: `json:\"sourceWeights,omitempty\" bson:\"sourceWeights,omitempty\"`"
+          "title": "Weight map for weighted distribution strategy"
         }
       },
       "description": "BucketMetadata represents a storage bucket entity."
@@ -842,24 +1079,24 @@
         "limit": {
           "type": "integer",
           "format": "int32",
-          "title": "Maximum number of items to return (default 20, max 100)\n@gotags: `form:\"limit\" json:\"limit,omitempty\" bson:\"limit,omitempty\"`"
+          "title": "Maximum number of items to return (default 20, max 100)"
         },
         "offset": {
           "type": "integer",
           "format": "int32",
-          "title": "Number of items to skip for pagination (default 0)\n@gotags: `form:\"offset\" json:\"offset,omitempty\" bson:\"offset,omitempty\"`"
+          "title": "Number of items to skip for pagination (default 0)"
         },
         "keyword": {
           "type": "string",
-          "title": "Search keyword across text fields\n@gotags: `form:\"keyword\" json:\"keyword,omitempty\" bson:\"keyword,omitempty\"`"
+          "title": "Search keyword across text fields"
         },
         "sortby": {
           "type": "string",
-          "title": "Field name to sort by (e.g. title, createdAt)\n@gotags: `form:\"sortby\" json:\"sortby,omitempty\" bson:\"sortby,omitempty\"`"
+          "title": "Field name to sort by (e.g. title, createdAt)"
         },
         "sortOrder": {
           "type": "string",
-          "title": "Sort direction order (asc or desc, default desc)\n@gotags: `form:\"sortOrder\" json:\"sortOrder,omitempty\" bson:\"sortOrder,omitempty\"`"
+          "title": "Sort direction order (asc or desc, default desc)"
         }
       }
     },
@@ -869,7 +1106,7 @@
         "totalCount": {
           "type": "string",
           "format": "int64",
-          "title": "Total count of matching items\n@gotags: `json:\"totalCount,omitempty\" bson:\"totalCount,omitempty\"`"
+          "title": "Total count of matching items"
         },
         "limit": {
           "type": "integer",
@@ -884,7 +1121,7 @@
         "totalPages": {
           "type": "integer",
           "format": "int32",
-          "title": "Total calculated number of pages\n@gotags: `json:\"totalPages,omitempty\" bson:\"totalPages,omitempty\"`"
+          "title": "Total calculated number of pages"
         }
       },
       "description": "CommonListResponse represents standardized pagination metadata across all services."
@@ -979,47 +1216,47 @@
       "properties": {
         "mongoId": {
           "type": "string",
-          "title": "MongoDB internal record identifier\n@gotags: `json:\"mongoId,omitempty\" bson:\"_id,omitempty\"`"
+          "title": "MongoDB internal record identifier"
         },
         "id": {
           "type": "string",
-          "title": "Unique file identifier (UUID)\n@gotags: `json:\"id,omitempty\" bson:\"id,omitempty\"`"
+          "title": "Unique file identifier (UUID)"
         },
         "bucketId": {
           "type": "string",
-          "title": "Bucket identifier\n@gotags: `json:\"bucketId,omitempty\" bson:\"bucketId,omitempty\"`"
+          "title": "Bucket identifier"
         },
         "directory": {
           "type": "string",
-          "title": "Directory path within the bucket\n@gotags: `json:\"directory,omitempty\" bson:\"directory,omitempty\"`"
+          "title": "Directory path within the bucket"
         },
         "name": {
           "type": "string",
-          "title": "File name\n@gotags: `json:\"name,omitempty\" bson:\"name,omitempty\"`"
+          "title": "File name"
         },
         "size": {
           "type": "string",
           "format": "int64",
-          "title": "File size in bytes\n@gotags: `json:\"size,omitempty\" bson:\"size,omitempty\"`"
+          "title": "File size in bytes"
         },
         "contentType": {
           "type": "string",
-          "title": "MIME content type\n@gotags: `json:\"contentType,omitempty\" bson:\"contentType,omitempty\"`"
+          "title": "MIME content type"
         },
         "etag": {
           "type": "string",
-          "title": "ETag / Checksum\n@gotags: `json:\"etag,omitempty\" bson:\"etag,omitempty\"`"
+          "title": "ETag / Checksum"
         },
         "userMetadata": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "title": "Custom user metadata\n@gotags: `json:\"userMetadata,omitempty\" bson:\"userMetadata,omitempty\"`"
+          "title": "Custom user metadata"
         },
         "createdAt": {
           "type": "string",
-          "title": "Creation timestamp in RFC3339 format\n@gotags: `json:\"createdAt,omitempty\" bson:\"createdAt,omitempty\"`"
+          "title": "Creation timestamp in RFC3339 format"
         }
       },
       "description": "FileMetadata represents a stored file/object record."
@@ -1106,5 +1343,27 @@
       },
       "description": "UploadFileResponse returns uploaded file metadata."
     }
-  }
+  },
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "JWT Authorization header using the Bearer scheme. Enter: 'Bearer <token>'"
+    },
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "x-api-key",
+      "in": "header",
+      "description": "Admin or Identity API key (header: x-api-key)"
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    },
+    {
+      "ApiKeyAuth": []
+    }
+  ]
 }

@@ -29,17 +29,17 @@
               "$ref": "#/definitions/romListConsolesResponse"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
           "401": {
             "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
           },
           "403": {
             "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
           }
         },
         "parameters": [
@@ -74,17 +74,17 @@
               "$ref": "#/definitions/romRomSearchResponse"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
           "401": {
             "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
           },
           "403": {
             "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
           }
         },
         "parameters": [
@@ -120,17 +120,17 @@
               "$ref": "#/definitions/romRomUploadResponse"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
           "401": {
             "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
           },
           "403": {
             "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
           }
         },
         "parameters": [
@@ -167,17 +167,17 @@
               "$ref": "#/definitions/romRomMetadata"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
           "401": {
             "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
           },
           "403": {
             "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
           }
         },
         "parameters": [
@@ -231,17 +231,17 @@
               "$ref": "#/definitions/romRomDeleteResponse"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
           "401": {
             "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
           },
           "403": {
             "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
           }
         },
         "parameters": [
@@ -288,17 +288,17 @@
               "$ref": "#/definitions/romRomMetadata"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
           "401": {
             "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
           },
           "403": {
             "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
           }
         },
         "parameters": [
@@ -350,17 +350,17 @@
               "title": "Stream result of v1FileChunk"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
           "401": {
             "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
           },
           "403": {
             "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
           }
         },
         "parameters": [
@@ -416,17 +416,17 @@
               "$ref": "#/definitions/romRomShareResponse"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
           "401": {
             "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
           },
           "403": {
             "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
           }
         },
         "parameters": [

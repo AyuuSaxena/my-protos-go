@@ -26,17 +26,17 @@
               "$ref": "#/definitions/imageImageSearchResponse"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
           "401": {
             "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
           },
           "403": {
             "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
           }
         },
         "parameters": [
@@ -72,17 +72,17 @@
               "$ref": "#/definitions/imageImageUploadResponse"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
           "401": {
             "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
           },
           "403": {
             "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
           }
         },
         "parameters": [
@@ -119,17 +119,17 @@
               "$ref": "#/definitions/imageImageMetadata"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
           "401": {
             "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
           },
           "403": {
             "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
           }
         },
         "parameters": [
@@ -183,17 +183,17 @@
               "$ref": "#/definitions/imageImageDeleteResponse"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
           "401": {
             "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
           },
           "403": {
             "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
           }
         },
         "parameters": [
@@ -240,17 +240,17 @@
               "$ref": "#/definitions/imageImageMetadata"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
           "401": {
             "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
           },
           "403": {
             "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
           }
         },
         "parameters": [
@@ -302,17 +302,17 @@
               "title": "Stream result of v1FileChunk"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
           "401": {
             "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
           },
           "403": {
             "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
           }
         },
         "parameters": [
@@ -368,17 +368,17 @@
               "$ref": "#/definitions/imageImageShareResponse"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          },
           "401": {
             "description": "Unauthorized - Missing or invalid JWT Bearer token or x-api-key"
           },
           "403": {
             "description": "Forbidden - Insufficient permissions or invalid token claims"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
           }
         },
         "parameters": [
