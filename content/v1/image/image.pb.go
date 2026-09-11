@@ -22,6 +22,92 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// AspectRatio represents standard visual aspect ratio classifications.
+type AspectRatio int32
+
+const (
+	AspectRatio_ASPECT_RATIO_UNSPECIFIED AspectRatio = 0
+	// 16:9 Landscape - Primary widescreen format (Recommended 1920x1080)
+	AspectRatio_ASPECT_RATIO_16_9_LANDSCAPE AspectRatio = 1
+	AspectRatio_ASPECT_RATIO_16_9           AspectRatio = 1
+	// 1:1 Square (Recommended 1080x1080)
+	AspectRatio_ASPECT_RATIO_1_1_SQUARE AspectRatio = 2
+	AspectRatio_ASPECT_RATIO_1_1        AspectRatio = 2
+	// 32:9 Ultra-Wide (OTT)
+	AspectRatio_ASPECT_RATIO_32_9_ULTRA_WIDE AspectRatio = 3
+	AspectRatio_ASPECT_RATIO_32_9            AspectRatio = 3
+	// 3:4 Portrait
+	AspectRatio_ASPECT_RATIO_3_4_PORTRAIT AspectRatio = 4
+	AspectRatio_ASPECT_RATIO_3_4          AspectRatio = 4
+	// 9:16 Vertical
+	AspectRatio_ASPECT_RATIO_9_16_VERTICAL AspectRatio = 5
+	AspectRatio_ASPECT_RATIO_9_16          AspectRatio = 5
+	// 2:3 Portrait
+	AspectRatio_ASPECT_RATIO_2_3_PORTRAIT AspectRatio = 6
+	AspectRatio_ASPECT_RATIO_2_3          AspectRatio = 6
+)
+
+// Enum value maps for AspectRatio.
+var (
+	AspectRatio_name = map[int32]string{
+		0: "ASPECT_RATIO_UNSPECIFIED",
+		1: "ASPECT_RATIO_16_9_LANDSCAPE",
+		// Duplicate value: 1: "ASPECT_RATIO_16_9",
+		2: "ASPECT_RATIO_1_1_SQUARE",
+		// Duplicate value: 2: "ASPECT_RATIO_1_1",
+		3: "ASPECT_RATIO_32_9_ULTRA_WIDE",
+		// Duplicate value: 3: "ASPECT_RATIO_32_9",
+		4: "ASPECT_RATIO_3_4_PORTRAIT",
+		// Duplicate value: 4: "ASPECT_RATIO_3_4",
+		5: "ASPECT_RATIO_9_16_VERTICAL",
+		// Duplicate value: 5: "ASPECT_RATIO_9_16",
+		6: "ASPECT_RATIO_2_3_PORTRAIT",
+		// Duplicate value: 6: "ASPECT_RATIO_2_3",
+	}
+	AspectRatio_value = map[string]int32{
+		"ASPECT_RATIO_UNSPECIFIED":     0,
+		"ASPECT_RATIO_16_9_LANDSCAPE":  1,
+		"ASPECT_RATIO_16_9":            1,
+		"ASPECT_RATIO_1_1_SQUARE":      2,
+		"ASPECT_RATIO_1_1":             2,
+		"ASPECT_RATIO_32_9_ULTRA_WIDE": 3,
+		"ASPECT_RATIO_32_9":            3,
+		"ASPECT_RATIO_3_4_PORTRAIT":    4,
+		"ASPECT_RATIO_3_4":             4,
+		"ASPECT_RATIO_9_16_VERTICAL":   5,
+		"ASPECT_RATIO_9_16":            5,
+		"ASPECT_RATIO_2_3_PORTRAIT":    6,
+		"ASPECT_RATIO_2_3":             6,
+	}
+)
+
+func (x AspectRatio) Enum() *AspectRatio {
+	p := new(AspectRatio)
+	*p = x
+	return p
+}
+
+func (x AspectRatio) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AspectRatio) Descriptor() protoreflect.EnumDescriptor {
+	return file_content_v1_image_image_proto_enumTypes[0].Descriptor()
+}
+
+func (AspectRatio) Type() protoreflect.EnumType {
+	return &file_content_v1_image_image_proto_enumTypes[0]
+}
+
+func (x AspectRatio) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AspectRatio.Descriptor instead.
+func (AspectRatio) EnumDescriptor() ([]byte, []int) {
+	return file_content_v1_image_image_proto_rawDescGZIP(), []int{0}
+}
+
 // ImageMetadata represents the core normalized Image entity with relational IDs.
 type ImageMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -50,8 +136,9 @@ type ImageMetadata struct {
 	Width int32 `protobuf:"varint,9,opt,name=width,proto3" json:"width,omitempty" bson:"width,omitempty"`
 	// @gotags: `json:"height,omitempty" bson:"height,omitempty"`
 	Height int32 `protobuf:"varint,10,opt,name=height,proto3" json:"height,omitempty" bson:"height,omitempty"`
+	// Aspect ratio classification
 	// @gotags: `json:"aspectRatio,omitempty" bson:"aspectRatio,omitempty"`
-	AspectRatio string `protobuf:"bytes,11,opt,name=aspect_ratio,json=aspectRatio,proto3" json:"aspectRatio,omitempty" bson:"aspectRatio,omitempty"`
+	AspectRatio AspectRatio `protobuf:"varint,11,opt,name=aspect_ratio,json=aspectRatio,proto3,enum=content.v1.image.AspectRatio" json:"aspectRatio,omitempty" bson:"aspectRatio,omitempty"`
 	// @gotags: `json:"format,omitempty" bson:"format,omitempty"`
 	Format string `protobuf:"bytes,12,opt,name=format,proto3" json:"format,omitempty" bson:"format,omitempty"`
 	// @gotags: `json:"category,omitempty" bson:"category,omitempty"`
@@ -72,7 +159,13 @@ type ImageMetadata struct {
 	// Enriched Relations (populated on read, not persisted in DB)
 	// Full file details resolved from fileId
 	// @gotags: `json:"fileMetadata,omitempty" bson:"fileMetadata,omitempty"`
-	FileMetadata  *v1.FileMetadata `protobuf:"bytes,21,opt,name=file_metadata,json=fileMetadata,proto3" json:"fileMetadata,omitempty" bson:"fileMetadata,omitempty"`
+	FileMetadata *v1.FileMetadata `protobuf:"bytes,21,opt,name=file_metadata,json=fileMetadata,proto3" json:"fileMetadata,omitempty" bson:"fileMetadata,omitempty"`
+	// Publication status flag
+	// @gotags: `json:"isPublish" bson:"isPublish"`
+	IsPublish bool `protobuf:"varint,22,opt,name=is_publish,json=isPublish,proto3" json:"isPublish" bson:"isPublish"`
+	// Active status flag (false indicates archived/deactivated)
+	// @gotags: `json:"isActive" bson:"isActive"`
+	IsActive      bool `protobuf:"varint,23,opt,name=is_active,json=isActive,proto3" json:"isActive" bson:"isActive"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -177,11 +270,11 @@ func (x *ImageMetadata) GetHeight() int32 {
 	return 0
 }
 
-func (x *ImageMetadata) GetAspectRatio() string {
+func (x *ImageMetadata) GetAspectRatio() AspectRatio {
 	if x != nil {
 		return x.AspectRatio
 	}
-	return ""
+	return AspectRatio_ASPECT_RATIO_UNSPECIFIED
 }
 
 func (x *ImageMetadata) GetFormat() string {
@@ -252,6 +345,20 @@ func (x *ImageMetadata) GetFileMetadata() *v1.FileMetadata {
 		return x.FileMetadata
 	}
 	return nil
+}
+
+func (x *ImageMetadata) GetIsPublish() bool {
+	if x != nil {
+		return x.IsPublish
+	}
+	return false
+}
+
+func (x *ImageMetadata) GetIsActive() bool {
+	if x != nil {
+		return x.IsActive
+	}
+	return false
 }
 
 type ImageGetRequest struct {
@@ -425,7 +532,16 @@ type ImageQuery struct {
 	UploaderId *string `protobuf:"bytes,7,opt,name=uploader_id,json=uploaderId,proto3,oneof" json:"uploaderId,omitempty" form:"uploaderId" bson:"uploaderId,omitempty"`
 	// Filter by site key (e.g. retrogames)
 	// @gotags: `form:"site" json:"site,omitempty" bson:"site,omitempty"`
-	Site          *string `protobuf:"bytes,8,opt,name=site,proto3,oneof" json:"site,omitempty" form:"site" bson:"site,omitempty"`
+	Site *string `protobuf:"bytes,8,opt,name=site,proto3,oneof" json:"site,omitempty" form:"site" bson:"site,omitempty"`
+	// Filter by aspect ratio
+	// @gotags: `form:"aspectRatio" json:"aspectRatio,omitempty" bson:"aspectRatio,omitempty"`
+	AspectRatio *AspectRatio `protobuf:"varint,9,opt,name=aspect_ratio,json=aspectRatio,proto3,enum=content.v1.image.AspectRatio,oneof" json:"aspectRatio,omitempty" form:"aspectRatio" bson:"aspectRatio,omitempty"`
+	// Filter by publication status
+	// @gotags: `form:"isPublish" json:"isPublish,omitempty" bson:"isPublish,omitempty"`
+	IsPublish *bool `protobuf:"varint,10,opt,name=is_publish,json=isPublish,proto3,oneof" json:"isPublish,omitempty" form:"isPublish" bson:"isPublish,omitempty"`
+	// Filter by active status
+	// @gotags: `form:"isActive" json:"isActive,omitempty" bson:"isActive,omitempty"`
+	IsActive      *bool `protobuf:"varint,11,opt,name=is_active,json=isActive,proto3,oneof" json:"isActive,omitempty" form:"isActive" bson:"isActive,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -514,6 +630,27 @@ func (x *ImageQuery) GetSite() string {
 		return *x.Site
 	}
 	return ""
+}
+
+func (x *ImageQuery) GetAspectRatio() AspectRatio {
+	if x != nil && x.AspectRatio != nil {
+		return *x.AspectRatio
+	}
+	return AspectRatio_ASPECT_RATIO_UNSPECIFIED
+}
+
+func (x *ImageQuery) GetIsPublish() bool {
+	if x != nil && x.IsPublish != nil {
+		return *x.IsPublish
+	}
+	return false
+}
+
+func (x *ImageQuery) GetIsActive() bool {
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
+	}
+	return false
 }
 
 type ImageSearchRequest struct {
@@ -740,7 +877,16 @@ type ImageFileInfo struct {
 	UploaderUsername string `protobuf:"bytes,12,opt,name=uploader_username,json=uploaderUsername,proto3" json:"uploaderUsername,omitempty" bson:"uploaderUsername,omitempty"`
 	// Dynamic site/tenant key (e.g. retrogames)
 	// @gotags: `json:"site,omitempty" bson:"site,omitempty"`
-	Site          string `protobuf:"bytes,13,opt,name=site,proto3" json:"site,omitempty" bson:"site,omitempty"`
+	Site string `protobuf:"bytes,13,opt,name=site,proto3" json:"site,omitempty" bson:"site,omitempty"`
+	// Aspect ratio classification
+	// @gotags: `json:"aspectRatio,omitempty" bson:"aspectRatio,omitempty"`
+	AspectRatio AspectRatio `protobuf:"varint,14,opt,name=aspect_ratio,json=aspectRatio,proto3,enum=content.v1.image.AspectRatio" json:"aspectRatio,omitempty" bson:"aspectRatio,omitempty"`
+	// Publication status flag
+	// @gotags: `json:"isPublish,omitempty" bson:"isPublish,omitempty"`
+	IsPublish bool `protobuf:"varint,15,opt,name=is_publish,json=isPublish,proto3" json:"isPublish,omitempty" bson:"isPublish,omitempty"`
+	// Active status flag
+	// @gotags: `json:"isActive,omitempty" bson:"isActive,omitempty"`
+	IsActive      bool `protobuf:"varint,16,opt,name=is_active,json=isActive,proto3" json:"isActive,omitempty" bson:"isActive,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -866,6 +1012,27 @@ func (x *ImageFileInfo) GetSite() string {
 	return ""
 }
 
+func (x *ImageFileInfo) GetAspectRatio() AspectRatio {
+	if x != nil {
+		return x.AspectRatio
+	}
+	return AspectRatio_ASPECT_RATIO_UNSPECIFIED
+}
+
+func (x *ImageFileInfo) GetIsPublish() bool {
+	if x != nil {
+		return x.IsPublish
+	}
+	return false
+}
+
+func (x *ImageFileInfo) GetIsActive() bool {
+	if x != nil {
+		return x.IsActive
+	}
+	return false
+}
+
 type UploadImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Image display title
@@ -888,7 +1055,16 @@ type UploadImageRequest struct {
 	CustomKey string `protobuf:"bytes,7,opt,name=custom_key,json=customKey,proto3" json:"customKey,omitempty" bson:"customKey,omitempty" form:"customKey"`
 	// Dynamic site/tenant key (e.g. retrogames)
 	// @gotags: `json:"site,omitempty" bson:"site,omitempty" form:"site"`
-	Site          *string `protobuf:"bytes,8,opt,name=site,proto3,oneof" json:"site,omitempty" bson:"site,omitempty" form:"site"`
+	Site *string `protobuf:"bytes,8,opt,name=site,proto3,oneof" json:"site,omitempty" bson:"site,omitempty" form:"site"`
+	// Aspect ratio classification
+	// @gotags: `json:"aspectRatio,omitempty" bson:"aspectRatio,omitempty" form:"aspectRatio"`
+	AspectRatio *AspectRatio `protobuf:"varint,9,opt,name=aspect_ratio,json=aspectRatio,proto3,enum=content.v1.image.AspectRatio,oneof" json:"aspectRatio,omitempty" bson:"aspectRatio,omitempty" form:"aspectRatio"`
+	// Publication status flag
+	// @gotags: `json:"isPublish,omitempty" bson:"isPublish,omitempty" form:"isPublish"`
+	IsPublish *bool `protobuf:"varint,10,opt,name=is_publish,json=isPublish,proto3,oneof" json:"isPublish,omitempty" bson:"isPublish,omitempty" form:"isPublish"`
+	// Active status flag
+	// @gotags: `json:"isActive,omitempty" bson:"isActive,omitempty" form:"isActive"`
+	IsActive      *bool `protobuf:"varint,11,opt,name=is_active,json=isActive,proto3,oneof" json:"isActive,omitempty" bson:"isActive,omitempty" form:"isActive"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -977,6 +1153,27 @@ func (x *UploadImageRequest) GetSite() string {
 		return *x.Site
 	}
 	return ""
+}
+
+func (x *UploadImageRequest) GetAspectRatio() AspectRatio {
+	if x != nil && x.AspectRatio != nil {
+		return *x.AspectRatio
+	}
+	return AspectRatio_ASPECT_RATIO_UNSPECIFIED
+}
+
+func (x *UploadImageRequest) GetIsPublish() bool {
+	if x != nil && x.IsPublish != nil {
+		return *x.IsPublish
+	}
+	return false
+}
+
+func (x *UploadImageRequest) GetIsActive() bool {
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
+	}
+	return false
 }
 
 type ImageUploadRequest struct {
@@ -1134,7 +1331,16 @@ type ImageUpdateRequest struct {
 	Status *string `protobuf:"bytes,8,opt,name=status,proto3,oneof" json:"status,omitempty" bson:"status,omitempty"`
 	// Updated site identifier
 	// @gotags: `json:"site,omitempty" bson:"site,omitempty"`
-	Site          *string `protobuf:"bytes,9,opt,name=site,proto3,oneof" json:"site,omitempty" bson:"site,omitempty"`
+	Site *string `protobuf:"bytes,9,opt,name=site,proto3,oneof" json:"site,omitempty" bson:"site,omitempty"`
+	// Updated aspect ratio classification
+	// @gotags: `json:"aspectRatio,omitempty" bson:"aspectRatio,omitempty"`
+	AspectRatio *AspectRatio `protobuf:"varint,10,opt,name=aspect_ratio,json=aspectRatio,proto3,enum=content.v1.image.AspectRatio,oneof" json:"aspectRatio,omitempty" bson:"aspectRatio,omitempty"`
+	// Updated publication status flag
+	// @gotags: `json:"isPublish,omitempty" bson:"isPublish,omitempty"`
+	IsPublish *bool `protobuf:"varint,11,opt,name=is_publish,json=isPublish,proto3,oneof" json:"isPublish,omitempty" bson:"isPublish,omitempty"`
+	// Updated active status flag
+	// @gotags: `json:"isActive,omitempty" bson:"isActive,omitempty"`
+	IsActive      *bool `protobuf:"varint,12,opt,name=is_active,json=isActive,proto3,oneof" json:"isActive,omitempty" bson:"isActive,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1230,6 +1436,27 @@ func (x *ImageUpdateRequest) GetSite() string {
 		return *x.Site
 	}
 	return ""
+}
+
+func (x *ImageUpdateRequest) GetAspectRatio() AspectRatio {
+	if x != nil && x.AspectRatio != nil {
+		return *x.AspectRatio
+	}
+	return AspectRatio_ASPECT_RATIO_UNSPECIFIED
+}
+
+func (x *ImageUpdateRequest) GetIsPublish() bool {
+	if x != nil && x.IsPublish != nil {
+		return *x.IsPublish
+	}
+	return false
+}
+
+func (x *ImageUpdateRequest) GetIsActive() bool {
+	if x != nil && x.IsActive != nil {
+		return *x.IsActive
+	}
+	return false
 }
 
 type ImageDeleteRequest struct {
@@ -1481,11 +1708,79 @@ func (x *ImageShareResponse) GetExpiresAt() string {
 	return ""
 }
 
+// AspectRatioImages groups image IDs and enriched image metadata by aspect ratio format.
+// Reusable across all content entities (ROMs, games, articles, videos, etc.)
+type AspectRatioImages struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Aspect ratio enum classification (16:9, 1:1, 32:9, 3:4, 9:16, 2:3)
+	// @gotags: `json:"aspectRatio,omitempty" bson:"aspectRatio,omitempty"`
+	AspectRatio AspectRatio `protobuf:"varint,1,opt,name=aspect_ratio,json=aspectRatio,proto3,enum=content.v1.image.AspectRatio" json:"aspectRatio,omitempty" bson:"aspectRatio,omitempty"`
+	// Array of image UUID foreign keys stored in database
+	// @gotags: `json:"imageIds,omitempty" bson:"imageIds,omitempty"`
+	ImageIds []string `protobuf:"bytes,2,rep,name=image_ids,json=imageIds,proto3" json:"imageIds,omitempty" bson:"imageIds,omitempty"`
+	// Enriched array of full image metadata resolved at read-time (response only)
+	// @gotags: `json:"images,omitempty" bson:"-"`
+	Images        []*ImageMetadata `protobuf:"bytes,3,rep,name=images,proto3" json:"images,omitempty" bson:"-"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AspectRatioImages) Reset() {
+	*x = AspectRatioImages{}
+	mi := &file_content_v1_image_image_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AspectRatioImages) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AspectRatioImages) ProtoMessage() {}
+
+func (x *AspectRatioImages) ProtoReflect() protoreflect.Message {
+	mi := &file_content_v1_image_image_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AspectRatioImages.ProtoReflect.Descriptor instead.
+func (*AspectRatioImages) Descriptor() ([]byte, []int) {
+	return file_content_v1_image_image_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *AspectRatioImages) GetAspectRatio() AspectRatio {
+	if x != nil {
+		return x.AspectRatio
+	}
+	return AspectRatio_ASPECT_RATIO_UNSPECIFIED
+}
+
+func (x *AspectRatioImages) GetImageIds() []string {
+	if x != nil {
+		return x.ImageIds
+	}
+	return nil
+}
+
+func (x *AspectRatioImages) GetImages() []*ImageMetadata {
+	if x != nil {
+		return x.Images
+	}
+	return nil
+}
+
 var File_content_v1_image_image_proto protoreflect.FileDescriptor
 
 const file_content_v1_image_image_proto_rawDesc = "" +
 	"\n" +
-	"\x1ccontent/v1/image/image.proto\x12\x10content.v1.image\x1a\x16common/v1/common.proto\"\xe6\x04\n" +
+	"\x1ccontent/v1/image/image.proto\x12\x10content.v1.image\x1a\x16common/v1/common.proto\"\xc1\x05\n" +
 	"\rImageMetadata\x12\x19\n" +
 	"\bmongo_id\x18\x01 \x01(\tR\amongoId\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n" +
@@ -1497,8 +1792,8 @@ const file_content_v1_image_image_proto_rawDesc = "" +
 	"\balt_text\x18\b \x01(\tR\aaltText\x12\x14\n" +
 	"\x05width\x18\t \x01(\x05R\x05width\x12\x16\n" +
 	"\x06height\x18\n" +
-	" \x01(\x05R\x06height\x12!\n" +
-	"\faspect_ratio\x18\v \x01(\tR\vaspectRatio\x12\x16\n" +
+	" \x01(\x05R\x06height\x12@\n" +
+	"\faspect_ratio\x18\v \x01(\x0e2\x1d.content.v1.image.AspectRatioR\vaspectRatio\x12\x16\n" +
 	"\x06format\x18\f \x01(\tR\x06format\x12\x1a\n" +
 	"\bcategory\x18\r \x01(\tR\bcategory\x12\x12\n" +
 	"\x04tags\x18\x0e \x03(\tR\x04tags\x12\x1b\n" +
@@ -1511,7 +1806,10 @@ const file_content_v1_image_image_proto_rawDesc = "" +
 	"created_at\x18\x13 \x01(\tR\tcreatedAt\x12\x1d\n" +
 	"\n" +
 	"updated_at\x18\x14 \x01(\tR\tupdatedAt\x12<\n" +
-	"\rfile_metadata\x18\x15 \x01(\v2\x17.common.v1.FileMetadataR\ffileMetadata\"\x93\x01\n" +
+	"\rfile_metadata\x18\x15 \x01(\v2\x17.common.v1.FileMetadataR\ffileMetadata\x12\x1d\n" +
+	"\n" +
+	"is_publish\x18\x16 \x01(\bR\tisPublish\x12\x1b\n" +
+	"\tis_active\x18\x17 \x01(\bR\bisActive\"\x93\x01\n" +
 	"\x0fImageGetRequest\x12\x13\n" +
 	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tH\x01R\x04name\x88\x01\x01\x12\x17\n" +
@@ -1529,7 +1827,7 @@ const file_content_v1_image_image_proto_rawDesc = "" +
 	"\x03_idB\a\n" +
 	"\x05_nameB\a\n" +
 	"\x05_slugB\a\n" +
-	"\x05_site\"\xd3\x02\n" +
+	"\x05_site\"\x8e\x04\n" +
 	"\n" +
 	"ImageQuery\x12\x17\n" +
 	"\x04name\x18\x01 \x01(\tH\x00R\x04name\x88\x01\x01\x12\x1f\n" +
@@ -1540,7 +1838,13 @@ const file_content_v1_image_image_proto_rawDesc = "" +
 	"\x03tag\x18\x06 \x01(\tH\x05R\x03tag\x88\x01\x01\x12$\n" +
 	"\vuploader_id\x18\a \x01(\tH\x06R\n" +
 	"uploaderId\x88\x01\x01\x12\x17\n" +
-	"\x04site\x18\b \x01(\tH\aR\x04site\x88\x01\x01B\a\n" +
+	"\x04site\x18\b \x01(\tH\aR\x04site\x88\x01\x01\x12E\n" +
+	"\faspect_ratio\x18\t \x01(\x0e2\x1d.content.v1.image.AspectRatioH\bR\vaspectRatio\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"is_publish\x18\n" +
+	" \x01(\bH\tR\tisPublish\x88\x01\x01\x12 \n" +
+	"\tis_active\x18\v \x01(\bH\n" +
+	"R\bisActive\x88\x01\x01B\a\n" +
 	"\x05_nameB\v\n" +
 	"\t_categoryB\t\n" +
 	"\a_formatB\t\n" +
@@ -1549,7 +1853,11 @@ const file_content_v1_image_image_proto_rawDesc = "" +
 	"_is_publicB\x06\n" +
 	"\x04_tagB\x0e\n" +
 	"\f_uploader_idB\a\n" +
-	"\x05_site\"\xcc\x02\n" +
+	"\x05_siteB\x0f\n" +
+	"\r_aspect_ratioB\r\n" +
+	"\v_is_publishB\f\n" +
+	"\n" +
+	"_is_active\"\xcc\x02\n" +
 	"\x12ImageSearchRequest\x12\x19\n" +
 	"\x05limit\x18\x01 \x01(\x05H\x00R\x05limit\x88\x01\x01\x12\x1b\n" +
 	"\x06offset\x18\x02 \x01(\x05H\x01R\x06offset\x88\x01\x01\x12\x1d\n" +
@@ -1574,7 +1882,7 @@ const file_content_v1_image_image_proto_rawDesc = "" +
 	"\x05limit\x18\x03 \x01(\x05R\x05limit\x12\x16\n" +
 	"\x06offset\x18\x04 \x01(\x05R\x06offset\x12\x1f\n" +
 	"\vtotal_pages\x18\x05 \x01(\x05R\n" +
-	"totalPages\"\x80\x03\n" +
+	"totalPages\"\xfe\x03\n" +
 	"\rImageFileInfo\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1b\n" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x12\x1d\n" +
@@ -1592,7 +1900,11 @@ const file_content_v1_image_image_proto_rawDesc = "" +
 	"\vuploader_id\x18\v \x01(\tR\n" +
 	"uploaderId\x12+\n" +
 	"\x11uploader_username\x18\f \x01(\tR\x10uploaderUsername\x12\x12\n" +
-	"\x04site\x18\r \x01(\tR\x04site\"\x88\x02\n" +
+	"\x04site\x18\r \x01(\tR\x04site\x12@\n" +
+	"\faspect_ratio\x18\x0e \x01(\x0e2\x1d.content.v1.image.AspectRatioR\vaspectRatio\x12\x1d\n" +
+	"\n" +
+	"is_publish\x18\x0f \x01(\bR\tisPublish\x12\x1b\n" +
+	"\tis_active\x18\x10 \x01(\bR\bisActive\"\xc3\x03\n" +
 	"\x12UploadImageRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x19\n" +
@@ -1602,17 +1914,26 @@ const file_content_v1_image_image_proto_rawDesc = "" +
 	"\tis_public\x18\x06 \x01(\bH\x00R\bisPublic\x88\x01\x01\x12\x1d\n" +
 	"\n" +
 	"custom_key\x18\a \x01(\tR\tcustomKey\x12\x17\n" +
-	"\x04site\x18\b \x01(\tH\x01R\x04site\x88\x01\x01B\f\n" +
+	"\x04site\x18\b \x01(\tH\x01R\x04site\x88\x01\x01\x12E\n" +
+	"\faspect_ratio\x18\t \x01(\x0e2\x1d.content.v1.image.AspectRatioH\x02R\vaspectRatio\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"is_publish\x18\n" +
+	" \x01(\bH\x03R\tisPublish\x88\x01\x01\x12 \n" +
+	"\tis_active\x18\v \x01(\bH\x04R\bisActive\x88\x01\x01B\f\n" +
 	"\n" +
 	"_is_publicB\a\n" +
-	"\x05_site\"\x85\x01\n" +
+	"\x05_siteB\x0f\n" +
+	"\r_aspect_ratioB\r\n" +
+	"\v_is_publishB\f\n" +
+	"\n" +
+	"_is_active\"\x85\x01\n" +
 	"\x12ImageUploadRequest\x12>\n" +
 	"\tfile_info\x18\x01 \x01(\v2\x1f.content.v1.image.ImageFileInfoH\x00R\bfileInfo\x12\x1f\n" +
 	"\n" +
 	"chunk_data\x18\x02 \x01(\fH\x00R\tchunkDataB\x0e\n" +
 	"\frequest_data\"L\n" +
 	"\x13ImageUploadResponse\x125\n" +
-	"\x05image\x18\x01 \x01(\v2\x1f.content.v1.image.ImageMetadataR\x05image\"\xe9\x02\n" +
+	"\x05image\x18\x01 \x01(\v2\x1f.content.v1.image.ImageMetadataR\x05image\"\xa4\x04\n" +
 	"\x12ImageUpdateRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\x05title\x18\x02 \x01(\tH\x00R\x05title\x88\x01\x01\x12%\n" +
@@ -1622,7 +1943,12 @@ const file_content_v1_image_image_proto_rawDesc = "" +
 	"\x04tags\x18\x06 \x03(\tR\x04tags\x12 \n" +
 	"\tis_public\x18\a \x01(\bH\x04R\bisPublic\x88\x01\x01\x12\x1b\n" +
 	"\x06status\x18\b \x01(\tH\x05R\x06status\x88\x01\x01\x12\x17\n" +
-	"\x04site\x18\t \x01(\tH\x06R\x04site\x88\x01\x01B\b\n" +
+	"\x04site\x18\t \x01(\tH\x06R\x04site\x88\x01\x01\x12E\n" +
+	"\faspect_ratio\x18\n" +
+	" \x01(\x0e2\x1d.content.v1.image.AspectRatioH\aR\vaspectRatio\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"is_publish\x18\v \x01(\bH\bR\tisPublish\x88\x01\x01\x12 \n" +
+	"\tis_active\x18\f \x01(\bH\tR\bisActive\x88\x01\x01B\b\n" +
 	"\x06_titleB\x0e\n" +
 	"\f_descriptionB\v\n" +
 	"\t_alt_textB\v\n" +
@@ -1630,7 +1956,11 @@ const file_content_v1_image_image_proto_rawDesc = "" +
 	"\n" +
 	"_is_publicB\t\n" +
 	"\a_statusB\a\n" +
-	"\x05_site\"g\n" +
+	"\x05_siteB\x0f\n" +
+	"\r_aspect_ratioB\r\n" +
+	"\v_is_publishB\f\n" +
+	"\n" +
+	"_is_active\"g\n" +
 	"\x12ImageDeleteRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
 	"\vhard_delete\x18\x02 \x01(\bR\n" +
@@ -1649,7 +1979,25 @@ const file_content_v1_image_image_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
 	"\fdownload_url\x18\x02 \x01(\tR\vdownloadUrl\x12\x1d\n" +
 	"\n" +
-	"expires_at\x18\x03 \x01(\tR\texpiresAtB8Z6github.com/AyuuSaxena/protos-go/content/v1/image;imageb\x06proto3"
+	"expires_at\x18\x03 \x01(\tR\texpiresAt\"\xab\x01\n" +
+	"\x11AspectRatioImages\x12@\n" +
+	"\faspect_ratio\x18\x01 \x01(\x0e2\x1d.content.v1.image.AspectRatioR\vaspectRatio\x12\x1b\n" +
+	"\timage_ids\x18\x02 \x03(\tR\bimageIds\x127\n" +
+	"\x06images\x18\x03 \x03(\v2\x1f.content.v1.image.ImageMetadataR\x06images*\xf4\x02\n" +
+	"\vAspectRatio\x12\x1c\n" +
+	"\x18ASPECT_RATIO_UNSPECIFIED\x10\x00\x12\x1f\n" +
+	"\x1bASPECT_RATIO_16_9_LANDSCAPE\x10\x01\x12\x15\n" +
+	"\x11ASPECT_RATIO_16_9\x10\x01\x12\x1b\n" +
+	"\x17ASPECT_RATIO_1_1_SQUARE\x10\x02\x12\x14\n" +
+	"\x10ASPECT_RATIO_1_1\x10\x02\x12 \n" +
+	"\x1cASPECT_RATIO_32_9_ULTRA_WIDE\x10\x03\x12\x15\n" +
+	"\x11ASPECT_RATIO_32_9\x10\x03\x12\x1d\n" +
+	"\x19ASPECT_RATIO_3_4_PORTRAIT\x10\x04\x12\x14\n" +
+	"\x10ASPECT_RATIO_3_4\x10\x04\x12\x1e\n" +
+	"\x1aASPECT_RATIO_9_16_VERTICAL\x10\x05\x12\x15\n" +
+	"\x11ASPECT_RATIO_9_16\x10\x05\x12\x1d\n" +
+	"\x19ASPECT_RATIO_2_3_PORTRAIT\x10\x06\x12\x14\n" +
+	"\x10ASPECT_RATIO_2_3\x10\x06\x1a\x02\x10\x01B8Z6github.com/AyuuSaxena/protos-go/content/v1/image;imageb\x06proto3"
 
 var (
 	file_content_v1_image_image_proto_rawDescOnce sync.Once
@@ -1663,36 +2011,46 @@ func file_content_v1_image_image_proto_rawDescGZIP() []byte {
 	return file_content_v1_image_image_proto_rawDescData
 }
 
-var file_content_v1_image_image_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_content_v1_image_image_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_content_v1_image_image_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_content_v1_image_image_proto_goTypes = []any{
-	(*ImageMetadata)(nil),        // 0: content.v1.image.ImageMetadata
-	(*ImageGetRequest)(nil),      // 1: content.v1.image.ImageGetRequest
-	(*ImageDownloadRequest)(nil), // 2: content.v1.image.ImageDownloadRequest
-	(*ImageQuery)(nil),           // 3: content.v1.image.ImageQuery
-	(*ImageSearchRequest)(nil),   // 4: content.v1.image.ImageSearchRequest
-	(*ImageSearchResponse)(nil),  // 5: content.v1.image.ImageSearchResponse
-	(*ImageFileInfo)(nil),        // 6: content.v1.image.ImageFileInfo
-	(*UploadImageRequest)(nil),   // 7: content.v1.image.UploadImageRequest
-	(*ImageUploadRequest)(nil),   // 8: content.v1.image.ImageUploadRequest
-	(*ImageUploadResponse)(nil),  // 9: content.v1.image.ImageUploadResponse
-	(*ImageUpdateRequest)(nil),   // 10: content.v1.image.ImageUpdateRequest
-	(*ImageDeleteRequest)(nil),   // 11: content.v1.image.ImageDeleteRequest
-	(*ImageDeleteResponse)(nil),  // 12: content.v1.image.ImageDeleteResponse
-	(*ImageShareRequest)(nil),    // 13: content.v1.image.ImageShareRequest
-	(*ImageShareResponse)(nil),   // 14: content.v1.image.ImageShareResponse
-	(*v1.FileMetadata)(nil),      // 15: common.v1.FileMetadata
+	(AspectRatio)(0),             // 0: content.v1.image.AspectRatio
+	(*ImageMetadata)(nil),        // 1: content.v1.image.ImageMetadata
+	(*ImageGetRequest)(nil),      // 2: content.v1.image.ImageGetRequest
+	(*ImageDownloadRequest)(nil), // 3: content.v1.image.ImageDownloadRequest
+	(*ImageQuery)(nil),           // 4: content.v1.image.ImageQuery
+	(*ImageSearchRequest)(nil),   // 5: content.v1.image.ImageSearchRequest
+	(*ImageSearchResponse)(nil),  // 6: content.v1.image.ImageSearchResponse
+	(*ImageFileInfo)(nil),        // 7: content.v1.image.ImageFileInfo
+	(*UploadImageRequest)(nil),   // 8: content.v1.image.UploadImageRequest
+	(*ImageUploadRequest)(nil),   // 9: content.v1.image.ImageUploadRequest
+	(*ImageUploadResponse)(nil),  // 10: content.v1.image.ImageUploadResponse
+	(*ImageUpdateRequest)(nil),   // 11: content.v1.image.ImageUpdateRequest
+	(*ImageDeleteRequest)(nil),   // 12: content.v1.image.ImageDeleteRequest
+	(*ImageDeleteResponse)(nil),  // 13: content.v1.image.ImageDeleteResponse
+	(*ImageShareRequest)(nil),    // 14: content.v1.image.ImageShareRequest
+	(*ImageShareResponse)(nil),   // 15: content.v1.image.ImageShareResponse
+	(*AspectRatioImages)(nil),    // 16: content.v1.image.AspectRatioImages
+	(*v1.FileMetadata)(nil),      // 17: common.v1.FileMetadata
 }
 var file_content_v1_image_image_proto_depIdxs = []int32{
-	15, // 0: content.v1.image.ImageMetadata.file_metadata:type_name -> common.v1.FileMetadata
-	3,  // 1: content.v1.image.ImageSearchRequest.query:type_name -> content.v1.image.ImageQuery
-	0,  // 2: content.v1.image.ImageSearchResponse.images:type_name -> content.v1.image.ImageMetadata
-	6,  // 3: content.v1.image.ImageUploadRequest.file_info:type_name -> content.v1.image.ImageFileInfo
-	0,  // 4: content.v1.image.ImageUploadResponse.image:type_name -> content.v1.image.ImageMetadata
-	5,  // [5:5] is the sub-list for method output_type
-	5,  // [5:5] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	0,  // 0: content.v1.image.ImageMetadata.aspect_ratio:type_name -> content.v1.image.AspectRatio
+	17, // 1: content.v1.image.ImageMetadata.file_metadata:type_name -> common.v1.FileMetadata
+	0,  // 2: content.v1.image.ImageQuery.aspect_ratio:type_name -> content.v1.image.AspectRatio
+	4,  // 3: content.v1.image.ImageSearchRequest.query:type_name -> content.v1.image.ImageQuery
+	1,  // 4: content.v1.image.ImageSearchResponse.images:type_name -> content.v1.image.ImageMetadata
+	0,  // 5: content.v1.image.ImageFileInfo.aspect_ratio:type_name -> content.v1.image.AspectRatio
+	0,  // 6: content.v1.image.UploadImageRequest.aspect_ratio:type_name -> content.v1.image.AspectRatio
+	7,  // 7: content.v1.image.ImageUploadRequest.file_info:type_name -> content.v1.image.ImageFileInfo
+	1,  // 8: content.v1.image.ImageUploadResponse.image:type_name -> content.v1.image.ImageMetadata
+	0,  // 9: content.v1.image.ImageUpdateRequest.aspect_ratio:type_name -> content.v1.image.AspectRatio
+	0,  // 10: content.v1.image.AspectRatioImages.aspect_ratio:type_name -> content.v1.image.AspectRatio
+	1,  // 11: content.v1.image.AspectRatioImages.images:type_name -> content.v1.image.ImageMetadata
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_content_v1_image_image_proto_init() }
@@ -1717,13 +2075,14 @@ func file_content_v1_image_image_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_content_v1_image_image_proto_rawDesc), len(file_content_v1_image_image_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   15,
+			NumEnums:      1,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_content_v1_image_image_proto_goTypes,
 		DependencyIndexes: file_content_v1_image_image_proto_depIdxs,
+		EnumInfos:         file_content_v1_image_image_proto_enumTypes,
 		MessageInfos:      file_content_v1_image_image_proto_msgTypes,
 	}.Build()
 	File_content_v1_image_image_proto = out.File

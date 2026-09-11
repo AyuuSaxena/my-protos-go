@@ -490,13 +490,9 @@
           "type": "string",
           "title": "Updated console ID"
         },
-        "developer": {
-          "type": "string",
-          "title": "Updated developer"
-        },
         "publisher": {
           "type": "string",
-          "title": "Updated publisher"
+          "title": "Updated game publisher"
         },
         "releaseYear": {
           "type": "integer",
@@ -538,8 +534,162 @@
         "site": {
           "type": "string",
           "title": "Updated site identifier"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/imageAspectRatioImages"
+          },
+          "title": "Updated array of image groups categorized by aspect ratio"
+        },
+        "isPublish": {
+          "type": "boolean",
+          "title": "Updated publication status flag"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "Updated active status flag"
         }
       }
+    },
+    "imageAspectRatio": {
+      "type": "string",
+      "enum": [
+        "ASPECT_RATIO_UNSPECIFIED",
+        "ASPECT_RATIO_16_9_LANDSCAPE",
+        "ASPECT_RATIO_16_9",
+        "ASPECT_RATIO_1_1_SQUARE",
+        "ASPECT_RATIO_1_1",
+        "ASPECT_RATIO_32_9_ULTRA_WIDE",
+        "ASPECT_RATIO_32_9",
+        "ASPECT_RATIO_3_4_PORTRAIT",
+        "ASPECT_RATIO_3_4",
+        "ASPECT_RATIO_9_16_VERTICAL",
+        "ASPECT_RATIO_9_16",
+        "ASPECT_RATIO_2_3_PORTRAIT",
+        "ASPECT_RATIO_2_3"
+      ],
+      "default": "ASPECT_RATIO_UNSPECIFIED",
+      "description": "AspectRatio represents standard visual aspect ratio classifications.\n\n - ASPECT_RATIO_16_9_LANDSCAPE: 16:9 Landscape - Primary widescreen format (Recommended 1920x1080)\n - ASPECT_RATIO_1_1_SQUARE: 1:1 Square (Recommended 1080x1080)\n - ASPECT_RATIO_32_9_ULTRA_WIDE: 32:9 Ultra-Wide (OTT)\n - ASPECT_RATIO_3_4_PORTRAIT: 3:4 Portrait\n - ASPECT_RATIO_9_16_VERTICAL: 9:16 Vertical\n - ASPECT_RATIO_2_3_PORTRAIT: 2:3 Portrait"
+    },
+    "imageAspectRatioImages": {
+      "type": "object",
+      "properties": {
+        "aspectRatio": {
+          "$ref": "#/definitions/imageAspectRatio",
+          "title": "Aspect ratio enum classification (16:9, 1:1, 32:9, 3:4, 9:16, 2:3)"
+        },
+        "imageIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Array of image UUID foreign keys stored in database"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/imageImageMetadata"
+          },
+          "title": "Enriched array of full image metadata resolved at read-time (response only)"
+        }
+      },
+      "title": "AspectRatioImages groups image IDs and enriched image metadata by aspect ratio format.\nReusable across all content entities (ROMs, games, articles, videos, etc.)"
+    },
+    "imageImageMetadata": {
+      "type": "object",
+      "properties": {
+        "mongoId": {
+          "type": "string",
+          "title": "MongoDB internal record identifier (_id)"
+        },
+        "id": {
+          "type": "string",
+          "title": "Unique Image identifier (UUID)"
+        },
+        "site": {
+          "type": "string",
+          "title": "Dynamic site/tenant key (e.g. retrogames)"
+        },
+        "title": {
+          "type": "string",
+          "title": "Display title of the Image"
+        },
+        "slug": {
+          "type": "string",
+          "title": "URL-friendly slug"
+        },
+        "description": {
+          "type": "string",
+          "title": "Detailed description"
+        },
+        "fileId": {
+          "type": "string",
+          "title": "Relational Foreign Key to storage file"
+        },
+        "altText": {
+          "type": "string",
+          "title": "Domain & Visual Metadata"
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "aspectRatio": {
+          "$ref": "#/definitions/imageAspectRatio",
+          "title": "Aspect ratio classification"
+        },
+        "format": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isPublic": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "title": "Lifecycle status (active, archived, draft)"
+        },
+        "uploaderId": {
+          "type": "string"
+        },
+        "uploaderUsername": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "fileMetadata": {
+          "$ref": "#/definitions/v1FileMetadata",
+          "title": "Enriched Relations (populated on read, not persisted in DB)\nFull file details resolved from fileId"
+        },
+        "isPublish": {
+          "type": "boolean",
+          "title": "Publication status flag"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "Active status flag (false indicates archived/deactivated)"
+        }
+      },
+      "description": "ImageMetadata represents the core normalized Image entity with relational IDs."
     },
     "protobufAny": {
       "type": "object",
@@ -641,10 +791,6 @@
           "type": "string",
           "title": "Console system database ID or key"
         },
-        "developer": {
-          "type": "string",
-          "title": "Game developer"
-        },
         "publisher": {
           "type": "string",
           "title": "Game publisher"
@@ -697,6 +843,22 @@
         "site": {
           "type": "string",
           "title": "Dynamic site/tenant key (e.g. retrogames)"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/imageAspectRatioImages"
+          },
+          "title": "Array of image groups categorized by aspect ratio"
+        },
+        "isPublish": {
+          "type": "boolean",
+          "title": "Publication status flag"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "Active status flag"
         }
       }
     },
@@ -760,12 +922,9 @@
         "fileId": {
           "type": "string"
         },
-        "developer": {
-          "type": "string",
-          "title": "Domain Metadata"
-        },
         "publisher": {
-          "type": "string"
+          "type": "string",
+          "title": "Game publisher"
         },
         "releaseYear": {
           "type": "integer",
@@ -816,6 +975,22 @@
         "fileMetadata": {
           "$ref": "#/definitions/v1FileMetadata",
           "title": "Full file details resolved from fileId"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/imageAspectRatioImages"
+          },
+          "title": "Array of image groups categorized by aspect ratio, storing imageIds in DB and enriched images on read"
+        },
+        "isPublish": {
+          "type": "boolean",
+          "title": "Publication status flag"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "Active status flag (false indicates archived/deactivated)"
         }
       },
       "description": "RomMetadata represents the core normalized ROM entity with relational IDs."
@@ -862,6 +1037,14 @@
         "site": {
           "type": "string",
           "title": "Filter by site key (e.g. retrogames)"
+        },
+        "isPublish": {
+          "type": "boolean",
+          "title": "Filter by publication status"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "Filter by active status"
         }
       }
     },

@@ -464,8 +464,40 @@
         "site": {
           "type": "string",
           "title": "Updated site identifier"
+        },
+        "aspectRatio": {
+          "$ref": "#/definitions/imageAspectRatio",
+          "title": "Updated aspect ratio classification"
+        },
+        "isPublish": {
+          "type": "boolean",
+          "title": "Updated publication status flag"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "Updated active status flag"
         }
       }
+    },
+    "imageAspectRatio": {
+      "type": "string",
+      "enum": [
+        "ASPECT_RATIO_UNSPECIFIED",
+        "ASPECT_RATIO_16_9_LANDSCAPE",
+        "ASPECT_RATIO_16_9",
+        "ASPECT_RATIO_1_1_SQUARE",
+        "ASPECT_RATIO_1_1",
+        "ASPECT_RATIO_32_9_ULTRA_WIDE",
+        "ASPECT_RATIO_32_9",
+        "ASPECT_RATIO_3_4_PORTRAIT",
+        "ASPECT_RATIO_3_4",
+        "ASPECT_RATIO_9_16_VERTICAL",
+        "ASPECT_RATIO_9_16",
+        "ASPECT_RATIO_2_3_PORTRAIT",
+        "ASPECT_RATIO_2_3"
+      ],
+      "default": "ASPECT_RATIO_UNSPECIFIED",
+      "description": "AspectRatio represents standard visual aspect ratio classifications.\n\n - ASPECT_RATIO_16_9_LANDSCAPE: 16:9 Landscape - Primary widescreen format (Recommended 1920x1080)\n - ASPECT_RATIO_1_1_SQUARE: 1:1 Square (Recommended 1080x1080)\n - ASPECT_RATIO_32_9_ULTRA_WIDE: 32:9 Ultra-Wide (OTT)\n - ASPECT_RATIO_3_4_PORTRAIT: 3:4 Portrait\n - ASPECT_RATIO_9_16_VERTICAL: 9:16 Vertical\n - ASPECT_RATIO_2_3_PORTRAIT: 2:3 Portrait"
     },
     "imageImageDeleteResponse": {
       "type": "object",
@@ -538,6 +570,18 @@
         "site": {
           "type": "string",
           "title": "Dynamic site/tenant key (e.g. retrogames)"
+        },
+        "aspectRatio": {
+          "$ref": "#/definitions/imageAspectRatio",
+          "title": "Aspect ratio classification"
+        },
+        "isPublish": {
+          "type": "boolean",
+          "title": "Publication status flag"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "Active status flag"
         }
       }
     },
@@ -585,7 +629,8 @@
           "format": "int32"
         },
         "aspectRatio": {
-          "type": "string"
+          "$ref": "#/definitions/imageAspectRatio",
+          "title": "Aspect ratio classification"
         },
         "format": {
           "type": "string"
@@ -621,6 +666,14 @@
         "fileMetadata": {
           "$ref": "#/definitions/v1FileMetadata",
           "title": "Enriched Relations (populated on read, not persisted in DB)\nFull file details resolved from fileId"
+        },
+        "isPublish": {
+          "type": "boolean",
+          "title": "Publication status flag"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "Active status flag (false indicates archived/deactivated)"
         }
       },
       "description": "ImageMetadata represents the core normalized Image entity with relational IDs."
@@ -659,6 +712,18 @@
         "site": {
           "type": "string",
           "title": "Filter by site key (e.g. retrogames)"
+        },
+        "aspectRatio": {
+          "$ref": "#/definitions/imageAspectRatio",
+          "title": "Filter by aspect ratio"
+        },
+        "isPublish": {
+          "type": "boolean",
+          "title": "Filter by publication status"
+        },
+        "isActive": {
+          "type": "boolean",
+          "title": "Filter by active status"
         }
       }
     },
